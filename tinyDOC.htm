@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>TinyDOC Editor</title>
+		<link rel="stylesheet" href="tinyDOC.css" type="text/css">
+	</head>
+	<body>
+		<div class="tinydoc_menubar">
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_save_enabled" id="buttonSave"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_print_enabled" id="buttonPrint"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_undo_enabled" id="buttonUndo"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_redo_enabled" id="buttonRedo"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_bold_enabled" id="buttonBold"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_italic_enabled" id="buttonItalic"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_underline_enabled" id="buttonUnderline"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_strikethrough_enabled" id="buttonStrikethrough"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_dotted_enabled" id="buttonDotted"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_numbered_enabled" id="buttonNumbered"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_highlight_enabled" id="buttonHighlight"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_link_enabled" id="buttonLink"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_template_enabled" id="buttonTemplate1"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_template_enabled" id="buttonTemplate2"></div>
+			</div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_template_enabled" id="buttonTemplate3"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
+				<div class="tinydoc_button_clear_enabled" id="buttonClear"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
+				<div id="tinydoc_urlviewer"></div>
+			</div>
+		</div>
+
+		<div class="tinydoc_splash">
+			<div class="tinydoc_splash_container">
+				<div class="tinydoc_spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+			</div>
+		</div>
+
+		<div class="tinydoc_error">Error while saving.</div>
+		<div class="tinydoc_saved">Document saved.</div>
+
+		<div id="tinydoc_textcode" contenteditable="true">Welcome to <b>TinyDOC Editor</b> by Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>This is a WYSIWYG (<span style="background-color: rgb(255, 255, 0);">What You See Is What You Get</span>) editor developed in <b>HTML5</b> with intentional limited features like:<br/><ul><li>Save & Print.</li><li>Undo & Redo.</li><li>Simplified formatting tools.</li></ul>The idea of this project if to provide a lightweight text editor with simple and easy-to-use features.</div>
+
+		<script>
+
+			function saveDocument()
+				{
+				// DISABLING THE DOCUMENT
+				document.getElementById("tinydoc_textcode").contentEditable = false;
+
+				// HIDING ALL NOTIFICATIONS
+				document.getElementsByClassName("tinydoc_saved")[0].style.display = "none";
+				document.getElementsByClassName("tinydoc_error")[0].style.display = "none";
+
+				// SHOWING THE LOADING SPLASH
+				document.getElementsByClassName("tinydoc_splash")[0].style.display = "block";
+
+				setTimeout(function()
+					{
+					// SETTING THE PARAMETERS FOR THE REQUEST
+					var valueDocument = document.getElementById("tinydoc_textcode").innerHTML;
+					var params = "documentdata=" + encodeURIComponent(valueDocument);
+
+					// SETTING THE SERVER URL FOR SAVING AND THE TIMEOUT VALUE
+					var serverTimeout = 3000;
+					var serverSavingURL = "myDocumentSaver.php";
+
+					// STARTING THE CODING OF THE REQUEST
+					var http = new XMLHttpRequest();
+					http.open("POST", serverSavingURL, true);
+					http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					http.timeout = serverTimeout;
+
+					// SETTING WHAT HAPPENS WHEN THE REQUEST IS DONE
+					http.onreadystatechange = function()
+						{
+						if(http.readyState == 4)
+							{
+							// ENABLING THE DOCUMENT
+							document.getElementById("tinydoc_textcode").contentEditable = true;
+
+							// HIDING THE LOADING SPLASH
+							document.getElementsByClassName("tinydoc_splash")[0].style.display = "none";
+
+							// IF THE SERVER REPLIES OK (JUST AS AN EXAMPLE REPLY), THEN THE DOCUMENT WAS SAVED
+							if (http.responseText=="OK")
+								{
+								// SHOWING THE SAVED DOCUMENT NOTIFICATION
+								document.getElementsByClassName("tinydoc_saved")[0].style.display = "block";
+
+								// SETTING THE DELAY FOR HIDING THE SAVED DOCUMENT NOTIFICATION
+								setTimeout(function(){document.getElementsByClassName("tinydoc_saved")[0].style.display = "none"},3000);
+
+								// SETTING THE DIRTY DOCUMENT STATUS OFF
+								window.onbeforeunload = null;
+								}
+								else
+								{
+								// SHOWING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
+								document.getElementsByClassName("tinydoc_error")[0].style.display = "block";
+
+								// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
+								setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000);
+								}
+
+							// FOCUSING THE DOCUMENT
+							document.getElementById("tinydoc_textcode").focus();
+							setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+							}
+						};
+
+					// SETTING THE ONERROR AND ONTIMEOUT EVENTS
+					http.onerror = function () {document.getElementsByClassName("tinydoc_error")[0].style.display = "block";setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)};
+					http.ontimeout = function (e) {document.getElementsByClassName("tinydoc_error")[0].style.display = "block";setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)};
+
+					// MAKES THE REQUEST
+					http.send(params);
+					}, 250);
+				}
+
+			function printDocument()
+				{
+				try
+					{
+					// CREATING A TEMP IFRAME
+					var newIframe = document.createElement("iframe");
+					newIframe.width = "0";
+					newIframe.height = "0";
+					newIframe.src = "about:blank";
+					newIframe.className = "tinydoc_frame";
+
+					// ADDING THE IFRAME TO THE DOCUMENT
+					document.body.appendChild(newIframe);
+
+					// WRITING THE DOCUMENT CONTENT INTO THE IFRAME
+					newIframe.contentWindow.document.write("<!doctype html><html><head><title>Print<\/title><\/head><body style='font-family:Arial;font-size:16px'>" + document.getElementById("tinydoc_textcode").innerHTML + "<\/body><\/html>");
+					newIframe.contentWindow.document.close(); //important!
+					newIframe.contentWindow.focus(); //IE fix
+
+					// PRINTING THE IFRAME
+					newIframe.contentWindow.print();
+
+					// REMOVING THE IFRAME
+					document.body.removeChild(newIframe);
+
+					// GETTING THE FOCUS IN THE DOCUMENT
+					document.getElementById("tinydoc_textcode").focus();
+
+					// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
+					setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+					}
+					catch(err)
+					{
+					}
+
+				// GETTING THE FOCUS IN THE DOCUMENT
+				document.getElementById("tinydoc_textcode").focus();
+
+				// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
+				setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+				}
+
+			function formatDoc(myCommand, myParameter)
+				{
+				try
+					{
+					// EXECUTING COMMAND FOR THE CURRENT SELECTION
+					document.execCommand(myCommand, false, myParameter);
+
+					// GETTING THE FOCUS IN THE DOCUMENT
+					document.getElementById("tinydoc_textcode").focus();
+
+					// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
+					setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+					}
+					catch(err)
+					{
+					}
+				}
+
+			function checkForURL()
+				{
+				try
+					{
+					// GETTING THE CURRENT SELECTION
+					var selectedNode = window.getSelection().focusNode;
+
+					// GETTING THE LASTEST NODE
+					var latestChildNode = selectedNode;
+					while (latestChildNode.firstChild!=null){latestChildNode = latestChildNode.firstChild;}
+
+					// GETTING THE URL (IF ANY)
+					var finalURL = latestChildNode.parentNode.href;
+
+					// CHECKING IF THERE IS A VALUE
+					if(typeof finalURL !== "undefined")
+						{
+						// ADDING THE VALUE TO THE URL VIEWER
+						document.getElementById("tinydoc_urlviewer").innerHTML = "<a href='" + finalURL + "' target='top'>CLICK HERE TO OPEN THE LINK</a>";
+						}
+						else
+						{
+						// CLEARING THE URL VIEWER
+						document.getElementById("tinydoc_urlviewer").innerHTML = "";
+						}
+					}
+					catch(err)
+					{
+					}
+				}
+
+			function resizeTinyDOCEditor()
+				{
+				try
+					{
+					// GETTING THE WINDOW SIZE
+					var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName("body")[0], x = w.innerWidth || e.clientWidth || g.clientWidth, y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+					// CALCUTING THE NEW SIZE FOR THE DOCUMENT
+					var editHeight = y - 56;
+					var editWidth = x - 16;
+
+					// RESIZING DOCUMENT
+					document.getElementById("tinydoc_textcode").style.height = editHeight.toString() + "px";
+					document.getElementById("tinydoc_textcode").style.width = editWidth.toString() + "px";
+					}
+					catch(err)
+					{
+					}
+				}
+
+			document.getElementById("tinydoc_textcode").addEventListener("paste", function(e)
+				{
+				try
+					{
+					// CANCELING THE PASTE EVENT
+					e.preventDefault();
+
+					// GETTING THE CLIPBOARD CONTENT AS PLAIN TEXT
+					var text = (e.originalEvent || e).clipboardData.getData("text/plain");
+
+					// PASTING THE TEXT
+					document.execCommand("insertText", false, text);
+					}
+					catch(err)
+					{
+					}
+				});
+
+			document.getElementById("tinydoc_textcode").addEventListener("keydown", function (e)
+				{
+				try
+					{
+					//CODE FOR ADDING SPACES (TABS) WHEN THE TAB KEY IS DOWN
+					if (e.keyCode==9)
+						{
+						// CANCELING THE TAB KEY EVENT
+						e.preventDefault();
+
+						// INSERTING SPACES AS A TAB SPACE
+						document.execCommand("insertText", false, "          ");
+
+						// GETTING THE FOCUS IN THE DOCUMENT
+						document.getElementById("tinydoc_textcode").focus();
+
+						// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
+						setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+						}
+					else if (e.ctrlKey || e.metaKey)
+						{
+						switch (String.fromCharCode(e.which).toLowerCase())
+							{
+							case "s":
+							// CANCELING THE SAVING PAGE KEY EVENT
+							e.preventDefault();
+
+							// SAVING THE DOCUMENT
+							saveDocument();
+							break;
+							}
+						}
+					}
+					catch(err)
+					{
+					}
+				});
+
+			document.getElementById("tinydoc_textcode").addEventListener("keyup", function (e)
+				{
+				// CHECKING FOR URL LINKS WHILE THE USER IS WRITING OR MOVING THROUGH THE DOCUMENT
+				checkForURL();
+				});
+
+			document.getElementById("tinydoc_textcode").addEventListener("input", function (e)
+				{
+				// SETTING THE DOCUMENT AS DIRTY WHEN THE USER IS TYPING
+				window.onbeforeunload = function(e){return "Dirty"};
+				});
+
+			window.onresize = function()
+				{
+				// RESIZING THE DOCUMENT
+				resizeTinyDOCEditor();
+				};
+
+			window.onload = function()
+				{
+				// RESIZING THE DOCUMENT
+				resizeTinyDOCEditor();
+
+				// GETTING THE FOCUS IN THE DOCUMENT
+				document.getElementById("tinydoc_textcode").focus();
+
+				// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
+				setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+
+				// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
+				document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
+				document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
+				document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
+				document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null)});
+				document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null)});
+				document.getElementById("buttonBold").addEventListener("click",function(event){formatDoc("bold",null)});
+				document.getElementById("buttonItalic").addEventListener("click",function(event){formatDoc("italic",null)});
+				document.getElementById("buttonUnderline").addEventListener("click",function(event){formatDoc("underline",null)});
+				document.getElementById("buttonStrikethrough").addEventListener("click",function(event){formatDoc("strikethrough",null)});
+				document.getElementById("buttonDotted").addEventListener("click",function(event){formatDoc("insertunorderedlist",null)});
+				document.getElementById("buttonNumbered").addEventListener("click",function(event){formatDoc("insertorderedlist",null)});
+				document.getElementById("buttonClear").addEventListener("click",function(event){formatDoc("removeFormat",null)});
+				document.getElementById("buttonHighlight").addEventListener("click",function(event){formatDoc("BackColor","#FFFF00")});
+				document.getElementById("buttonLink").addEventListener("click",function(event)
+					{
+					// GETTING THE SELECTED TEXT
+					var selectedText = window.getSelection().toString();
+
+					// CHECKING THE SELECTED TEXT
+					if (selectedText!=null)
+						{
+						// IF THERE IS A SELECTED TEXT
+						if (selectedText.length>0)
+							{
+							// ASKING THE USER FOR THE URL
+							var linkURL = prompt("Please, write the URL here:","https:\/\/");
+
+							// VALIDATORS FOR KNOWING IF THE URL IS A HTTP, HTTPS OR MAILTO LINK
+							var linkURLChecker1 = linkURL.toLowerCase().indexOf("http://");
+							var linkURLChecker2 = linkURL.toLowerCase().indexOf("https://");
+							var linkURLChecker3 = linkURL.toLowerCase().indexOf("mailto:");
+
+							// CHECKING THE VALUE
+							if (linkURLChecker1==0 || linkURLChecker2==0 || linkURLChecker3==0)
+								{
+								// INSERTING THE URL LINK INTO THE DOCUMENT
+								formatDoc("insertHTML","<a href='" + linkURL + "' target='top'>" + document.getSelection() + "</a>");
+								}
+							}
+						}
+					});
+				document.getElementById("buttonTemplate1").addEventListener("click",function(event){formatDoc("insertHTML","My Template 1<br />Example 1<br />");});
+				document.getElementById("buttonTemplate2").addEventListener("click",function(event){formatDoc("insertHTML","My Template 2<br />Example 2<br />");});
+				document.getElementById("buttonTemplate3").addEventListener("click",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");});
+				document.getElementsByClassName("tinydoc_menubar")[0].addEventListener("click",function(event){document.getElementById("tinydoc_textcode").focus()});
+				}
+		</script>
+	</body>
+</html>
