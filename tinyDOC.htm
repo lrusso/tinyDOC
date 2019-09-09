@@ -355,8 +355,8 @@
 				document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
 				document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
 				document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
-				document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null)});
-				document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null)});
+				document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL()});
+				document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL()});
 				document.getElementById("buttonBold").addEventListener("click",function(event){formatDoc("bold",null)});
 				document.getElementById("buttonItalic").addEventListener("click",function(event){formatDoc("italic",null)});
 				document.getElementById("buttonUnderline").addEventListener("click",function(event){formatDoc("underline",null)});
