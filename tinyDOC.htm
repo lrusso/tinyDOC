@@ -73,12 +73,34 @@
 			</div>
 		</div>
 
-		<div class="tinydoc_error">Error while saving.</div>
-		<div class="tinydoc_saved">Document saved.</div>
+		<div class="tinydoc_error"></div>
+		<div class="tinydoc_saved"></div>
 
-		<div id="tinydoc_textcode" contenteditable="true">Welcome to <b>TinyDOC Editor</b> by Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>This is a WYSIWYG (<span style="background-color: rgb(255, 255, 0);">What You See Is What You Get</span>) editor developed in <b>HTML5</b> with intentional limited functions like:<br/><ul><li>Save & Print.</li><li>Undo & Redo.</li><li>Templates feature.</li><li>Simplified formatting tools.</li></ul>The idea of this project if to provide a lightweight text editor with simple and easy-to-use features.</div>
+		<div id="tinydoc_textcode" contenteditable="true"></div>
 
 		<script>
+
+			var userLanguage = window.navigator.userLanguage || window.navigator.language;
+
+			var STRING_ERROR = "";
+			var STRING_SAVED = "";
+			var STRING_WELCOME = "";
+			var STRING_INPUTURL = "";
+
+			if (userLanguage.substring(0,2)=="es")
+				{
+				STRING_ERROR = "Error al guardar.";
+				STRING_SAVED = "Documento guardado.";
+				STRING_WELCOME = "Bienvenido a <b>TinyDOC Editor</b> por Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>Este es un editor WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) desarrollado en <b>HTML5</b> con funciones intencionalmente limitadas, tales como:<br/><ul><li>Guardar e Imprimir.</li><li>Deshacer y Rehacer.</li><li>Funci&oacute;n para plantillas.</li><li>Herramientas de formato simplificadas.</li></ul>La idea de este proyecto es la de brindar un editor textos ligero con funciones sencillas e intuitivas.";
+				STRING_INPUTURL = "Por favor, ingrese la URL:";
+				}
+				else
+				{
+				STRING_ERROR = "Error while saving.";
+				STRING_SAVED = "Document saved.";
+				STRING_WELCOME = "Welcome to <b>TinyDOC Editor</b> by Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>This is a WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) editor developed in <b>HTML5</b> with intentional limited functions like:<br/><ul><li>Save & Print.</li><li>Undo & Redo.</li><li>Templates feature.</li><li>Simplified formatting tools.</li></ul>The idea of this project if to provide a lightweight text editor with simple and easy-to-use features.";
+				STRING_INPUTURL = "Please, write the URL:";
+				}
 
 			function saveDocument()
 				{
@@ -345,6 +367,13 @@
 				// RESIZING THE DOCUMENT
 				resizeTinyDOCEditor();
 
+				// SETTING THE WELCOME DOCUMENT
+				document.getElementById("tinydoc_textcode").innerHTML = STRING_WELCOME;
+
+				// SETTING THE LANGUAGE VALUES
+				document.getElementsByClassName("tinydoc_saved")[0].innerHTML = STRING_SAVED;
+				document.getElementsByClassName("tinydoc_error")[0].innerHTML = STRING_ERROR;
+
 				// GETTING THE FOCUS IN THE DOCUMENT
 				document.getElementById("tinydoc_textcode").focus();
 
@@ -377,7 +406,7 @@
 						if (selectedText.length>0)
 							{
 							// ASKING THE USER FOR THE URL
-							var linkURL = prompt("Please, write the URL here:","https:\/\/");
+							var linkURL = prompt(STRING_INPUTURL,"https:\/\/");
 
 							// VALIDATORS FOR KNOWING IF THE URL IS A HTTP, HTTPS OR MAILTO LINK
 							var linkURLChecker1 = linkURL.toLowerCase().indexOf("http://");
