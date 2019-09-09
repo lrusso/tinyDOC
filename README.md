@@ -1,6 +1,6 @@
 # TinyDOC Editor
 
-Tiny HTML5 Rich Text Editor
+TinyDOC Editor is a simple HTML5 Rich Text Editor. The idea of this project if to provide a lightweight text editor with simple and easy-to-use features.
 
 ![alt screenshot](https://raw.githubusercontent.com/lrusso/tinyDOC/master/tinyDOC.png)
 
