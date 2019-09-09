@@ -405,22 +405,37 @@
 						// IF THERE IS A SELECTED TEXT
 						if (selectedText.length>0)
 							{
-							// ASKING THE USER FOR THE URL
-							var linkURL = prompt(STRING_INPUTURL,"https:\/\/");
+							// VALIDATORS FOR KNOWING IF THE SELECTED TEXT IS A HTTP, HTTPS OR MAILTO LINK
+							var selectedTextURLChecker1 = selectedText.toLowerCase().indexOf(" ");
+							var selectedTextURLChecker2 = selectedText.toLowerCase().indexOf("http://");
+							var selectedTextURLChecker3 = selectedText.toLowerCase().indexOf("https://");
+							var selectedTextURLChecker4 = selectedText.toLowerCase().indexOf("mailto:");
 
-							// CHECKING THE LINKURL VALUE
-							if (linkURL!=null)
+							// VALIDATING THE SELECTED TEXT
+							if (selectedTextURLChecker1==-1 && (selectedTextURLChecker2==0 || selectedTextURLChecker3==0 || selectedTextURLChecker4==0))
 								{
-								// VALIDATORS FOR KNOWING IF THE URL IS A HTTP, HTTPS OR MAILTO LINK
-								var linkURLChecker1 = linkURL.toLowerCase().indexOf("http://");
-								var linkURLChecker2 = linkURL.toLowerCase().indexOf("https://");
-								var linkURLChecker3 = linkURL.toLowerCase().indexOf("mailto:");
+								// INSERTING THE URL LINK INTO THE DOCUMENT
+								formatDoc("insertHTML","<a href='" + selectedText + "' target='top'>" + selectedText + "</a>");
+								}
+								else
+								{
+								// ASKING THE USER FOR THE URL
+								var linkURL = prompt(STRING_INPUTURL,"https:\/\/");
 
-								// CHECKING THE VALUE
-								if (linkURLChecker1==0 || linkURLChecker2==0 || linkURLChecker3==0)
+								// CHECKING THE LINKURL VALUE
+								if (linkURL!=null)
 									{
-									// INSERTING THE URL LINK INTO THE DOCUMENT
-									formatDoc("insertHTML","<a href='" + linkURL + "' target='top'>" + document.getSelection() + "</a>");
+									// VALIDATORS FOR KNOWING IF THE URL IS A HTTP, HTTPS OR MAILTO LINK
+									var linkURLChecker1 = linkURL.toLowerCase().indexOf("http://");
+									var linkURLChecker2 = linkURL.toLowerCase().indexOf("https://");
+									var linkURLChecker3 = linkURL.toLowerCase().indexOf("mailto:");
+
+									// VALIDATING THE URL
+									if (linkURLChecker1==0 || linkURLChecker2==0 || linkURLChecker3==0)
+										{
+										// INSERTING THE URL LINK INTO THE DOCUMENT
+										formatDoc("insertHTML","<a href='" + linkURL + "' target='top'>" + document.getSelection() + "</a>");
+										}
 									}
 								}
 							}
