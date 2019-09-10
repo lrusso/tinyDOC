@@ -380,6 +380,20 @@
 				// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
 				setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 
+				// TRYING TO MOVE THE CURSOR TO THE BEGINNING OF THE DOCUMENT
+				try
+					{
+					var range = document.createRange();
+					var sel = window.getSelection();
+					range.setStart(document.getElementById("tinydoc_textcode").childNodes[0], 0);
+					range.collapse(true);
+					sel.removeAllRanges();
+					sel.addRange(range);
+					}
+					catch(err)
+					{
+					}
+
 				// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
 				document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
 				document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
