@@ -268,6 +268,12 @@
 					}
 				}
 
+			function checkForEmail(email)
+				{
+				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(String(email).toLowerCase());
+				}
+
 			function resizeTinyDOCEditor()
 				{
 				try
@@ -423,13 +429,22 @@
 							var selectedTextURLChecker1 = selectedText.toLowerCase().indexOf(" ");
 							var selectedTextURLChecker2 = selectedText.toLowerCase().indexOf("http://");
 							var selectedTextURLChecker3 = selectedText.toLowerCase().indexOf("https://");
-							var selectedTextURLChecker4 = selectedText.toLowerCase().indexOf("mailto:");
+							var selectedTextURLChecker4 = checkForEmail(selectedText);
 
 							// VALIDATING THE SELECTED TEXT
-							if (selectedTextURLChecker1==-1 && (selectedTextURLChecker2==0 || selectedTextURLChecker3==0 || selectedTextURLChecker4==0))
+							if (selectedTextURLChecker1==-1 && (selectedTextURLChecker2==0 || selectedTextURLChecker3==0 || selectedTextURLChecker4==true))
 								{
-								// INSERTING THE URL LINK INTO THE DOCUMENT
-								formatDoc("insertHTML","<a href='" + selectedText + "' target='top'>" + selectedText + "</a>");
+								// CHECKING IF IT IS A URL OR EMAIL
+								if (selectedTextURLChecker4==true)
+									{
+									// INSERTING THE MAILTO LINK INTO THE DOCUMENT
+									formatDoc("insertHTML","<a href='mailto:" + selectedText + "' target='top'>" + selectedText + "</a>");
+									}
+									else
+									{
+									// INSERTING THE URL LINK INTO THE DOCUMENT
+									formatDoc("insertHTML","<a href='" + selectedText + "' target='top'>" + selectedText + "</a>");
+									}
 								}
 								else
 								{
