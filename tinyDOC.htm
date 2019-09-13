@@ -102,6 +102,26 @@
 				STRING_INPUTURL = "Please, write the URL:";
 				}
 
+			function encodeText(str)
+				{
+				// FUNCTION FOR ESCAPING SPECIAL CHARACTERS
+				var i = str.length;
+				var aRet = [];
+				while (i--)
+					{
+					var tempChar = str[i].charCodeAt();
+					if (tempChar > 126)
+						{
+						aRet[i] = "&#" + tempChar + ";";
+						}
+						else
+						{
+						aRet[i] = str[i];
+						}
+					}
+				return aRet.join("");
+				}
+
 			function saveDocument()
 				{
 				// DISABLING THE DOCUMENT
@@ -117,7 +137,7 @@
 				setTimeout(function()
 					{
 					// SETTING THE PARAMETERS FOR THE REQUEST
-					var valueDocument = document.getElementById("tinydoc_textcode").innerHTML;
+					var valueDocument = encodeText(document.getElementById("tinydoc_textcode").innerHTML);
 					var params = "documentdata=" + encodeURIComponent(valueDocument);
 
 					// SETTING THE SERVER URL FOR SAVING AND THE TIMEOUT VALUE
