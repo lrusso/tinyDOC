@@ -420,6 +420,9 @@
 					{
 					}
 
+				// SCROLLING TO THE TOP OF THE DOCUMENT
+				try{document.getElementById("tinydoc_textcode").scrollTop = 0}catch(err){}
+
 				// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
 				document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
 				document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
