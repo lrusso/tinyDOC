@@ -59,6 +59,10 @@
 			</div>
 			<div class="tinydoc_separator"></div>
 			<div class="tinydoc_holder">
+				<div class="tinydoc_button_calc_enabled" id="buttonCalc"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
 				<div class="tinydoc_button_clear_enabled" id="buttonClear"></div>
 			</div>
 			<div class="tinydoc_separator"></div>
@@ -110,7 +114,7 @@
 				while (i--)
 					{
 					var tempChar = str[i].charCodeAt();
-					if (tempChar > 126)
+					if (tempChar > 126 || (tempChar==60 || tempChar==62))
 						{
 						aRet[i] = "&#" + tempChar + ";";
 						}
@@ -294,6 +298,23 @@
 				return re.test(String(email).toLowerCase());
 				}
 
+			function moveCaret(charCount)
+				{
+				try
+					{
+					var sel = window.getSelection();
+					if (sel.rangeCount > 0)
+						{
+						var textNode = sel.focusNode;
+						var newOffset = sel.focusOffset + charCount;
+						sel.collapse(textNode, Math.min(textNode.length, newOffset));
+						}
+					}
+					catch(err)
+					{
+					}
+				}
+
 			function resizeTinyDOCEditor()
 				{
 				try
@@ -437,6 +458,107 @@
 				document.getElementById("buttonNumbered").addEventListener("click",function(event){formatDoc("insertorderedlist",null)});
 				document.getElementById("buttonClear").addEventListener("click",function(event){formatDoc("removeFormat",null)});
 				document.getElementById("buttonHighlight").addEventListener("click",function(event){formatDoc("BackColor","#FFFF00")});
+				document.getElementById("buttonCalc").addEventListener("click",function(event)
+					{
+					// GETTING THE SELECTED TEXT
+					var selectedText = window.getSelection().toString();
+
+					// CHECKING THE SELECTED TEXT
+					if (selectedText!=null)
+						{
+						// IF THERE IS A SELECTED TEXT
+						if (selectedText.length>0)
+							{
+							// SPLITTING THE SELECTED TEXT BY BREAKLINES
+							var splitted = selectedText.split("\n");
+
+							// CHECK IF IT IS A SINGLE LINE EXPRESSION OR A MULTILINE ADDING OPERATION
+							if (splitted.length==1)
+								{
+								// REMOVING INVALID CHARACTERS
+								selectedText = selectedText.replace(/[^0-9.*\/()+-]/g, "");
+
+								// MOVING THE CARET AFTER THE CURRENT SELECTION
+								moveCaret(selectedText.length);
+
+								try
+									{
+									// EVALUATING THE EXPRESSION
+									var finalResult = eval(selectedText);
+
+									// SHOWING ONLY TWO DECIMALS AFTER COMMA
+									finalResult = parseFloat(finalResult).toFixed(2);
+
+									// CHECKING IF THE FINAL RESULT IS AN INTEGER
+									if (finalResult.indexOf(".00")>-1)
+										{
+										finalResult = parseFloat(finalResult).toFixed(0);
+										}
+
+									// INSERTING THE EXPRESSION RESULT
+									document.execCommand("insertText", false, "     " + finalResult);
+									}
+									catch(err)
+									{
+									// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
+									document.execCommand("insertText", false, "     ERROR");
+									}
+								}
+							else
+								{
+								// SETTING THE FINAL RESULT VARIABLE
+								var finalResult = 0;
+
+								// GETTING ALL THE LINES
+								for (var i=0;i<splitted.length;i++)
+									{
+									try
+										{
+										// GETTING ONE LINE
+										var currentLine = splitted[i];
+
+										// CHECKING THE LINE
+										if (currentLine.length>0)
+											{
+											// REMOVING INVALID CHARACTERS
+											currentLine = currentLine.replace(/[^0-9.]/g, "");
+
+											// ADDING THE VALUE TO THE FINAL RESULT
+											finalResult = parseFloat(finalResult) + parseFloat(currentLine);
+											}
+										}
+										catch(err)
+										{
+										}
+									}
+
+								// MOVING THE CARET AFTER THE CURRENT SELECTION
+								moveCaret(selectedText.length);
+
+								try
+									{
+									// SHOWING ONLY TWO DECIMALS AFTER COMMA
+									finalResult = parseFloat(finalResult).toFixed(2);
+
+									// CHECKING IF THE FINAL RESULT IS AN INTEGER
+									if (finalResult.indexOf(".00")>-1)
+										{
+										finalResult = parseFloat(finalResult).toFixed(0);
+										}
+
+									// INSERTING THE FINAL RESULT
+									document.execCommand("insertText", false, "\n\n" + finalResult);
+									}
+									catch(err)
+									{
+									// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
+									document.execCommand("insertText", false, "\n\nERROR");
+									}
+								}
+							}
+						}
+					});
+
 				document.getElementById("buttonLink").addEventListener("click",function(event)
 					{
 					// GETTING THE SELECTED TEXT
