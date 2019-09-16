@@ -27,7 +27,7 @@ gym    $300
 games  $50
 ```
 
-Highlight **the text with the values** that you want make a sum of, then click in the Calc Button, and the result will appear below the selected text.
+Highlight the text with the values that you want make a sum of, then click in the Calc Button, and the result will appear below the selected text.
 
 ```
 rent   $500
