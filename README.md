@@ -13,7 +13,7 @@ https://lrusso.github.io/tinyDOC/tinyDOC.htm
 ```
 lorem ipsum (5+4-3)*2/1 lorem ipsum
 ```
-Highlight **(5+4-3)*2/1**, then click in the Calc Button, and the result will appear right next to the selected text.
+Highlight (5+4-3)*2/1, then click in the Calc Button, and the result will appear right next to the selected text.
 
 ```
 lorem ipsum (5+4-3)*2/1     12 lorem ipsum
