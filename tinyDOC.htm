@@ -298,23 +298,6 @@
 				return re.test(String(email).toLowerCase());
 				}
 
-			function moveCaret(charCount)
-				{
-				try
-					{
-					var sel = window.getSelection();
-					if (sel.rangeCount > 0)
-						{
-						var textNode = sel.focusNode;
-						var newOffset = sel.focusOffset + charCount;
-						sel.collapse(textNode, Math.min(textNode.length, newOffset));
-						}
-					}
-					catch(err)
-					{
-					}
-				}
-
 			function resizeTinyDOCEditor()
 				{
 				try
@@ -478,9 +461,6 @@
 								// REMOVING INVALID CHARACTERS
 								selectedText = selectedText.replace(/[^0-9.*\/()+-]/g, "");
 
-								// MOVING THE CARET AFTER THE CURRENT SELECTION
-								moveCaret(selectedText.length);
-
 								try
 									{
 									// EVALUATING THE EXPRESSION
@@ -531,9 +511,6 @@
 										{
 										}
 									}
-
-								// MOVING THE CARET AFTER THE CURRENT SELECTION
-								moveCaret(selectedText.length);
 
 								try
 									{
