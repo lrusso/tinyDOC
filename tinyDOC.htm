@@ -476,12 +476,12 @@
 										}
 
 									// INSERTING THE EXPRESSION RESULT
-									document.execCommand("insertText", false, "     " + finalResult);
+									document.execCommand("insertText", false, finalResult);
 									}
 									catch(err)
 									{
 									// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-									document.execCommand("insertText", false, "     ERROR");
+									document.execCommand("insertText", false, "ERROR");
 									}
 								}
 							else
@@ -524,18 +524,17 @@
 										}
 
 									// INSERTING THE FINAL RESULT
-									document.execCommand("insertText", false, "\n\n" + finalResult);
+									document.execCommand("insertText", false, finalResult);
 									}
 									catch(err)
 									{
 									// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-									document.execCommand("insertText", false, "\n\nERROR");
+									document.execCommand("insertText", false, "ERROR");
 									}
 								}
 							}
 						}
 					});
-
 				document.getElementById("buttonLink").addEventListener("click",function(event)
 					{
 					// GETTING THE SELECTED TEXT
