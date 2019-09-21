@@ -332,6 +332,8 @@
 				{
 				try
 					{
+					// IF THE LOADING SPLASH IS VISIBLE, IT MEANS THAT THE DOCUMENT IT IS BEEN SAVED
+					// AND ALL THE KEYDOWN EVENTS WILL BE DISABLED BECAUSE OF THAT.
 					if (document.getElementsByClassName("tinydoc_splash")[0].style.display == "block")
 						{
 						e.preventDefault();
