@@ -124,9 +124,6 @@
 
 			function saveDocument()
 				{
-				// DISABLING THE DOCUMENT
-				document.getElementById("tinydoc_textcode").contentEditable = false;
-
 				// HIDING ALL NOTIFICATIONS
 				document.getElementsByClassName("tinydoc_saved")[0].style.display = "none";
 				document.getElementsByClassName("tinydoc_error")[0].style.display = "none";
@@ -156,9 +153,6 @@
 						{
 						if(http.readyState == 4)
 							{
-							// ENABLING THE DOCUMENT
-							document.getElementById("tinydoc_textcode").contentEditable = true;
-
 							// HIDING THE LOADING SPLASH
 							document.getElementsByClassName("tinydoc_splash")[0].style.display = "none";
 							document.getElementsByClassName("tinydoc_splash_container")[0].style.display = "none";
@@ -338,32 +332,39 @@
 				{
 				try
 					{
-					//CODE FOR ADDING SPACES (TABS) WHEN THE TAB KEY IS DOWN
-					if (e.keyCode==9)
+					if (document.getElementsByClassName("tinydoc_splash")[0].style.display == "block")
 						{
-						// CANCELING THE TAB KEY EVENT
 						e.preventDefault();
-
-						// INSERTING SPACES AS A TAB SPACE
-						document.execCommand("insertText", false, "          ");
-
-						// GETTING THE FOCUS IN THE DOCUMENT
-						document.getElementById("tinydoc_textcode").focus();
-
-						// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
-						setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 						}
-					else if (e.ctrlKey || e.metaKey)
+						else
 						{
-						switch (String.fromCharCode(e.which).toLowerCase())
+						//CODE FOR ADDING SPACES (TABS) WHEN THE TAB KEY IS DOWN
+						if (e.keyCode==9)
 							{
-							case "s":
-							// CANCELING THE SAVING PAGE KEY EVENT
+							// CANCELING THE TAB KEY EVENT
 							e.preventDefault();
 
-							// SAVING THE DOCUMENT
-							saveDocument();
-							break;
+							// INSERTING SPACES AS A TAB SPACE
+							document.execCommand("insertText", false, "          ");
+
+							// GETTING THE FOCUS IN THE DOCUMENT
+							document.getElementById("tinydoc_textcode").focus();
+
+							// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
+							setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+							}
+						else if (e.ctrlKey || e.metaKey)
+							{
+							switch (String.fromCharCode(e.which).toLowerCase())
+								{
+								case "s":
+								// CANCELING THE SAVING PAGE KEY EVENT
+								e.preventDefault();
+
+								// SAVING THE DOCUMENT
+								saveDocument();
+								break;
+								}
 							}
 						}
 					}
