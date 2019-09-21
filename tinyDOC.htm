@@ -71,11 +71,7 @@
 			</div>
 		</div>
 
-		<div class="tinydoc_splash">
-			<div class="tinydoc_splash_container">
-				<div class="tinydoc_spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-			</div>
-		</div>
+		<div class="tinydoc_splash"></div><div class="tinydoc_splash_container"></div>
 
 		<div class="tinydoc_error"></div>
 		<div class="tinydoc_saved"></div>
@@ -137,6 +133,7 @@
 
 				// SHOWING THE LOADING SPLASH
 				document.getElementsByClassName("tinydoc_splash")[0].style.display = "block";
+				document.getElementsByClassName("tinydoc_splash_container")[0].style.display = "block";
 
 				setTimeout(function()
 					{
@@ -164,6 +161,7 @@
 
 							// HIDING THE LOADING SPLASH
 							document.getElementsByClassName("tinydoc_splash")[0].style.display = "none";
+							document.getElementsByClassName("tinydoc_splash_container")[0].style.display = "none";
 
 							// IF THE SERVER REPLIES OK (JUST AS AN EXAMPLE REPLY), THEN THE DOCUMENT WAS SAVED
 							if (http.responseText=="OK")
@@ -306,7 +304,7 @@
 					var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName("body")[0], x = w.innerWidth || e.clientWidth || g.clientWidth, y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
 					// CALCUTING THE NEW SIZE FOR THE DOCUMENT
-					var editHeight = y - 56;
+					var editHeight = y - 49;
 					var editWidth = x - 16;
 
 					// RESIZING DOCUMENT
