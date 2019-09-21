@@ -502,17 +502,26 @@
 										// EVALUATING THE EXPRESSION
 										var finalResult = eval(selectedText);
 
-										// SHOWING ONLY TWO DECIMALS AFTER COMMA
-										finalResult = parseFloat(finalResult).toFixed(2);
-
-										// CHECKING IF THE FINAL RESULT IS AN INTEGER
-										if (finalResult.indexOf(".00")>-1)
+										// CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
+										if (isNaN(finalResult)==true)
 											{
-											finalResult = parseFloat(finalResult).toFixed(0);
+											// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
+											document.execCommand("insertText", false, "ERROR");
 											}
+											else
+											{
+											// SHOWING ONLY TWO DECIMALS AFTER COMMA
+											finalResult = parseFloat(finalResult).toFixed(2);
 
-										// INSERTING THE EXPRESSION RESULT
-										document.execCommand("insertText", false, finalResult);
+											// CHECKING IF THE FINAL RESULT IS AN INTEGER
+											if (finalResult.indexOf(".00")>-1)
+												{
+												finalResult = parseFloat(finalResult).toFixed(0);
+												}
+
+											// INSERTING THE EXPRESSION RESULT
+											document.execCommand("insertText", false, finalResult);
+											}
 										}
 										catch(err)
 										{
@@ -550,17 +559,26 @@
 
 									try
 										{
-										// SHOWING ONLY TWO DECIMALS AFTER COMMA
-										finalResult = parseFloat(finalResult).toFixed(2);
-
-										// CHECKING IF THE FINAL RESULT IS AN INTEGER
-										if (finalResult.indexOf(".00")>-1)
+										// CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
+										if (isNaN(finalResult)==true)
 											{
-											finalResult = parseFloat(finalResult).toFixed(0);
+											// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
+											document.execCommand("insertText", false, "ERROR");
 											}
+											else
+											{
+											// SHOWING ONLY TWO DECIMALS AFTER COMMA
+											finalResult = parseFloat(finalResult).toFixed(2);
 
-										// INSERTING THE FINAL RESULT
-										document.execCommand("insertText", false, finalResult);
+											// CHECKING IF THE FINAL RESULT IS AN INTEGER
+											if (finalResult.indexOf(".00")>-1)
+												{
+												finalResult = parseFloat(finalResult).toFixed(0);
+												}
+
+											// INSERTING THE FINAL RESULT
+											document.execCommand("insertText", false, finalResult);
+											}
 										}
 										catch(err)
 										{
