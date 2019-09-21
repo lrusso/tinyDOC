@@ -129,6 +129,9 @@
 				// CLEARING THE NOTIFICATION TIMER
 				try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
 
+				// HIDING THE CARET
+				document.getElementById("tinydoc_textcode").classList.add("tinydoc_caret_invisible");
+
 				// HIDING ALL NOTIFICATIONS
 				document.getElementsByClassName("tinydoc_saved")[0].style.display = "none";
 				document.getElementsByClassName("tinydoc_error")[0].style.display = "none";
@@ -188,6 +191,9 @@
 								// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 								NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000);
 								}
+
+							// SHOWING THE CARET
+							document.getElementById("tinydoc_textcode").classList.remove("tinydoc_caret_invisible");
 
 							// FOCUSING THE DOCUMENT
 							document.getElementById("tinydoc_textcode").focus();
