@@ -87,6 +87,8 @@
 			var STRING_WELCOME = "";
 			var STRING_INPUTURL = "";
 
+			var NOTIFICATION_TIMER;
+
 			if (userLanguage.substring(0,2)=="es")
 				{
 				STRING_ERROR = "Error al guardar.";
@@ -124,6 +126,8 @@
 
 			function saveDocument()
 				{
+				try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+
 				// HIDING ALL NOTIFICATIONS
 				document.getElementsByClassName("tinydoc_saved")[0].style.display = "none";
 				document.getElementsByClassName("tinydoc_error")[0].style.display = "none";
@@ -164,7 +168,8 @@
 								document.getElementsByClassName("tinydoc_saved")[0].style.display = "block";
 
 								// SETTING THE DELAY FOR HIDING THE SAVED DOCUMENT NOTIFICATION
-								setTimeout(function(){document.getElementsByClassName("tinydoc_saved")[0].style.display = "none"},3000);
+								try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+								NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_saved")[0].style.display = "none"},3000);
 
 								// SETTING THE DIRTY DOCUMENT STATUS OFF
 								window.onbeforeunload = null;
@@ -175,7 +180,8 @@
 								document.getElementsByClassName("tinydoc_error")[0].style.display = "block";
 
 								// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
-								setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000);
+								try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+								NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000);
 								}
 
 							// FOCUSING THE DOCUMENT
@@ -185,8 +191,19 @@
 						};
 
 					// SETTING THE ONERROR AND ONTIMEOUT EVENTS
-					http.onerror = function () {document.getElementsByClassName("tinydoc_error")[0].style.display = "block";setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)};
-					http.ontimeout = function (e) {document.getElementsByClassName("tinydoc_error")[0].style.display = "block";setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)};
+					http.onerror = function ()
+						{
+						document.getElementsByClassName("tinydoc_error")[0].style.display = "block";
+						try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+						NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)
+						};
+
+					http.ontimeout = function (e)
+						{
+						document.getElementsByClassName("tinydoc_error")[0].style.display = "block";
+						try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+						NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)
+						};
 
 					// MAKES THE REQUEST
 					http.send(params);
