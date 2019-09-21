@@ -126,6 +126,7 @@
 
 			function saveDocument()
 				{
+				// CLEARING THE NOTIFICATION TIMER
 				try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
 
 				// HIDING ALL NOTIFICATIONS
@@ -167,8 +168,10 @@
 								// SHOWING THE SAVED DOCUMENT NOTIFICATION
 								document.getElementsByClassName("tinydoc_saved")[0].style.display = "block";
 
-								// SETTING THE DELAY FOR HIDING THE SAVED DOCUMENT NOTIFICATION
+								// CLEARING THE NOTIFICATION TIMER
 								try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+
+								// SETTING THE DELAY FOR HIDING THE SAVED DOCUMENT NOTIFICATION
 								NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_saved")[0].style.display = "none"},3000);
 
 								// SETTING THE DIRTY DOCUMENT STATUS OFF
@@ -179,8 +182,10 @@
 								// SHOWING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 								document.getElementsByClassName("tinydoc_error")[0].style.display = "block";
 
-								// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
+								// CLEARING THE NOTIFICATION TIMER
 								try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+
+								// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 								NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000);
 								}
 
@@ -193,15 +198,25 @@
 					// SETTING THE ONERROR AND ONTIMEOUT EVENTS
 					http.onerror = function ()
 						{
+						// SHOWING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 						document.getElementsByClassName("tinydoc_error")[0].style.display = "block";
+
+						// CLEARING THE NOTIFICATION TIMER
 						try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+
+						// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 						NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)
 						};
 
 					http.ontimeout = function (e)
 						{
+						// SHOWING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 						document.getElementsByClassName("tinydoc_error")[0].style.display = "block";
+
+						// CLEARING THE NOTIFICATION TIMER
 						try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+
+						// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 						NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)
 						};
 
