@@ -212,6 +212,13 @@
 
 						// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 						NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)
+
+						// SHOWING THE CARET
+						document.getElementById("tinydoc_textcode").classList.remove("tinydoc_caret_invisible");
+
+						// FOCUSING THE DOCUMENT
+						document.getElementById("tinydoc_textcode").focus();
+						setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 						};
 
 					// SETTING THE ONTIMEOUT EVENT
@@ -225,6 +232,13 @@
 
 						// SETTING THE DELAY FOR HIDING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
 						NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)
+
+						// SHOWING THE CARET
+						document.getElementById("tinydoc_textcode").classList.remove("tinydoc_caret_invisible");
+
+						// FOCUSING THE DOCUMENT
+						document.getElementById("tinydoc_textcode").focus();
+						setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 						};
 
 					// MAKES THE REQUEST
