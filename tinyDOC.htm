@@ -195,7 +195,7 @@
 							}
 						};
 
-					// SETTING THE ONERROR AND ONTIMEOUT EVENTS
+					// SETTING THE ONERROR EVENT
 					http.onerror = function ()
 						{
 						// SHOWING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
@@ -208,6 +208,7 @@
 						NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_error")[0].style.display = "none"},3000)
 						};
 
+					// SETTING THE ONTIMEOUT EVENT
 					http.ontimeout = function (e)
 						{
 						// SHOWING THE ERROR WHILE SAVING DOCUMENT NOTIFICATION
@@ -476,152 +477,164 @@
 				document.getElementById("buttonHighlight").addEventListener("click",function(event){formatDoc("BackColor","#FFFF00")});
 				document.getElementById("buttonCalc").addEventListener("click",function(event)
 					{
-					// GETTING THE SELECTED TEXT
-					var selectedText = window.getSelection().toString();
-
-					// CHECKING THE SELECTED TEXT
-					if (selectedText!=null)
+					try
 						{
-						// IF THERE IS A SELECTED TEXT
-						if (selectedText.length>0)
+						// GETTING THE SELECTED TEXT
+						var selectedText = window.getSelection().toString();
+
+						// CHECKING THE SELECTED TEXT
+						if (selectedText!=null)
 							{
-							// SPLITTING THE SELECTED TEXT BY BREAKLINES
-							var splitted = selectedText.split("\n");
-
-							// CHECK IF IT IS A SINGLE LINE EXPRESSION OR A MULTILINE ADDING OPERATION
-							if (splitted.length==1)
+							// IF THERE IS A SELECTED TEXT
+							if (selectedText.length>0)
 								{
-								// REMOVING INVALID CHARACTERS
-								selectedText = selectedText.replace(/[^0-9.*\/()+-]/g, "");
+								// SPLITTING THE SELECTED TEXT BY BREAKLINES
+								var splitted = selectedText.split("\n");
 
-								try
+								// CHECK IF IT IS A SINGLE LINE EXPRESSION OR A MULTILINE ADDING OPERATION
+								if (splitted.length==1)
 									{
-									// EVALUATING THE EXPRESSION
-									var finalResult = eval(selectedText);
+									// REMOVING INVALID CHARACTERS
+									selectedText = selectedText.replace(/[^0-9.*\/()+-]/g, "");
 
-									// SHOWING ONLY TWO DECIMALS AFTER COMMA
-									finalResult = parseFloat(finalResult).toFixed(2);
-
-									// CHECKING IF THE FINAL RESULT IS AN INTEGER
-									if (finalResult.indexOf(".00")>-1)
-										{
-										finalResult = parseFloat(finalResult).toFixed(0);
-										}
-
-									// INSERTING THE EXPRESSION RESULT
-									document.execCommand("insertText", false, finalResult);
-									}
-									catch(err)
-									{
-									// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-									document.execCommand("insertText", false, "ERROR");
-									}
-								}
-							else
-								{
-								// SETTING THE FINAL RESULT VARIABLE
-								var finalResult = 0;
-
-								// GETTING ALL THE LINES
-								for (var i=0;i<splitted.length;i++)
-									{
 									try
 										{
-										// GETTING ONE LINE
-										var currentLine = splitted[i];
+										// EVALUATING THE EXPRESSION
+										var finalResult = eval(selectedText);
 
-										// CHECKING THE LINE
-										if (currentLine.length>0)
+										// SHOWING ONLY TWO DECIMALS AFTER COMMA
+										finalResult = parseFloat(finalResult).toFixed(2);
+
+										// CHECKING IF THE FINAL RESULT IS AN INTEGER
+										if (finalResult.indexOf(".00")>-1)
 											{
-											// REMOVING INVALID CHARACTERS
-											currentLine = currentLine.replace(/[^0-9.]/g, "");
-
-											// ADDING THE VALUE TO THE FINAL RESULT
-											finalResult = parseFloat(finalResult) + parseFloat(currentLine);
+											finalResult = parseFloat(finalResult).toFixed(0);
 											}
+
+										// INSERTING THE EXPRESSION RESULT
+										document.execCommand("insertText", false, finalResult);
 										}
 										catch(err)
 										{
+										// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
+										document.execCommand("insertText", false, "ERROR");
 										}
 									}
-
-								try
+								else
 									{
-									// SHOWING ONLY TWO DECIMALS AFTER COMMA
-									finalResult = parseFloat(finalResult).toFixed(2);
+									// SETTING THE FINAL RESULT VARIABLE
+									var finalResult = 0;
 
-									// CHECKING IF THE FINAL RESULT IS AN INTEGER
-									if (finalResult.indexOf(".00")>-1)
+									// GETTING ALL THE LINES
+									for (var i=0;i<splitted.length;i++)
 										{
-										finalResult = parseFloat(finalResult).toFixed(0);
+										try
+											{
+											// GETTING ONE LINE
+											var currentLine = splitted[i];
+
+											// CHECKING THE LINE
+											if (currentLine.length>0)
+												{
+												// REMOVING INVALID CHARACTERS
+												currentLine = currentLine.replace(/[^0-9.]/g, "");
+
+												// ADDING THE VALUE TO THE FINAL RESULT
+												finalResult = parseFloat(finalResult) + parseFloat(currentLine);
+												}
+											}
+											catch(err)
+											{
+											}
 										}
 
-									// INSERTING THE FINAL RESULT
-									document.execCommand("insertText", false, finalResult);
-									}
-									catch(err)
-									{
-									// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-									document.execCommand("insertText", false, "ERROR");
+									try
+										{
+										// SHOWING ONLY TWO DECIMALS AFTER COMMA
+										finalResult = parseFloat(finalResult).toFixed(2);
+
+										// CHECKING IF THE FINAL RESULT IS AN INTEGER
+										if (finalResult.indexOf(".00")>-1)
+											{
+											finalResult = parseFloat(finalResult).toFixed(0);
+											}
+
+										// INSERTING THE FINAL RESULT
+										document.execCommand("insertText", false, finalResult);
+										}
+										catch(err)
+										{
+										// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
+										document.execCommand("insertText", false, "ERROR");
+										}
 									}
 								}
 							}
 						}
+						catch(err)
+						{
+						}
 					});
 				document.getElementById("buttonLink").addEventListener("click",function(event)
 					{
-					// GETTING THE SELECTED TEXT
-					var selectedText = window.getSelection().toString();
-
-					// CHECKING THE SELECTED TEXT
-					if (selectedText!=null)
+					try
 						{
-						// IF THERE IS A SELECTED TEXT
-						if (selectedText.length>0)
-							{
-							// VALIDATORS FOR KNOWING IF THE SELECTED TEXT IS A HTTP, HTTPS OR MAILTO LINK
-							var selectedTextURLChecker1 = selectedText.toLowerCase().indexOf(" ");
-							var selectedTextURLChecker2 = selectedText.toLowerCase().indexOf("http://");
-							var selectedTextURLChecker3 = selectedText.toLowerCase().indexOf("https://");
-							var selectedTextURLChecker4 = checkForEmail(selectedText);
+						// GETTING THE SELECTED TEXT
+						var selectedText = window.getSelection().toString();
 
-							// VALIDATING THE SELECTED TEXT
-							if (selectedTextURLChecker1==-1 && (selectedTextURLChecker2==0 || selectedTextURLChecker3==0 || selectedTextURLChecker4==true))
+						// CHECKING THE SELECTED TEXT
+						if (selectedText!=null)
+							{
+							// IF THERE IS A SELECTED TEXT
+							if (selectedText.length>0)
 								{
-								// CHECKING IF IT IS A URL OR EMAIL
-								if (selectedTextURLChecker4==true)
+								// VALIDATORS FOR KNOWING IF THE SELECTED TEXT IS A HTTP, HTTPS OR MAILTO LINK
+								var selectedTextURLChecker1 = selectedText.toLowerCase().indexOf(" ");
+								var selectedTextURLChecker2 = selectedText.toLowerCase().indexOf("http://");
+								var selectedTextURLChecker3 = selectedText.toLowerCase().indexOf("https://");
+								var selectedTextURLChecker4 = checkForEmail(selectedText);
+
+								// VALIDATING THE SELECTED TEXT
+								if (selectedTextURLChecker1==-1 && (selectedTextURLChecker2==0 || selectedTextURLChecker3==0 || selectedTextURLChecker4==true))
 									{
-									// INSERTING THE MAILTO LINK INTO THE DOCUMENT
-									formatDoc("insertHTML","<a href='mailto:" + selectedText.toLowerCase() + "' target='top'>" + selectedText + "</a>");
+									// CHECKING IF IT IS A URL OR EMAIL
+									if (selectedTextURLChecker4==true)
+										{
+										// INSERTING THE MAILTO LINK INTO THE DOCUMENT
+										formatDoc("insertHTML","<a href='mailto:" + selectedText.toLowerCase() + "' target='top'>" + selectedText + "</a>");
+										}
+										else
+										{
+										// INSERTING THE URL LINK INTO THE DOCUMENT
+										formatDoc("insertHTML","<a href='" + selectedText + "' target='top'>" + selectedText + "</a>");
+										}
 									}
 									else
 									{
-									// INSERTING THE URL LINK INTO THE DOCUMENT
-									formatDoc("insertHTML","<a href='" + selectedText + "' target='top'>" + selectedText + "</a>");
-									}
-								}
-								else
-								{
-								// ASKING THE USER FOR THE URL
-								var linkURL = prompt(STRING_INPUTURL,"https:\/\/");
+									// ASKING THE USER FOR THE URL
+									var linkURL = prompt(STRING_INPUTURL,"https:\/\/");
 
-								// CHECKING THE LINKURL VALUE
-								if (linkURL!=null)
-									{
-									// VALIDATORS FOR KNOWING IF THE URL IS A HTTP, HTTPS OR MAILTO LINK
-									var linkURLChecker1 = linkURL.toLowerCase().indexOf("http://");
-									var linkURLChecker2 = linkURL.toLowerCase().indexOf("https://");
-									var linkURLChecker3 = linkURL.toLowerCase().indexOf("mailto:");
-
-									// VALIDATING THE URL
-									if (linkURLChecker1==0 || linkURLChecker2==0 || linkURLChecker3==0)
+									// CHECKING THE LINKURL VALUE
+									if (linkURL!=null)
 										{
-										// INSERTING THE URL LINK INTO THE DOCUMENT
-										formatDoc("insertHTML","<a href='" + linkURL + "' target='top'>" + document.getSelection() + "</a>");
+										// VALIDATORS FOR KNOWING IF THE URL IS A HTTP, HTTPS OR MAILTO LINK
+										var linkURLChecker1 = linkURL.toLowerCase().indexOf("http://");
+										var linkURLChecker2 = linkURL.toLowerCase().indexOf("https://");
+										var linkURLChecker3 = linkURL.toLowerCase().indexOf("mailto:");
+
+										// VALIDATING THE URL
+										if (linkURLChecker1==0 || linkURLChecker2==0 || linkURLChecker3==0)
+											{
+											// INSERTING THE URL LINK INTO THE DOCUMENT
+											formatDoc("insertHTML","<a href='" + linkURL + "' target='top'>" + document.getSelection() + "</a>");
+											}
 										}
 									}
 								}
 							}
+						}
+						catch(err)
+						{
 						}
 					});
 				document.getElementById("buttonTemplate1").addEventListener("click",function(event){formatDoc("insertHTML","My Template 1<br />Example 1<br />");});
