@@ -11,12 +11,12 @@ https://lrusso.github.io/tinyDOC/tinyDOC.htm
 ## Calc Button Sample 1 - Single Line Evaluation
 
 ```
-lorem ipsum (5+4-3)*2/1 lorem ipsum
+lorem ipsum (5.40+4.70-3.90)*2/1 lorem ipsum
 ```
-Select (5+4-3)*2/1, then click in the Calc Button, and the result will be inserted next to the selected text.
+Select (5.40+4.70-3.90)*2/1, then click in the Calc Button, and the result will be inserted next to the selected text.
 
 ```
-lorem ipsum (5+4-3)*2/1 = 12 lorem ipsum
+lorem ipsum (5.40+4.70-3.90)*2/1 = 12.40 lorem ipsum
 ```
 
 ## Calc Button Sample 2 - Multi Line Addition Operation
