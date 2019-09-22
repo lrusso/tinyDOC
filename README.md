@@ -13,10 +13,10 @@ https://lrusso.github.io/tinyDOC/tinyDOC.htm
 ```
 lorem ipsum (5+4-3)*2/1 lorem ipsum
 ```
-Select (5+4-3)*2/1, then click in the Calc Button, and the selected text will be replaced with the result.
+Select (5+4-3)*2/1, then click in the Calc Button, and the result will be inserted next to the selected text.
 
 ```
-lorem ipsum 12 lorem ipsum
+lorem ipsum (5+4-3)*2/1     12 lorem ipsum
 ```
 
 ## Calc Button Sample 2 - Multi Line Addition Operation
@@ -27,8 +27,13 @@ $300
 $50
 ```
 
-Select all, then click in the Calc Button, and the selected text will be replaced with the result.
+Select all, then click in the Calc Button, and the result will be inserted below to the selected text.
 
 ```
+$500
+$300
+$50
+
+
 850
 ```
