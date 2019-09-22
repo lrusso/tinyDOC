@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -522,11 +522,14 @@
 										// EVALUATING THE EXPRESSION
 										var finalResult = eval(selectedText);
 
+										// MOVING THE CARET AFTER THE SELECTED TEXT
+										try{document.getSelection().collapseToEnd()}catch(err){}
+
 										// CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
 										if (isNaN(finalResult)==true)
 											{
 											// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-											document.execCommand("insertText", false, "ERROR");
+											document.execCommand("insertText", false, "     ERROR");
 											}
 											else
 											{
@@ -540,13 +543,13 @@
 												}
 
 											// INSERTING THE EXPRESSION RESULT
-											document.execCommand("insertText", false, finalResult);
+											document.execCommand("insertText", false, "     " + finalResult);
 											}
 										}
 										catch(err)
 										{
 										// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-										document.execCommand("insertText", false, "ERROR");
+										document.execCommand("insertText", false, "     ERROR");
 										}
 									}
 								else
@@ -579,11 +582,14 @@
 
 									try
 										{
+										// MOVING THE CARET AFTER THE SELECTED TEXT
+										try{document.getSelection().collapseToEnd()}catch(err){}
+
 										// CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
 										if (isNaN(finalResult)==true)
 											{
 											// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-											document.execCommand("insertText", false, "ERROR");
+											document.execCommand("insertText", false, "\n\nERROR");
 											}
 											else
 											{
@@ -597,13 +603,13 @@
 												}
 
 											// INSERTING THE FINAL RESULT
-											document.execCommand("insertText", false, finalResult);
+											document.execCommand("insertText", false, "\n\n" + finalResult);
 											}
 										}
 										catch(err)
 										{
 										// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-										document.execCommand("insertText", false, "ERROR");
+										document.execCommand("insertText", false, "\n\nERROR");
 										}
 									}
 								}
@@ -680,6 +686,34 @@
 				document.getElementById("buttonTemplate3").addEventListener("click",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");});
 				document.getElementsByClassName("tinydoc_menubar")[0].addEventListener("click",function(event){document.getElementById("tinydoc_textcode").focus()});
 				}
+
+
+
+
+
+
+
+function setCaretAfterFocusedInput(container) {    
+  var input = container.querySelector('input:focus');
+  if (input) {
+    container.focus(); // required for firefox
+    setCaretAfter(input);
+  }
+}
+
+function setCaretAfter(element) {
+  if (window.getSelection) {            
+    var range = document.createRange();
+    range.setStartAfter(element);
+    
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+}
+
+
+
 		</script>
 	</body>
 </html>
