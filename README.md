@@ -33,6 +33,6 @@ Select all, then click in the Calc Button, and the result will be inserted below
 $ 100.10
 $ 200.20
 $ 300.30
------
+----------
 600.60
 ```
