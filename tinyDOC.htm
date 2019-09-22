@@ -508,6 +508,9 @@
 							// IF THERE IS A SELECTED TEXT
 							if (selectedText.length>0)
 								{
+								// MOVING THE CARET AFTER THE SELECTED TEXT
+								try{document.getSelection().collapseToEnd()}catch(err){}
+
 								// SPLITTING THE SELECTED TEXT BY BREAKLINES
 								var splitted = selectedText.split("\n");
 
@@ -521,9 +524,6 @@
 										{
 										// EVALUATING THE EXPRESSION
 										var finalResult = eval(selectedText);
-
-										// MOVING THE CARET AFTER THE SELECTED TEXT
-										try{document.getSelection().collapseToEnd()}catch(err){}
 
 										// CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
 										if (isNaN(finalResult)==true)
@@ -558,7 +558,7 @@
 									var finalResult = 0;
 
 									// SETTING THE VARIABLE FOR THE LAST-LINE-BREAKLINE-CHECKER
-									var lastLineBR = false;
+									var lastLineBR = "";
 
 									// GETTING ALL THE LINES
 									for (var i=0;i<splitted.length;i++)
@@ -578,10 +578,11 @@
 												finalResult = parseFloat(finalResult) + parseFloat(currentLine);
 												}
 
-											// CHECKING IF THE LAST LINE HAS ONLY A BREAKLINE AS CONTENT
-											if (currentLine=="" && i==splitted.length-1)
+											// CHECKING IF THE LAST LINE AND IS NOT A BREAKLINE.
+											// IF SO, A BREAKLINE WILL BE ADDED BEFORE THE RESULT.
+											if (currentLine!="" && i==splitted.length-1)
 												{
-												lastLineBR = true;
+												lastLineBR = "\n";
 												}
 											}
 											catch(err)
@@ -591,23 +592,11 @@
 
 									try
 										{
-										// MOVING THE CARET AFTER THE SELECTED TEXT
-										try{document.getSelection().collapseToEnd()}catch(err){}
-
 										// CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
 										if (isNaN(finalResult)==true)
 											{
-											// CHECKING IF THE LAST LINE OF THE SELECTED TEXT HAS A BREAKLINE
-											if (lastLineBR==true)
-												{
-												// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-												document.execCommand("insertText", false, "----------\nERROR");
-												}
-												else
-												{
-												// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-												document.execCommand("insertText", false, "\n----------\nERROR");
-												}
+											// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
+											document.execCommand("insertText", false, lastLineBR + "----------\nERROR");
 											}
 											else
 											{
@@ -620,32 +609,14 @@
 												finalResult = parseFloat(finalResult).toFixed(0);
 												}
 
-											// CHECKING IF THE LAST LINE OF THE SELECTED TEXT HAS A BREAKLINE
-											if (lastLineBR==true)
-												{
-												// INSERTING THE FINAL RESULT
-												document.execCommand("insertText", false, "----------\n" + finalResult);
-												}
-												else
-												{
-												// INSERTING THE FINAL RESULT
-												document.execCommand("insertText", false, "\n----------\n" + finalResult);
-												}
+											// INSERTING THE FINAL RESULT
+											document.execCommand("insertText", false, lastLineBR + "----------\n" + finalResult);
 											}
 										}
 										catch(err)
 										{
-										// CHECKING IF THE LAST LINE OF THE SELECTED TEXT HAS A BREAKLINE
-										if (lastLineBR==true)
-											{
-											// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-											document.execCommand("insertText", false, "----------\nERROR");
-											}
-											else
-											{
-											// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-											document.execCommand("insertText", false, "\n----------\nERROR");
-											}
+										// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
+										document.execCommand("insertText", false, lastLineBR + "----------\nERROR");
 										}
 									}
 								}
@@ -722,34 +693,6 @@
 				document.getElementById("buttonTemplate3").addEventListener("click",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");});
 				document.getElementsByClassName("tinydoc_menubar")[0].addEventListener("click",function(event){document.getElementById("tinydoc_textcode").focus()});
 				}
-
-
-
-
-
-
-
-function setCaretAfterFocusedInput(container) {    
-  var input = container.querySelector('input:focus');
-  if (input) {
-    container.focus(); // required for firefox
-    setCaretAfter(input);
-  }
-}
-
-function setCaretAfter(element) {
-  if (window.getSelection) {            
-    var range = document.createRange();
-    range.setStartAfter(element);
-    
-    var selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
-}
-
-
-
 		</script>
 	</body>
 </html>
