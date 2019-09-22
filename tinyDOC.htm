@@ -529,7 +529,7 @@
 										if (isNaN(finalResult)==true)
 											{
 											// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-											document.execCommand("insertText", false, "     ERROR");
+											document.execCommand("insertText", false, " = ERROR");
 											}
 											else
 											{
@@ -543,19 +543,22 @@
 												}
 
 											// INSERTING THE EXPRESSION RESULT
-											document.execCommand("insertText", false, "     " + finalResult);
+											document.execCommand("insertText", false, " = " + finalResult);
 											}
 										}
 										catch(err)
 										{
 										// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-										document.execCommand("insertText", false, "     ERROR");
+										document.execCommand("insertText", false, " = ERROR");
 										}
 									}
 								else
 									{
 									// SETTING THE FINAL RESULT VARIABLE
 									var finalResult = 0;
+
+									// SETTING THE VARIABLE FOR THE LAST-LINE-BREAKLINE-CHECKER
+									var lastLineBR = false;
 
 									// GETTING ALL THE LINES
 									for (var i=0;i<splitted.length;i++)
@@ -574,6 +577,12 @@
 												// ADDING THE VALUE TO THE FINAL RESULT
 												finalResult = parseFloat(finalResult) + parseFloat(currentLine);
 												}
+
+											// CHECKING IF THE LAST LINE HAS ONLY A BREAKLINE AS CONTENT
+											if (currentLine=="" && i==splitted.length-1)
+												{
+												lastLineBR = true;
+												}
 											}
 											catch(err)
 											{
@@ -588,8 +597,17 @@
 										// CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
 										if (isNaN(finalResult)==true)
 											{
-											// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-											document.execCommand("insertText", false, "\n\nERROR");
+											// CHECKING IF THE LAST LINE OF THE SELECTED TEXT HAS A BREAKLINE
+											if (lastLineBR==true)
+												{
+												// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
+												document.execCommand("insertText", false, "------\nERROR");
+												}
+												else
+												{
+												// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
+												document.execCommand("insertText", false, "\n------\nERROR");
+												}
 											}
 											else
 											{
@@ -602,14 +620,32 @@
 												finalResult = parseFloat(finalResult).toFixed(0);
 												}
 
-											// INSERTING THE FINAL RESULT
-											document.execCommand("insertText", false, "\n\n" + finalResult);
+											// CHECKING IF THE LAST LINE OF THE SELECTED TEXT HAS A BREAKLINE
+											if (lastLineBR==true)
+												{
+												// INSERTING THE FINAL RESULT
+												document.execCommand("insertText", false, "------\n" + finalResult);
+												}
+												else
+												{
+												// INSERTING THE FINAL RESULT
+												document.execCommand("insertText", false, "\n------\n" + finalResult);
+												}
 											}
 										}
 										catch(err)
 										{
-										// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-										document.execCommand("insertText", false, "\n\nERROR");
+										// CHECKING IF THE LAST LINE OF THE SELECTED TEXT HAS A BREAKLINE
+										if (lastLineBR==true)
+											{
+											// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
+											document.execCommand("insertText", false, "------\nERROR");
+											}
+											else
+											{
+											// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
+											document.execCommand("insertText", false, "\n------\nERROR");
+											}
 										}
 									}
 								}
