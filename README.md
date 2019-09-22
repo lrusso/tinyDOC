@@ -16,7 +16,7 @@ lorem ipsum (5+4-3)*2/1 lorem ipsum
 Select (5+4-3)*2/1, then click in the Calc Button, and the result will be inserted next to the selected text.
 
 ```
-lorem ipsum (5+4-3)*2/1     12 lorem ipsum
+lorem ipsum (5+4-3)*2/1 = 12 lorem ipsum
 ```
 
 ## Calc Button Sample 2 - Multi Line Addition Operation
@@ -33,7 +33,6 @@ Select all, then click in the Calc Button, and the result will be inserted below
 $500
 $300
 $50
-
-
+-----
 850
 ```
