@@ -601,12 +601,12 @@
 											if (lastLineBR==true)
 												{
 												// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-												document.execCommand("insertText", false, "------\nERROR");
+												document.execCommand("insertText", false, "-----\nERROR");
 												}
 												else
 												{
 												// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-												document.execCommand("insertText", false, "\n------\nERROR");
+												document.execCommand("insertText", false, "\n-----\nERROR");
 												}
 											}
 											else
@@ -624,12 +624,12 @@
 											if (lastLineBR==true)
 												{
 												// INSERTING THE FINAL RESULT
-												document.execCommand("insertText", false, "------\n" + finalResult);
+												document.execCommand("insertText", false, "-----\n" + finalResult);
 												}
 												else
 												{
 												// INSERTING THE FINAL RESULT
-												document.execCommand("insertText", false, "\n------\n" + finalResult);
+												document.execCommand("insertText", false, "\n-----\n" + finalResult);
 												}
 											}
 										}
@@ -639,12 +639,12 @@
 										if (lastLineBR==true)
 											{
 											// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-											document.execCommand("insertText", false, "------\nERROR");
+											document.execCommand("insertText", false, "-----\nERROR");
 											}
 											else
 											{
 											// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-											document.execCommand("insertText", false, "\n------\nERROR");
+											document.execCommand("insertText", false, "\n-----\nERROR");
 											}
 										}
 									}
