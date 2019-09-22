@@ -22,17 +22,17 @@ lorem ipsum (5.40+4.70-3.90)*2/1 = 12.40 lorem ipsum
 ## Calc Button Sample 2 - Multi Line Addition Operation
 
 ```
-$500
-$300
-$50
+$100.10
+$200.20
+$300.30
 ```
 
 Select all, then click in the Calc Button, and the result will be inserted below to the selected text.
 
 ```
-$500
-$300
-$50
+$100.10
+$200.20
+$300.30
 -----
-850
+600.60
 ```
