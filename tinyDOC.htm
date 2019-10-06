@@ -381,9 +381,12 @@
 								{
 								}
 							}
+
+						// CHECKING IF THERE IS A PREVIOUS FOUND TO THE CARET POSITION
+						// AND THAT THERE ARE NO FOUNDS AFTER THE CARET POSITION.
 						if (SEARCH_FOUND_FIRST!=null && SEARCH_FOUND == false)
 							{
-							// SELECTING THE TEXT
+							// SELECTING THE PREVIOUS FOUND (THE FIRST MATCH IN THE DOCUMENT)
 							selection.removeAllRanges();
 							selection.addRange(SEARCH_FOUND_FIRST);
 							}
