@@ -340,29 +340,39 @@
 				{
 				try
 					{
+					// CHECKING IF THE SEARCH VALUE IS EMPTY
 					if (SEARCH_STRING==null)
 						{
+						// IF IT IS EMPTY, WILL ASK THE USER TO INPUT A VALUE
 						searchInDocument();
 						}
 						else
 						{
+						// GETTING THE CARET POSITION
 						SEARCH_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));
+
+						// SETTING THAT THE VALUE WAS NOT FOUND YET
 						SEARCH_FOUND = false;
+
+						// GETTING THE CURRENT SELECTION AND ALL THE DOCUMENT NODES
 						var sel = window.getSelection();
 						var allNodes = document.getElementById("tinydoc_textcode").childNodes;
 
+						// GOING THROUGH EVERY NODE
 						for (var i=0;i<allNodes.length;i++)
 							{
 							try
 								{
-								var latestChildNode = allNodes[i];
-								if (latestChildNode.firstChild!=null)
+								// CHECKING IF THE NODE AT LEAST ONE CHILD
+								if (allNodes[i].firstChild!=null)
 									{
-									searchInDocument_AllDescendants(SEARCH_STRING,latestChildNode,sel);
+									// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD
+									searchInDocument_AllDescendants(SEARCH_STRING,allNodes[i],sel);
 									}
 									else
 									{
-									searchInDocument_findAndSelect(SEARCH_STRING,latestChildNode,sel);
+									// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
+									searchInDocument_findAndSelect(SEARCH_STRING,allNodes[i],sel);
 									}
 								}
 								catch(err)
