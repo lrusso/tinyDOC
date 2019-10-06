@@ -97,6 +97,7 @@
 
 			var SEARCH_STRING = null;
 			var SEARCH_FOUND = false;
+			var SEARCH_FOUND_FIRST = null;
 			var SEARCH_INITIAL_INDEX = null;
 
 			var NOTIFICATION_TIMER;
@@ -353,9 +354,10 @@
 
 						// SETTING THAT THE VALUE WAS NOT FOUND YET
 						SEARCH_FOUND = false;
+						SEARCH_FOUND_FIRST = null;
 
 						// GETTING THE CURRENT SELECTION AND ALL THE DOCUMENT NODES
-						var sel = window.getSelection();
+						var selection = window.getSelection();
 						var allNodes = document.getElementById("tinydoc_textcode").childNodes;
 
 						// GOING THROUGH EVERY NODE
@@ -367,17 +369,23 @@
 								if (allNodes[i].firstChild!=null)
 									{
 									// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-									searchInDocument_AllDescendants(SEARCH_STRING,allNodes[i],sel);
+									searchInDocument_AllDescendants(SEARCH_STRING,allNodes[i],selection);
 									}
 									else
 									{
 									// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
-									searchInDocument_findAndSelect(SEARCH_STRING,allNodes[i],sel);
+									searchInDocument_findAndSelect(SEARCH_STRING,allNodes[i],selection);
 									}
 								}
 								catch(err)
 								{
 								}
+							}
+						if (SEARCH_FOUND_FIRST!=null && SEARCH_FOUND == false)
+							{
+							// SELECTING THE TEXT
+							selection.removeAllRanges();
+							selection.addRange(SEARCH_FOUND_FIRST);
 							}
 						}
 					}
@@ -445,6 +453,11 @@
 							range.setStart(myNode, startIndex);
 							range.setEnd(myNode, endIndex);
 
+							if (SEARCH_FOUND_FIRST==null)
+								{
+								SEARCH_FOUND_FIRST = range;
+								}
+
 							// SELECTING THE TEXT
 							selection.removeAllRanges();
 							selection.addRange(range);
@@ -457,6 +470,29 @@
 								{
 								// SETTING THAT THE SEARCH VALUE WAS FOUND
 								SEARCH_FOUND = true;
+								}
+
+							// SCROLLING TO THE SELECTED VALUE
+							try
+								{
+								/*
+								var caretPositionY = getCaretPositionY();
+								var rect = document.getElementById("tinydoc_textcode").getBoundingClientRect();
+								if (caretPositionY<0)
+									{
+									console.log(caretPositionY + ' - ' + rect.top);
+									caretPositionY = caretPositionY - rect.top;
+									}
+									else
+									{
+									console.log(caretPositionY + ' + ' + rect.top);
+									caretPositionY = caretPositionY + rect.top;
+									}
+								document.getElementById("tinydoc_textcode").scrollTop = caretPosition;
+								*/
+								}
+								catch(err)
+								{
 								}
 							}
 						}
@@ -513,6 +549,34 @@
 					catch(err)
 					{
 					}
+				}
+
+			function getCaretPositionY()
+				{
+				// Authors of this function: Nishad Up & Tom
+				// https://stackoverflow.com/questions/3972014/get-caret-position-in-contenteditable-div/30993650#30993650
+				var y = 0;
+				try
+					{
+					var sel = window.getSelection();
+					if(sel.rangeCount)
+						{
+						var range = sel.getRangeAt(0).cloneRange();
+						if(range.getClientRects())
+							{
+							range.collapse(true);
+							var rect = range.getClientRects()[0];
+							if(rect)
+								{
+								y = rect.top;
+								}
+							}
+						}
+					}
+					catch(err)
+					{
+					}
+				return y;
 				}
 
 			function getCaretPosition(element)
