@@ -363,10 +363,10 @@
 							{
 							try
 								{
-								// CHECKING IF THE NODE HAS AT LEAST ONE CHILD
+								// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
 								if (allNodes[i].firstChild!=null)
 									{
-									// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD
+									// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
 									searchInDocument_AllDescendants(SEARCH_STRING,allNodes[i],sel);
 									}
 									else
@@ -390,17 +390,25 @@
 				{
 				try
 					{
+					// GOING THROUGH EVERY NODE
 					for (var i = 0; i < latestChildNode.childNodes.length; i++)
 						{
 						try
 							{
+							// CHECKING IF THERE IS NO VALUE FOUND YET
 							if (SEARCH_FOUND==false)
 								{
+								// CREATING A VARIABLE AND GETTING THE CHILD NODE
 								var child = latestChildNode.childNodes[i];
+
+								// CHECKING IF THAT CHILD NODE HAS A CHILD NODE
 								if (child.firstChild!=null)
 									{
+									// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
 									searchInDocument_AllDescendants(search,child,sel);
 									}
+
+								// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
 								searchInDocument_findAndSelect(search,child,sel);
 								}
 							}
