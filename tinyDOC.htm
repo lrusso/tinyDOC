@@ -426,33 +426,36 @@
 				{
 				try
 					{
+					// SETTING ALL THE PARAMETERS
 					var needle = search;
 					var re = new RegExp(needle,"gi");
 					var haystack = myNode.textContent.toLowerCase();
 
+					// GOING THROUGH EVERY TEXT MATCH
 					while(re.exec(haystack))
 						{
 						if (SEARCH_FOUND==false)
 							{
-							// FINDING THE TEXT
+							// LOCATING THE TEXT MATCH
 							var startIndex = re.lastIndex - search.length;
 							var endIndex = startIndex + search.length;
 
+							// CREATING THE RANGE
 							var range = document.createRange();
 							range.setStart(myNode, startIndex);
 							range.setEnd(myNode, endIndex);
+
+							// SELECTING THE TEXT
 							selection.removeAllRanges();
 							selection.addRange(range);
 
+							// GETTING THE CARET POSITION
 							var caretPosition = getCaretPosition(document.getElementById("tinydoc_textcode"));
 
+							// CHECKING IF THE CARET POSITION IS GREATER THAN THE INITIAL CARET POSITION
 							if (caretPosition>SEARCH_INITIAL_INDEX)
 								{
-								var range = document.createRange();
-								range.setStart(myNode, startIndex);
-								range.setEnd(myNode, endIndex);
-								selection.removeAllRanges();
-								selection.addRange(range);
+								// SETTING THAT THE SEARCH VALUE WAS FOUND
 								SEARCH_FOUND = true;
 								}
 							}
