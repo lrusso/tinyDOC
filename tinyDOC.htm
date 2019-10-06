@@ -306,19 +306,28 @@
 				{
 				try
 					{
+					// CREATING THE SEARCH VALUE VARIABLE
 					var search;
+
+					// CHECKING IF THERE IS ANY PREVIOUS SEARCH VALUE
 					if (SEARCH_STRING!=null)
 						{
+						// SHOWING A PROMPT WITH THE PREVIOUS SEARCH VALUE
 						search = prompt(STRING_SEARCH,SEARCH_STRING);
 						}
 						else
 						{
+						// SHOWING THE PROMPT
 						search = prompt(STRING_SEARCH);
 						}
 
+					// CHECKING IF THE USER WROTE A SEARCH VALUE
 					if (search!=null)
 						{
+						// SETTING THE SEARCH VALUE USING THE TOLOWERCASE METHOD FOR A INSENSITIVE CASE SEARCH
 						SEARCH_STRING = search.toLowerCase();
+
+						// FINDING THE SEARCH VALUE
 						searchInDocumentNext();
 						}
 					}
@@ -487,6 +496,8 @@
 
 			function getCaretPosition(element)
 				{
+				// Author of this function: Tim Down
+				// https://stackoverflow.com/questions/4811822/get-a-ranges-start-and-end-offsets-relative-to-its-parent-container/4812022#4812022
 				var caretOffset = 0;
 				try
 					{
