@@ -389,6 +389,29 @@
 							// SELECTING THE PREVIOUS FOUND (THE FIRST MATCH IN THE DOCUMENT)
 							selection.removeAllRanges();
 							selection.addRange(SEARCH_FOUND_FIRST);
+
+
+							// SCROLLING TO THE SELECTED VALUE
+							try
+								{
+								// SETTING THE SCROLLTOP TO 0
+								document.getElementById("tinydoc_textcode").scrollTop = 0;
+
+								// GETTING THE CARET Y-POSITION
+								var caretPositionY = getCaretPositionY();
+
+								// GETTING THE DOCUMENT PADDING-TOP
+								var containerPaddingTop = document.getElementById("tinydoc_textcode").getBoundingClientRect().top + 10;
+
+								// GETTING THE TARGET POSITION
+								var targetPostion = caretPositionY - containerPaddingTop;
+
+								// SETTING THE SCROLL LOCATION
+								document.getElementById("tinydoc_textcode").scrollTop = targetPostion;
+								}
+								catch(err)
+								{
+								}
 							}
 						}
 					}
@@ -482,24 +505,20 @@
 								// SCROLLING TO THE SELECTED VALUE
 								try
 									{
+									// SETTING THE SCROLLTOP TO 0
+									document.getElementById("tinydoc_textcode").scrollTop = 0;
 
-									// ------- PENDING CODE -------
-
-									/*
+									// GETTING THE CARET Y-POSITION
 									var caretPositionY = getCaretPositionY();
-									var containerPaddingTop = document.getElementById("tinydoc_textcode").getBoundingClientRect().top;
+
+									// GETTING THE DOCUMENT PADDING-TOP
+									var containerPaddingTop = document.getElementById("tinydoc_textcode").getBoundingClientRect().top + 10;
+
+									// GETTING THE TARGET POSITION
 									var targetPostion = caretPositionY - containerPaddingTop;
-									var currentPostion = document.getElementById("tinydoc_textcode").scrollTop;
-									var currentPostionNegative = currentPostion - (targetPostion * -1);
-									if (targetPostion<0)
-										{
-										document.getElementById("tinydoc_textcode").scrollTop = currentPostionNegative;
-										}
-										else
-										{
-										document.getElementById("tinydoc_textcode").scrollTop = targetPostion;
-										}
-									*/
+
+									// SETTING THE SCROLL LOCATION
+									document.getElementById("tinydoc_textcode").scrollTop = targetPostion;
 									}
 									catch(err)
 									{
