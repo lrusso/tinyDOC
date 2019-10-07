@@ -456,49 +456,59 @@
 							range.setStart(myNode, startIndex);
 							range.setEnd(myNode, endIndex);
 
-							if (SEARCH_FOUND_FIRST==null)
-								{
-								SEARCH_FOUND_FIRST = range;
-								}
-
 							// SELECTING THE TEXT
 							selection.removeAllRanges();
 							selection.addRange(range);
 
-							// GETTING THE CARET POSITION
-							var caretPosition = getCaretPosition(document.getElementById("tinydoc_textcode"));
-
-							// CHECKING IF THE CARET POSITION IS GREATER THAN THE INITIAL CARET POSITION
-							if (caretPosition>SEARCH_INITIAL_INDEX)
+							// CHECKING IF THAT THE SELECTED TEXT IS THE SAME AS THE ONE THAT THE USER WROTE
+							if (window.getSelection().toString().toLowerCase()==search)
 								{
-								// SETTING THAT THE SEARCH VALUE WAS FOUND
-								SEARCH_FOUND = true;
-								}
-
-							// SCROLLING TO THE SELECTED VALUE
-							try
-								{
-
-								// ------------- PENDING CODE -------------
-
-								/*
-								var caretPositionY = getCaretPositionY();
-								var rect = document.getElementById("tinydoc_textcode").getBoundingClientRect();
-								if (caretPositionY<0)
+								// CHECKING IF THERE IS A FIRST VALUE FOUND
+								if (SEARCH_FOUND_FIRST==null)
 									{
-									console.log(caretPositionY + ' - ' + rect.top);
-									caretPositionY = caretPositionY - rect.top;
+									SEARCH_FOUND_FIRST = range;
 									}
-									else
+
+								// GETTING THE CARET POSITION
+								var caretPosition = getCaretPosition(document.getElementById("tinydoc_textcode"));
+
+								// CHECKING IF THE CARET POSITION IS GREATER THAN THE INITIAL CARET POSITION
+								if (caretPosition>SEARCH_INITIAL_INDEX)
 									{
-									console.log(caretPositionY + ' + ' + rect.top);
-									caretPositionY = caretPositionY + rect.top;
+									// SETTING THAT THE SEARCH VALUE WAS FOUND
+									SEARCH_FOUND = true;
 									}
-								document.getElementById("tinydoc_textcode").scrollTop = caretPosition;
-								*/
+
+								// SCROLLING TO THE SELECTED VALUE
+								try
+									{
+
+									// ------------- PENDING CODE -------------
+
+									/*
+									var caretPositionY = getCaretPositionY();
+									var rect = document.getElementById("tinydoc_textcode").getBoundingClientRect();
+									if (caretPositionY<0)
+										{
+										console.log(caretPositionY + ' - ' + rect.top);
+										caretPositionY = caretPositionY - rect.top;
+										}
+										else
+										{
+										console.log(caretPositionY + ' + ' + rect.top);
+										caretPositionY = caretPositionY + rect.top;
+										}
+									document.getElementById("tinydoc_textcode").scrollTop = caretPosition;
+									*/
+									}
+									catch(err)
+									{
+									}
 								}
-								catch(err)
+								else
 								{
+								// CLEARING SELECTION IF THERE IS NO MATCH
+								selection.removeAllRanges();
 								}
 							}
 						}
