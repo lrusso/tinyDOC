@@ -483,22 +483,22 @@
 								try
 									{
 
-									// ------------- PENDING CODE -------------
+									// ------- PENDING CODE -------
 
 									/*
 									var caretPositionY = getCaretPositionY();
-									var rect = document.getElementById("tinydoc_textcode").getBoundingClientRect();
-									if (caretPositionY<0)
+									var containerPaddingTop = document.getElementById("tinydoc_textcode").getBoundingClientRect().top;
+									var targetPostion = caretPositionY - containerPaddingTop;
+									var currentPostion = document.getElementById("tinydoc_textcode").scrollTop;
+									var currentPostionNegative = currentPostion - (targetPostion * -1);
+									if (targetPostion<0)
 										{
-										console.log(caretPositionY + ' - ' + rect.top);
-										caretPositionY = caretPositionY - rect.top;
+										document.getElementById("tinydoc_textcode").scrollTop = currentPostionNegative;
 										}
 										else
 										{
-										console.log(caretPositionY + ' + ' + rect.top);
-										caretPositionY = caretPositionY + rect.top;
+										document.getElementById("tinydoc_textcode").scrollTop = targetPostion;
 										}
-									document.getElementById("tinydoc_textcode").scrollTop = caretPosition;
 									*/
 									}
 									catch(err)
