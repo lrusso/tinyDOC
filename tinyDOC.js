@@ -788,13 +788,71 @@ function checkForURL()
 		{
 		// GETTING THE CURRENT SELECTION
 		var selectedNode = window.getSelection().focusNode;
+		// GOING THROUGH EVERY NODE
+		for (var i=0;i<selectedNode.length;i++)
+			{
+			try
+				{
+				// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
+				if (selectedNode.firstChild!=null)
+					{
+					// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+					checkForURL_AllDescendants(selectedNode);
+					}
+					else
+					{
+					// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
+					checkForURL_Update(selectedNode);
+					}
+				}
+				catch(err)
+				{
+				}
+			}
+		}
+		catch(err)
+		{
+		}
+	}
 
-		// GETTING THE LASTEST NODE
-		var latestChildNode = selectedNode;
-		while (latestChildNode.firstChild!=null){latestChildNode = latestChildNode.firstChild;}
+function checkForURL_AllDescendants(latestChildNode)
+	{
+	try
+		{
+		// GOING THROUGH EVERY NODE
+		for (var i = 0; i < latestChildNode.childNodes.length; i++)
+			{
+			try
+				{
+				// CREATING A VARIABLE AND GETTING THE CHILD NODE
+				var child = latestChildNode.childNodes[i];
 
+				// CHECKING IF THAT CHILD NODE HAS A CHILD NODE
+				if (child.firstChild!=null)
+					{
+					// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
+					checkForURL_AllDescendants(child);
+					}
+
+				// EXECUTING THE CHECK FOR URL FUNCTION WITHIN THE CURRENT NODE
+				checkForURL_Update(child);
+				}
+				catch(err)
+				{
+				}
+			}
+		}
+		catch(err)
+		{
+		}
+	}
+
+function checkForURL_Update(selectedNode)
+	{
+	try
+		{
 		// GETTING THE URL (IF ANY)
-		var finalURL = latestChildNode.parentNode.href;
+		var finalURL = selectedNode.parentNode.href;
 
 		// CHECKING IF THERE IS A VALUE
 		if(typeof finalURL !== "undefined")
