@@ -444,54 +444,73 @@ function findInDocument_findAndSelect(search, myNode, selection)
 
 function replaceInDocument()
 	{
+	// CREATING THE VARIABLES FOR EVERY QUESTION
 	var question1;
 	var question2;
 
+	// CHECKING IF THERE IS A PREVIOUS VALUE FOR FINDREPLACE_FIND
 	if (FINDREPLACE_FIND!=null)
 		{
+		// SHOWING A PROMPT WITH THE PREVIOUS FINDREPLACE_FIND VALUE
 		question1 = prompt(STRING_FINDREPLACE_FIND,FINDREPLACE_FIND);
 		}
 		else
 		{
+		// SHOWING A PROMPT
 		question1 = prompt(STRING_FINDREPLACE_FIND);
 		}
 
-	if (FINDREPLACE_REPLACEWIDTH!=null)
-		{
-		question2 = prompt(STRING_FINDREPLACE_REPLACEWITH,FINDREPLACE_REPLACEWIDTH);
-		}
-		else
-		{
-		question2 = prompt(STRING_FINDREPLACE_REPLACEWITH);
-		}
-
+	// SETTING THE FINDREPLACE_FIND VALUE USING THE TOLOWERCASE METHOD FOR A INSENSITIVE CASE REPLACE
 	FINDREPLACE_FIND = question1.toLowerCase();
-	FINDREPLACE_REPLACEWIDTH = question2;
 
-	if (FINDREPLACE_FIND!=null && FINDREPLACE_REPLACEWIDTH!=null)
+	// CHECKING IF THERE IS A VALUE IN FINDREPLACE_FIND IN ORDER TO SHOW THE NEXT PROMPT
+	if (FINDREPLACE_FIND!=null)
 		{
-		var selection = window.getSelection();
-		var allNodes = document.getElementById("tinydoc_textcode").childNodes;
-
-		// GOING THROUGH EVERY NODE
-		for (var i=0;i<allNodes.length;i++)
+		if (FINDREPLACE_FIND!="")
 			{
-			try
+			// CHECKING IF THERE IS A PREVIOUS VALUE FOR FINDREPLACE_REPLACEWIDTH
+			if (FINDREPLACE_REPLACEWIDTH!=null)
 				{
-				// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
-				if (allNodes[i].firstChild!=null)
-					{
-					// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-					replaceInDocument_AllDescendants(FINDREPLACE_FIND,allNodes[i],selection);
-					}
-					else
-					{
-					// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
-					replaceInDocument_findAndSelect(FINDREPLACE_FIND,allNodes[i],selection);
-					}
+				// SHOWING A PROMPT WITH THE PREVIOUS FINDREPLACE_REPLACEWIDTH VALUE
+				question2 = prompt(STRING_FINDREPLACE_REPLACEWITH,FINDREPLACE_REPLACEWIDTH);
 				}
-				catch(err)
+				else
 				{
+				// SHOWING A PROMPT
+				question2 = prompt(STRING_FINDREPLACE_REPLACEWITH);
+				}
+
+			// SETTING THE FINDREPLACE_REPLACEWIDTH VALUE
+			FINDREPLACE_REPLACEWIDTH = question2;
+
+			// CHECKING IF THERE IS A VALUE IN FINDREPLACE_REPLACEWIDTH IN ORDER TO PERFORM THE REPLACING FUNCTION
+			if (FINDREPLACE_REPLACEWIDTH!=null)
+				{
+				// GETTING THE CURRENT SELECTION AND ALL THE DOCUMENT NODES
+				var selection = window.getSelection();
+				var allNodes = document.getElementById("tinydoc_textcode").childNodes;
+
+				// GOING THROUGH EVERY NODE
+				for (var i=0;i<allNodes.length;i++)
+					{
+					try
+						{
+						// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
+						if (allNodes[i].firstChild!=null)
+							{
+							// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+							replaceInDocument_AllDescendants(FINDREPLACE_FIND,allNodes[i],selection);
+							}
+							else
+							{
+							// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
+							replaceInDocument_findAndSelect(FINDREPLACE_FIND,allNodes[i],selection);
+							}
+						}
+						catch(err)
+						{
+						}
+					}
 				}
 			}
 		}
