@@ -23,6 +23,10 @@
 			</div>
 			<div class="tinydoc_separator"></div>
 			<div class="tinydoc_holder">
+				<div class="tinydoc_button_replace_enabled" id="buttonReplace"></div>
+			</div>
+			<div class="tinydoc_separator"></div>
+			<div class="tinydoc_holder">
 				<div class="tinydoc_button_undo_enabled" id="buttonUndo"></div>
 			</div>
 			<div class="tinydoc_holder">
@@ -95,12 +99,17 @@
 			var STRING_NOTFOUND = "";
 			var STRING_WELCOME = "";
 			var STRING_SEARCH = "";
+			var STRING_REPLACE_FIND = "";
+			var STRING_REPLACE_REPLACEWITH = "";
 			var STRING_INPUTURL = "";
 
 			var SEARCH_STRING = null;
 			var SEARCH_FOUND = false;
 			var SEARCH_FOUND_FIRST = null;
 			var SEARCH_INITIAL_INDEX = null;
+
+			var REPLACE_FIND = null;
+			var REPLACE_REPLACEWIDTH = null;
 
 			var NOTIFICATION_TIMER;
 
@@ -111,6 +120,8 @@
 				STRING_NOTFOUND = "Texto no encontrado.";
 				STRING_WELCOME = "Bienvenido a <b>TinyDOC Editor</b> por Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>Este es un editor WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) desarrollado en <b>HTML5</b> con funciones intencionalmente limitadas, tales como:<br/><ul><li>Guardar e Imprimir.</li><li>Deshacer y Rehacer.</li><li>Funci&oacute;n para plantillas.</li><li>Herramientas de formato simplificadas.</li></ul>La idea de este proyecto es la de brindar un editor de textos liviano con funciones sencillas e intuitivas.<ol><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li><li>Sed in pellentesque eros, id luctus purus.</li><li>Curabitur gravida posuere lorem, eget finibus odio vehicula at.</li><li>Phasellus nisi diam, laoreet non enim at, lacinia egestas justo.</li></ol>Pellentesque bibendum metus vel interdum dignissim. Sed tempor augue eu felis elementum tincidunt. Cras ac ante id elit viverra hendrerit in vitae quam. Ut varius, ligula in volutpat tempus, enim nunc volutpat dolor, nec ultrices arcu lorem quis metus. Nulla pharetra dignissim vestibulum. Aliquam auctor tortor sodales, vehicula purus vel, tristique nibh. Aenean in mi purus. Phasellus consectetur leo enim, id rutrum leo egestas nec. <span style='background-color: rgb(255, 255, 0);'>Praesent fermentum, eros quis vehicula semper, nisi quam aliquam elit</span>, in consequat nulla ante quis tellus. Mauris ultrices dui et turpis semper, ac viverra lacus interdum. In aliquam est eu leo placerat vulputate. Praesent imperdiet sit amet libero eget ullamcorper.";
 				STRING_SEARCH = "Por favor, ingrese el texto que desea buscar:";
+				STRING_REPLACE_FIND = "Por favor, ingrese el texto que desea buscar:";
+				STRING_REPLACE_REPLACEWITH = "Por favor, ingrese el texto que lo reemplazar" + String.fromCharCode(225) +":";
 				STRING_INPUTURL = "Por favor, ingrese la URL:";
 				}
 				else
@@ -120,6 +131,8 @@
 				STRING_NOTFOUND = "Text not found.";
 				STRING_WELCOME = "Welcome to <b>TinyDOC Editor</b> by Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>This is a WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) editor developed in <b>HTML5</b> with intentional limited functions like:<br/><ul><li>Save & Print.</li><li>Undo & Redo.</li><li>Templates feature.</li><li>Simplified formatting tools.</li></ul>The idea of this project is to provide a lightweight text editor with simple and easy-to-use features.<ol><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li><li>Sed in pellentesque eros, id luctus purus.</li><li>Curabitur gravida posuere lorem, eget finibus odio vehicula at.</li><li>Phasellus nisi diam, laoreet non enim at, lacinia egestas justo.</li></ol>Pellentesque bibendum metus vel interdum dignissim. Sed tempor augue eu felis elementum tincidunt. Cras ac ante id elit viverra hendrerit in vitae quam. Ut varius, ligula in volutpat tempus, enim nunc volutpat dolor, nec ultrices arcu lorem quis metus. Nulla pharetra dignissim vestibulum. Aliquam auctor tortor sodales, vehicula purus vel, tristique nibh. Aenean in mi purus. Phasellus consectetur leo enim, id rutrum leo egestas nec. <span style='background-color: rgb(255, 255, 0);'>Praesent fermentum, eros quis vehicula semper, nisi quam aliquam elit</span>, in consequat nulla ante quis tellus. Mauris ultrices dui et turpis semper, ac viverra lacus interdum. In aliquam est eu leo placerat vulputate. Praesent imperdiet sit amet libero eget ullamcorper.";
 				STRING_SEARCH = "Please, write the text that you want to find:";
+				STRING_REPLACE_FIND = "Please, write the text that you want to find:";
+				STRING_REPLACE_REPLACEWITH = "Please, write the text that will be replacing it:";
 				STRING_INPUTURL = "Please, write the URL:";
 				}
 
@@ -556,6 +569,135 @@
 					}
 				}
 
+			function replaceInDocument()
+				{
+				var question1;
+				var question2;
+
+				if (REPLACE_FIND!=null)
+					{
+					question1 = prompt(STRING_REPLACE_FIND,REPLACE_FIND);
+					}
+					else
+					{
+					question1 = prompt(STRING_REPLACE_FIND);
+					}
+
+				if (REPLACE_REPLACEWIDTH!=null)
+					{
+					question2 = prompt(STRING_REPLACE_REPLACEWITH,REPLACE_REPLACEWIDTH);
+					}
+					else
+					{
+					question2 = prompt(STRING_REPLACE_REPLACEWITH);
+					}
+
+				REPLACE_FIND = question1.toLowerCase();
+				REPLACE_REPLACEWIDTH = question2;
+
+				if (REPLACE_FIND!=null && REPLACE_REPLACEWIDTH!=null)
+					{
+					var selection = window.getSelection();
+					var allNodes = document.getElementById("tinydoc_textcode").childNodes;
+
+					// GOING THROUGH EVERY NODE
+					for (var i=0;i<allNodes.length;i++)
+						{
+						try
+							{
+							// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
+							if (allNodes[i].firstChild!=null)
+								{
+								// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+								replaceInDocument_AllDescendants(REPLACE_FIND,allNodes[i],selection);
+								}
+								else
+								{
+								// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
+								replaceInDocument_findAndSelect(REPLACE_FIND,allNodes[i],selection);
+								}
+							}
+							catch(err)
+							{
+							}
+						}
+					}
+				}
+
+			function replaceInDocument_AllDescendants(search,latestChildNode,sel)
+				{
+				try
+					{
+					// GOING THROUGH EVERY NODE
+					for (var i = 0; i < latestChildNode.childNodes.length; i++)
+						{
+						try
+							{
+							// CREATING A VARIABLE AND GETTING THE CHILD NODE
+							var child = latestChildNode.childNodes[i];
+
+							// CHECKING IF THAT CHILD NODE HAS A CHILD NODE
+							if (child.firstChild!=null)
+								{
+								// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
+								replaceInDocument_AllDescendants(search,child,sel);
+								}
+
+							// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
+							replaceInDocument_findAndSelect(search,child,sel);
+							}
+							catch(err)
+							{
+							}
+						}
+					}
+					catch(err)
+					{
+					}
+				}
+
+			function replaceInDocument_findAndSelect(search, myNode, selection)
+				{
+				try
+					{
+					// SETTING ALL THE PARAMETERS
+					var needle = search;
+					var re = new RegExp(needle,"gi");
+					var haystack = myNode.textContent.toLowerCase();
+
+					// GOING THROUGH EVERY TEXT MATCH
+					while(re.exec(haystack))
+						{
+						// LOCATING THE TEXT MATCH
+						var startIndex = re.lastIndex - search.length;
+						var endIndex = startIndex + search.length;
+
+						// CREATING THE RANGE
+						var range = document.createRange();
+						range.setStart(myNode, startIndex);
+						range.setEnd(myNode, endIndex);
+
+						// SELECTING THE TEXT
+						selection.removeAllRanges();
+						selection.addRange(range);
+
+						// CHECKING IF THAT THE SELECTED TEXT IS THE SAME AS THE ONE THAT THE USER WROTE
+						if (window.getSelection().toString().toLowerCase()==search)
+							{
+							document.execCommand("insertText", false, REPLACE_REPLACEWIDTH);
+							}
+							else
+							{
+							// CLEARING SELECTION IF THERE IS NO MATCH
+							selection.removeAllRanges();
+							}
+						}
+					}
+					catch(err)
+					{
+					}
+				}
+
 			function formatDoc(myCommand, myParameter)
 				{
 				try
@@ -821,6 +963,7 @@
 				document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
 				document.getElementById("buttonSearch").addEventListener("click",function(event){searchInDocument()});
 				document.getElementById("buttonSearchNext").addEventListener("click",function(event){searchInDocumentNext()});
+				document.getElementById("buttonReplace").addEventListener("click",function(event){replaceInDocument()});
 				document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL()});
 				document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL()});
 				document.getElementById("buttonBold").addEventListener("click",function(event){formatDoc("bold",null)});
