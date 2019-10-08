@@ -17,6 +17,8 @@ var FIND_INITIAL_INDEX = null;
 var FINDREPLACE_FIND = null;
 var FINDREPLACE_REPLACEWIDTH = null;
 
+var LINK_FOUND = false;
+
 var NOTIFICATION_TIMER;
 
 if (userLanguage.substring(0,2)=="es")
@@ -786,8 +788,12 @@ function checkForURL()
 	{
 	try
 		{
+		// SETTING THE LINK FOUND VALUE AS FALSE
+		LINK_FOUND = false;
+
 		// GETTING THE CURRENT SELECTION
 		var selectedNode = window.getSelection().focusNode;
+
 		// GOING THROUGH EVERY NODE
 		for (var i=0;i<selectedNode.length;i++)
 			{
@@ -808,6 +814,13 @@ function checkForURL()
 				catch(err)
 				{
 				}
+			}
+
+		// CHECKING IF A LINK WAS FOUND
+		if (LINK_FOUND==false)
+			{
+			// CLEARING THE URL VIEWER
+			document.getElementById("tinydoc_urlviewer").innerHTML = "";
 			}
 		}
 		catch(err)
@@ -859,11 +872,9 @@ function checkForURL_Update(selectedNode)
 			{
 			// ADDING THE VALUE TO THE URL VIEWER
 			document.getElementById("tinydoc_urlviewer").innerHTML = "<a href='" + finalURL + "' target='top'>CLICK HERE TO OPEN THE LINK</a>";
-			}
-			else
-			{
-			// CLEARING THE URL VIEWER
-			document.getElementById("tinydoc_urlviewer").innerHTML = "";
+
+			// SETTING THE LINK FOUND VALUE AS TRUE
+			LINK_FOUND = true;
 			}
 		}
 		catch(err)
