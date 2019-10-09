@@ -7,7 +7,6 @@ var STRING_WELCOME = "";
 var STRING_FIND = "";
 var STRING_FINDREPLACE_FIND = "";
 var STRING_FINDREPLACE_REPLACEWITH = "";
-var STRING_INPUTURL = "";
 
 var FIND_STRING = null;
 var FIND_FOUND = false;
@@ -30,7 +29,6 @@ if (userLanguage.substring(0,2)=="es")
 	STRING_FIND = "Por favor, ingrese el texto que desea buscar:";
 	STRING_FINDREPLACE_FIND = "Por favor, ingrese el texto que desea buscar:";
 	STRING_FINDREPLACE_REPLACEWITH = "Por favor, ingrese el texto que lo reemplazar" + String.fromCharCode(225) +":";
-	STRING_INPUTURL = "Por favor, ingrese la URL:";
 	}
 	else
 	{
@@ -41,7 +39,6 @@ if (userLanguage.substring(0,2)=="es")
 	STRING_FIND = "Please, write the text that you want to find:";
 	STRING_FINDREPLACE_FIND = "Please, write the text that you want to find:";
 	STRING_FINDREPLACE_REPLACEWITH = "Please, write the text that will be replacing it:";
-	STRING_INPUTURL = "Please, write the URL:";
 	}
 
 function encodeText(str)
@@ -754,27 +751,6 @@ function insertLink()
 						{
 						// INSERTING THE URL LINK INTO THE DOCUMENT
 						formatDoc("insertHTML","<a href='" + selectedText + "' target='top'>" + selectedText + "</a>");
-						}
-					}
-					else
-					{
-					// ASKING THE USER FOR THE URL
-					var linkURL = prompt(STRING_INPUTURL,"https:\/\/");
-
-					// CHECKING THE LINKURL VALUE
-					if (linkURL!=null)
-						{
-						// VALIDATORS FOR KNOWING IF THE URL IS A HTTP, HTTPS OR MAILTO LINK
-						var linkURLChecker1 = linkURL.toLowerCase().indexOf("http://");
-						var linkURLChecker2 = linkURL.toLowerCase().indexOf("https://");
-						var linkURLChecker3 = linkURL.toLowerCase().indexOf("mailto:");
-
-						// VALIDATING THE URL
-						if (linkURLChecker1==0 || linkURLChecker2==0 || linkURLChecker3==0)
-							{
-							// INSERTING THE URL LINK INTO THE DOCUMENT
-							formatDoc("insertHTML","<a href='" + linkURL + "' target='top'>" + document.getSelection() + "</a>");
-							}
 						}
 					}
 				}
