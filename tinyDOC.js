@@ -1125,6 +1125,7 @@ window.onload = function()
 
 	// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
 	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
+	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL()});
 	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
 	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
 	document.getElementById("buttonFind").addEventListener("click",function(event){findInDocument()});
