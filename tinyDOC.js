@@ -5,16 +5,13 @@ var STRING_SAVED = "";
 var STRING_NOTFOUND = "";
 var STRING_WELCOME = "";
 var STRING_FIND = "";
-var STRING_FINDREPLACE_FIND = "";
-var STRING_FINDREPLACE_REPLACEWITH = "";
+var STRING_REPLACEWITH = "";
 
 var FIND_STRING = null;
 var FIND_FOUND = false;
 var FIND_FOUND_FIRST = null;
 var FIND_INITIAL_INDEX = null;
-
-var FINDREPLACE_FIND = null;
-var FINDREPLACE_REPLACEWIDTH = null;
+var FIND_REPLACEWITH = null;
 
 var LINK_FOUND = false;
 
@@ -26,9 +23,8 @@ if (userLanguage.substring(0,2)=="es")
 	STRING_SAVED = "Documento guardado.";
 	STRING_NOTFOUND = "Texto no encontrado.";
 	STRING_WELCOME = "Bienvenido a <b>TinyDOC Editor</b> por Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>Este es un editor WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) desarrollado en <b>HTML5</b> con funciones intencionalmente limitadas, tales como:<br/><ul><li>Guardar e Imprimir.</li><li>Deshacer y Rehacer.</li><li>Buscar y Reemplazar.</li><li>Funci&oacute;n para plantillas.</li><li>Herramientas de formato simplificadas.</li></ul>La idea de este proyecto es la de brindar un editor de textos liviano con funciones sencillas e intuitivas.<ol><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li><li>Sed in pellentesque eros, id luctus purus.</li><li>Curabitur gravida posuere lorem, eget finibus odio vehicula at.</li><li>Phasellus nisi diam, laoreet non enim at, lacinia egestas justo.</li></ol>Pellentesque bibendum metus vel interdum dignissim. Sed tempor augue eu felis elementum tincidunt. Cras ac ante id elit viverra hendrerit in vitae quam. Ut varius, ligula in volutpat tempus, enim nunc volutpat dolor, nec ultrices arcu lorem quis metus. Nulla pharetra dignissim vestibulum. Aliquam auctor tortor sodales, vehicula purus vel, tristique nibh. Aenean in mi purus. Phasellus consectetur leo enim, id rutrum leo egestas nec. <span style='background-color: rgb(255, 255, 0);'>Praesent fermentum, eros quis vehicula semper, nisi quam aliquam elit</span>, in consequat nulla ante quis tellus. Mauris ultrices dui et turpis semper, ac viverra lacus interdum. In aliquam est eu leo placerat vulputate. Praesent imperdiet sit amet libero eget ullamcorper.";
-	STRING_FIND = "Por favor, ingrese el texto que desea buscar:";
-	STRING_FINDREPLACE_FIND = "Por favor, ingrese el texto que desea buscar:";
-	STRING_FINDREPLACE_REPLACEWITH = "Por favor, ingrese el texto que lo reemplazar" + String.fromCharCode(225) +":";
+	STRING_FIND = "Buscar...";
+	STRING_REPLACEWITH = "Reemplazar con...";
 	}
 	else
 	{
@@ -36,9 +32,8 @@ if (userLanguage.substring(0,2)=="es")
 	STRING_SAVED = "Document saved.";
 	STRING_NOTFOUND = "Text not found.";
 	STRING_WELCOME = "Welcome to <b>TinyDOC Editor</b> by Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>This is a WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) editor developed in <b>HTML5</b> with intentional limited functions like:<br/><ul><li>Save & Print.</li><li>Undo & Redo.</li><li>Find and Replace.</li><li>Templates feature.</li><li>Simplified formatting tools.</li></ul>The idea of this project is to provide a lightweight text editor with simple and easy-to-use features.<ol><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li><li>Sed in pellentesque eros, id luctus purus.</li><li>Curabitur gravida posuere lorem, eget finibus odio vehicula at.</li><li>Phasellus nisi diam, laoreet non enim at, lacinia egestas justo.</li></ol>Pellentesque bibendum metus vel interdum dignissim. Sed tempor augue eu felis elementum tincidunt. Cras ac ante id elit viverra hendrerit in vitae quam. Ut varius, ligula in volutpat tempus, enim nunc volutpat dolor, nec ultrices arcu lorem quis metus. Nulla pharetra dignissim vestibulum. Aliquam auctor tortor sodales, vehicula purus vel, tristique nibh. Aenean in mi purus. Phasellus consectetur leo enim, id rutrum leo egestas nec. <span style='background-color: rgb(255, 255, 0);'>Praesent fermentum, eros quis vehicula semper, nisi quam aliquam elit</span>, in consequat nulla ante quis tellus. Mauris ultrices dui et turpis semper, ac viverra lacus interdum. In aliquam est eu leo placerat vulputate. Praesent imperdiet sit amet libero eget ullamcorper.";
-	STRING_FIND = "Please, write the text that you want to find:";
-	STRING_FINDREPLACE_FIND = "Please, write the text that you want to find:";
-	STRING_FINDREPLACE_REPLACEWITH = "Please, write the text that will be replacing it:";
+	STRING_FIND = "Find...";
+	STRING_REPLACEWITH = "Replace with...";
 	}
 
 function encodeText(str)
@@ -226,36 +221,23 @@ function printDocument()
 	setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 	}
 
-function findInDocument()
+function showSearchBox()
 	{
 	try
 		{
-		// CREATING THE SEARCH VALUE VARIABLE
-		var search;
-
-		// CHECKING IF THERE IS ANY PREVIOUS SEARCH VALUE
-		if (FIND_STRING!=null)
+		if (document.getElementsByClassName("tinydoc_button_find_box")[0].style.display=="block")
 			{
-			// SHOWING A PROMPT WITH THE PREVIOUS SEARCH VALUE
-			search = prompt(STRING_FIND,FIND_STRING);
+			document.getElementsByClassName("tinydoc_button_find_box")[0].style.display = "none";
+			document.getElementById("buttonFind").classList.remove("tinydoc_button_find_selected");
 			}
 			else
 			{
-			// SHOWING THE PROMPT
-			search = prompt(STRING_FIND);
-			}
+			document.getElementsByClassName("tinydoc_button_find_box")[0].style.display = "block";
+			document.getElementById("buttonFind").classList.add("tinydoc_button_find_selected");
 
-		// CHECKING IF THE USER WROTE A SEARCH VALUE
-		if (search!=null)
-			{
-			if (search!="")
-				{
-				// SETTING THE SEARCH VALUE USING THE TOLOWERCASE METHOD FOR A INSENSITIVE CASE SEARCH
-				FIND_STRING = search.toLowerCase();
-
-				// FINDING THE SEARCH VALUE
-				findInDocumentNext();
-				}
+			// FOCUSING THE DOCUMENT
+			document.getElementsByClassName("tinydoc_button_find_textbox1")[0].focus();
+			setTimeout(function(){document.getElementsByClassName("tinydoc_button_find_textbox1")[0].focus()},200);
 			}
 		}
 		catch(err)
@@ -263,76 +245,111 @@ function findInDocument()
 		}
 	}
 
-function findInDocumentNext()
+function findReplaceInDocument()
 	{
 	try
 		{
+		// GETTING THE FIND VALUE
+		FIND_STRING = document.getElementsByClassName("tinydoc_button_find_textbox1")[0].value;
+		FIND_STRING = FIND_STRING.toLowerCase();
+
+		// GETTING THE REPLACE VALUE
+		FIND_REPLACEWITH = document.getElementsByClassName("tinydoc_button_find_textbox2")[0].value;
+		FIND_REPLACEWITH = FIND_REPLACEWITH.toLowerCase();
+
 		// CHECKING IF THE SEARCH VALUE IS EMPTY
-		if (FIND_STRING==null)
+		if (FIND_STRING!="")
 			{
-			// IF IT IS EMPTY, WILL ASK THE USER TO INPUT A VALUE
-			findInDocument();
-			}
-			else
-			{
-			// GETTING THE CARET POSITION
-			FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));
-
-			// SETTING THAT THE VALUE WAS NOT FOUND YET
-			FIND_FOUND = false;
-			FIND_FOUND_FIRST = null;
-
-			// GETTING THE CURRENT SELECTION AND ALL THE DOCUMENT NODES
-			var selection = window.getSelection();
-			var allNodes = document.getElementById("tinydoc_textcode").childNodes;
-
-			// GOING THROUGH EVERY NODE
-			for (var i=0;i<allNodes.length;i++)
+			// CHECKING IF IT IS GOING TO BE A FIND OR A FIND-AND-REPLACE FUNCTION
+			if (FIND_REPLACEWITH!="")
 				{
-				try
+				// GETTING THE CURRENT SELECTION AND ALL THE DOCUMENT NODES
+				var selection = window.getSelection();
+				var allNodes = document.getElementById("tinydoc_textcode").childNodes;
+
+				// GOING THROUGH EVERY NODE
+				for (var i=0;i<allNodes.length;i++)
 					{
-					// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
-					if (allNodes[i].firstChild!=null)
+					try
 						{
-						// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-						findInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
+						// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
+						if (allNodes[i].firstChild!=null)
+							{
+							// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+							replaceInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
+							}
+							else
+							{
+							// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
+							replaceInDocument_findAndSelect(FIND_STRING,allNodes[i],selection);
+							}
 						}
-						else
+						catch(err)
 						{
-						// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
-						findInDocument_findAndSelect(FIND_STRING,allNodes[i],selection);
 						}
 					}
-					catch(err)
+				}
+				else
+				{
+				// GETTING THE CARET POSITION
+				FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));
+
+				// SETTING THAT THE VALUE WAS NOT FOUND YET
+				FIND_FOUND = false;
+				FIND_FOUND_FIRST = null;
+
+				// GETTING THE CURRENT SELECTION AND ALL THE DOCUMENT NODES
+				var selection = window.getSelection();
+				var allNodes = document.getElementById("tinydoc_textcode").childNodes;
+
+				// GOING THROUGH EVERY NODE
+				for (var i=0;i<allNodes.length;i++)
 					{
+					try
+						{
+						// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
+						if (allNodes[i].firstChild!=null)
+							{
+							// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+							findInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
+							}
+							else
+							{
+							// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
+							findInDocument_findAndSelect(FIND_STRING,allNodes[i],selection);
+							}
+						}
+						catch(err)
+						{
+						}
 					}
-				}
 
-			// CHECKING IF THERE IS A PREVIOUS FOUND TO THE CARET POSITION
-			// AND THAT THERE ARE NO FOUNDS AFTER THE CARET POSITION.
-			if (FIND_FOUND_FIRST!=null && FIND_FOUND == false)
-				{
-				// SELECTING THE PREVIOUS FOUND (THE FIRST MATCH IN THE DOCUMENT)
-				selection.removeAllRanges();
-				selection.addRange(FIND_FOUND_FIRST);
+				// CHECKING IF THERE IS A PREVIOUS FOUND TO THE CARET POSITION
+				// AND THAT THERE ARE NO FOUNDS AFTER THE CARET POSITION.
+				if (FIND_FOUND_FIRST!=null && FIND_FOUND == false)
+					{
+					// SELECTING THE PREVIOUS FOUND (THE FIRST MATCH IN THE DOCUMENT)
+					selection.removeAllRanges();
+					selection.addRange(FIND_FOUND_FIRST);
 
-				// SCROLLING TO THE SELECTED VALUE
-				scrollToCaret();
-				}
-			else if (FIND_FOUND==false)
-				{
-				// HIDING ALL NOTIFICATIONS
-				document.getElementsByClassName("tinydoc_saved")[0].style.display = "none";
-				document.getElementsByClassName("tinydoc_error")[0].style.display = "none";
+					// SCROLLING TO THE SELECTED VALUE
+					scrollToCaret();
+					}
+				else if (FIND_FOUND==false)
+					{
+					// HIDING ALL NOTIFICATIONS
+					document.getElementsByClassName("tinydoc_saved")[0].style.display = "none";
+					document.getElementsByClassName("tinydoc_error")[0].style.display = "none";
 
-				// SHOWING THE NOT FOUND NOTIFICATION
-				document.getElementsByClassName("tinydoc_notfound")[0].style.display = "block";
+					// SHOWING THE NOT FOUND NOTIFICATION
+					document.getElementsByClassName("tinydoc_notfound")[0].style.display = "block";
 
-				// CLEARING THE NOTIFICATION TIMER
-				try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
+					// CLEARING THE NOTIFICATION TIMER
+					try{clearTimeout(NOTIFICATION_TIMER)}catch(err){}
 
-				// SETTING THE DELAY FOR HIDING THE SAVED DOCUMENT NOTIFICATION
-				NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_notfound")[0].style.display = "none"},3000);
+					// SETTING THE DELAY FOR HIDING THE SAVED DOCUMENT NOTIFICATION
+					NOTIFICATION_TIMER = setTimeout(function(){document.getElementsByClassName("tinydoc_notfound")[0].style.display = "none"},3000);
+					}
 				}
 			}
 		}
@@ -439,80 +456,6 @@ function findInDocument_findAndSelect(search, myNode, selection)
 		}
 	}
 
-function replaceInDocument()
-	{
-	// CREATING THE VARIABLES FOR EVERY QUESTION
-	var question1;
-	var question2;
-
-	// CHECKING IF THERE IS A PREVIOUS VALUE FOR FINDREPLACE_FIND
-	if (FINDREPLACE_FIND!=null)
-		{
-		// SHOWING A PROMPT WITH THE PREVIOUS FINDREPLACE_FIND VALUE
-		question1 = prompt(STRING_FINDREPLACE_FIND,FINDREPLACE_FIND);
-		}
-		else
-		{
-		// SHOWING A PROMPT
-		question1 = prompt(STRING_FINDREPLACE_FIND);
-		}
-
-	// SETTING THE FINDREPLACE_FIND VALUE USING THE TOLOWERCASE METHOD FOR A INSENSITIVE CASE REPLACE
-	FINDREPLACE_FIND = question1.toLowerCase();
-
-	// CHECKING IF THERE IS A VALUE IN FINDREPLACE_FIND IN ORDER TO SHOW THE NEXT PROMPT
-	if (FINDREPLACE_FIND!=null)
-		{
-		if (FINDREPLACE_FIND!="")
-			{
-			// CHECKING IF THERE IS A PREVIOUS VALUE FOR FINDREPLACE_REPLACEWIDTH
-			if (FINDREPLACE_REPLACEWIDTH!=null)
-				{
-				// SHOWING A PROMPT WITH THE PREVIOUS FINDREPLACE_REPLACEWIDTH VALUE
-				question2 = prompt(STRING_FINDREPLACE_REPLACEWITH,FINDREPLACE_REPLACEWIDTH);
-				}
-				else
-				{
-				// SHOWING A PROMPT
-				question2 = prompt(STRING_FINDREPLACE_REPLACEWITH);
-				}
-
-			// SETTING THE FINDREPLACE_REPLACEWIDTH VALUE
-			FINDREPLACE_REPLACEWIDTH = question2;
-
-			// CHECKING IF THERE IS A VALUE IN FINDREPLACE_REPLACEWIDTH IN ORDER TO PERFORM THE REPLACING FUNCTION
-			if (FINDREPLACE_REPLACEWIDTH!=null)
-				{
-				// GETTING THE CURRENT SELECTION AND ALL THE DOCUMENT NODES
-				var selection = window.getSelection();
-				var allNodes = document.getElementById("tinydoc_textcode").childNodes;
-
-				// GOING THROUGH EVERY NODE
-				for (var i=0;i<allNodes.length;i++)
-					{
-					try
-						{
-						// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
-						if (allNodes[i].firstChild!=null)
-							{
-							// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-							replaceInDocument_AllDescendants(FINDREPLACE_FIND,allNodes[i],selection);
-							}
-							else
-							{
-							// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
-							replaceInDocument_findAndSelect(FINDREPLACE_FIND,allNodes[i],selection);
-							}
-						}
-						catch(err)
-						{
-						}
-					}
-				}
-			}
-		}
-	}
-
 function replaceInDocument_AllDescendants(search,latestChildNode,sel)
 	{
 	try
@@ -573,7 +516,7 @@ function replaceInDocument_findAndSelect(search, myNode, selection)
 			// CHECKING IF THAT THE SELECTED TEXT IS THE SAME AS THE ONE THAT THE USER WROTE
 			if (window.getSelection().toString().toLowerCase()==search)
 				{
-				document.execCommand("insertText", false, FINDREPLACE_REPLACEWIDTH);
+				document.execCommand("insertText", false, FIND_REPLACEWITH);
 				}
 				else
 				{
@@ -713,6 +656,10 @@ function insertCalc()
 					}
 				}
 			}
+
+		// FOCUSING THE DOCUMENT
+		document.getElementById("tinydoc_textcode").focus();
+		setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 		}
 		catch(err)
 		{
@@ -755,6 +702,10 @@ function insertLink()
 					}
 				}
 			}
+
+		// FOCUSING THE DOCUMENT
+		document.getElementById("tinydoc_textcode").focus();
+		setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 		}
 		catch(err)
 		{
@@ -1057,8 +1008,8 @@ document.getElementById("tinydoc_textcode").addEventListener("keydown", function
 					// CANCELING THE STANDARD FIND DIALOG EVENT
 					e.preventDefault();
 
-					// SEARCH IN DOCUMENT
-					findInDocument();
+					// SHOW THE SEARCH BOX
+					showSearchBox();
 					break;
 					}
 				}
@@ -1099,6 +1050,8 @@ window.onload = function()
 	document.getElementsByClassName("tinydoc_saved")[0].innerHTML = STRING_SAVED;
 	document.getElementsByClassName("tinydoc_error")[0].innerHTML = STRING_ERROR;
 	document.getElementsByClassName("tinydoc_notfound")[0].innerHTML = STRING_NOTFOUND;
+	document.getElementsByClassName("tinydoc_button_find_textbox1")[0].placeholder = STRING_FIND;
+	document.getElementsByClassName("tinydoc_button_find_textbox2")[0].placeholder = STRING_REPLACEWITH;
 
 	// GETTING THE FOCUS IN THE DOCUMENT
 	document.getElementById("tinydoc_textcode").focus();
@@ -1128,9 +1081,8 @@ window.onload = function()
 	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL()});
 	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
 	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
-	document.getElementById("buttonFind").addEventListener("click",function(event){findInDocument()});
-	document.getElementById("buttonFindNext").addEventListener("click",function(event){findInDocumentNext()});
-	document.getElementById("buttonReplace").addEventListener("click",function(event){replaceInDocument()});
+	document.getElementById("buttonFind").addEventListener("click",function(event){showSearchBox()});
+	document.getElementById("buttonFindNext").addEventListener("click",function(event){findReplaceInDocument()});
 	document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL()});
 	document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL()});
 	document.getElementById("buttonBold").addEventListener("click",function(event){formatDoc("bold",null)});
@@ -1146,5 +1098,5 @@ window.onload = function()
 	document.getElementById("buttonTemplate1").addEventListener("click",function(event){formatDoc("insertHTML","My Template 1<br />Example 1<br />");});
 	document.getElementById("buttonTemplate2").addEventListener("click",function(event){formatDoc("insertHTML","My Template 2<br />Example 2<br />");});
 	document.getElementById("buttonTemplate3").addEventListener("click",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");});
-	document.getElementsByClassName("tinydoc_menubar")[0].addEventListener("click",function(event){document.getElementById("tinydoc_textcode").focus()});
+	document.getElementsByClassName("tinydoc_menubar")[0].addEventListener("click",function(event){if (document.getElementsByClassName("tinydoc_button_find_textbox1")[0]!=document.activeElement&&document.getElementsByClassName("tinydoc_button_find_textbox2")[0]!=document.activeElement){document.getElementById("tinydoc_textcode").focus()}});
 	}
