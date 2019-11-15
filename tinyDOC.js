@@ -1124,7 +1124,7 @@ window.onload = function()
 	document.getElementById("tinydoc_textcode").addEventListener("blur",function(event){FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));});
 	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
 	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
-	document.getElementById("buttonFind").addEventListener("click",function(event){FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));showSearchBox()});
+	document.getElementById("buttonFind").addEventListener("click",function(event){showSearchBox()});
 	document.getElementById("buttonFindNext").addEventListener("click",function(event){findReplaceInDocument()});
 	document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL()});
 	document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL()});
