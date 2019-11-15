@@ -379,8 +379,12 @@ function findInDocument_AllDescendants(search,latestChildNode,sel)
 					// CHECKING IF THAT CHILD NODE HAS A CHILD NODE
 					if (child.firstChild!=null)
 						{
-						// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
-						findInDocument_AllDescendants(search,child,sel);
+						// CHECKING IF THE TEXT EXISTS WITHIN THE CHILD NODE
+						if (child.firstChild.textContent.indexOf(search)>-1)
+							{
+							// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
+							findInDocument_AllDescendants(search,child,sel);
+							}
 						}
 
 					// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
@@ -474,8 +478,12 @@ function replaceInDocument_AllDescendants(search,latestChildNode,sel)
 				// CHECKING IF THAT CHILD NODE HAS A CHILD NODE
 				if (child.firstChild!=null)
 					{
-					// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
-					replaceInDocument_AllDescendants(search,child,sel);
+					// CHECKING IF THE TEXT EXISTS WITHIN THE CHILD NODE
+					if (child.firstChild.textContent.indexOf(search)>-1)
+						{
+						// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
+						replaceInDocument_AllDescendants(search,child,sel);
+						}
 					}
 
 				// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
