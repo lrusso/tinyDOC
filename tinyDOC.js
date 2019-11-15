@@ -507,12 +507,13 @@ function replaceInDocument_findAndSelect(search, myNode, selection)
 		var needle = search;
 		var re = new RegExp(needle,"gi");
 		var haystack = myNode.textContent.toLowerCase();
+		var tempOffset = 0;
 
 		// GOING THROUGH EVERY TEXT MATCH
 		while(re.exec(haystack))
 			{
 			// LOCATING THE TEXT MATCH
-			var startIndex = re.lastIndex - search.length;
+			var startIndex = re.lastIndex - search.length + tempOffset;
 			var endIndex = startIndex + search.length;
 
 			// CREATING THE RANGE
@@ -528,9 +529,17 @@ function replaceInDocument_findAndSelect(search, myNode, selection)
 			if (window.getSelection().toString().toLowerCase()==search)
 				{
 				document.execCommand("insertText", false, FIND_REPLACEWITH);
+
+				// CHECKING IF THE FIND AND REPLACE VALUES HAVE A DIFFERENT LENGTH
+				if (search.length!=FIND_REPLACEWITH.length)
+					{
+					// IF SO, THE OFFSET MUST BE UPDATED
+					tempOffset = tempOffset + FIND_REPLACEWITH.length - 1;
+					}
 				}
 				else
 				{
+				console.log(window.getSelection().toString());
 				// CLEARING SELECTION IF THERE IS NO MATCH
 				selection.removeAllRanges();
 				}
