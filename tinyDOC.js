@@ -298,9 +298,6 @@ function findReplaceInDocument()
 				}
 				else
 				{
-				// GETTING THE CARET POSITION
-				FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));
-
 				// SETTING THAT THE VALUE WAS NOT FOUND YET
 				FIND_FOUND = false;
 				FIND_FOUND_FIRST = null;
@@ -342,6 +339,9 @@ function findReplaceInDocument()
 					// SELECTING THE PREVIOUS FOUND (THE FIRST MATCH IN THE DOCUMENT)
 					selection.removeAllRanges();
 					selection.addRange(FIND_FOUND_FIRST);
+
+					// UPDATING THE CARET POSITION
+					FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));
 
 					// SCROLLING TO THE SELECTED VALUE
 					scrollToCaret();
@@ -453,6 +453,9 @@ function findInDocument_findAndSelect(search, myNode, selection)
 						{
 						// SETTING THAT THE SEARCH VALUE WAS FOUND
 						FIND_FOUND = true;
+
+						// UPDATING THE CARET POSITION
+						FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));
 						}
 
 					// SCROLLING TO THE SELECTED VALUE
@@ -1118,9 +1121,10 @@ window.onload = function()
 	// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
 	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
 	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL()});
+	document.getElementById("tinydoc_textcode").addEventListener("blur",function(event){FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));});
 	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
 	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
-	document.getElementById("buttonFind").addEventListener("click",function(event){showSearchBox()});
+	document.getElementById("buttonFind").addEventListener("click",function(event){FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));showSearchBox()});
 	document.getElementById("buttonFindNext").addEventListener("click",function(event){findReplaceInDocument()});
 	document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL()});
 	document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL()});
