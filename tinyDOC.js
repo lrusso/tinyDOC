@@ -539,7 +539,6 @@ function replaceInDocument_findAndSelect(search, myNode, selection)
 				}
 				else
 				{
-				console.log(window.getSelection().toString());
 				// CLEARING SELECTION IF THERE IS NO MATCH
 				selection.removeAllRanges();
 				}
