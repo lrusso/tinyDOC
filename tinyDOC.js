@@ -278,8 +278,12 @@ function findReplaceInDocument()
 						// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
 						if (allNodes[i].firstChild!=null)
 							{
-							// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-							replaceInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
+							// CHECKING IF THE TEXT EXISTS WITHIN THE CHILD NODE
+							if (allNodes[i].firstChild.textContent.indexOf(search)>-1)
+								{
+								// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+								replaceInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
+								}
 							}
 							else
 							{
