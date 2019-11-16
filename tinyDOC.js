@@ -278,12 +278,8 @@ function findReplaceInDocument()
 						// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
 						if (allNodes[i].firstChild!=null)
 							{
-							// CHECKING IF THE TEXT EXISTS WITHIN THE CHILD NODE
-							if (allNodes[i].firstChild.textContent.indexOf(FIND_STRING)>-1)
-								{
-								// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-								replaceInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
-								}
+							// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+							replaceInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
 							}
 							else
 							{
@@ -314,12 +310,8 @@ function findReplaceInDocument()
 						// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
 						if (allNodes[i].firstChild!=null)
 							{
-							// CHECKING IF THE TEXT EXISTS WITHIN THE CHILD NODE
-							if (allNodes[i].firstChild.textContent.indexOf(FIND_STRING)>-1)
-								{
-								// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-								findInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
-								}
+							// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
+							findInDocument_AllDescendants(FIND_STRING,allNodes[i],selection);
 							}
 							else
 							{
