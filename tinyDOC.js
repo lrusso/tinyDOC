@@ -1105,7 +1105,7 @@ window.onload = function()
 	// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
 	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
 	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL()});
-	document.getElementById("tinydoc_textcode").addEventListener("blur",function(event){FIND_INITIAL_INDEX = getCaretPosition(document.getElementById("tinydoc_textcode"));});
+	document.getElementById("tinydoc_textcode").addEventListener("blur",function(event){FIND_INITIAL_INDEX=getCaretPosition(document.getElementById("tinydoc_textcode"))});
 	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
 	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
 	document.getElementById("buttonFind").addEventListener("click",function(event){showSearchBox()});
@@ -1125,5 +1125,5 @@ window.onload = function()
 	document.getElementById("buttonTemplate1").addEventListener("click",function(event){formatDoc("insertHTML","My Template 1<br />Example 1<br />");});
 	document.getElementById("buttonTemplate2").addEventListener("click",function(event){formatDoc("insertHTML","My Template 2<br />Example 2<br />");});
 	document.getElementById("buttonTemplate3").addEventListener("click",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");});
-	document.getElementsByClassName("tinydoc_menubar")[0].addEventListener("click",function(event){if (document.getElementsByClassName("tinydoc_button_find_textbox1")[0]!=document.activeElement&&document.getElementsByClassName("tinydoc_button_find_textbox2")[0]!=document.activeElement){document.getElementById("tinydoc_textcode").focus()}});
+	document.getElementsByClassName("tinydoc_menubar")[0].addEventListener("click",function(event){if(document.getElementsByClassName("tinydoc_button_find_textbox1")[0]!=document.activeElement&&document.getElementsByClassName("tinydoc_button_find_textbox2")[0]!=document.activeElement){document.getElementById("tinydoc_textcode").focus()}});
 	}
