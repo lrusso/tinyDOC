@@ -665,8 +665,8 @@ document.getElementById("tinydoc_textcode").addEventListener("keydown", function
 				// CANCELING THE TAB KEY EVENT
 				e.preventDefault();
 
-				// INSERTING A TAB SPACE
-				document.execCommand("insertHTML", false, "&#009");
+				// INSERTING SPACES AS A TAB SPACE
+				document.execCommand("insertText", false, "          ");
 
 				// GETTING THE FOCUS IN THE DOCUMENT
 				document.getElementById("tinydoc_textcode").focus();
