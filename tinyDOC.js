@@ -639,8 +639,14 @@ document.getElementById("tinydoc_textcode").addEventListener("paste", function(e
 		// GETTING THE CLIPBOARD CONTENT AS PLAIN TEXT
 		var text = (e.originalEvent || e).clipboardData.getData("text/plain");
 
+		// REPLACING SPECIAL CHARACTERS
+		text = text.replace(/</gm, "&lt;");
+		text = text.replace(/>/gm, "&gt;");
+		text = text.replace(/  /gm, "&nbsp;&nbsp;");
+		text = text.replace(/\n/gm, "<br />");
+
 		// PASTING THE TEXT
-		document.execCommand("insertText", false, text);
+		document.execCommand("insertHTML", false, text);
 		}
 		catch(err)
 		{
