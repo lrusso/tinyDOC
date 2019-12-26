@@ -640,6 +640,7 @@ document.getElementById("tinydoc_textcode").addEventListener("paste", function(e
 		var text = (e.originalEvent || e).clipboardData.getData("text/plain");
 
 		// REPLACING SPECIAL CHARACTERS
+		text = text.replace(/&/gm, "&amp;");
 		text = text.replace(/</gm, "&lt;");
 		text = text.replace(/>/gm, "&gt;");
 		text = text.replace(/  /gm, "&nbsp;&nbsp;");
