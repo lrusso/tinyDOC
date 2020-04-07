@@ -374,12 +374,12 @@ function insertLink()
 					if (selectedTextURLChecker4==true)
 						{
 						// INSERTING THE MAILTO LINK INTO THE DOCUMENT
-						formatDoc("insertHTML","<a href='mailto:" + selectedText.toLowerCase() + "' target='top'>" + selectedText + "</a>");
+						formatDoc("insertHTML","<a href='mailto:" + selectedText.toLowerCase() + "' target='_blank'>" + selectedText + "</a>");
 						}
 						else
 						{
 						// INSERTING THE URL LINK INTO THE DOCUMENT
-						formatDoc("insertHTML","<a href='" + selectedText + "' target='top'>" + selectedText + "</a>");
+						formatDoc("insertHTML","<a href='" + selectedText + "' target='_blank'>" + selectedText + "</a>");
 						}
 					}
 				}
@@ -499,7 +499,7 @@ function checkForURL_Update(selectedNode)
 		if(typeof finalURL !== "undefined")
 			{
 			// ADDING THE VALUE TO THE URL VIEWER
-			document.getElementById("tinydoc_urlviewer").innerHTML = "<a href='" + finalURL + "' target='top'>" + STRING_CLICKURL + "</a>";
+			document.getElementById("tinydoc_urlviewer").innerHTML = "<a href='" + finalURL + "' target='_blank'>" + STRING_CLICKURL + "</a>";
 
 			// SETTING THE LINK FOUND VALUE AS TRUE
 			LINK_FOUND = true;
