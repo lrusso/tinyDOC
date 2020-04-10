@@ -405,7 +405,7 @@ function formatDoc(myCommand, myParameter)
 		document.getElementById("tinydoc_textcode").focus();
 
 		// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
-		setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},1);
+		setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
 		}
 		catch(err)
 		{
