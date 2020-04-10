@@ -756,7 +756,7 @@ window.addEventListener("load", function()
 	try{document.getElementById("tinydoc_textcode").scrollTop = 0}catch(err){}
 
 	// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
-	document.getElementById("tinydoc_textcode").addEventListener("mousedown",function(event){checkForURL();event.preventDefault()});
+	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL();});
 	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL();event.preventDefault()});
 	document.getElementById("buttonSave").addEventListener("mousedown",function(event){saveDocument();event.preventDefault()});
 	document.getElementById("buttonPrint").addEventListener("mousedown",function(event){printDocument();event.preventDefault()});
