@@ -756,12 +756,12 @@ window.addEventListener("load", function()
 	try{document.getElementById("tinydoc_textcode").scrollTop = 0}catch(err){}
 
 	// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
-	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL();event.preventDefault()});
+	document.getElementById("tinydoc_textcode").addEventListener("mousedown",function(event){checkForURL();event.preventDefault()});
 	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL();event.preventDefault()});
-	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument();event.preventDefault()});
-	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument();event.preventDefault()});
-	document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL();event.preventDefault()});
-	document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL();event.preventDefault()});
+	document.getElementById("buttonSave").addEventListener("mousedown",function(event){saveDocument();event.preventDefault()});
+	document.getElementById("buttonPrint").addEventListener("mousedown",function(event){printDocument();event.preventDefault()});
+	document.getElementById("buttonUndo").addEventListener("mousedown",function(event){formatDoc("undo",null);checkForURL();event.preventDefault()});
+	document.getElementById("buttonRedo").addEventListener("mousedown",function(event){formatDoc("redo",null);checkForURL();event.preventDefault()});
 	document.getElementById("buttonBold").addEventListener("mousedown",function(event){formatDoc("bold",null);event.preventDefault()});
 	document.getElementById("buttonItalic").addEventListener("mousedown",function(event){formatDoc("italic",null);event.preventDefault()});
 	document.getElementById("buttonUnderline").addEventListener("mousedown",function(event){formatDoc("underline",null);event.preventDefault()});
