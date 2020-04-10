@@ -713,13 +713,13 @@ document.getElementById("tinydoc_textcode").addEventListener("input", function (
 	window.onbeforeunload = function(e){return "Dirty"};
 	});
 
-window.onresize = function()
+window.addEventListener("resize", function()
 	{
 	// RESIZING THE DOCUMENT
 	resizeTinyDOCEditor();
-	};
+	});
 
-window.onload = function()
+window.addEventListener("load", function()
 	{
 	// RESIZING THE DOCUMENT
 	resizeTinyDOCEditor();
@@ -775,4 +775,4 @@ window.onload = function()
 	document.getElementById("buttonTemplate1").addEventListener("click",function(event){formatDoc("insertHTML","My Template 1<br />Example 1<br />");});
 	document.getElementById("buttonTemplate2").addEventListener("click",function(event){formatDoc("insertHTML","My Template 2<br />Example 2<br />");});
 	document.getElementById("buttonTemplate3").addEventListener("click",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");});
-	}
+	});
