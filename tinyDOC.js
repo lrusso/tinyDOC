@@ -405,7 +405,7 @@ function formatDoc(myCommand, myParameter)
 		document.getElementById("tinydoc_textcode").focus();
 
 		// PRENTIVE DELAYED EVENT FOR GETTING FOCUS IN THE DOCUMENT
-		setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},200);
+		setTimeout(function(){document.getElementById("tinydoc_textcode").focus()},1);
 		}
 		catch(err)
 		{
@@ -756,23 +756,23 @@ window.addEventListener("load", function()
 	try{document.getElementById("tinydoc_textcode").scrollTop = 0}catch(err){}
 
 	// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
-	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL()});
-	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL()});
-	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument()});
-	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument()});
-	document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL()});
-	document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL()});
-	document.getElementById("buttonBold").addEventListener("mousedown",function(event){formatDoc("bold",null)});
-	document.getElementById("buttonItalic").addEventListener("mousedown",function(event){formatDoc("italic",null)});
-	document.getElementById("buttonUnderline").addEventListener("mousedown",function(event){formatDoc("underline",null)});
-	document.getElementById("buttonStrikethrough").addEventListener("mousedown",function(event){formatDoc("strikethrough",null)});
-	document.getElementById("buttonDotted").addEventListener("mousedown",function(event){formatDoc("insertunorderedlist",null)});
-	document.getElementById("buttonNumbered").addEventListener("mousedown",function(event){formatDoc("insertorderedlist",null)});
-	document.getElementById("buttonClear").addEventListener("mousedown",function(event){formatDoc("removeFormat",null)});
-	document.getElementById("buttonHighlight").addEventListener("mousedown",function(event){formatDoc("BackColor","#FFFF00")});
-	document.getElementById("buttonCalc").addEventListener("mousedown",function(event){insertCalc()});
-	document.getElementById("buttonLink").addEventListener("mousedown",function(event){insertLink()});
-	document.getElementById("buttonTemplate1").addEventListener("mousedown",function(event){formatDoc("insertHTML","My Template 1<br />Example 1<br />");});
-	document.getElementById("buttonTemplate2").addEventListener("mousedown",function(event){formatDoc("insertHTML","My Template 2<br />Example 2<br />");});
-	document.getElementById("buttonTemplate3").addEventListener("mousedown",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");});
+	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL();event.preventDefault()});
+	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL();event.preventDefault()});
+	document.getElementById("buttonSave").addEventListener("click",function(event){saveDocument();event.preventDefault()});
+	document.getElementById("buttonPrint").addEventListener("click",function(event){printDocument();event.preventDefault()});
+	document.getElementById("buttonUndo").addEventListener("click",function(event){formatDoc("undo",null);checkForURL();event.preventDefault()});
+	document.getElementById("buttonRedo").addEventListener("click",function(event){formatDoc("redo",null);checkForURL();event.preventDefault()});
+	document.getElementById("buttonBold").addEventListener("mousedown",function(event){formatDoc("bold",null);event.preventDefault()});
+	document.getElementById("buttonItalic").addEventListener("mousedown",function(event){formatDoc("italic",null);event.preventDefault()});
+	document.getElementById("buttonUnderline").addEventListener("mousedown",function(event){formatDoc("underline",null);event.preventDefault()});
+	document.getElementById("buttonStrikethrough").addEventListener("mousedown",function(event){formatDoc("strikethrough",null);event.preventDefault()});
+	document.getElementById("buttonDotted").addEventListener("mousedown",function(event){formatDoc("insertunorderedlist",null);event.preventDefault()});
+	document.getElementById("buttonNumbered").addEventListener("mousedown",function(event){formatDoc("insertorderedlist",null);event.preventDefault()});
+	document.getElementById("buttonClear").addEventListener("mousedown",function(event){formatDoc("removeFormat",null);event.preventDefault()});
+	document.getElementById("buttonHighlight").addEventListener("mousedown",function(event){formatDoc("BackColor","#FFFF00");event.preventDefault()});
+	document.getElementById("buttonCalc").addEventListener("mousedown",function(event){insertCalc();event.preventDefault()});
+	document.getElementById("buttonLink").addEventListener("mousedown",function(event){insertLink();event.preventDefault()});
+	document.getElementById("buttonTemplate1").addEventListener("mousedown",function(event){formatDoc("insertHTML","My Template 1<br />Example 1<br />");event.preventDefault()});
+	document.getElementById("buttonTemplate2").addEventListener("mousedown",function(event){formatDoc("insertHTML","My Template 2<br />Example 2<br />");event.preventDefault()});
+	document.getElementById("buttonTemplate3").addEventListener("mousedown",function(event){formatDoc("insertHTML","My Template 3<br />Example 3<br />");event.preventDefault()});
 	});
