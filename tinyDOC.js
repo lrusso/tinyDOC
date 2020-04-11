@@ -757,7 +757,7 @@ window.addEventListener("load", function()
 
 	// SETTING WHAT HAPPENS WHEN EACH ELEMENT IS CLICKED
 	document.getElementById("tinydoc_textcode").addEventListener("click",function(event){checkForURL();});
-	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL();event.preventDefault()});
+	document.getElementById("tinydoc_textcode").addEventListener("contextmenu",function(event){checkForURL();});
 	document.getElementById("buttonSave").addEventListener("mousedown",function(event){saveDocument();event.preventDefault()});
 	document.getElementById("buttonPrint").addEventListener("mousedown",function(event){printDocument();event.preventDefault()});
 	document.getElementById("buttonUndo").addEventListener("mousedown",function(event){formatDoc("undo",null);checkForURL();event.preventDefault()});
