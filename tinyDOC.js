@@ -2,7 +2,6 @@ var userLanguage = window.navigator.userLanguage || window.navigator.language;
 
 var STRING_ERROR = "";
 var STRING_SAVED = "";
-var STRING_NOTFOUND = "";
 var STRING_WELCOME = "";
 var STRING_CLICKURL = "";
 
@@ -14,7 +13,6 @@ if (userLanguage.substring(0,2)=="es")
 	{
 	STRING_ERROR = "Error al guardar.";
 	STRING_SAVED = "Documento guardado.";
-	STRING_NOTFOUND = "Texto no encontrado.";
 	STRING_WELCOME = "Bienvenido a <b>TinyDOC Editor</b> por Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>Este es un editor WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) desarrollado en <b>HTML5</b> con funciones intencionalmente limitadas, tales como:<br/><ul><li>Guardar e Imprimir.</li><li>Deshacer y Rehacer.</li><li>Funci&oacute;n para plantillas.</li><li>Herramientas de formato simplificadas.</li></ul>La idea de este proyecto es la de brindar un editor de textos liviano con funciones sencillas e intuitivas.<ol><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li><li>Sed in pellentesque eros, id luctus purus.</li><li>Curabitur gravida posuere lorem, eget finibus odio vehicula at.</li><li>Phasellus nisi diam, laoreet non enim at, lacinia egestas justo.</li></ol>Pellentesque bibendum metus vel interdum dignissim. Sed tempor augue eu felis elementum tincidunt. Cras ac ante id elit viverra hendrerit in vitae quam. Ut varius, ligula in volutpat tempus, enim nunc volutpat dolor, nec ultrices arcu lorem quis metus. Nulla pharetra dignissim vestibulum. Aliquam auctor tortor sodales, vehicula purus vel, tristique nibh. Aenean in mi purus. Phasellus consectetur leo enim, id rutrum leo egestas nec. <span style='background-color: rgb(255, 255, 0);'>Praesent fermentum, eros quis vehicula semper, nisi quam aliquam elit</span>, in consequat nulla ante quis tellus. Mauris ultrices dui et turpis semper, ac viverra lacus interdum. In aliquam est eu leo placerat vulputate. Praesent imperdiet sit amet libero eget ullamcorper.";
 	STRING_CLICKURL = "HAGA CLICK AQU&Iacute; PARA ABRIR EL LINK";
 	}
@@ -22,7 +20,6 @@ if (userLanguage.substring(0,2)=="es")
 	{
 	STRING_ERROR = "Error while saving.";
 	STRING_SAVED = "Document saved.";
-	STRING_NOTFOUND = "Text not found.";
 	STRING_WELCOME = "Welcome to <b>TinyDOC Editor</b> by Leonardo Russo / <a href='https://www.lrusso.com'>www.lrusso.com</a><br/><br/>This is a WYSIWYG (<span style='background-color: rgb(255, 255, 0);'>What You See Is What You Get</span>) editor developed in <b>HTML5</b> with intentional limited functions like:<br/><ul><li>Save & Print.</li><li>Undo & Redo.</li><li>Templates feature.</li><li>Simplified formatting tools.</li></ul>The idea of this project is to provide a lightweight text editor with simple and easy-to-use features.<ol><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li><li>Sed in pellentesque eros, id luctus purus.</li><li>Curabitur gravida posuere lorem, eget finibus odio vehicula at.</li><li>Phasellus nisi diam, laoreet non enim at, lacinia egestas justo.</li></ol>Pellentesque bibendum metus vel interdum dignissim. Sed tempor augue eu felis elementum tincidunt. Cras ac ante id elit viverra hendrerit in vitae quam. Ut varius, ligula in volutpat tempus, enim nunc volutpat dolor, nec ultrices arcu lorem quis metus. Nulla pharetra dignissim vestibulum. Aliquam auctor tortor sodales, vehicula purus vel, tristique nibh. Aenean in mi purus. Phasellus consectetur leo enim, id rutrum leo egestas nec. <span style='background-color: rgb(255, 255, 0);'>Praesent fermentum, eros quis vehicula semper, nisi quam aliquam elit</span>, in consequat nulla ante quis tellus. Mauris ultrices dui et turpis semper, ac viverra lacus interdum. In aliquam est eu leo placerat vulputate. Praesent imperdiet sit amet libero eget ullamcorper.";
 	STRING_CLICKURL = "CLICK HERE TO OPEN THE LINK";
 	}
@@ -58,7 +55,6 @@ function saveDocument()
 	// HIDING ALL NOTIFICATIONS
 	document.getElementsByClassName("tinydoc_saved")[0].style.display = "none";
 	document.getElementsByClassName("tinydoc_error")[0].style.display = "none";
-	document.getElementsByClassName("tinydoc_notfound")[0].style.display = "none";
 
 	// SHOWING THE LOADING SPLASH
 	document.getElementsByClassName("tinydoc_splash")[0].style.display = "block";
@@ -730,7 +726,6 @@ window.addEventListener("load", function()
 	// SETTING THE LANGUAGE VALUES
 	document.getElementsByClassName("tinydoc_saved")[0].innerHTML = STRING_SAVED;
 	document.getElementsByClassName("tinydoc_error")[0].innerHTML = STRING_ERROR;
-	document.getElementsByClassName("tinydoc_notfound")[0].innerHTML = STRING_NOTFOUND;
 
 	// GETTING THE FOCUS IN THE DOCUMENT
 	document.getElementById("tinydoc_textcode").focus();
