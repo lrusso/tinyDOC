@@ -44,3 +44,22 @@ body{padding:0;margin:0}
 #tinydoc_textcode{position:fixed;left:0;top:41px;width:100%;height:200px;padding-left:8px;padding-top:8px;padding-right:8px;padding-bottom:8px;margin:0;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;-webkit-text-size-adjust:none}
 #tinydoc_urlviewer{float:left;font-family:Arial;font-size:13px;line-height:2.6;margin-left:6px;margin-right:0;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
 #tinydoc_urlviewer a{text-decoration:none}
+
+@media (pointer: coarse)
+	{
+	.tinydoc_button_save_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_print_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_undo_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_redo_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_bold_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_italic_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_underline_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_strikethrough_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_dotted_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_numbered_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_highlight_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_link_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_template_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_calc_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	.tinydoc_button_clear_enabled:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+	}
