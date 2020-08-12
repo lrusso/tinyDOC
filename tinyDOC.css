@@ -1,6 +1,8 @@
 body{padding:0;margin:0}
 
-.tinydoc_menubar{border-bottom:thin solid #D3D3D3;background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:40px;overflow:hidden;text-align:center;font-family:Arial;font-size:13px}
+.tinydoc_menubar{border-bottom:thin solid #D3D3D3;background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:40px;overflow-x:scroll;outline:none;text-align:center;font-family:Arial;font-size:13px}
+.tinydoc_menubar::-webkit-scrollbar{display:none}
+.tinydoc_wrapper{float:left;width:670px}
 .tinydoc_holder{float:left;padding-top:3px;padding-bottom:3px;margin:0}
 .tinydoc_separator{float:left;border-left:thin solid #D3D3D3;margin-left:5px;height:100px;width:1px}
 .tinydoc_separator2{float:left;border-left:thin solid #D3D3D3;margin-left:135px;height:100px;width:1px}
