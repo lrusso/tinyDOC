@@ -605,26 +605,6 @@ function checkForEmail(email)
 	return re.test(String(email).toLowerCase());
 	}
 
-function resizeTinyDOCEditor()
-	{
-	try
-		{
-		// GETTING THE WINDOW SIZE
-		var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName("body")[0], x = w.innerWidth || e.clientWidth || g.clientWidth, y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-
-		// CALCUTING THE NEW SIZE FOR THE DOCUMENT
-		var editHeight = y - 57;
-		var editWidth = x - 16;
-
-		// RESIZING DOCUMENT
-		document.getElementById("tinydoc_textcode").style.height = editHeight.toString() + "px";
-		document.getElementById("tinydoc_textcode").style.width = editWidth.toString() + "px";
-		}
-		catch(err)
-		{
-		}
-	}
-
 document.getElementById("tinydoc_textcode").addEventListener("paste", function(e)
 	{
 	try
@@ -709,17 +689,8 @@ document.getElementById("tinydoc_textcode").addEventListener("input", function (
 	window.onbeforeunload = function(e){return "Dirty"};
 	});
 
-window.addEventListener("resize", function()
-	{
-	// RESIZING THE DOCUMENT
-	resizeTinyDOCEditor();
-	});
-
 window.addEventListener("load", function()
 	{
-	// RESIZING THE DOCUMENT
-	resizeTinyDOCEditor();
-
 	// SETTING THE WELCOME DOCUMENT
 	document.getElementById("tinydoc_textcode").innerHTML = STRING_WELCOME;
 
