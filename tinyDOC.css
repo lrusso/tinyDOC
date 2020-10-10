@@ -1,6 +1,6 @@
 html,body{position:fixed;height:100%;width:100%;overflow:auto;padding:0;margin:0}
 
-.tinydoc_menubar{border-bottom:thin solid #D3D3D3;background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:40px;overflow-x:scroll;overflow-y:hidden;outline:none;text-align:center;font-family:Arial;font-size:13px}
+.tinydoc_menubar{border-bottom:thin solid #D3D3D3;background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:40px;overflow-x:scroll;overflow-y:hidden;outline:none;text-align:center;font-family:Arial;font-size:13px;scrollbar-width:none}
 .tinydoc_menubar::-webkit-scrollbar{display:none}
 .tinydoc_wrapper{float:left;width:670px}
 .tinydoc_holder{float:left;padding-top:3px;padding-bottom:3px;margin:0}
