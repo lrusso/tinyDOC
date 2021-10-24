@@ -701,7 +701,7 @@ class tinyDOC2
 		try
 			{
 			// CHECKING IF THE USER IS SELECTING A LIST
-			if(this.checkParentTag("LI")==true || this.checkParentTag("UL")==true)
+			if(this.checkParentTag("LI")==true || this.checkParentTag("UL")==true || this.checkParentTag("OL")==true)
 				{
 				var plainText = window.getSelection().toString();
 
