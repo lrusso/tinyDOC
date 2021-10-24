@@ -6,7 +6,7 @@
 	"display": "standalone",
 	"orientation": "portrait",
 	"theme_color": "#F2F2F2",
-	"background_color": "#000000",
+	"background_color": "#FFFFFF",
 	"icons": [
 		{
 			"src": "https://lrusso.github.io/tinyDOC2/tinyDOC2FavIcon_192x192.png",
