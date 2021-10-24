@@ -1,4 +1,4 @@
-class tinyDOC
+class tinyDOC2
 	{
 	constructor(myContainer, documentText, saveFunction, template1, template2, template3)
 		{
