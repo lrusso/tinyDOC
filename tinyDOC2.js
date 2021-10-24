@@ -733,7 +733,7 @@ class tinyDOC2
 				var plainText = window.getSelection().toString();
 
 				// CHECKING IF THERE USER ONLY IS SELECTING ONE ITEM LIST
-				if(plainText.indexOf("\n")==-1 || plainText.indexOf("\n")==plainText.length-1)
+				if(plainText.indexOf("\n")==-1)
 					{
 					// ADDING THE HIGHTLIGHT STYLE
 					this.formatStyle("span",backgroundColor);
