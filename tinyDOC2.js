@@ -1147,35 +1147,25 @@ class tinyDOC2
 				var firstNode = frag.firstChild;
 				range.insertNode(frag);
 
-				// Preserve the selection
-				if (lastNode)
+				setTimeout(function()
 					{
-					range = range.cloneRange();
-					range.setStartAfter(lastNode);
-					if (selectPastedContent)
+					// Preserve the selection
+					if (lastNode)
 						{
-						range.setStartBefore(firstNode);
+						range = range.cloneRange();
+						range.setStartAfter(lastNode);
+						if (selectPastedContent)
+							{
+							range.setStartBefore(firstNode);
+							}
+						else
+							{
+							range.collapse(true);
+							}
+						sel.removeAllRanges();
+						sel.addRange(range);
 						}
-					else
-						{
-						range.collapse(true);
-						}
-					sel.removeAllRanges();
-					sel.addRange(range);
-					}
-				}
-			}
-		else if ( (sel = document.selection) && sel.type != "Control")
-			{
-			// IE < 9
-			var originalRange = sel.createRange();
-			originalRange.collapse(true);
-			sel.createRange().pasteHTML(html);
-			if (selectPastedContent)
-				{
-				range = sel.createRange();
-				range.setEndPoint("StartToStart", originalRange);
-				range.select();
+					},10);
 				}
 			}
 		}
