@@ -639,9 +639,9 @@ class tinyDOC2
 		{
 		var selection = window.getSelection();
 		var range = selection.getRangeAt(0);
-		var selectedContents = range.extractContents();
+		var selectedContent = range.extractContents();
 
-		var existingSelector = selectedContents.querySelector(tag);
+		var existingSelector = selectedContent.querySelector(tag);
 
 		if (existingSelector)
 			{
@@ -650,7 +650,7 @@ class tinyDOC2
 		else
 			{
 			var newTag = document.createElement(tag);
-			newTag.appendChild(selectedContents);
+			newTag.appendChild(selectedContent);
 
 			if (tag=="span")
 				{
@@ -662,22 +662,28 @@ class tinyDOC2
 			}
 		}
 
-	formatList(tag,tag2)
+	formatList(tag1,tag2)
 		{
 		try
 			{
+			// GETTING THE CURRENT SELECTION
 			var selection = window.getSelection();
 			var range = selection.getRangeAt(0);
-			var selectedContents = range.extractContents();
+			var selectedContent = range.extractContents();
 
-			var parentTag = document.createElement(tag);
-			var childTag = document.createElement(tag2);
-			parentTag.appendChild(childTag);
+			// ADDING THE LIST TAGS
+			var listTag = document.createElement(tag1);
+			var itemTag = document.createElement(tag2);
+			listTag.appendChild(itemTag);
 
-			childTag.appendChild(selectedContents);
+			// ADDING THE SELECTED CONTENT TO THE LIST ITEM
+			itemTag.appendChild(selectedContent);
 
+			// REMOVING THE SELECTED CONTENT
 			range.deleteContents();
-			range.insertNode(parentTag);
+
+			// INSERTING THE LIST
+			range.insertNode(listTag);
 			}
 			catch(err)
 			{
