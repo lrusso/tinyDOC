@@ -635,30 +635,36 @@ class tinyDOC2
 			}
 		}
 
-	formatStyle(tag, myParameter)
+	formatStyle(myTag, myParameter)
 		{
-		var selection = window.getSelection();
-		var range = selection.getRangeAt(0);
-		var selectedContent = range.extractContents();
-
-		var existingSelector = selectedContent.querySelector(tag);
-
-		if (existingSelector)
+		try
 			{
-			this.pasteHtmlAtCaret(existingSelector.innerHTML,true);
-			}
-		else
-			{
-			var newTag = document.createElement(tag);
-			newTag.appendChild(selectedContent);
+			var selection = window.getSelection();
+			var range = selection.getRangeAt(0);
+			var selectedContent = range.extractContents();
 
-			if (tag=="span")
+			var existingSelector = selectedContent.querySelector(myTag);
+
+			if (existingSelector)
 				{
-				newTag.style.backgroundColor = myParameter
+				this.pasteHtmlAtCaret(existingSelector.innerHTML,true);
 				}
+			else
+				{
+				var newTag = document.createElement(myTag);
+				newTag.appendChild(selectedContent);
 
-			range.deleteContents();
-			range.insertNode(newTag);
+				if (myTag=="span")
+					{
+					newTag.style.backgroundColor = myParameter;
+					}
+
+				range.deleteContents();
+				range.insertNode(newTag);
+				}
+			}
+			catch(err)
+			{
 			}
 		}
 
