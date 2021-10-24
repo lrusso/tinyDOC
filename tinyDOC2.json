@@ -1,6 +1,6 @@
 {
-	"name": "TinyDOC Editor",
-	"short_name": "TinyDOC Editor",
+	"name": "TinyDOC 2 Editor",
+	"short_name": "TinyDOC 2 Editor",
 	"lang": "en-US",
 	"start_url": "https://lrusso.github.io/tinyDOC2/tinyDOC2.htm",
 	"display": "standalone",
