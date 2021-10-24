@@ -421,7 +421,7 @@ class tinyDOC2
 				// FOCUSING THE DOCUMENT
 				thisTinyDOC.document.focus();
 
-				// PASTING THE TEXT
+				// PASTING THE PLAIN TEXT
 				thisTinyDOC.insertHtmlAtCaret(text,false);
 				}
 				catch(err)
@@ -790,7 +790,7 @@ class tinyDOC2
 				// CONVERTING BREAK LINES
 				plainText = plainText.replace(/\n/gm, "<br />");
 
-				// PASTING PLAIN TEXT
+				// INSERTING THE PLAIN TEXT
 				this.insertHtmlAtCaret(plainText,true);
 				}
 			}
