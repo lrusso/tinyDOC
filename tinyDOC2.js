@@ -286,21 +286,21 @@ class tinyDOC2
 		if (template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
-			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.pasteHtmlAtCaret(template1,false);event.preventDefault()});
+			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template1,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
 		if (template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
-			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.pasteHtmlAtCaret(template2,false);event.preventDefault()});
+			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template2,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
 		if (template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
-			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.pasteHtmlAtCaret(template3,false);event.preventDefault()});
+			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template3,false);event.preventDefault()});
 			}
 
 		// SETTING WHAT WILL HAPPEN WHEN THE USER IS TYPING
@@ -323,7 +323,7 @@ class tinyDOC2
 						event.preventDefault();
 
 						// INSERTING SPACES AS A TAB SPACE
-						thisTinyDOC.pasteHtmlAtCaret("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",false);
+						thisTinyDOC.insertHtmlAtCaret("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",false);
 
 						// FOCUSING THE DOCUMENT AFTER 100 MS
 						setTimeout(function(){thisTinyDOC.document.focus()},100);
@@ -422,7 +422,7 @@ class tinyDOC2
 				thisTinyDOC.document.focus();
 
 				// PASTING THE TEXT
-				thisTinyDOC.pasteHtmlAtCaret(text,false);
+				thisTinyDOC.insertHtmlAtCaret(text,false);
 				}
 				catch(err)
 				{
@@ -639,7 +639,7 @@ class tinyDOC2
 		{
 		try
 			{
-			// GETTING CURRENT SELECTION
+			// GETTING THE CURRENT SELECTION
 			var selection = window.getSelection();
 			var range = selection.getRangeAt(0);
 			var selectedContent = range.extractContents();
@@ -650,25 +650,34 @@ class tinyDOC2
 			// CHECKING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
 			if (existingSelector)
 				{
-				// PASTING
-				this.pasteHtmlAtCaret(existingSelector.innerHTML,true);
+				// INSERTING THE HTML CONTENT WITHOUT THE TAG
+				this.insertHtmlAtCaret(existingSelector.innerHTML,true);
 				}
 			else
 				{
+				// CREATING THE TAG
 				var newTag = document.createElement(myTag);
+
+				// ADDING THE SELECTED CONTENT TO THE TAG
 				newTag.appendChild(selectedContent);
 
+				// CHECKING IF IT IS A SPAN ELEMENT (IN THIS PROJECT, USED FOR HIGHLIGHT)
 				if (myTag=="span")
 					{
+					// SETTING THE BACKGROUND COLOR
 					newTag.style.backgroundColor = myParameter;
 					}
 
+				// DELETING THE SELECTED CONTENT
 				range.deleteContents();
+
+				// INSERTING THE NEW TAG
 				range.insertNode(newTag);
 
 				// WAITING 10 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
+					// MAINTAINING THE INITIAL SELECTION
 					range = range.cloneRange();
 					range.setStartBefore(newTag);
 					selection.removeAllRanges();
@@ -782,7 +791,7 @@ class tinyDOC2
 				plainText = plainText.replace(/\n/gm, "<br />");
 
 				// PASTING PLAIN TEXT
-				this.pasteHtmlAtCaret(plainText,true);
+				this.insertHtmlAtCaret(plainText,true);
 				}
 			}
 			catch(err)
@@ -858,12 +867,12 @@ class tinyDOC2
 						if (selectedTextURLChecker4==true)
 							{
 							// INSERTING THE MAILTO LINK INTO THE DOCUMENT
-							this.pasteHtmlAtCaret("<a href='mailto:" + selectedText.toLowerCase() + "' target='_blank'>" + selectedText + "</a>", false);
+							this.insertHtmlAtCaret("<a href='mailto:" + selectedText.toLowerCase() + "' target='_blank'>" + selectedText + "</a>", false);
 							}
 							else
 							{
 							// INSERTING THE URL LINK INTO THE DOCUMENT
-							this.pasteHtmlAtCaret("<a href='" + selectedText + "' target='_blank'>" + selectedText + "</a>", false);
+							this.insertHtmlAtCaret("<a href='" + selectedText + "' target='_blank'>" + selectedText + "</a>", false);
 							}
 						}
 					}
@@ -914,7 +923,7 @@ class tinyDOC2
 							if (isNaN(finalResult)==true)
 								{
 								// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-								this.pasteHtmlAtCaret(" = ERROR",false);
+								this.insertHtmlAtCaret(" = ERROR",false);
 								}
 								else
 								{
@@ -928,13 +937,13 @@ class tinyDOC2
 									}
 
 								// INSERTING THE EXPRESSION RESULT
-								this.pasteHtmlAtCaret(" = " + finalResult, false);
+								this.insertHtmlAtCaret(" = " + finalResult, false);
 								}
 							}
 							catch(err)
 							{
 							// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-							this.pasteHtmlAtCaret(" = ERROR", false);
+							this.insertHtmlAtCaret(" = ERROR", false);
 							}
 						}
 						else
@@ -981,7 +990,7 @@ class tinyDOC2
 							if (isNaN(finalResult)==true)
 								{
 								// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-								this.pasteHtmlAtCaret(lastLineBR + "----------<br/>ERROR", false);
+								this.insertHtmlAtCaret(lastLineBR + "----------<br/>ERROR", false);
 								}
 								else
 								{
@@ -995,13 +1004,13 @@ class tinyDOC2
 									}
 
 								// INSERTING THE FINAL RESULT
-								this.pasteHtmlAtCaret(lastLineBR + "----------<br/>" + finalResult, false);
+								this.insertHtmlAtCaret(lastLineBR + "----------<br/>" + finalResult, false);
 								}
 							}
 							catch(err)
 							{
 							// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-							this.pasteHtmlAtCaret(lastLineBR + "----------<br/>ERROR", false);
+							this.insertHtmlAtCaret(lastLineBR + "----------<br/>ERROR", false);
 							}
 						}
 					}
@@ -1122,7 +1131,7 @@ class tinyDOC2
 			}
 		}
 
-	pasteHtmlAtCaret(html, selectPastedContent)
+	insertHtmlAtCaret(html, selectPastedContent)
 		{
 		// https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
 
