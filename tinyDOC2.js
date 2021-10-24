@@ -286,21 +286,21 @@ class tinyDOC2
 		if (template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
-			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("insertHTML",template1);event.preventDefault()});
+			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.pasteHtmlAtCaret(template1,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
 		if (template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
-			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("insertHTML",template2);event.preventDefault()});
+			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.pasteHtmlAtCaret(template2,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
 		if (template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
-			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("insertHTML",template3);event.preventDefault()});
+			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.pasteHtmlAtCaret(template3,false);event.preventDefault()});
 			}
 
 		// SETTING WHAT WILL HAPPEN WHEN THE USER IS TYPING
