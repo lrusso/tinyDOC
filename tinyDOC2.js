@@ -753,12 +753,12 @@ class tinyDOC2
 						if (selectedTextURLChecker4==true)
 							{
 							// INSERTING THE MAILTO LINK INTO THE DOCUMENT
-							this.formatDoc("insertHTML","<a href='mailto:" + selectedText.toLowerCase() + "' target='_blank'>" + selectedText + "</a>");
+							this.pasteHtmlAtCaret("<a href='mailto:" + selectedText.toLowerCase() + "' target='_blank'>" + selectedText + "</a>", false);
 							}
 							else
 							{
 							// INSERTING THE URL LINK INTO THE DOCUMENT
-							this.formatDoc("insertHTML","<a href='" + selectedText + "' target='_blank'>" + selectedText + "</a>");
+							this.pasteHtmlAtCaret("<a href='" + selectedText + "' target='_blank'>" + selectedText + "</a>", false);
 							}
 						}
 					}
