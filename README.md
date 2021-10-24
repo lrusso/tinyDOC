@@ -1,6 +1,6 @@
 # TinyDOC 2 Editor 
 
-TinyDOC 2 Editor is a HTML5 Rich Text Editor. The idea of this project is to provide a lightweight text editor with simple and easy-to-use features without using ExecCommand. TinyDOC 1 uses execCommand (https://github.com/lrusso/tinyDOC).
+TinyDOC 2 Editor is a HTML5 Rich Text Editor. The idea of this project is to provide a lightweight text editor with simple and easy-to-use features without using ExecCommand.
 
 **------ TINYDOC 2 IS A WORK IN PROGRESS ------**
 
