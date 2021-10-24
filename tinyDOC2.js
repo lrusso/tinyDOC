@@ -661,6 +661,14 @@ class tinyDOC2
 
 				range.deleteContents();
 				range.insertNode(newTag);
+
+				setTimeout(function()
+					{
+					range = range.cloneRange();
+					range.setStartBefore(newTag);
+					selection.removeAllRanges();
+					selection.addRange(range);
+					}, 10);
 				}
 			}
 			catch(err)
