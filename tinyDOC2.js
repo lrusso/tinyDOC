@@ -726,20 +726,24 @@ class tinyDOC2
 
 	checkParentTag(tagToFind)
 		{
-		// CREATING A VARIABLES TO
+		// CREATING A VARIABLE TO CHECK IF THE TAG WAS FOUND
 		var tagFound = false;
 
 		try
 			{
+			// GETTING THR CURRENT FOCUS NODE
 			var upperNode = window.getSelection().focusNode;
 
 			// LOOPING ALL THE PARENT NODES
 			while (upperNode.parentNode)
 				{
+				// GETTING THE PARENT NODE
 				upperNode = upperNode.parentNode;
 
+				// CHECKING IF THAT NODE IS THE ONE THAT NEEDS TO BE FOUND
 				if (upperNode.nodeName==tagToFind)
 					{
+					// SETTING THE TAG WAS FOUND
 					tagFound = true;
 					}
 				}
