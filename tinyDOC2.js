@@ -611,7 +611,7 @@ class tinyDOC2
 			else if(myCommand=="italic") {this.formatStyle("i",myParameter)}
 			else if(myCommand=="underline"){this.formatStyle("u",myParameter)}
 			else if(myCommand=="strikethrough"){this.formatStyle("strike",myParameter)}
-			else if(myCommand=="BackColor"){this.formatStyle("span",myParameter)}
+			else if(myCommand=="BackColor"){this.highlightText(myParameter)}
 			else if(myCommand=="insertunorderedlist"){this.formatList("ul","li")}
 			else if(myCommand=="insertorderedlist"){this.formatList("ol","li")}
 			else if(myCommand=="removeFormat"){this.removeFormat()}
@@ -694,6 +694,55 @@ class tinyDOC2
 			catch(err)
 			{
 			}
+		}
+
+	highlightText(backgroundColor)
+		{
+		try
+			{
+			// CHECKING IF THE USER IS SELECTING A LIST
+			if(this.checkParentTag("LI")==true)
+				{
+				var plainText = window.getSelection().toString();
+
+				// CHECKING IF THERE USER ONLY IS SELECTING ONE ITEM LIST
+				if(plainText.indexOf("\n")==-1)
+					{
+					// ADDING THE HIGHTLIGHT STYLE
+					this.formatStyle("span",backgroundColor);
+					}
+				}
+				else
+				{
+				// IF NO MULTIPLE ITEM LIST WERE SELECTED, ADDING THE HIGHTLIGHT STYLE
+				this.formatStyle("span",backgroundColor);
+				}
+			}
+			catch(err)
+			{
+			}
+		}
+
+	checkParentTag(tagToFind)
+		{
+		var tagFound = false;
+		var upperNode = window.getSelection().focusNode;
+
+		while (upperNode.parentNode)
+			{
+			if (upperNode==this.document)
+				{
+				return;
+				}
+
+			upperNode = upperNode.parentNode;
+			if (upperNode.nodeName==tagToFind)
+				{
+				tagFound = true;
+				}
+			}
+
+		return tagFound;
 		}
 
 	removeFormat()
