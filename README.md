@@ -8,7 +8,7 @@ TinyDOC 2 Editor is a HTML5 Rich Text Editor. The idea of this project is to pro
 
 https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 
-## TinyDOC Constructor
+## TinyDOC 2 Constructor
 
 | # | TYPE | REQUIRED |
 | :------------ |:---------------:| :-----:|
@@ -21,10 +21,10 @@ https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 
 **Example:**
 ```javascript
-new tinyDOC(document.getElementById("myTestContainer"), "Welcome", saveFunction, "My Template1", "My Template2", "My Template3")
+new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction, "My Template1", "My Template2", "My Template3")
 ```
 
-## TinyDOC Methods
+## TinyDOC 2 Methods
 
 | # | METHOD | DETAILS |
 | :------------ |:---------------:| :----- |
@@ -38,10 +38,10 @@ new tinyDOC(document.getElementById("myTestContainer"), "Welcome", saveFunction,
 | 8 | scrollToTop | Scrolls to the top of the document. |
 | 9 | getText(boolean) | Returns the document content with or without encoding. |
 
-## Accessing the ContentEditable Div used by TinyDOC
+## Accessing the ContentEditable Div used by TinyDOC 2
 
 ```javascript
-let myExample = new tinyDOC(document.getElementById("myTestContainer"))
+let myExample = new tinyDOC2(document.getElementById("myTestContainer"))
 myExample.document.scrollTop = 0
 ```
 
