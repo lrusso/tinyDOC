@@ -701,7 +701,7 @@ class tinyDOC2
 		try
 			{
 			// CHECKING IF THE USER IS SELECTING A LIST
-			if(this.checkParentTag("LI")==true)
+			if(this.checkParentTag("LI")==true || this.checkParentTag("UL")==true)
 				{
 				var plainText = window.getSelection().toString();
 
@@ -725,21 +725,26 @@ class tinyDOC2
 
 	checkParentTag(tagToFind)
 		{
+		// CREATING A VARIABLES TO 
 		var tagFound = false;
-		var upperNode = window.getSelection().focusNode;
 
-		while (upperNode.parentNode)
+		try
 			{
-			if (upperNode==this.document)
-				{
-				return;
-				}
+			var upperNode = window.getSelection().focusNode;
 
-			upperNode = upperNode.parentNode;
-			if (upperNode.nodeName==tagToFind)
+			// LOOPING ALL THE PARENT NODES
+			while (upperNode.parentNode)
 				{
-				tagFound = true;
+				upperNode = upperNode.parentNode;
+
+				if (upperNode.nodeName==tagToFind)
+					{
+					tagFound = true;
+					}
 				}
+			}
+			catch(err)
+			{
 			}
 
 		return tagFound;
