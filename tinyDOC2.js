@@ -607,10 +607,11 @@ class tinyDOC2
 			// FOCUSING THE DOCUMENT
 			this.document.focus();
 
-			if (myCommand=="bold"){this.formatStyle("b")}
-			else if (myCommand=="italic") {this.formatStyle("i")}
-			else if (myCommand=="underline"){this.formatStyle("u")}
-			else if (myCommand=="strikethrough"){this.formatStyle("strike")}
+			if (myCommand=="bold"){this.formatStyle("b",myParameter)}
+			else if(myCommand=="italic") {this.formatStyle("i",myParameter)}
+			else if(myCommand=="underline"){this.formatStyle("u",myParameter)}
+			else if(myCommand=="strikethrough"){this.formatStyle("strike",myParameter)}
+			else if(myCommand=="BackColor"){this.formatStyle("span",myParameter)}
 			else if(myCommand=="removeFormat"){this.removeFormat()}
 			else
 				{
@@ -632,7 +633,7 @@ class tinyDOC2
 			}
 		}
 
-	formatStyle(tag)
+	formatStyle(tag, myParameter)
 		{
 		var selection = window.getSelection();
 		var range = selection.getRangeAt(0);
@@ -648,6 +649,12 @@ class tinyDOC2
 			{
 			var b = document.createElement(tag);
 			b.appendChild(selectedContents);
+
+			if (tag=="span")
+				{
+				b.style.backgroundColor = myParameter
+				}
+
 			range.deleteContents();
 			range.insertNode(b);
 			}
@@ -657,11 +664,19 @@ class tinyDOC2
 		{
 		try
 			{
+			// CHECKING IF THERE IS ANY SELECTED TEXT
 			if(window.getSelection().toString())
 				{
+				// GETTING THE SELECTED TEXT
 				var plainText = window.getSelection().toString();
+
+				// GETTING THE FORMATTED TEXT RANGE
 				var range = window.getSelection().getRangeAt(0);
+
+				// DELETING THE FORMATTED TEXT
 				range.deleteContents();
+
+				// INSERTING THE PLAIN TEXT
 				range.insertNode(document.createTextNode(plainText));
 				}
 			}
