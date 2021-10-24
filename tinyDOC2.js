@@ -670,14 +670,11 @@ class tinyDOC2
 				// GETTING THE SELECTED TEXT
 				var plainText = window.getSelection().toString();
 
-				// GETTING THE FORMATTED TEXT RANGE
-				var range = window.getSelection().getRangeAt(0);
+				// CONVERTING BREAK LINES
+				plainText = plainText.replace(/\n/gm, "<br />");
 
-				// DELETING THE FORMATTED TEXT
-				range.deleteContents();
-
-				// INSERTING THE PLAIN TEXT
-				range.insertNode(document.createTextNode(plainText));
+				// PASTING PLAIN TEXT
+				this.pasteHtmlAtCaret(plainText,true);
 				}
 			}
 			catch(err)
