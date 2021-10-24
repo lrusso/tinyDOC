@@ -612,6 +612,8 @@ class tinyDOC2
 			else if(myCommand=="underline"){this.formatStyle("u",myParameter)}
 			else if(myCommand=="strikethrough"){this.formatStyle("strike",myParameter)}
 			else if(myCommand=="BackColor"){this.formatStyle("span",myParameter)}
+			else if(myCommand=="insertunorderedlist"){this.formatList("ul","li")}
+			else if(myCommand=="insertorderedlist"){this.formatList("ol","li")}
 			else if(myCommand=="removeFormat"){this.removeFormat()}
 			else
 				{
@@ -647,16 +649,38 @@ class tinyDOC2
 			}
 		else
 			{
-			var b = document.createElement(tag);
-			b.appendChild(selectedContents);
+			var newTag = document.createElement(tag);
+			newTag.appendChild(selectedContents);
 
 			if (tag=="span")
 				{
-				b.style.backgroundColor = myParameter
+				newTag.style.backgroundColor = myParameter
 				}
 
 			range.deleteContents();
-			range.insertNode(b);
+			range.insertNode(newTag);
+			}
+		}
+
+	formatList(tag,tag2)
+		{
+		try
+			{
+			var selection = window.getSelection();
+			var range = selection.getRangeAt(0);
+			var selectedContents = range.extractContents();
+
+			var parentTag = document.createElement(tag);
+			var childTag = document.createElement(tag2);
+			parentTag.appendChild(childTag);
+
+			childTag.appendChild(selectedContents);
+
+			range.deleteContents();
+			range.insertNode(parentTag);
+			}
+			catch(err)
+			{
 			}
 		}
 
