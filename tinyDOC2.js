@@ -639,14 +639,18 @@ class tinyDOC2
 		{
 		try
 			{
+			// GETTING CURRENT SELECTION
 			var selection = window.getSelection();
 			var range = selection.getRangeAt(0);
 			var selectedContent = range.extractContents();
 
+			// SEARCHING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
 			var existingSelector = selectedContent.querySelector(myTag);
 
+			// CHECKING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
 			if (existingSelector)
 				{
+				// PASTING
 				this.pasteHtmlAtCaret(existingSelector.innerHTML,true);
 				}
 			else
@@ -662,6 +666,7 @@ class tinyDOC2
 				range.deleteContents();
 				range.insertNode(newTag);
 
+				// WAITING 10 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					range = range.cloneRange();
@@ -1121,52 +1126,44 @@ class tinyDOC2
 		{
 		// https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
 
-		var sel, range;
-		if (window.getSelection)
+		var selection = window.getSelection();
+		if (selection.getRangeAt && selection.rangeCount)
 			{
-			// IE9 and non-IE
-			sel = window.getSelection();
-			if (sel.getRangeAt && sel.rangeCount)
+			var range = selection.getRangeAt(0);
+			range.deleteContents();
+
+			var el = document.createElement("div");
+			el.innerHTML = html;
+
+			var frag = document.createDocumentFragment(), node, lastNode;
+
+			while((node = el.firstChild))
 				{
-				range = sel.getRangeAt(0);
-				range.deleteContents();
-
-				// Range.createContextualFragment() would be useful here but is
-				// only relatively recently standardized and is not supported in
-				// some browsers (IE9, for one)
-
-				var el = document.createElement("div");
-				el.innerHTML = html;
-				var frag = document.createDocumentFragment(), node, lastNode;
-
-				while ( (node = el.firstChild) )
-					{
-					lastNode = frag.appendChild(node);
-					}
-
-				var firstNode = frag.firstChild;
-				range.insertNode(frag);
-
-				setTimeout(function()
-					{
-					// Preserve the selection
-					if (lastNode)
-						{
-						range = range.cloneRange();
-						range.setStartAfter(lastNode);
-						if (selectPastedContent)
-							{
-							range.setStartBefore(firstNode);
-							}
-						else
-							{
-							range.collapse(true);
-							}
-						sel.removeAllRanges();
-						sel.addRange(range);
-						}
-					},10);
+				lastNode = frag.appendChild(node);
 				}
+
+			var firstNode = frag.firstChild;
+			range.insertNode(frag);
+
+			// WAITING 10 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				if (lastNode)
+					{
+					range = range.cloneRange();
+					range.setStartAfter(lastNode);
+					if (selectPastedContent)
+						{
+						range.setStartBefore(firstNode);
+						}
+					else
+						{
+						range.collapse(true);
+						}
+					selection.removeAllRanges();
+					selection.addRange(range);
+					}
+				},10);
 			}
 		}
 	}
