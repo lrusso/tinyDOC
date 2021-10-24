@@ -703,6 +703,7 @@ class tinyDOC2
 			// CHECKING IF THE USER IS SELECTING A LIST
 			if(this.checkParentTag("LI")==true || this.checkParentTag("UL")==true || this.checkParentTag("OL")==true)
 				{
+				// GETTING THE SELECTING AS A PLAIN TEXT
 				var plainText = window.getSelection().toString();
 
 				// CHECKING IF THERE USER ONLY IS SELECTING ONE ITEM LIST
@@ -725,7 +726,7 @@ class tinyDOC2
 
 	checkParentTag(tagToFind)
 		{
-		// CREATING A VARIABLES TO 
+		// CREATING A VARIABLES TO
 		var tagFound = false;
 
 		try
