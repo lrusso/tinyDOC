@@ -642,6 +642,10 @@ class tinyDOC2
 			// GETTING THE CURRENT SELECTION
 			var selection = window.getSelection();
 			var range = selection.getRangeAt(0);
+
+			// WORKAROUND FOR CHROME
+			if (range.commonAncestorContainer.nodeName=="UL"){return}
+
 			var selectedContent = range.extractContents();
 
 			// SEARCHING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
@@ -729,7 +733,7 @@ class tinyDOC2
 				var plainText = window.getSelection().toString();
 
 				// CHECKING IF THERE USER ONLY IS SELECTING ONE ITEM LIST
-				if(plainText.indexOf("\n")==-1)
+				if(plainText.indexOf("\n")==-1 || plainText.indexOf("\n")==plainText.length-1)
 					{
 					// ADDING THE HIGHTLIGHT STYLE
 					this.formatStyle("span",backgroundColor);
