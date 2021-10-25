@@ -911,112 +911,127 @@ class tinyDOC2
 	// https://codepen.io/jeffward/pen/OJjPKYo
 	setCaretPosition(container, position)
 		{
-		function createRange(node,chars,range)
+		try
 			{
-			if(range == null)
+			function createRange(node,chars,range)
 				{
-				range = window.document.createRange();
-				range.selectNode(node);
-				range.setStart(node,0);
-				}
-
-			if(chars.count == 0)
-				{
-				range.setEnd(node,chars.count);
-				}
-			else if(node != null && chars.count > 0)
-				{
-				if(node.nodeType == 3)
+				if(range == null)
 					{
-					if(node.textContent.length < chars.count)
+					range = window.document.createRange();
+					range.selectNode(node);
+					range.setStart(node,0);
+					}
+
+				if(chars.count == 0)
+					{
+					range.setEnd(node,chars.count);
+					}
+				else if(node != null && chars.count > 0)
+					{
+					if(node.nodeType == 3)
 						{
-						chars.count -= node.textContent.length;
+						if(node.textContent.length < chars.count)
+							{
+							chars.count -= node.textContent.length;
+							}
+						else
+							{
+							range.setEnd(node,chars.count);
+							chars.count = 0;
+							}
 						}
 					else
 						{
-						range.setEnd(node,chars.count);
-						chars.count = 0;
-						}
-					}
-				else
-					{
-					var _g = 0;
-					var _g1 = node.childNodes.length;
-					while(_g < _g1)
-						{
-						var lp = _g++;
-						range = createRange(node.childNodes[lp],chars,range);
-						if(chars.count == 0)
+						var _g = 0;
+						var _g1 = node.childNodes.length;
+						while(_g < _g1)
 							{
-							break;
+							var lp = _g++;
+							range = createRange(node.childNodes[lp],chars,range);
+							if(chars.count == 0)
+								{
+								break;
+								}
 							}
 						}
 					}
+				return range;
 				}
-			return range;
-			}
 
-		if(position >= 0)
-			{
-			var selection = window.getSelection();
-			var range = createRange(container,{ count : position});
-			if(range != null)
+			if(position >= 0)
 				{
-				range.collapse(false);
-				selection.removeAllRanges();
-				selection.addRange(range);
+				var selection = window.getSelection();
+				var range = createRange(container,{ count : position});
+				if(range != null)
+					{
+					range.collapse(false);
+					selection.removeAllRanges();
+					selection.addRange(range);
+					}
 				}
+			}
+			catch(err)
+			{
 			}
 		}
 
+	// https://gist.github.com/isLishude/6ccd1fbf42d1eaac667d6873e7b134f8
+	// https://codepen.io/jeffward/pen/OJjPKYo
 	getCaretPosition(container)
 		{
-		function isDescendantOf(node,parent)
+		try
 			{
-			while(node != null)
+			function isDescendantOf(node,parent)
 				{
-				if(node == parent)
-					{
-					return true;
-					}
-				node = node.parentNode;
-				}
-			return false;
-			}
-
-		var selection = window.getSelection();
-		var charCount = -1;
-		var node;
-
-		if(selection.focusNode != null)
-			{
-			if(isDescendantOf(selection.focusNode,container))
-				{
-				node = selection.focusNode;
-				charCount = selection.focusOffset;
 				while(node != null)
 					{
-					if(node == container)
+					if(node == parent)
 						{
-						break;
+						return true;
 						}
-					if(node.previousSibling != null)
+					node = node.parentNode;
+					}
+				return false;
+				}
+
+			var selection = window.getSelection();
+			var charCount = -1;
+			var node;
+
+			if(selection.focusNode != null)
+				{
+				if(isDescendantOf(selection.focusNode,container))
+					{
+					node = selection.focusNode;
+					charCount = selection.focusOffset;
+					while(node != null)
 						{
-						node = node.previousSibling;
-						charCount += node.textContent.length;
-						}
-					else
-						{
-						node = node.parentNode;
-						if(node == null)
+						if(node == container)
 							{
 							break;
+							}
+						if(node.previousSibling != null)
+							{
+							node = node.previousSibling;
+							charCount += node.textContent.length;
+							}
+						else
+							{
+							node = node.parentNode;
+							if(node == null)
+								{
+								break;
+								}
 							}
 						}
 					}
 				}
+			return charCount;
 			}
-		return charCount;
+			catch(err)
+			{
+			return 0;
+			}
 		}
 
 	insertLink()
