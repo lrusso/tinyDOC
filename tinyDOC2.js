@@ -308,6 +308,9 @@ class tinyDOC2
 			{
 			try
 				{
+				// REGISTERING THE UNDO EVENT
+				thisTinyDOC.saveUndo();
+
 				// CHECKING IF THE DOCUMENT IS DISABLED
 				if (thisTinyDOC.documentEnabled==false)
 					{
@@ -321,6 +324,7 @@ class tinyDOC2
 						{
 						// CANCELING THE TAB KEY EVENT
 						event.preventDefault();
+
 
 						// INSERTING SPACES AS A TAB SPACE
 						thisTinyDOC.insertHtmlAtCaret("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",false);
@@ -365,6 +369,9 @@ class tinyDOC2
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
+
+				// REGISTERING THE UNDO EVENT
+				thisTinyDOC.saveUndo();
 				}
 			});
 
@@ -435,6 +442,13 @@ class tinyDOC2
 			// SETTING THE DOCUMENT AS DIRTY
 			window.onbeforeunload = function(e){return "Dirty"};
 			});
+
+		// SETTING THE HISTORY VALUES
+		this.document_history = [];
+		this.document_history_index = 0;
+
+		// REGISTERING THE UNDO EVENT
+		thisTinyDOC.saveUndo();
 
 		// FORCING AN INITIAL RESIZE
 		this.resize();
@@ -607,6 +621,7 @@ class tinyDOC2
 			// FOCUSING THE DOCUMENT
 			this.document.focus();
 
+			// CHECKING ALL THE POSSIBLE COMMANDS
 			if (myCommand=="bold"){this.formatStyle("b",myParameter)}
 			else if(myCommand=="italic") {this.formatStyle("i",myParameter)}
 			else if(myCommand=="underline"){this.formatStyle("u",myParameter)}
@@ -615,11 +630,8 @@ class tinyDOC2
 			else if(myCommand=="insertunorderedlist"){this.formatList("ul","li")}
 			else if(myCommand=="insertorderedlist"){this.formatList("ol","li")}
 			else if(myCommand=="removeFormat"){this.removeFormat()}
-			else
-				{
-				// EXECUTING COMMAND FOR THE CURRENT SELECTION
-				document.execCommand(myCommand, false, myParameter);
-				}
+			else if(myCommand=="undo"){this.undo()}
+			else if(myCommand=="redo"){this.redo()}
 
 			// FIX FOR FIREFOX
 			this.document.blur();
@@ -634,7 +646,6 @@ class tinyDOC2
 			{
 			}
 		}
-
 
 	formatStyle(myTag, myParameter)
 		{
@@ -810,6 +821,65 @@ class tinyDOC2
 
 		// FOCUSING THE DOCUMENT AFTER 100 MS
 		setTimeout(function(){thisTinyDOC.document.focus()},100);
+		}
+
+	undo()
+		{
+		// CHECKING IF THERE IS A DOCUMENT HISTORY TO UNDO
+		if(this.document_history_index>0)
+			{
+			// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
+			this.document.innerHTML = this.document_history[this.document_history_index-1];
+
+			// UPDATING THE DOCUMENT HISTORY INDEX
+			this.document_history_index = this.document_history_index - 1;
+			}
+		}
+
+	redo()
+		{
+		// CHECKING IF THERE IS A DOCUMENT HISTORY TO REDO
+		if(this.document_history[this.document_history_index+1])
+			{
+			// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
+			this.document.innerHTML = this.document_history[this.document_history_index+1];
+
+			// UPDATING THE DOCUMENT HISTORY INDEX
+			this.document_history_index = this.document_history_index + 1;
+			}
+		}
+
+	saveUndo()
+		{
+		// IF WE ALREADY USED UNDO BUTTON AND MADE MODIFICATION - DELETE ALL FORWARD HISTORY
+		if(this.document_history_index<this.document_history.length-1)
+			{
+			// REMOVING ALL FORWARD HISTORY
+			this.document_history = this.document_history.slice(0,this.document_history_index+1);
+
+			// UPDATING THE DOCUMENT HISTORY INDEX
+			this.document_history_index = this.document_history_index + 1;
+			}
+
+		// GETTING THE CURRENT DOCUMENT CONTENT OR STATE
+		var current_state = this.document.innerHTML;
+
+		// IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
+		if(current_state!=this.document_history[this.document_history_index])
+			{
+			// ADDING THE CURRENT DOCUMENT STATE TO THE DOCUMENT HISTORY
+			this.document_history.push(current_state);
+
+			// UPDATING THE DOCUMENT HISTORY INDEX
+			this.document_history_index = this.document_history.length - 1;
+			}
+		}
+
+	clearUndoRedo()
+		{
+		// CLEARING THE UNDO/REDO HISTORY
+		this.document_history = [];
+		this.document_history_index = 0;
 		}
 
 	insertLink()
