@@ -1419,6 +1419,7 @@ class tinyDOC2
 	insertHtmlAtCaret(html, selectPastedContent)
 		{
 		var selection = window.getSelection();
+
 		if (selection.getRangeAt && selection.rangeCount)
 			{
 			var range = selection.getRangeAt(0);
@@ -1437,21 +1438,21 @@ class tinyDOC2
 			var firstNode = frag.firstChild;
 			range.insertNode(frag);
 
-				if (lastNode)
+			if (lastNode)
+				{
+				range = range.cloneRange();
+				range.setStartAfter(lastNode);
+				if (selectPastedContent)
 					{
-					range = range.cloneRange();
-					range.setStartAfter(lastNode);
-					if (selectPastedContent)
-						{
-						range.setStartBefore(firstNode);
-						}
-					else
-						{
-						range.collapse(true);
-						}
-					selection.removeAllRanges();
-					selection.addRange(range);
+					range.setStartBefore(firstNode);
 					}
+				else
+					{
+					range.collapse(true);
+					}
+				selection.removeAllRanges();
+				selection.addRange(range);
+				}
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
