@@ -666,12 +666,6 @@ class tinyDOC2
 			// INSERTING THE NEW TAG
 			range.insertNode(newTag);
 
-			newTag.normalize();
-			this.document.normalize();
-
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
-
 			// WAITING 10 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
@@ -712,6 +706,16 @@ class tinyDOC2
 
 				// INSERTING THE LIST
 				range.insertNode(listTag);
+
+				// WAITING 10 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// MOVING THE CARET AFTER THE LIST
+					range = range.cloneRange();
+					range.setStartAfter(listTag);
+					selection.removeAllRanges();
+					selection.addRange(range);
+					}, 10);
 				}
 			}
 			catch(err)
