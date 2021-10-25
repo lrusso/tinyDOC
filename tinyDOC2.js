@@ -640,59 +640,47 @@ class tinyDOC2
 		{
 		try
 			{
-			// CHECKING IF ELEMENTS CAN BE ADDED TO THE CURRENT POSITION
-			if (this.canAddElements()==true)
+			// GETTING THE CURRENT SELECTION
+			var selection = window.getSelection();
+			var range = selection.getRangeAt(0);
+
+			// GETTING THE SELECTED CONTENT
+			var selectedContent = range.extractContents();
+
+			// CREATING THE TAG
+			var newTag = document.createElement(myTag);
+
+			// ADDING THE SELECTED CONTENT TO THE TAG
+			newTag.appendChild(selectedContent);
+
+			// CHECKING IF IT IS A SPAN ELEMENT (IN THIS PROJECT, USED FOR HIGHLIGHT)
+			if (myTag=="span")
 				{
-				// GETTING THE CURRENT SELECTION
-				var selection = window.getSelection();
-				var range = selection.getRangeAt(0);
-
-				var selectedContent = range.extractContents();
-
-				// SEARCHING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
-				var existingSelector = selectedContent.querySelector(myTag);
-
-				// CHECKING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
-				if (existingSelector)
-					{
-					// INSERTING THE HTML CONTENT WITHOUT THE TAG
-					this.insertHtmlAtCaret(existingSelector.innerHTML,true);
-					}
-				else
-					{
-					// CREATING THE TAG
-					var newTag = document.createElement(myTag);
-
-					// ADDING THE SELECTED CONTENT TO THE TAG
-					newTag.appendChild(selectedContent);
-
-					// CHECKING IF IT IS A SPAN ELEMENT (IN THIS PROJECT, USED FOR HIGHLIGHT)
-					if (myTag=="span")
-						{
-						// SETTING THE BACKGROUND COLOR
-						newTag.style.backgroundColor = myParameter;
-						}
-
-					// DELETING THE SELECTED CONTENT
-					range.deleteContents();
-
-					// INSERTING THE NEW TAG
-					range.insertNode(newTag);
-
-					// SETTING THE CURRENT INSTANCE FOR LATER USE
-					var thisTinyDOC = this;
-
-					// WAITING 10 MS FOR THE UI TO BE UPDATED
-					setTimeout(function()
-						{
-						// MAINTAINING THE INITIAL SELECTION
-						range = range.cloneRange();
-						range.setStartBefore(newTag);
-						selection.removeAllRanges();
-						selection.addRange(range);
-						}, 10);
-					}
+				// SETTING THE BACKGROUND COLOR
+				newTag.style.backgroundColor = myParameter;
 				}
+
+			// DELETING THE SELECTED CONTENT
+			range.deleteContents();
+
+			// INSERTING THE NEW TAG
+			range.insertNode(newTag);
+
+			newTag.normalize();
+			this.document.normalize();
+
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
+			// WAITING 10 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				// MAINTAINING THE INITIAL SELECTION
+				range = range.cloneRange();
+				range.setStartBefore(newTag);
+				selection.removeAllRanges();
+				selection.addRange(range);
+				}, 10);
 			}
 			catch(err)
 			{
@@ -703,54 +691,31 @@ class tinyDOC2
 		{
 		try
 			{
-			// GETTING THE CURRENT SELECTION
-			var selection = window.getSelection();
-			var range = selection.getRangeAt(0);
-			var selectedContent = range.extractContents();
-
-			// ADDING THE LIST TAGS
-			var listTag = document.createElement(tag1);
-			var itemTag = document.createElement(tag2);
-			listTag.appendChild(itemTag);
-
-			// ADDING THE SELECTED CONTENT TO THE LIST ITEM
-			itemTag.appendChild(selectedContent);
-
-			// REMOVING THE SELECTED CONTENT
-			range.deleteContents();
-
-			// INSERTING THE LIST
-			range.insertNode(listTag);
-			}
-			catch(err)
-			{
-			}
-		}
-
-	canAddElements()
-		{
-		try
-			{
-			// CHECKING IF THE USER IS SELECTING A LIST
-			if(this.checkParentTag("LI")==true || this.checkParentTag("UL")==true || this.checkParentTag("OL")==true)
+			// PREVENTING NESTED LISTS
+			if(this.checkParentTag("LI")==false && this.checkParentTag("UL")==false && this.checkParentTag("OL")==false)
 				{
-				// GETTING THE SELECTING AS A PLAIN TEXT
-				var plainText = window.getSelection().toString();
+				// GETTING THE CURRENT SELECTION
+				var selection = window.getSelection();
+				var range = selection.getRangeAt(0);
+				var selectedContent = range.extractContents();
 
-				// CHECKING IF THERE USER ONLY IS SELECTING ONE ITEM LIST
-				if(plainText.indexOf("\n")==-1)
-					{
-					return true;
-					}
-				}
-				else
-				{
-				return true;
+				// ADDING THE LIST TAGS
+				var listTag = document.createElement(tag1);
+				var itemTag = document.createElement(tag2);
+				listTag.appendChild(itemTag);
+
+				// ADDING THE SELECTED CONTENT TO THE LIST ITEM
+				itemTag.appendChild(selectedContent);
+
+				// REMOVING THE SELECTED CONTENT
+				range.deleteContents();
+
+				// INSERTING THE LIST
+				range.insertNode(listTag);
 				}
 			}
 			catch(err)
 			{
-			return false;
 			}
 		}
 
