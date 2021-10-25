@@ -692,6 +692,9 @@ class tinyDOC2
 			// INSERTING THE NEW TAG
 			range.insertNode(newTag);
 
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
 			// WAITING 10 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
@@ -700,6 +703,12 @@ class tinyDOC2
 				range.setStartBefore(newTag);
 				selection.removeAllRanges();
 				selection.addRange(range);
+
+				// REGISTERING THE UNDO EVENT
+				thisTinyDOC.saveUndo();
+
+				// SETTING THE DOCUMENT AS DIRTY
+				window.onbeforeunload = function(e){return "Dirty"};
 				}, 10);
 			}
 			catch(err)
@@ -733,6 +742,9 @@ class tinyDOC2
 				// INSERTING THE LIST
 				range.insertNode(listTag);
 
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
 				// WAITING 10 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
@@ -741,6 +753,12 @@ class tinyDOC2
 					range.setStartAfter(listTag);
 					selection.removeAllRanges();
 					selection.addRange(range);
+
+					// REGISTERING THE UNDO EVENT
+					thisTinyDOC.saveUndo();
+
+					// SETTING THE DOCUMENT AS DIRTY
+					window.onbeforeunload = function(e){return "Dirty"};
 					}, 10);
 				}
 			}
