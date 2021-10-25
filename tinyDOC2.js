@@ -325,7 +325,6 @@ class tinyDOC2
 						// CANCELING THE TAB KEY EVENT
 						event.preventDefault();
 
-
 						// INSERTING SPACES AS A TAB SPACE
 						thisTinyDOC.insertHtmlAtCaret("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",false);
 
