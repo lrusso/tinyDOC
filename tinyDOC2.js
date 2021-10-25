@@ -331,22 +331,37 @@ class tinyDOC2
 						// FOCUSING THE DOCUMENT AFTER 100 MS
 						setTimeout(function(){thisTinyDOC.document.focus()},100);
 						}
-					else if (event.ctrlKey || event.metaKey)
+					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="s")
 						{
 						// CHECKING IF THERE IS A SAVE FUNCTION
 						if (thisTinyDOC.saveFunction)
 							{
-							switch (String.fromCharCode(event.which).toLowerCase())
-								{
-								case "s":
-								// CANCELING THE SAVING PAGE KEY EVENT
-								event.preventDefault();
+							// CANCELING THE SAVING PAGE KEY EVENT
+							event.preventDefault();
 
-								// SAVING THE DOCUMENT
-								thisTinyDOC.save();
-								break;
-								}
+							// SAVING THE DOCUMENT
+							thisTinyDOC.save();
 							}
+						}
+					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="z")
+						{
+						// CANCELING THE UNDO PAGE KEY EVENT
+						event.preventDefault();
+						}
+					else if ((event.ctrlKey || event.shiftKey) && String.fromCharCode(event.which).toLowerCase()=="z")
+						{
+						// CANCELING THE REDO PAGE KEY EVENT
+						event.preventDefault();
+						}
+					else if ((event.shiftKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="z")
+						{
+						// CANCELING THE REDO PAGE KEY EVENT
+						event.preventDefault();
+						}
+					else if (event.ctrlKey && String.fromCharCode(event.which).toLowerCase()=="y")
+						{
+						// CANCELING THE REDO PAGE KEY EVENT
+						event.preventDefault();
 						}
 					}
 				}
