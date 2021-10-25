@@ -848,54 +848,66 @@ class tinyDOC2
 
 	redo()
 		{
-		// CHECKING IF THERE IS A DOCUMENT HISTORY TO REDO
-		if(this.document_history[this.document_history_index+1])
+		try
 			{
-			// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
-			this.document.innerHTML = this.document_history[this.document_history_index+1];
-
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
-
-			// WAITING 10 MS FOR THE UI TO BE UPDATED
-			setTimeout(function()
+			// CHECKING IF THERE IS A DOCUMENT HISTORY TO REDO
+			if(this.document_history[this.document_history_index+1])
 				{
-				// MOVING THE CARET TO THE STORED POSITION
-				thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_caret[thisTinyDOC.document_history_index+1]);
+				// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
+				this.document.innerHTML = this.document_history[this.document_history_index+1];
 
-				// UPDATING THE DOCUMENT HISTORY INDEX
-				thisTinyDOC.document_history_index = thisTinyDOC.document_history_index + 1;
-				},10);
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 10 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// MOVING THE CARET TO THE STORED POSITION
+					thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_caret[thisTinyDOC.document_history_index+1]);
+
+					// UPDATING THE DOCUMENT HISTORY INDEX
+					thisTinyDOC.document_history_index = thisTinyDOC.document_history_index + 1;
+					},10);
+				}
+			}
+			catch(err)
+			{
 			}
 		}
 
 	saveUndo()
 		{
-		// IF WE ALREADY USED UNDO BUTTON AND MADE MODIFICATION - DELETE ALL FORWARD HISTORY
-		if(this.document_history_index<this.document_history.length-1)
+		try
 			{
-			// REMOVING ALL FORWARD HISTORY
-			this.document_history = this.document_history.slice(0,this.document_history_index+1);
-			this.document_history_caret = this.document_history_caret.slice(0,this.document_history_index+1);
+			// IF WE ALREADY USED UNDO BUTTON AND MADE MODIFICATION - DELETE ALL FORWARD HISTORY
+			if(this.document_history_index<this.document_history.length-1)
+				{
+				// REMOVING ALL FORWARD HISTORY
+				this.document_history = this.document_history.slice(0,this.document_history_index+1);
+				this.document_history_caret = this.document_history_caret.slice(0,this.document_history_index+1);
 
-			// UPDATING THE DOCUMENT HISTORY INDEX
-			this.document_history_index = this.document_history_index + 1;
+				// UPDATING THE DOCUMENT HISTORY INDEX
+				this.document_history_index = this.document_history_index + 1;
+				}
+
+			// GETTING THE CURRENT DOCUMENT CONTENT OR STATE
+			var current_state = this.document.innerHTML;
+
+			// IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
+			if(current_state!=this.document_history[this.document_history_index])
+				{
+				// ADDING THE CURRENT DOCUMENT CONTENT STATE TO THE DOCUMENT HISTORY
+				this.document_history.push(current_state);
+
+				// ADDING THE CURRENT DOCUMENT CARET STATE TO THE DOCUMENT HISTORY
+				this.document_history_caret.push(this.getCaretPosition(this.document));
+
+				// UPDATING THE DOCUMENT HISTORY INDEX
+				this.document_history_index = this.document_history.length - 1;
+				}
 			}
-
-		// GETTING THE CURRENT DOCUMENT CONTENT OR STATE
-		var current_state = this.document.innerHTML;
-
-		// IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
-		if(current_state!=this.document_history[this.document_history_index])
+			catch(err)
 			{
-			// ADDING THE CURRENT DOCUMENT CONTENT STATE TO THE DOCUMENT HISTORY
-			this.document_history.push(current_state);
-
-			// ADDING THE CURRENT DOCUMENT CARET STATE TO THE DOCUMENT HISTORY
-			this.document_history_caret.push(this.getCaretPosition(this.document));
-
-			// UPDATING THE DOCUMENT HISTORY INDEX
-			this.document_history_index = this.document_history.length - 1;
 			}
 		}
 
