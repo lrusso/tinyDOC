@@ -611,7 +611,7 @@ class tinyDOC2
 			else if(myCommand=="italic") {this.formatStyle("i",myParameter)}
 			else if(myCommand=="underline"){this.formatStyle("u",myParameter)}
 			else if(myCommand=="strikethrough"){this.formatStyle("strike",myParameter)}
-			else if(myCommand=="BackColor"){this.highlightText(myParameter)}
+			else if(myCommand=="BackColor"){this.formatStyle("span",myParameter)}
 			else if(myCommand=="insertunorderedlist"){this.formatList("ul","li")}
 			else if(myCommand=="insertorderedlist"){this.formatList("ol","li")}
 			else if(myCommand=="removeFormat"){this.removeFormat()}
@@ -635,58 +635,63 @@ class tinyDOC2
 			}
 		}
 
+
 	formatStyle(myTag, myParameter)
 		{
 		try
 			{
-			// GETTING THE CURRENT SELECTION
-			var selection = window.getSelection();
-			var range = selection.getRangeAt(0);
-
-			// WORKAROUND FOR CHROME
-			if (range.commonAncestorContainer.nodeName=="UL"){return}
-
-			var selectedContent = range.extractContents();
-
-			// SEARCHING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
-			var existingSelector = selectedContent.querySelector(myTag);
-
-			// CHECKING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
-			if (existingSelector)
+			// CHECKING IF ELEMENTS CAN BE ADDED TO THE CURRENT POSITION
+			if (this.canAddElements()==true)
 				{
-				// INSERTING THE HTML CONTENT WITHOUT THE TAG
-				this.insertHtmlAtCaret(existingSelector.innerHTML,true);
-				}
-			else
-				{
-				// CREATING THE TAG
-				var newTag = document.createElement(myTag);
+				// GETTING THE CURRENT SELECTION
+				var selection = window.getSelection();
+				var range = selection.getRangeAt(0);
 
-				// ADDING THE SELECTED CONTENT TO THE TAG
-				newTag.appendChild(selectedContent);
+				var selectedContent = range.extractContents();
 
-				// CHECKING IF IT IS A SPAN ELEMENT (IN THIS PROJECT, USED FOR HIGHLIGHT)
-				if (myTag=="span")
+				// SEARCHING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
+				var existingSelector = selectedContent.querySelector(myTag);
+
+				// CHECKING IF THE TAG IS ALREADY INSERTED IN THE SELECTED CONTENT
+				if (existingSelector)
 					{
-					// SETTING THE BACKGROUND COLOR
-					newTag.style.backgroundColor = myParameter;
+					// INSERTING THE HTML CONTENT WITHOUT THE TAG
+					this.insertHtmlAtCaret(existingSelector.innerHTML,true);
 					}
-
-				// DELETING THE SELECTED CONTENT
-				range.deleteContents();
-
-				// INSERTING THE NEW TAG
-				range.insertNode(newTag);
-
-				// WAITING 10 MS FOR THE UI TO BE UPDATED
-				setTimeout(function()
+				else
 					{
-					// MAINTAINING THE INITIAL SELECTION
-					range = range.cloneRange();
-					range.setStartBefore(newTag);
-					selection.removeAllRanges();
-					selection.addRange(range);
-					}, 10);
+					// CREATING THE TAG
+					var newTag = document.createElement(myTag);
+
+					// ADDING THE SELECTED CONTENT TO THE TAG
+					newTag.appendChild(selectedContent);
+
+					// CHECKING IF IT IS A SPAN ELEMENT (IN THIS PROJECT, USED FOR HIGHLIGHT)
+					if (myTag=="span")
+						{
+						// SETTING THE BACKGROUND COLOR
+						newTag.style.backgroundColor = myParameter;
+						}
+
+					// DELETING THE SELECTED CONTENT
+					range.deleteContents();
+
+					// INSERTING THE NEW TAG
+					range.insertNode(newTag);
+
+					// SETTING THE CURRENT INSTANCE FOR LATER USE
+					var thisTinyDOC = this;
+
+					// WAITING 10 MS FOR THE UI TO BE UPDATED
+					setTimeout(function()
+						{
+						// MAINTAINING THE INITIAL SELECTION
+						range = range.cloneRange();
+						range.setStartBefore(newTag);
+						selection.removeAllRanges();
+						selection.addRange(range);
+						}, 10);
+					}
 				}
 			}
 			catch(err)
@@ -722,7 +727,7 @@ class tinyDOC2
 			}
 		}
 
-	highlightText(backgroundColor)
+	canAddElements()
 		{
 		try
 			{
@@ -735,18 +740,17 @@ class tinyDOC2
 				// CHECKING IF THERE USER ONLY IS SELECTING ONE ITEM LIST
 				if(plainText.indexOf("\n")==-1)
 					{
-					// ADDING THE HIGHTLIGHT STYLE
-					this.formatStyle("span",backgroundColor);
+					return true;
 					}
 				}
 				else
 				{
-				// IF NO MULTIPLE ITEM LIST WERE SELECTED, ADDING THE HIGHTLIGHT STYLE
-				this.formatStyle("span",backgroundColor);
+				return true;
 				}
 			}
 			catch(err)
 			{
+			return false;
 			}
 		}
 
