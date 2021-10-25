@@ -543,6 +543,46 @@ class tinyDOC2
 			}
 		}
 
+	// https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
+	scrollToCursor()
+		{
+		try
+			{
+			// GETTING THE CURRENT SELECTION
+			const selection = window.getSelection();
+
+			// CHECKING IF THERE ARE SELECTION RANGES
+			if (!selection.rangeCount)
+				{
+				return;
+				}
+
+			// GETTING THE FIRST SELECTION RANGE. THERE'S ALMOST NEVER CAN BE MORE (INSTEAD OF FIREFOX)
+			const firstRange = selection.getRangeAt(0);
+
+			// SOMETIMES IF THE EDITABLE ELEMENT IS GETTING REMOVED FROM THE DOM YOU MAY GET A HIERARCHYREQUEST ERROR IN SAFARI
+			if (firstRange.commonAncestorContainer === document)
+				{
+				return;
+				}
+
+			// CREATING AN EMPTY BR THAT WILL BE USED AS AN ANCHOR FOR SCROLL, BECAUSE IT'S IMPOSIBLE TO DO IT WITH JUST TEXT NODES
+			const tempAnchorEl = document.createElement("br");
+
+			// PUTTING THE BR RIGHT AFTER THE CARET POSITION
+			firstRange.insertNode(tempAnchorEl);
+
+			// SCROLLING TO THE BR. I PERSONALLY PREFER TO ADD THE BLOCK END OPTION, BUT IF YOU WANT TO USE 'START' INSTEAD JUST REPLACE BR TO SPAN
+			tempAnchorEl.scrollIntoView({block: "end"});
+
+			// REMOVING THE ANCHOR BECAUSE IT'S NOT NEEDED ANYMORE
+			tempAnchorEl.remove();
+			}
+			catch(err)
+			{
+			}
+		}
+
 	setText(myText)
 		{
 		try
@@ -1375,10 +1415,9 @@ class tinyDOC2
 			}
 		}
 
+	// https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
 	insertHtmlAtCaret(html, selectPastedContent)
 		{
-		// https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
-
 		var selection = window.getSelection();
 		if (selection.getRangeAt && selection.rangeCount)
 			{
@@ -1397,6 +1436,22 @@ class tinyDOC2
 
 			var firstNode = frag.firstChild;
 			range.insertNode(frag);
+
+				if (lastNode)
+					{
+					range = range.cloneRange();
+					range.setStartAfter(lastNode);
+					if (selectPastedContent)
+						{
+						range.setStartBefore(firstNode);
+						}
+					else
+						{
+						range.collapse(true);
+						}
+					selection.removeAllRanges();
+					selection.addRange(range);
+					}
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -1422,6 +1477,8 @@ class tinyDOC2
 
 				// REGISTERING THE UNDO EVENT
 				thisTinyDOC.saveUndo();
+
+				thisTinyDOC.scrollToCursor();
 
 				// SETTING THE DOCUMENT AS DIRTY
 				window.onbeforeunload = function(e){return "Dirty"};
