@@ -38,7 +38,7 @@ new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction
 | 6 | disable | Disables the document. |
 | 7 | resize | Resizes the document to fit the container. |
 | 8 | scrollToTop | Scrolls to the top of the document. |
-| 9 | clearUndoRedo | Clear all the undo/redo history. |
+| 9 | clearUndoRedo | Clears all the undo/redo history. |
 | 10 | getText(boolean) | Returns the document content with or without encoding. |
 
 ## Accessing the ContentEditable Div used by TinyDOC 2
