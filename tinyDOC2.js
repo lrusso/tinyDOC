@@ -444,6 +444,7 @@ class tinyDOC2
 
 		// SETTING THE HISTORY VALUES
 		this.document_history = [];
+		this.document_history_caret = [];
 		this.document_history_index = 0;
 
 		// REGISTERING THE UNDO EVENT
@@ -830,8 +831,18 @@ class tinyDOC2
 			// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
 			this.document.innerHTML = this.document_history[this.document_history_index-1];
 
-			// UPDATING THE DOCUMENT HISTORY INDEX
-			this.document_history_index = this.document_history_index - 1;
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
+			// WAITING 10 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				// MOVING THE CARET TO THE STORED POSITION
+				thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_caret[thisTinyDOC.document_history_index-1]);
+
+				// UPDATING THE DOCUMENT HISTORY INDEX
+				thisTinyDOC.document_history_index = thisTinyDOC.document_history_index - 1;
+				},10);
 			}
 		}
 
@@ -843,8 +854,18 @@ class tinyDOC2
 			// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
 			this.document.innerHTML = this.document_history[this.document_history_index+1];
 
-			// UPDATING THE DOCUMENT HISTORY INDEX
-			this.document_history_index = this.document_history_index + 1;
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
+			// WAITING 10 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				// MOVING THE CARET TO THE STORED POSITION
+				thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_caret[thisTinyDOC.document_history_index+1]);
+
+				// UPDATING THE DOCUMENT HISTORY INDEX
+				thisTinyDOC.document_history_index = thisTinyDOC.document_history_index + 1;
+				},10);
 			}
 		}
 
@@ -855,6 +876,7 @@ class tinyDOC2
 			{
 			// REMOVING ALL FORWARD HISTORY
 			this.document_history = this.document_history.slice(0,this.document_history_index+1);
+			this.document_history_caret = this.document_history_caret.slice(0,this.document_history_index+1);
 
 			// UPDATING THE DOCUMENT HISTORY INDEX
 			this.document_history_index = this.document_history_index + 1;
@@ -866,8 +888,11 @@ class tinyDOC2
 		// IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
 		if(current_state!=this.document_history[this.document_history_index])
 			{
-			// ADDING THE CURRENT DOCUMENT STATE TO THE DOCUMENT HISTORY
+			// ADDING THE CURRENT DOCUMENT CONTENT STATE TO THE DOCUMENT HISTORY
 			this.document_history.push(current_state);
+
+			// ADDING THE CURRENT DOCUMENT CARET STATE TO THE DOCUMENT HISTORY
+			this.document_history_caret.push(this.getCaretPosition(this.document));
 
 			// UPDATING THE DOCUMENT HISTORY INDEX
 			this.document_history_index = this.document_history.length - 1;
@@ -878,7 +903,120 @@ class tinyDOC2
 		{
 		// CLEARING THE UNDO/REDO HISTORY
 		this.document_history = [];
+		this.document_history_caret = [];
 		this.document_history_index = 0;
+		}
+
+	// https://gist.github.com/isLishude/6ccd1fbf42d1eaac667d6873e7b134f8
+	// https://codepen.io/jeffward/pen/OJjPKYo
+	setCaretPosition(container, position)
+		{
+		function createRange(node,chars,range)
+			{
+			if(range == null)
+				{
+				range = window.document.createRange();
+				range.selectNode(node);
+				range.setStart(node,0);
+				}
+
+			if(chars.count == 0)
+				{
+				range.setEnd(node,chars.count);
+				}
+			else if(node != null && chars.count > 0)
+				{
+				if(node.nodeType == 3)
+					{
+					if(node.textContent.length < chars.count)
+						{
+						chars.count -= node.textContent.length;
+						}
+					else
+						{
+						range.setEnd(node,chars.count);
+						chars.count = 0;
+						}
+					}
+				else
+					{
+					var _g = 0;
+					var _g1 = node.childNodes.length;
+					while(_g < _g1)
+						{
+						var lp = _g++;
+						range = createRange(node.childNodes[lp],chars,range);
+						if(chars.count == 0)
+							{
+							break;
+							}
+						}
+					}
+				}
+			return range;
+			}
+
+		if(position >= 0)
+			{
+			var selection = window.getSelection();
+			var range = createRange(container,{ count : position});
+			if(range != null)
+				{
+				range.collapse(false);
+				selection.removeAllRanges();
+				selection.addRange(range);
+				}
+			}
+		}
+
+	getCaretPosition(container)
+		{
+		function isDescendantOf(node,parent)
+			{
+			while(node != null)
+				{
+				if(node == parent)
+					{
+					return true;
+					}
+				node = node.parentNode;
+				}
+			return false;
+			}
+
+		var selection = window.getSelection();
+		var charCount = -1;
+		var node;
+
+		if(selection.focusNode != null)
+			{
+			if(isDescendantOf(selection.focusNode,container))
+				{
+				node = selection.focusNode;
+				charCount = selection.focusOffset;
+				while(node != null)
+					{
+					if(node == container)
+						{
+						break;
+						}
+					if(node.previousSibling != null)
+						{
+						node = node.previousSibling;
+						charCount += node.textContent.length;
+						}
+					else
+						{
+						node = node.parentNode;
+						if(node == null)
+							{
+							break;
+							}
+						}
+					}
+				}
+			}
+		return charCount;
 		}
 
 	insertLink()
