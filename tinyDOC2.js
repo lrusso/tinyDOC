@@ -735,7 +735,7 @@ class tinyDOC2
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
-			// WAITING 10 MS FOR THE UI TO BE UPDATED
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
 				// MAINTAINING THE INITIAL SELECTION
@@ -749,7 +749,7 @@ class tinyDOC2
 
 				// SETTING THE DOCUMENT AS DIRTY
 				window.onbeforeunload = function(e){return "Dirty"};
-				}, 10);
+				},25);
 			}
 			catch(err)
 			{
@@ -785,7 +785,7 @@ class tinyDOC2
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
-				// WAITING 10 MS FOR THE UI TO BE UPDATED
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// MOVING THE CARET AFTER THE LIST
@@ -799,7 +799,7 @@ class tinyDOC2
 
 					// SETTING THE DOCUMENT AS DIRTY
 					window.onbeforeunload = function(e){return "Dirty"};
-					}, 10);
+					},25);
 				}
 			}
 			catch(err)
@@ -907,7 +907,7 @@ class tinyDOC2
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
-			// WAITING 10 MS FOR THE UI TO BE UPDATED
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
 				// MOVING THE CARET TO THE STORED POSITION
@@ -915,7 +915,7 @@ class tinyDOC2
 
 				// UPDATING THE DOCUMENT HISTORY INDEX
 				thisTinyDOC.document_history_index = thisTinyDOC.document_history_index - 1;
-				},10);
+				},25);
 			}
 		}
 
@@ -932,7 +932,7 @@ class tinyDOC2
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
-				// WAITING 10 MS FOR THE UI TO BE UPDATED
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// MOVING THE CARET TO THE STORED POSITION
@@ -940,7 +940,7 @@ class tinyDOC2
 
 					// UPDATING THE DOCUMENT HISTORY INDEX
 					thisTinyDOC.document_history_index = thisTinyDOC.document_history_index + 1;
-					},10);
+					},25);
 				}
 			}
 			catch(err)
@@ -1421,7 +1421,7 @@ class tinyDOC2
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
-			// WAITING 10 MS FOR THE UI TO BE UPDATED
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
 				if (lastNode)
@@ -1445,14 +1445,14 @@ class tinyDOC2
 
 				// SETTING THE DOCUMENT AS DIRTY
 				window.onbeforeunload = function(e){return "Dirty"};
-				},10);
+				},25);
 
-			// WAITING 20 MS FOR THE CARET TO BE AT THE RIGHT LOCATION AND THE DOCUMENT CONTENT ALREADY RENDERED
+			// WAITING 35 MS FOR THE CARET TO BE AT THE RIGHT LOCATION AND THE DOCUMENT CONTENT ALREADY RENDERED
 			setTimeout(function()
 				{
 				// REGISTERING THE UNDO EVENT
 				thisTinyDOC.saveUndo();
-				},20);
+				},35);
 			}
 		}
 	}
