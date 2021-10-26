@@ -901,6 +901,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
 			// GETTING THE CURRENT CARET POSITION
 			this.document_history_lastCaret = this.getCaretPosition(this.document);
 
@@ -909,9 +912,6 @@ class tinyDOC2
 				{
 				// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
 				this.document.innerHTML = this.document_history[this.document_history_index-1];
-
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
 
 				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
@@ -928,9 +928,6 @@ class tinyDOC2
 				}
 				else
 				{
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
 				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
@@ -957,6 +954,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
 			// GETTING THE CURRENT CARET POSITION
 			this.document_history_lastCaret = this.getCaretPosition(this.document);
 
@@ -965,9 +965,6 @@ class tinyDOC2
 				{
 				// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
 				this.document.innerHTML = this.document_history[this.document_history_index+1];
-
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
 
 				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
@@ -984,9 +981,6 @@ class tinyDOC2
 				}
 				else
 				{
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
 				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
