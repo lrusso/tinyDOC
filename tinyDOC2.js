@@ -1440,15 +1440,19 @@ class tinyDOC2
 					selection.addRange(range);
 					}
 
-				// REGISTERING THE UNDO EVENT
-				thisTinyDOC.saveUndo();
-
 				// SCROLLING TO THE CARET
 				thisTinyDOC.scrollToCaret();
 
 				// SETTING THE DOCUMENT AS DIRTY
 				window.onbeforeunload = function(e){return "Dirty"};
 				},10);
+
+			// WAITING 20 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				// REGISTERING THE UNDO EVENT
+				thisTinyDOC.saveUndo();
+				},20);
 			}
 		}
 	}
