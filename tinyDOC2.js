@@ -1047,7 +1047,7 @@ class tinyDOC2
 		this.document_history_index = 0;
 		this.document_history_lastCaret = 0;
 
-		// SAVING THE FIRST STATE
+		// SAVING THE INITIAL STATE
 		this.saveUndo();
 		}
 
