@@ -705,17 +705,7 @@ class tinyDOC2
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false)
-				{
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// FOCUSING THE DOCUMENT AFTER 100 MS
-				setTimeout(function(){thisTinyDOC.document.focus()},100);
-
-				// NO POINT GOING ANY FURTHER
-				return;
-				}
+			if (this.isDocumentSelected()==false){return}
 
 			// REGISTERING THE UNDO EVENT
 			this.saveUndo();
@@ -775,17 +765,7 @@ class tinyDOC2
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false)
-				{
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// FOCUSING THE DOCUMENT AFTER 100 MS
-				setTimeout(function(){thisTinyDOC.document.focus()},100);
-
-				// NO POINT GOING ANY FURTHER
-				return;
-				}
+			if (this.isDocumentSelected()==false){return}
 
 			// PREVENTING NESTED LISTS
 			if(this.checkParentTag("LI")==false && this.checkParentTag("UL")==false && this.checkParentTag("OL")==false)
@@ -869,6 +849,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// CREATING A VARIABLE TO CHECK IF THE DOCUMENT WAS FOUND
+			var docFound = false;
+
 			// GETTING THR CURRENT FOCUS NODE
 			var upperNode = window.getSelection().focusNode;
 
@@ -876,7 +859,7 @@ class tinyDOC2
 			if (upperNode==this.document)
 				{
 				// SETTING THAT THE DOCUMENT WAS FOUND
-				return true;
+				docFound = true;
 				}
 
 			// LOOPING ALL THE PARENT NODES
@@ -889,16 +872,30 @@ class tinyDOC2
 				if (upperNode==this.document)
 					{
 					// SETTING THAT THE DOCUMENT WAS FOUND
-					return true;
+					docFound = true;
 					}
 				}
+
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
+			// FOCUSING THE DOCUMENT AFTER 100 MS
+			setTimeout(function(){thisTinyDOC.document.focus()},100);
+
+			// RETURNNING THAT THE DOCUMENT FOUND RESULT
+			return docFound;
 			}
 			catch(err)
 			{
-			}
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
 
-		// SETTING THAT THE DOCUMENT WAS NOT FOUND
-		return false;
+			// FOCUSING THE DOCUMENT AFTER 100 MS
+			setTimeout(function(){thisTinyDOC.document.focus()},100);
+
+			// RETURN THAT THE DOCUMENT WAS NOT FOUND
+			return false;
+			}
 		}
 
 	removeFormat()
@@ -964,17 +961,7 @@ class tinyDOC2
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false)
-				{
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// FOCUSING THE DOCUMENT AFTER 100 MS
-				setTimeout(function(){thisTinyDOC.document.focus()},100);
-
-				// NO POINT GOING ANY FURTHER
-				return;
-				}
+			if (this.isDocumentSelected()==false){return}
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -1030,17 +1017,7 @@ class tinyDOC2
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false)
-				{
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// FOCUSING THE DOCUMENT AFTER 100 MS
-				setTimeout(function(){thisTinyDOC.document.focus()},100);
-
-				// NO POINT GOING ANY FURTHER
-				return;
-				}
+			if (this.isDocumentSelected()==false){return}
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -1532,17 +1509,7 @@ class tinyDOC2
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false)
-				{
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// FOCUSING THE DOCUMENT AFTER 100 MS
-				setTimeout(function(){thisTinyDOC.document.focus()},100);
-
-				// NO POINT GOING ANY FURTHER
-				return;
-				}
+			if (this.isDocumentSelected()==false){return}
 
 			// REGISTERING THE UNDO EVENT
 			this.saveUndo();
