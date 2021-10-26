@@ -1383,7 +1383,7 @@ class tinyDOC2
 	insertHtmlAtCaret(html, selectPastedContent)
 		{
 		// REGISTERING THE UNDO EVENT
-		thisTinyDOC.saveUndo();
+		this.saveUndo();
 
 		var selection = window.getSelection();
 
