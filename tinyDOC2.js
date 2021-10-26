@@ -460,9 +460,6 @@ class tinyDOC2
 		// CLEARING THE DOCUMENT UNDO/REDO HISTORY
 		this.clearUndoRedo();
 
-		// SAVING THE FIRST STATE
-		this.saveUndo();
-
 		// FORCING AN INITIAL RESIZE
 		this.resize();
 
@@ -482,9 +479,6 @@ class tinyDOC2
 
 			// CLEARING THE DOCUMENT UNDO/REDO HISTORY
 			this.clearUndoRedo();
-
-			// SAVING THE FIRST STATE
-			this.saveUndo();
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -1052,6 +1046,9 @@ class tinyDOC2
 		this.document_history_caret = [];
 		this.document_history_index = 0;
 		this.document_history_lastCaret = 0;
+
+		// SAVING THE FIRST STATE
+		this.saveUndo();
 		}
 
 	// https://gist.github.com/isLishude/6ccd1fbf42d1eaac667d6873e7b134f8
