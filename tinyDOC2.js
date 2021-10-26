@@ -544,7 +544,7 @@ class tinyDOC2
 		}
 
 	// https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
-	scrollToCursor()
+	scrollToCaret()
 		{
 		try
 			{
@@ -1060,58 +1060,22 @@ class tinyDOC2
 			}
 		}
 
-	// https://gist.github.com/isLishude/6ccd1fbf42d1eaac667d6873e7b134f8
-	// https://codepen.io/jeffward/pen/OJjPKYo
-	getCaretPosition(container)
+	// https://stackoverflow.com/questions/3972014/get-contenteditable-caret-position
+	getCaretPosition(element)
 		{
 		try
 			{
-			function isDescendantOf(node,parent)
-				{
-				while(node != null)
-					{
-					if(node == parent)
-						{
-						return true;
-						}
-					node = node.parentNode;
-					}
-				return false;
-				}
+			var caretOffset = 0;
 
-			var selection = window.getSelection();
-			var charCount = -1;
-			var node;
+			var range = window.getSelection().getRangeAt(0);
+			var preCaretRange = range.cloneRange();
 
-			if(selection.focusNode != null)
-				{
-				if(isDescendantOf(selection.focusNode,container))
-					{
-					node = selection.focusNode;
-					charCount = selection.focusOffset;
-					while(node != null)
-						{
-						if(node == container)
-							{
-							break;
-							}
-						if(node.previousSibling != null)
-							{
-							node = node.previousSibling;
-							charCount += node.textContent.length;
-							}
-						else
-							{
-							node = node.parentNode;
-							if(node == null)
-								{
-								break;
-								}
-							}
-						}
-					}
-				}
-			return charCount;
+			preCaretRange.selectNodeContents(element);
+			preCaretRange.setEnd(range.endContainer, range.endOffset);
+
+			caretOffset = preCaretRange.toString().length;
+
+			return caretOffset;
 			}
 			catch(err)
 			{
@@ -1457,6 +1421,7 @@ class tinyDOC2
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
+
 			// WAITING 10 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
@@ -1479,11 +1444,13 @@ class tinyDOC2
 				// REGISTERING THE UNDO EVENT
 				thisTinyDOC.saveUndo();
 
-				thisTinyDOC.scrollToCursor();
+				// SCROLLING TO THE CARET
+				thisTinyDOC.scrollToCaret();
 
 				// SETTING THE DOCUMENT AS DIRTY
 				window.onbeforeunload = function(e){return "Dirty"};
 				},10);
+
 			}
 		}
 	}
