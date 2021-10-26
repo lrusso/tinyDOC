@@ -1382,6 +1382,9 @@ class tinyDOC2
 	// https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
 	insertHtmlAtCaret(html, selectPastedContent)
 		{
+		// REGISTERING THE UNDO EVENT
+		thisTinyDOC.saveUndo();
+
 		var selection = window.getSelection();
 
 		if (selection.getRangeAt && selection.rangeCount)
@@ -1443,16 +1446,12 @@ class tinyDOC2
 				// SCROLLING TO THE CARET
 				thisTinyDOC.scrollToCaret();
 
+				// REGISTERING THE UNDO EVENT
+				thisTinyDOC.saveUndo();
+
 				// SETTING THE DOCUMENT AS DIRTY
 				window.onbeforeunload = function(e){return "Dirty"};
 				},25);
-
-			// WAITING 35 MS FOR THE CARET TO BE AT THE RIGHT LOCATION AND THE DOCUMENT CONTENT ALREADY RENDERED
-			setTimeout(function()
-				{
-				// REGISTERING THE UNDO EVENT
-				thisTinyDOC.saveUndo();
-				},35);
 			}
 		}
 	}
