@@ -921,6 +921,9 @@ class tinyDOC2
 
 					// UPDATING THE DOCUMENT HISTORY INDEX
 					thisTinyDOC.document_history_index = thisTinyDOC.document_history_index - 1;
+
+					// SCROLLING TO THE CARET
+					thisTinyDOC.scrollToCaret();
 					},25);
 				}
 				else
@@ -974,6 +977,9 @@ class tinyDOC2
 
 					// UPDATING THE DOCUMENT HISTORY INDEX
 					thisTinyDOC.document_history_index = thisTinyDOC.document_history_index + 1;
+
+					// SCROLLING TO THE CARET
+					thisTinyDOC.scrollToCaret();
 					},25);
 				}
 				else
