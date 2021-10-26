@@ -457,13 +457,11 @@ class tinyDOC2
 			window.onbeforeunload = function(e){return "Dirty"};
 			});
 
-		// SETTING THE HISTORY VALUES
-		this.document_history = [];
-		this.document_history_caret = [];
-		this.document_history_index = 0;
+		// CLEARING THE DOCUMENT UNDO/REDO HISTORY
+		this.clearUndoRedo();
 
-		// REGISTERING THE UNDO EVENT
-		thisTinyDOC.saveUndo();
+		// SAVING THE FIRST STATE
+		this.saveUndo();
 
 		// FORCING AN INITIAL RESIZE
 		this.resize();
@@ -481,6 +479,12 @@ class tinyDOC2
 
 			// SETTING THE DOCUMENT AS CLEAN
 			window.onbeforeunload = null;
+
+			// CLEARING THE DOCUMENT UNDO/REDO HISTORY
+			this.clearUndoRedo();
+
+			// SAVING THE FIRST STATE
+			this.saveUndo();
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -901,23 +905,53 @@ class tinyDOC2
 
 	undo()
 		{
-		// CHECKING IF THERE IS A DOCUMENT HISTORY TO UNDO
-		if(this.document_history_index>0)
+		try
 			{
-			// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
-			this.document.innerHTML = this.document_history[this.document_history_index-1];
+			// GETTING THE CURRENT CARET POSITION
+			this.document_history_lastCaret = this.getCaretPosition(this.document);
 
+			// CHECKING IF THERE IS A DOCUMENT HISTORY TO UNDO
+			if(this.document_history_index>0)
+				{
+				// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
+				this.document.innerHTML = this.document_history[this.document_history_index-1];
+
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// MOVING THE CARET TO THE STORED POSITION
+					thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_caret[thisTinyDOC.document_history_index-1]);
+
+					// UPDATING THE DOCUMENT HISTORY INDEX
+					thisTinyDOC.document_history_index = thisTinyDOC.document_history_index - 1;
+					},25);
+				}
+				else
+				{
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// RESTORING THE CARET POSITION
+					thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_lastCaret);
+					},25);
+				}
+			}
+			catch(err)
+			{
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
 			// WAITING 25 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
-				// MOVING THE CARET TO THE STORED POSITION
-				thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_caret[thisTinyDOC.document_history_index-1]);
-
-				// UPDATING THE DOCUMENT HISTORY INDEX
-				thisTinyDOC.document_history_index = thisTinyDOC.document_history_index - 1;
+				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
+				thisTinyDOC.setCaretPosition(thisTinyDOC.document,0);
 				},25);
 			}
 		}
@@ -926,6 +960,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// GETTING THE CURRENT CARET POSITION
+			this.document_history_lastCaret = this.getCaretPosition(this.document);
+
 			// CHECKING IF THERE IS A DOCUMENT HISTORY TO REDO
 			if(this.document_history[this.document_history_index+1])
 				{
@@ -945,9 +982,30 @@ class tinyDOC2
 					thisTinyDOC.document_history_index = thisTinyDOC.document_history_index + 1;
 					},25);
 				}
+				else
+				{
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// RESTORING THE CARET POSITION
+					thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_lastCaret);
+					},25);
+				}
 			}
 			catch(err)
 			{
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
+				thisTinyDOC.setCaretPosition(thisTinyDOC.document,0);
+				},25);
 			}
 		}
 
@@ -993,6 +1051,7 @@ class tinyDOC2
 		this.document_history = [];
 		this.document_history_caret = [];
 		this.document_history_index = 0;
+		this.document_history_lastCaret = 0;
 		}
 
 	// https://gist.github.com/isLishude/6ccd1fbf42d1eaac667d6873e7b134f8
