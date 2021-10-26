@@ -704,6 +704,19 @@ class tinyDOC2
 		{
 		try
 			{
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false)
+				{
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// FOCUSING THE DOCUMENT AFTER 100 MS
+				setTimeout(function(){thisTinyDOC.document.focus()},100);
+
+				// NO POINT GOING ANY FURTHER
+				return;
+				}
+
 			// REGISTERING THE UNDO EVENT
 			this.saveUndo();
 
@@ -761,6 +774,19 @@ class tinyDOC2
 		{
 		try
 			{
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false)
+				{
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// FOCUSING THE DOCUMENT AFTER 100 MS
+				setTimeout(function(){thisTinyDOC.document.focus()},100);
+
+				// NO POINT GOING ANY FURTHER
+				return;
+				}
+
 			// PREVENTING NESTED LISTS
 			if(this.checkParentTag("LI")==false && this.checkParentTag("UL")==false && this.checkParentTag("OL")==false)
 				{
@@ -839,6 +865,42 @@ class tinyDOC2
 		return tagFound;
 		}
 
+	isDocumentSelected()
+		{
+		try
+			{
+			// GETTING THR CURRENT FOCUS NODE
+			var upperNode = window.getSelection().focusNode;
+
+			// CHECKING IF THAT NODE IS THE ONE THAT NEEDS TO BE FOUND
+			if (upperNode==this.document)
+				{
+				// SETTING THAT THE DOCUMENT WAS FOUND
+				return true;
+				}
+
+			// LOOPING ALL THE PARENT NODES
+			while (upperNode.parentNode)
+				{
+				// GETTING THE PARENT NODE
+				upperNode = upperNode.parentNode;
+
+				// CHECKING IF THAT NODE IS THE ONE THAT NEEDS TO BE FOUND
+				if (upperNode==this.document)
+					{
+					// SETTING THAT THE DOCUMENT WAS FOUND
+					return true;
+					}
+				}
+			}
+			catch(err)
+			{
+			}
+
+		// SETTING THAT THE DOCUMENT WAS NOT FOUND
+		return false;
+		}
+
 	removeFormat()
 		{
 		try
@@ -901,6 +963,19 @@ class tinyDOC2
 		{
 		try
 			{
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false)
+				{
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// FOCUSING THE DOCUMENT AFTER 100 MS
+				setTimeout(function(){thisTinyDOC.document.focus()},100);
+
+				// NO POINT GOING ANY FURTHER
+				return;
+				}
+
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
@@ -954,6 +1029,19 @@ class tinyDOC2
 		{
 		try
 			{
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false)
+				{
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// FOCUSING THE DOCUMENT AFTER 100 MS
+				setTimeout(function(){thisTinyDOC.document.focus()},100);
+
+				// NO POINT GOING ANY FURTHER
+				return;
+				}
+
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
@@ -1441,51 +1529,44 @@ class tinyDOC2
 	// https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
 	insertHtmlAtCaret(html, selectPastedContent)
 		{
-		// REGISTERING THE UNDO EVENT
-		this.saveUndo();
-
-		var selection = window.getSelection();
-
-		if (selection.getRangeAt && selection.rangeCount)
+		try
 			{
-			var range = selection.getRangeAt(0);
-			range.deleteContents();
-
-			var el = document.createElement("div");
-			el.innerHTML = html;
-
-			var frag = document.createDocumentFragment(), node, lastNode;
-
-			while((node = el.firstChild))
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false)
 				{
-				lastNode = frag.appendChild(node);
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// FOCUSING THE DOCUMENT AFTER 100 MS
+				setTimeout(function(){thisTinyDOC.document.focus()},100);
+
+				// NO POINT GOING ANY FURTHER
+				return;
 				}
 
-			var firstNode = frag.firstChild;
-			range.insertNode(frag);
+			// REGISTERING THE UNDO EVENT
+			this.saveUndo();
 
-			if (lastNode)
+			var selection = window.getSelection();
+
+			if (selection.getRangeAt && selection.rangeCount)
 				{
-				range = range.cloneRange();
-				range.setStartAfter(lastNode);
-				if (selectPastedContent)
-					{
-					range.setStartBefore(firstNode);
-					}
-				else
-					{
-					range.collapse(true);
-					}
-				selection.removeAllRanges();
-				selection.addRange(range);
-				}
+				var range = selection.getRangeAt(0);
+				range.deleteContents();
 
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
+				var el = document.createElement("div");
+				el.innerHTML = html;
 
-			// WAITING 25 MS FOR THE UI TO BE UPDATED
-			setTimeout(function()
-				{
+				var frag = document.createDocumentFragment(), node, lastNode;
+
+				while((node = el.firstChild))
+					{
+					lastNode = frag.appendChild(node);
+					}
+
+				var firstNode = frag.firstChild;
+				range.insertNode(frag);
+
 				if (lastNode)
 					{
 					range = range.cloneRange();
@@ -1502,15 +1583,41 @@ class tinyDOC2
 					selection.addRange(range);
 					}
 
-				// SCROLLING TO THE CARET
-				thisTinyDOC.scrollToCaret();
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
 
-				// REGISTERING THE UNDO EVENT
-				thisTinyDOC.saveUndo();
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					if (lastNode)
+						{
+						range = range.cloneRange();
+						range.setStartAfter(lastNode);
+						if (selectPastedContent)
+							{
+							range.setStartBefore(firstNode);
+							}
+						else
+							{
+							range.collapse(true);
+							}
+						selection.removeAllRanges();
+						selection.addRange(range);
+						}
 
-				// SETTING THE DOCUMENT AS DIRTY
-				window.onbeforeunload = function(e){return "Dirty"};
-				},25);
+					// SCROLLING TO THE CARET
+					thisTinyDOC.scrollToCaret();
+
+					// REGISTERING THE UNDO EVENT
+					thisTinyDOC.saveUndo();
+
+					// SETTING THE DOCUMENT AS DIRTY
+					window.onbeforeunload = function(e){return "Dirty"};
+					},25);
+				}
+			}
+			catch(err)
+			{
 			}
 		}
 	}
