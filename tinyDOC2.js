@@ -706,6 +706,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// REGISTERING THE UNDO EVENT
+			this.saveUndo();
+
 			// GETTING THE CURRENT SELECTION
 			var selection = window.getSelection();
 			var range = selection.getRangeAt(0);
@@ -713,10 +716,10 @@ class tinyDOC2
 			// GETTING THE SELECTED CONTENT
 			var selectedContent = range.extractContents();
 
-			// CREATING THE TAG
+			// CREATING THE NEW TAG
 			var newTag = document.createElement(myTag);
 
-			// ADDING THE SELECTED CONTENT TO THE TAG
+			// ADDING THE SELECTED CONTENT TO THE NEW TAG
 			newTag.appendChild(selectedContent);
 
 			// CHECKING IF IT IS A SPAN ELEMENT (IN THIS PROJECT, USED FOR HIGHLIGHT)
