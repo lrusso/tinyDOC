@@ -908,7 +908,11 @@ class tinyDOC2
 				// GETTING THE SELECTED TEXT
 				var plainText = window.getSelection().toString();
 
-				// CONVERTING BREAK LINES
+				// REPLACING SPECIAL CHARACTERS
+				plainText = plainText.replace(/&/gm, "&amp;");
+				plainText = plainText.replace(/</gm, "&lt;");
+				plainText = plainText.replace(/>/gm, "&gt;");
+				plainText = plainText.replace(/  /gm, "&nbsp;&nbsp;");
 				plainText = plainText.replace(/\n/gm, "<br />");
 
 				// INSERTING THE PLAIN TEXT
