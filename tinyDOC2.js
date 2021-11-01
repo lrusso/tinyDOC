@@ -345,23 +345,23 @@ class tinyDOC2
 						}
 					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="z")
 						{
-						// CANCELING THE UNDO PAGE KEY EVENT
-						event.preventDefault();
+						// REGISTERING THE UNDO EVENT
+						setTimeout(function(){thisTinyDOC.saveUndo()},50);
 						}
-					else if ((event.ctrlKey || event.shiftKey) && String.fromCharCode(event.which).toLowerCase()=="z")
+					else if ((event.ctrlKey && event.shiftKey) && String.fromCharCode(event.which).toLowerCase()=="z")
 						{
-						// CANCELING THE REDO PAGE KEY EVENT
-						event.preventDefault();
+						// REGISTERING THE UNDO EVENT
+						setTimeout(function(){thisTinyDOC.saveUndo()},50);
 						}
 					else if ((event.shiftKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="z")
 						{
-						// CANCELING THE REDO PAGE KEY EVENT
-						event.preventDefault();
+						// REGISTERING THE UNDO EVENT
+						setTimeout(function(){thisTinyDOC.saveUndo()},50);
 						}
 					else if (event.ctrlKey && String.fromCharCode(event.which).toLowerCase()=="y")
 						{
-						// CANCELING THE REDO PAGE KEY EVENT
-						event.preventDefault();
+						// REGISTERING THE UNDO EVENT
+						setTimeout(function(){thisTinyDOC.saveUndo()},50);
 						}
 					}
 				}
