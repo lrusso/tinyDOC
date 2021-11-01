@@ -308,9 +308,6 @@ class tinyDOC2
 			{
 			try
 				{
-				// REGISTERING THE UNDO EVENT
-				//thisTinyDOC.saveUndo();
-
 				// CHECKING IF THE DOCUMENT IS DISABLED
 				if (thisTinyDOC.documentEnabled==false)
 					{
