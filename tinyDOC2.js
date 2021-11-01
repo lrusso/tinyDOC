@@ -309,7 +309,7 @@ class tinyDOC2
 			try
 				{
 				// REGISTERING THE UNDO EVENT
-				thisTinyDOC.saveUndo();
+				//thisTinyDOC.saveUndo();
 
 				// CHECKING IF THE DOCUMENT IS DISABLED
 				if (thisTinyDOC.documentEnabled==false)
@@ -343,25 +343,37 @@ class tinyDOC2
 							thisTinyDOC.save();
 							}
 						}
-					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="z")
+					else if ((event.ctrlKey || event.metaKey) && !event.shiftKey && String.fromCharCode(event.which).toLowerCase()=="z")
 						{
+						// CANCELING THE NATIVE UNDO EVENT
+						event.preventDefault();
+
 						// REGISTERING THE UNDO EVENT
-						setTimeout(function(){thisTinyDOC.saveUndo()},50);
+						thisTinyDOC.undo(true);
+						}
+					else if (event.shiftKey && event.metaKey && String.fromCharCode(event.which).toLowerCase()=="z")
+						{
+						// CANCELING THE NATIVE REDO EVENT
+						event.preventDefault();
+
+						// REGISTERING THE REDO EVENT
+						thisTinyDOC.redo(true);
 						}
 					else if ((event.ctrlKey && event.shiftKey) && String.fromCharCode(event.which).toLowerCase()=="z")
 						{
+						// CANCELING THE NATIVE UNDO EVENT
+						event.preventDefault();
+
 						// REGISTERING THE UNDO EVENT
-						setTimeout(function(){thisTinyDOC.saveUndo()},50);
-						}
-					else if ((event.shiftKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="z")
-						{
-						// REGISTERING THE UNDO EVENT
-						setTimeout(function(){thisTinyDOC.saveUndo()},50);
+						thisTinyDOC.undo(true);
 						}
 					else if (event.ctrlKey && String.fromCharCode(event.which).toLowerCase()=="y")
 						{
-						// REGISTERING THE UNDO EVENT
-						setTimeout(function(){thisTinyDOC.saveUndo()},50);
+						// CANCELING THE NATIVE REDO EVENT
+						event.preventDefault();
+
+						// REGISTERING THE REDO EVENT
+						thisTinyDOC.redo(true);
 						}
 					}
 				}
@@ -683,8 +695,8 @@ class tinyDOC2
 			else if(myCommand=="insertunorderedlist"){this.formatList("ul","li")}
 			else if(myCommand=="insertorderedlist"){this.formatList("ol","li")}
 			else if(myCommand=="removeFormat"){this.removeFormat()}
-			else if(myCommand=="undo"){this.undo()}
-			else if(myCommand=="redo"){this.redo()}
+			else if(myCommand=="undo"){this.undo(false)}
+			else if(myCommand=="redo"){this.redo(false)}
 
 			// FIX FOR FIREFOX
 			this.document.blur();
@@ -960,12 +972,12 @@ class tinyDOC2
 		setTimeout(function(){thisTinyDOC.document.focus()},100);
 		}
 
-	undo()
+	undo(keyboardRequest)
 		{
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false){return}
+			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -1016,12 +1028,12 @@ class tinyDOC2
 			}
 		}
 
-	redo()
+	redo(keyboardRequest)
 		{
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false){return}
+			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
