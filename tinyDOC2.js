@@ -550,44 +550,94 @@ class tinyDOC2
 			}
 		}
 
-	// https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
 	scrollToCaret()
 		{
 		try
 			{
-			// GETTING THE CURRENT SELECTION
-			const selection = window.getSelection();
+			// GETTING THE CARET Y POSITION
+			var caretPositionY = this.getCaretY();
 
-			// CHECKING IF THERE ARE SELECTION RANGES
-			if (!selection.rangeCount)
+			// CHECKING IF THE CARET IS WITHIN THE VISIBLE CONTENT
+			if (caretPositionY<20 || caretPositionY>this.document.offsetHeight)
 				{
-				return;
+				// MOVING THE SCROLLBAR TO THE CARET
+				this.document.scrollTop = caretPositionY;
 				}
-
-			// GETTING THE FIRST SELECTION RANGE. THERE'S ALMOST NEVER CAN BE MORE (INSTEAD OF FIREFOX)
-			const firstRange = selection.getRangeAt(0);
-
-			// SOMETIMES IF THE EDITABLE ELEMENT IS GETTING REMOVED FROM THE DOM YOU MAY GET A HIERARCHYREQUEST ERROR IN SAFARI
-			if (firstRange.commonAncestorContainer === document)
-				{
-				return;
-				}
-
-			// CREATING AN EMPTY BR THAT WILL BE USED AS AN ANCHOR FOR SCROLL, BECAUSE IT'S IMPOSIBLE TO DO IT WITH JUST TEXT NODES
-			const tempAnchorEl = document.createElement("br");
-
-			// PUTTING THE BR RIGHT AFTER THE CARET POSITION
-			firstRange.insertNode(tempAnchorEl);
-
-			// SCROLLING TO THE BR. I PERSONALLY PREFER TO ADD THE BLOCK END OPTION, BUT IF YOU WANT TO USE 'START' INSTEAD JUST REPLACE BR TO SPAN
-			tempAnchorEl.scrollIntoView({block: "end"});
-
-			// REMOVING THE ANCHOR BECAUSE IT'S NOT NEEDED ANYMORE
-			tempAnchorEl.remove();
 			}
 			catch(err)
 			{
 			}
+		}
+
+	// https://stackoverflow.com/questions/6846230/coordinates-of-selected-text-in-browser-page
+	getCaretY()
+		{
+		try
+			{
+			var sel = document.selection;
+			var range;
+			var rect;
+			var x = 0;
+			var y = 0;
+
+			if (sel)
+				{
+				if (sel.type != "Control")
+					{
+					range = sel.createRange();
+					range.collapse(true);
+					x = range.boundingLeft;
+					y = range.boundingTop;
+					}
+				}
+			else if (window.getSelection)
+				{
+				sel = window.getSelection();
+
+				if (sel.rangeCount)
+					{
+					range = sel.getRangeAt(0).cloneRange();
+
+					if (range.getClientRects)
+						{
+						range.collapse(true);
+
+						if (range.getClientRects().length>0)
+							{
+							rect = range.getClientRects()[0];
+							x = rect.left;
+							y = rect.top;
+							}
+						}
+
+					// Fall back to inserting a temporary element
+					if (x == 0 && y == 0)
+						{
+						var span = document.createElement("span");
+						if (span.getClientRects)
+							{
+							// Ensure span has dimensions and position by adding a zero-width space character
+							span.appendChild( document.createTextNode("\u200b") );
+							range.insertNode(span);
+							rect = span.getClientRects()[0];
+							x = rect.left;
+							y = rect.top;
+
+							var spanParent = span.parentNode;
+							spanParent.removeChild(span);
+
+							// Glue any broken text nodes back together
+							spanParent.normalize();
+							}
+						}
+					}
+				}
+			return y;
+			}
+			catch(err)
+			{
+			}
+		return 0;
 		}
 
 	setText(myText)
