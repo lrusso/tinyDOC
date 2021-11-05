@@ -610,13 +610,13 @@ class tinyDOC2
 							}
 						}
 
-					// Fall back to inserting a temporary element
+					// FALLING BACK TO INSERTING A TEMPORARY ELEMENT
 					if (x == 0 && y == 0)
 						{
 						var span = document.createElement("span");
 						if (span.getClientRects)
 							{
-							// Ensure span has dimensions and position by adding a zero-width space character
+							// ENSURING SPAN HAS DIMENSIONS AND POSITION BY ADDING A ZERO-WIDTH SPACE CHARACTER
 							span.appendChild( document.createTextNode("\u200b") );
 							range.insertNode(span);
 							rect = span.getClientRects()[0];
@@ -626,7 +626,7 @@ class tinyDOC2
 							var spanParent = span.parentNode;
 							spanParent.removeChild(span);
 
-							// Glue any broken text nodes back together
+							// GLUING ANY BROKEN TEXT NODES BACK TOGETHER
 							spanParent.normalize();
 							}
 						}
