@@ -328,6 +328,14 @@ class tinyDOC2
 						// FOCUSING THE DOCUMENT AFTER 100 MS
 						setTimeout(function(){thisTinyDOC.document.focus()},100);
 						}
+					else if (event.keyCode==13)
+						{
+						// CANCELING THE ENTER KEY EVENT
+						event.preventDefault();
+
+						// INSERTING THE BREAKLINE
+						thisTinyDOC.insertHtmlAtCaret("<br />",false);
+						}
 					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="s")
 						{
 						// CHECKING IF THERE IS A SAVE FUNCTION
@@ -1008,7 +1016,7 @@ class tinyDOC2
 					var range = window.getSelection().getRangeAt(0);
 
 					// CHECKING IF AN ENTIRE TAG WAS SELECTED
-					if (range.startOffset==0 && ((range.endOffset==0 || range.endOffset==window.getSelection().toString().length) || (range.endOffset==1 && range.startContainer.nodeName=="DIV")))
+					if (range.startOffset==0 && ((range.endOffset==0 || range.endOffset==window.getSelection().toString().length)))
 						{
 						// GETTING THE CURRENT FOCUS NODE
 						var upperNode = range.startContainer;
