@@ -550,6 +550,7 @@ class tinyDOC2
 			}
 		}
 
+	// https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
 	scrollToCaret()
 		{
 		try
@@ -558,10 +559,37 @@ class tinyDOC2
 			var caretPositionY = this.getCaretY();
 
 			// CHECKING IF THE CARET IS WITHIN THE VISIBLE CONTENT
-			if (caretPositionY<20 || caretPositionY>this.document.offsetHeight)
+			if (caretPositionY<0 || caretPositionY>this.document.offsetHeight)
 				{
-				// MOVING THE SCROLLBAR TO THE CARET
-				this.document.scrollTop = caretPositionY;
+				// GETTING THE CURRENT SELECTION
+				var selection = window.getSelection();
+
+				// CHECKING IF THERE ARE SELECTION RANGES
+				if (!selection.rangeCount)
+					{
+					return;
+					}
+
+				// GETTING THE FIRST SELECTION RANGE. THERE'S ALMOST NEVER CAN BE MORE (INSTEAD OF FIREFOX)
+				var firstRange = selection.getRangeAt(0);
+
+				// SOMETIMES IF THE EDITABLE ELEMENT IS GETTING REMOVED FROM THE DOM YOU MAY GET A HIERARCHYREQUEST ERROR IN SAFARI
+				if (firstRange.commonAncestorContainer === document)
+					{
+					return;
+					}
+
+				// CREATING AN EMPTY BR THAT WILL BE USED AS AN ANCHOR FOR SCROLL, BECAUSE IT'S IMPOSIBLE TO DO IT WITH JUST TEXT NODES
+				var tempAnchorEl = document.createElement("br");
+
+				// PUTTING THE BR RIGHT AFTER THE CARET POSITION
+				firstRange.insertNode(tempAnchorEl);
+
+				// SCROLLING TO THE BR. I PERSONALLY PREFER TO ADD THE BLOCK END OPTION, BUT IF YOU WANT TO USE 'START' INSTEAD JUST REPLACE BR TO SPAN
+				tempAnchorEl.scrollIntoView({block: "end"});
+
+				// REMOVING THE ANCHOR BECAUSE IT'S NOT NEEDED ANYMORE
+				tempAnchorEl.remove();
 				}
 			}
 			catch(err)
