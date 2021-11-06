@@ -1008,7 +1008,7 @@ class tinyDOC2
 					var range = window.getSelection().getRangeAt(0);
 
 					// CHECKING IF AN ENTIRE TAG WAS SELECTED
-					if (range.startOffset==0 && (range.endOffset==0 || range.endOffset==window.getSelection().toString().length))
+					if (range.startOffset==0 && ((range.endOffset==0 || range.endOffset==window.getSelection().toString().length) || (range.endOffset==1 && range.startContainer.nodeName=="DIV")))
 						{
 						// GETTING THE CURRENT FOCUS NODE
 						var upperNode = range.startContainer;
