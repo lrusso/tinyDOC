@@ -1002,6 +1002,32 @@ class tinyDOC2
 				plainText = plainText.replace(/  /gm, "&nbsp;&nbsp;");
 				plainText = plainText.replace(/\n/gm, "<br />");
 
+				try
+					{
+					// GETTING THE SELECTED RANGE
+					var range = window.getSelection().getRangeAt(0);
+
+					// CHECKING IF AN ENTIRE TAG WAS SELECTED
+					if (range.startOffset==0 && (range.endOffset==0 || range.endOffset==window.getSelection().toString().length))
+						{
+						// GETTING THE CURRENT FOCUS NODE
+						var upperNode = range.startContainer;
+
+						// LOOPING ALL THE PARENT NODES
+						while (upperNode.parentNode!=this.document)
+							{
+							// GETTING THE PARENT NODE
+							upperNode = upperNode.parentNode;
+							}
+
+						// REMOVING THE PARENT NODE
+						upperNode.parentNode.removeChild(upperNode);
+						}
+					}
+					catch(err)
+					{
+					}
+
 				// INSERTING THE PLAIN TEXT
 				this.insertHtmlAtCaret(plainText,true);
 				}
