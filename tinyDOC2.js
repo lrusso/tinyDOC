@@ -1029,7 +1029,7 @@ class tinyDOC2
 					}
 
 				// INSERTING THE PLAIN TEXT
-				this.insertHtmlAtCaret(plainText,true);
+				this.insertHtmlAtCaret(plainText,false);
 				}
 			}
 			catch(err)
