@@ -559,7 +559,7 @@ class tinyDOC2
 			var caretPositionY = this.getCaretY();
 
 			// CHECKING IF THE CARET IS WITHIN THE VISIBLE CONTENT
-			if (caretPositionY<0 || caretPositionY>this.document.offsetHeight)
+			if (caretPositionY<this.document.offsetTop || caretPositionY>this.document.offsetHeight)
 				{
 				// GETTING THE CURRENT SELECTION
 				var selection = window.getSelection();
