@@ -330,11 +330,15 @@ class tinyDOC2
 						}
 					else if (event.keyCode==13)
 						{
-						// CANCELING THE ENTER KEY EVENT
-						event.preventDefault();
+						// CHECKING IF THE CARET IS NOT IN A LIST
+						if (thisTinyDOC.checkParentTag("LI")==false)
+							{
+							// CANCELING THE ENTER KEY EVENT
+							event.preventDefault();
 
-						// INSERTING THE BREAKLINE
-						thisTinyDOC.insertHtmlAtCaret("<br />",false);
+							// INSERTING THE BREAKLINE
+							thisTinyDOC.insertHtmlAtCaret("<br />",false);
+							}
 						}
 					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="s")
 						{
