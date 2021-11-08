@@ -568,7 +568,7 @@ class tinyDOC2
 		try
 			{
 			// GETTING THE CARET Y POSITION
-			var caretPositionY = this.getCaretY() - this.document.offsetTop;
+			var caretPositionY = this.getCaretY();
 
 			// CHECKING IF THE CARET IS WITHIN THE VISIBLE CONTENT
 			if (caretPositionY<0 || caretPositionY>this.document.offsetHeight)
@@ -597,8 +597,17 @@ class tinyDOC2
 				// PUTTING THE BR RIGHT AFTER THE CARET POSITION
 				firstRange.insertNode(tempAnchorEl);
 
-				// SCROLLING TO THE BR. I PERSONALLY PREFER TO ADD THE BLOCK END OPTION, BUT IF YOU WANT TO USE 'START' INSTEAD JUST REPLACE BR TO SPAN
-				tempAnchorEl.scrollIntoView({block: "end"});
+				// GETTING WHERE TO SCROLL TO
+				if (caretPositionY<0)
+					{
+					// SCROLLING TO THE BR AND TRYING TO SHOW IT AS THE FIRST LINE
+					tempAnchorEl.scrollIntoView({block: "start"});
+					}
+					else
+					{
+					// SCROLLING TO THE BR AND TRYING TO SHOW IT AS THE LAST LINE
+					tempAnchorEl.scrollIntoView({block: "end"});
+					}
 
 				// REMOVING THE ANCHOR BECAUSE IT'S NOT NEEDED ANYMORE
 				tempAnchorEl.remove();
