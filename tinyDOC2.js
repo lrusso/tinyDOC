@@ -597,7 +597,7 @@ class tinyDOC2
 				// PUTTING THE BR RIGHT AFTER THE CARET POSITION
 				firstRange.insertNode(tempAnchorEl);
 
-				// GETTING WHERE TO SCROLL TO
+				// CHECKING WHERE TO SCROLL TO
 				if (caretPositionY<0)
 					{
 					// SCROLLING TO THE BR AND TRYING TO SHOW IT AS THE FIRST LINE
