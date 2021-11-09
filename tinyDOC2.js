@@ -568,7 +568,7 @@ class tinyDOC2
 		try
 			{
 			// GETTING THE CARET Y POSITION
-			var caretPositionY = this.getCaretY();
+			var caretPositionY = this.getCaretY() - this.document.offsetTop + 16;
 
 			// CHECKING IF THE CARET IS WITHIN THE VISIBLE CONTENT
 			if (caretPositionY<0 || caretPositionY>this.document.offsetHeight)
