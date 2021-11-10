@@ -330,15 +330,8 @@ class tinyDOC2
 						}
 					else if (event.keyCode==13)
 						{
-						// CHECKING IF THE CARET IS NOT IN A LIST
-						if (thisTinyDOC.checkParentTag("LI")==false)
-							{
-							// CANCELING THE ENTER KEY EVENT
-							event.preventDefault();
-
-							// INSERTING THE BREAKLINE
-							thisTinyDOC.insertHtmlAtCaret("<br />",false);
-							}
+						// CHECKING AND HANDLING BREAKLINES IN A LIST
+						thisTinyDOC.handleBreakLineInList(event);
 						}
 					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="s")
 						{
@@ -594,7 +587,7 @@ class tinyDOC2
 				// CREATING AN EMPTY BR THAT WILL BE USED AS AN ANCHOR FOR SCROLL, BECAUSE IT'S IMPOSIBLE TO DO IT WITH JUST TEXT NODES
 				var tempAnchorEl = document.createElement("br");
 
-				// PUTTING THE BR RIGHT AFTER THE CARET POSITION
+				// ADDING A BREAKLINE AFTER THE CARET POSITION
 				firstRange.insertNode(tempAnchorEl);
 
 				// CHECKING WHERE TO SCROLL TO
@@ -951,6 +944,67 @@ class tinyDOC2
 			}
 
 		return tagFound;
+		}
+
+	handleBreakLineInList(event)
+		{
+		try
+			{
+			// CHECKING IF THE CARET IS IN A LIST
+			if (this.checkParentTag("LI")==false && (this.checkParentTag("UL")==true || this.checkParentTag("OL")==true))
+				{
+				// CANCELING THE ENTER KEY EVENT
+				event.preventDefault();
+
+				// GETTING THE INITIAL NODE
+				var initialNode  = window.getSelection().focusNode;
+
+				// GETTING THE CURRENT FOCUS NODE
+				var upperNode = window.getSelection().focusNode;
+
+				// LOOPING ALL THE PARENT NODES
+				while (upperNode.parentNode)
+					{
+					// GETTING THE PARENT NODE
+					upperNode = upperNode.parentNode;
+
+					// CHECKING IF THE ELEMENT IS A LIST TYPE
+					if (upperNode.nodeName=="UL" || upperNode.nodeName=="OL")
+						{
+						// CHECKING IF THE CARET IS AT THE LAST ITEM OF THE LIST
+						if (upperNode.lastChild==initialNode)
+							{
+							// SETTING A VARIABLE TO CHECK IF A BREAKLINE MUST BE ADDED
+							var mustAddBreakLine = true;
+
+							// CHECKING IF THERE IS A NEXT SIBLING
+							if (upperNode.nextSibling)
+								{
+								// CHECKING IF THE NEXT SIBLING IS A BREAKLINE
+								if (upperNode.nextSibling.nodeName=="BR")
+									{
+									// SETTING THAT THE BREAKLINE MUST NOT BE ADDED
+									mustAddBreakLine = false;
+									}
+								}
+
+							// CHECKING IF A BREAKLINE MUST BE ADDED
+							if (mustAddBreakLine==true)
+								{
+								// CREATING A BREAKLINE
+								var tempAnchorEl = document.createElement("br");
+
+								// ADDING THE BREAKLINE AFTER THE LIST
+								upperNode.parentNode.insertBefore(tempAnchorEl, upperNode.nextSibling)
+								}
+							}
+						}
+					}
+				}
+			}
+			catch(err)
+			{
+			}
 		}
 
 	isDocumentSelected()
