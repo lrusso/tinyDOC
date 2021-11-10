@@ -871,14 +871,28 @@ class tinyDOC2
 			// PREVENTING NESTED LISTS
 			if(this.checkParentTag("LI")==false && this.checkParentTag("UL")==false && this.checkParentTag("OL")==false)
 				{
+				// GETTING THE SELECTED TEXT
+				var selectedText = window.getSelection().toString();
+
 				// GETTING THE CURRENT SELECTION
 				var selection = window.getSelection();
 				var range = selection.getRangeAt(0);
 				var selectedContent = range.extractContents();
 
-				// ADDING THE LIST TAGS
+				// CREATING THE LIST TAG
 				var listTag = document.createElement(tag1);
+
+				// CREATING THE ITEM TAG
 				var itemTag = document.createElement(tag2);
+
+				// CHECKING IF THERE IS NO SELECTION
+				if (selectedText=="")
+					{
+					// ADDING A BREAKLINE TO THE ITEM TAG (FOR MOVING THROUGH THE EMPTY LIST USING THE KEYS)
+					itemTag.innerHTML = "<br />";
+					}
+
+				// ADDING THE ITEM TO THE LIST
 				listTag.appendChild(itemTag);
 
 				// ADDING THE SELECTED CONTENT TO THE LIST ITEM
@@ -1554,7 +1568,7 @@ class tinyDOC2
 							if (isNaN(finalResult)==true)
 								{
 								// INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
-								this.insertHtmlAtCaret(lastLineBR + "----------<br/>ERROR", false);
+								this.insertHtmlAtCaret(lastLineBR + "----------<br />ERROR", false);
 								}
 								else
 								{
@@ -1568,13 +1582,13 @@ class tinyDOC2
 									}
 
 								// INSERTING THE FINAL RESULT
-								this.insertHtmlAtCaret(lastLineBR + "----------<br/>" + finalResult, false);
+								this.insertHtmlAtCaret(lastLineBR + "----------<br />" + finalResult, false);
 								}
 							}
 							catch(err)
 							{
 							// INSERTING AN ERROR TEXT IF THE RESULT COULD NOT BE DISPLAYED
-							this.insertHtmlAtCaret(lastLineBR + "----------<br/>ERROR", false);
+							this.insertHtmlAtCaret(lastLineBR + "----------<br />ERROR", false);
 							}
 						}
 					}
