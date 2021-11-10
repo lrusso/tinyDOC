@@ -1169,6 +1169,9 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
 
+			// HIDING THE CARET
+			this.document.style.caretColor = "transparent";
+
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
@@ -1192,6 +1195,9 @@ class tinyDOC2
 
 					// SCROLLING TO THE CARET
 					thisTinyDOC.scrollToCaret();
+
+					// SHOWING THE CARET
+					thisTinyDOC.document.style.caretColor = "black";
 					},25);
 				}
 				else
@@ -1201,6 +1207,9 @@ class tinyDOC2
 					{
 					// RESTORING THE CARET POSITION
 					thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_lastCaret);
+
+					// SHOWING THE CARET
+					thisTinyDOC.document.style.caretColor = "black";
 					},25);
 				}
 			}
@@ -1214,6 +1223,9 @@ class tinyDOC2
 				{
 				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
 				thisTinyDOC.setCaretPosition(thisTinyDOC.document,0);
+
+				// SHOWING THE CARET
+				thisTinyDOC.document.style.caretColor = "black";
 				},25);
 			}
 		}
@@ -1224,6 +1236,9 @@ class tinyDOC2
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
+
+			// HIDING THE CARET
+			this.document.style.caretColor = "transparent";
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -1248,6 +1263,9 @@ class tinyDOC2
 
 					// SCROLLING TO THE CARET
 					thisTinyDOC.scrollToCaret();
+
+					// SHOWING THE CARET
+					thisTinyDOC.document.style.caretColor = "black";
 					},25);
 				}
 				else
@@ -1257,6 +1275,9 @@ class tinyDOC2
 					{
 					// RESTORING THE CARET POSITION
 					thisTinyDOC.setCaretPosition(thisTinyDOC.document,thisTinyDOC.document_history_lastCaret);
+
+					// SHOWING THE CARET
+					thisTinyDOC.document.style.caretColor = "black";
 					},25);
 				}
 			}
@@ -1270,6 +1291,9 @@ class tinyDOC2
 				{
 				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
 				thisTinyDOC.setCaretPosition(thisTinyDOC.document,0);
+
+				// SHOWING THE CARET
+				thisTinyDOC.document.style.caretColor = "black";
 				},25);
 			}
 		}
