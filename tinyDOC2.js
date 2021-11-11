@@ -393,7 +393,27 @@ class tinyDOC2
 				// PREVENTING ANY INPUT
 				event.preventDefault();
 				}
-				else
+			else if ((event.ctrlKey || event.metaKey) && !event.shiftKey && String.fromCharCode(event.which).toLowerCase()=="z")
+				{
+				// CANCELING THE NATIVE UNDO EVENT
+				event.preventDefault();
+				}
+			else if (event.shiftKey && event.metaKey && String.fromCharCode(event.which).toLowerCase()=="z")
+				{
+				// CANCELING THE NATIVE REDO EVENT
+				event.preventDefault();
+				}
+			else if ((event.ctrlKey && event.shiftKey) && String.fromCharCode(event.which).toLowerCase()=="z")
+				{
+				// CANCELING THE NATIVE UNDO EVENT
+				event.preventDefault();
+				}
+			else if (event.ctrlKey && String.fromCharCode(event.which).toLowerCase()=="y")
+				{
+				// CANCELING THE NATIVE REDO EVENT
+				event.preventDefault();
+				}
+			else
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
@@ -1419,6 +1439,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// CHECKING IF THE CARET IS IN THE DOCUMENT
+			if (this.isDocumentSelected()==false){return 0}
+
 			var caretOffset = 0;
 
 			var range = window.getSelection().getRangeAt(0);
