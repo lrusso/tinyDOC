@@ -584,7 +584,7 @@ class tinyDOC2
 			var currentSelection = this.saveSelection(this.document);
 
 			// GETTING THE CARET Y POSITION
-			var caretPositionY = this.getCaretY() - this.document.offsetTop + 16;
+			var caretPositionY = this.getCaretY() - this.document.offsetTop - 16;
 
 			// CHECKING IF THE CARET IS WITHIN THE VISIBLE CONTENT
 			if (caretPositionY<0 || caretPositionY>this.document.offsetHeight)
@@ -617,7 +617,7 @@ class tinyDOC2
 				if (caretPositionY<0)
 					{
 					// SCROLLING TO THE BR AND TRYING TO SHOW IT AS THE FIRST LINE
-					tempAnchorEl.scrollIntoView({block: "start"});
+					tempAnchorEl.scrollIntoView({block: "end"});
 					}
 					else
 					{
@@ -1883,7 +1883,7 @@ class tinyDOC2
 				if (node.nodeType == 3)
 					{
 					var nextCharIndex = charIndex + node.length;
-					if (!foundStart && savedSel.start >= charIndex && savedSel.start <= nextCharIndex)
+					if (!foundStart && savedSel.start >= charIndex && savedSel.start < nextCharIndex)
 						{
 						range.setStart(node, savedSel.start - charIndex);
 						foundStart = true;
