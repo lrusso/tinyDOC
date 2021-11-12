@@ -1157,8 +1157,12 @@ class tinyDOC2
 						// CHECKING IF THERE IS NO LIST ITEM SELECTED
 						if(foundListItem==false)
 							{
-							// REMOVING THE PARENT NODE
-							upperNode.parentNode.removeChild(upperNode);
+							// CHECKING IF THE UPPER NODE TEXT IS THE SELECTED TEXT
+							if (upperNode.innerText.length==range.endOffset)
+								{
+								// REMOVING THE PARENT NODE
+								upperNode.parentNode.removeChild(upperNode);
+								}
 							}
 						}
 					}
