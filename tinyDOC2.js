@@ -983,7 +983,6 @@ class tinyDOC2
 			}
 
 		return false;
-
 		}
 
 	checkChildTag(tagToFind)
