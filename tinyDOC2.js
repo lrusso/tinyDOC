@@ -1131,18 +1131,34 @@ class tinyDOC2
 					// CHECKING IF AN ENTIRE TAG WAS SELECTED
 					if (range.startOffset==0 && (range.endOffset==0 || range.endOffset==window.getSelection().toString().length))
 						{
+						// DELETING THE SELECTED CONTENT
+						range.deleteContents();
+
 						// GETTING THE CURRENT FOCUS NODE
 						var upperNode = range.startContainer;
 
-						// LOOPING ALL THE PARENT NODES
-						while (upperNode.parentNode!=this.document)
+						// LOOPING ALL THE PARENT NODES UNTIL HIT THE DOCUMENT OR A LIST ITEM
+						while (upperNode.parentNode!=this.document || upperNode.parentNode=="LI")
 							{
 							// GETTING THE PARENT NODE
 							upperNode = upperNode.parentNode;
 							}
 
-						// REMOVING THE PARENT NODE
-						upperNode.parentNode.removeChild(upperNode);
+						// CHECKING IF THE UPPER NODE IS A LIST ITEM
+						if (upperNode.nodeName=="LI")
+							{
+							// LOOPING EVERY CHILD
+							while (upperNode.firstChild)
+								{
+								// REMOVING EVERY CHILD
+								upperNode.removeChild(upperNode.firstChild);
+								}
+							}
+							else
+							{
+							// REMOVING THE PARENT NODE
+							upperNode.parentNode.removeChild(upperNode);
+							}
 						}
 					}
 					catch(err)
