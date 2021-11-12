@@ -1194,7 +1194,6 @@ class tinyDOC2
 					}
 					catch(err)
 					{
-					console.log(err)
 					}
 
 				// INSERTING THE PLAIN TEXT
