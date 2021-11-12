@@ -963,33 +963,51 @@ class tinyDOC2
 
 	checkParentTag(tagToFind)
 		{
-		// CREATING A VARIABLE TO CHECK IF THE TAG WAS FOUND
-		var tagFound = false;
+		// GETTING THE SELECTED RANGE
+		var range = window.getSelection().getRangeAt(0);
 
-		try
+		// GETTING THE CURRENT FOCUS NODE
+		var upperNode = range.startContainer;
+
+		// LOOPING ALL THE PARENT NODES
+		while (upperNode.parentNode!=this.document)
 			{
-			// GETTING THR CURRENT FOCUS NODE
-			var upperNode = window.getSelection().focusNode;
+			// GETTING THE PARENT NODE
+			upperNode = upperNode.parentNode;
 
-			// LOOPING ALL THE PARENT NODES
-			while (upperNode.parentNode)
+			// CHECKING IF THE PARENT NODE IS THE REQUESTED ONE
+			if (upperNode.nodeName==tagToFind)
 				{
-				// GETTING THE PARENT NODE
-				upperNode = upperNode.parentNode;
-
-				// CHECKING IF THAT NODE IS THE ONE THAT NEEDS TO BE FOUND
-				if (upperNode.nodeName==tagToFind)
-					{
-					// SETTING THE TAG WAS FOUND
-					tagFound = true;
-					}
+				return true;
 				}
 			}
-			catch(err)
+
+		return false;
+
+		}
+
+	checkChildTag(tagToFind)
+		{
+		// GETTING THE SELECTED RANGE
+		var range = window.getSelection().getRangeAt(0);
+
+		// GETTING THE CURRENT FOCUS NODE
+		var lowerNode = range.startContainer;
+
+		// LOOPING EVERY CHILD NODE
+		while (lowerNode.firstChild)
 			{
+			// GETTING THE FIRST CHILD
+			lowerNode = lowerNode.firstChild;
+
+			// CHECKING IF THE CHILD NODE IS THE REQUESTED ONE
+			if (lowerNode.nodeName==tagToFind)
+				{
+				return true;
+				}
 			}
 
-		return tagFound;
+		return false;
 		}
 
 	handleBreakLineInList(event)
@@ -1141,8 +1159,32 @@ class tinyDOC2
 							upperNode = upperNode.parentNode;
 							}
 
-						// REMOVING THE PARENT NODE
-						upperNode.parentNode.removeChild(upperNode);
+						// GETTING THE UPPER NODE
+						var lowerNode = upperNode;
+
+						// CREATING A VARIABLE TO CHECK IF A LIST ITEM WAS FOUND
+						var foundListItem = false;
+
+						// LOOPING ALL THE CHILD NODES
+						while (lowerNode.firstChild)
+							{
+							// GETTING THE CHILD NODE
+							lowerNode = lowerNode.firstChild;
+
+							// CHECKING IF THE NODE IS A LIST ITEM
+							if (lowerNode.nodeName=="LI")
+								{
+								// SETTING THAT THE LIST ITEM WAS FOUND
+								foundListItem = true;
+								}
+							}
+
+						// CHECKING IF THERE IS NO LIST ITEM SELECTED
+						if(foundListItem==false)
+							{
+							// REMOVING THE PARENT NODE
+							upperNode.parentNode.removeChild(upperNode);
+							}
 						}
 					}
 					catch(err)
