@@ -257,6 +257,9 @@ class tinyDOC2
 			this.document.innerHTML = documentText;
 			}
 
+		// REGEX TO CHECK IF THE USER IS USING SAFARI
+		this.isUsingSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 		// SETTING THE CURRENT INSTANCE FOR LATER USE
 		var thisTinyDOC = this;
 
@@ -580,6 +583,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// CHECKING IF THE USER IS USING SAFARI AND PREVENTING ANY FURTHER LOGIC
+			if (this.isUsingSafari==true){return}
+
 			// SAVING THE CURRENT SELECTION
 			var currentSelection = this.saveSelection(this.document);
 
