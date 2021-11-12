@@ -1850,54 +1850,67 @@ class tinyDOC2
 	// https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
 	saveSelection(containerEl)
 		{
-		var doc = containerEl.ownerDocument;
-		var win = doc.defaultView;
-		var range = win.getSelection().getRangeAt(0);
-		var preSelectionRange = range.cloneRange();
-		preSelectionRange.selectNodeContents(containerEl);
-		preSelectionRange.setEnd(range.startContainer, range.startOffset);
-		var start = preSelectionRange.toString().length;
-		return { start: start, end: start + range.toString().length};
+		try
+			{
+			var doc = containerEl.ownerDocument;
+			var win = doc.defaultView;
+			var range = win.getSelection().getRangeAt(0);
+			var preSelectionRange = range.cloneRange();
+			preSelectionRange.selectNodeContents(containerEl);
+			preSelectionRange.setEnd(range.startContainer, range.startOffset);
+			var start = preSelectionRange.toString().length;
+			return {start: start, end: start + range.toString().length};
+			}
+			catch(err)
+			{
+			return {start: 0, end: 0};
+			}
 		}
 
 	// https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
 	restoreSelection(containerEl, savedSel)
 		{
-		var doc = containerEl.ownerDocument, win = doc.defaultView;
-		var charIndex = 0, range = doc.createRange();
-		range.setStart(containerEl, 0);
-		range.collapse(true);
-		var nodeStack = [containerEl], node, foundStart = false, stop = false;
-
-		while (!stop && (node = nodeStack.pop()))
+		try
 			{
-			if (node.nodeType == 3)
-				{
-				var nextCharIndex = charIndex + node.length;
-				if (!foundStart && savedSel.start >= charIndex && savedSel.start <= nextCharIndex)
-					{
-					range.setStart(node, savedSel.start - charIndex);
-					foundStart = true;
-					}
-				if (foundStart && savedSel.end >= charIndex && savedSel.end <= nextCharIndex)
-					{
-					range.setEnd(node, savedSel.end - charIndex);
-					stop = true;
-					}
-					charIndex = nextCharIndex;
-				}
-			else
-				{
-				var i = node.childNodes.length;
-				while (i--)
-					{
-					nodeStack.push(node.childNodes[i]);
-					}
-				}
-			}
+			var doc = containerEl.ownerDocument, win = doc.defaultView;
+			var charIndex = 0, range = doc.createRange();
+			range.setStart(containerEl, 0);
+			range.collapse(true);
+			var nodeStack = [containerEl], node, foundStart = false, stop = false;
 
-		var sel = win.getSelection();
-		sel.removeAllRanges();
-		sel.addRange(range);
+			while (!stop && (node = nodeStack.pop()))
+				{
+				if (node.nodeType == 3)
+					{
+					var nextCharIndex = charIndex + node.length;
+					if (!foundStart && savedSel.start >= charIndex && savedSel.start <= nextCharIndex)
+						{
+						range.setStart(node, savedSel.start - charIndex);
+						foundStart = true;
+						}
+					if (foundStart && savedSel.end >= charIndex && savedSel.end <= nextCharIndex)
+						{
+						range.setEnd(node, savedSel.end - charIndex);
+						stop = true;
+						}
+					charIndex = nextCharIndex;
+					}
+					else
+					{
+					var i = node.childNodes.length;
+					while (i--)
+						{
+						nodeStack.push(node.childNodes[i]);
+						}
+					}
+				}
+
+			var sel = win.getSelection();
+			sel.removeAllRanges();
+			sel.addRange(range);
+			}
+			catch(err)
+			{
+			}
 		}
 	}
