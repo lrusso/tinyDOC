@@ -985,30 +985,6 @@ class tinyDOC2
 		return false;
 		}
 
-	checkChildTag(tagToFind)
-		{
-		// GETTING THE SELECTED RANGE
-		var range = window.getSelection().getRangeAt(0);
-
-		// GETTING THE CURRENT FOCUS NODE
-		var lowerNode = range.startContainer;
-
-		// LOOPING EVERY CHILD NODE
-		while (lowerNode.firstChild)
-			{
-			// GETTING THE FIRST CHILD
-			lowerNode = lowerNode.firstChild;
-
-			// CHECKING IF THE CHILD NODE IS THE REQUESTED ONE
-			if (lowerNode.nodeName==tagToFind)
-				{
-				return true;
-				}
-			}
-
-		return false;
-		}
-
 	handleBreakLineInList(event)
 		{
 		try
