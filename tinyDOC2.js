@@ -580,6 +580,9 @@ class tinyDOC2
 		{
 		try
 			{
+			// SAVING THE CURRENT SELECTION
+			var currentSelection = this.saveSelection(this.document);
+
 			// GETTING THE CARET Y POSITION
 			var caretPositionY = this.getCaretY() - this.document.offsetTop + 16;
 
@@ -625,6 +628,9 @@ class tinyDOC2
 				// REMOVING THE ANCHOR BECAUSE IT'S NOT NEEDED ANYMORE
 				tempAnchorEl.remove();
 				}
+
+			// RESTORING THE SELECTION
+			this.restoreSelection(this.document,currentSelection);
 			}
 			catch(err)
 			{
@@ -1839,5 +1845,59 @@ class tinyDOC2
 			catch(err)
 			{
 			}
+		}
+
+	// https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
+	saveSelection(containerEl)
+		{
+		var doc = containerEl.ownerDocument;
+		var win = doc.defaultView;
+		var range = win.getSelection().getRangeAt(0);
+		var preSelectionRange = range.cloneRange();
+		preSelectionRange.selectNodeContents(containerEl);
+		preSelectionRange.setEnd(range.startContainer, range.startOffset);
+		var start = preSelectionRange.toString().length;
+		return { start: start, end: start + range.toString().length};
+		}
+
+	// https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
+	restoreSelection(containerEl, savedSel)
+		{
+		var doc = containerEl.ownerDocument, win = doc.defaultView;
+		var charIndex = 0, range = doc.createRange();
+		range.setStart(containerEl, 0);
+		range.collapse(true);
+		var nodeStack = [containerEl], node, foundStart = false, stop = false;
+
+		while (!stop && (node = nodeStack.pop()))
+			{
+			if (node.nodeType == 3)
+				{
+				var nextCharIndex = charIndex + node.length;
+				if (!foundStart && savedSel.start >= charIndex && savedSel.start <= nextCharIndex)
+					{
+					range.setStart(node, savedSel.start - charIndex);
+					foundStart = true;
+					}
+				if (foundStart && savedSel.end >= charIndex && savedSel.end <= nextCharIndex)
+					{
+					range.setEnd(node, savedSel.end - charIndex);
+					stop = true;
+					}
+					charIndex = nextCharIndex;
+				}
+			else
+				{
+				var i = node.childNodes.length;
+				while (i--)
+					{
+					nodeStack.push(node.childNodes[i]);
+					}
+				}
+			}
+
+		var sel = win.getSelection();
+		sel.removeAllRanges();
+		sel.addRange(range);
 		}
 	}
