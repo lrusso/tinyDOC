@@ -960,7 +960,7 @@ class tinyDOC2
 					}
 
 				// INSERTING THE LIST
-				this.insertHtmlAtCaret("<" + tag1 + "><" + tag2 + ">" + selectedText + "</" + tag2 + "></" + tag1+ ">")
+				this.insertHtmlAtCaret("<" + tag1 + "><" + tag2 + ">" + selectedText + "</" + tag2 + "></" + tag1 + ">");
 				}
 			}
 			catch(err)
