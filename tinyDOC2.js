@@ -960,7 +960,7 @@ class tinyDOC2
 				if (selectedText=="")
 					{
 					// ADDING A BREAKLINE TO THE ITEM TAG (FOR MOVING THROUGH THE EMPTY LIST USING THE KEYS)
-					selectedText = "&nbsp;";
+					selectedText = "<br />";
 					}
 
 				// INSERTING THE LIST
