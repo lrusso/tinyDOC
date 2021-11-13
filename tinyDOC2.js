@@ -1049,12 +1049,18 @@ class tinyDOC2
 								// ADDING THE BREAKLINE AFTER THE LIST
 								upperNode.parentNode.insertBefore(tempAnchorEl, upperNode.nextSibling)
 
-								// MOVING THE CARET TO THE BREAKLINE
-								var range = document.createRange();
-								range.selectNodeContents(tempAnchorEl);
-								var sel = window.getSelection();
-								sel.removeAllRanges();
-								sel.addRange(range);
+								// WAITING 25 MS FOR THE UI TO BE UPDATED
+								setTimeout(function()
+									{
+									// MOVING THE CARET TO THE BREAKLINE
+									var range = document.createRange();
+									range.selectNodeContents(tempAnchorEl);
+									range.setStartBefore(tempAnchorEl);
+									range.collapse(true);
+									var sel = window.getSelection();
+									sel.removeAllRanges();
+									sel.addRange(range);
+									},25);
 								}
 							}
 						}
