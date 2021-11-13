@@ -1056,7 +1056,9 @@ class tinyDOC2
 						}
 					}
 				}
-				else
+
+			// CHECKING IF THE CARET IS NOT IN A LIST
+			else if (this.checkParentTag("LI")==false)
 				{
 				// CANCELING THE ENTER KEY EVENT
 				event.preventDefault();
