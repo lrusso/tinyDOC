@@ -1014,6 +1014,8 @@ class tinyDOC2
 				// GETTING THE CURRENT FOCUS NODE
 				var upperNode = window.getSelection().focusNode;
 
+				var listNode = null;
+
 				// LOOPING ALL THE PARENT NODES
 				while (upperNode.parentNode)
 					{
@@ -1023,46 +1025,35 @@ class tinyDOC2
 					// CHECKING IF THE ELEMENT IS A LIST TYPE
 					if (upperNode.nodeName=="UL" || upperNode.nodeName=="OL")
 						{
-						// CHECKING IF THE CARET IS AT THE LAST ITEM OF THE LIST
-						if (upperNode.lastChild==initialNode)
+						// SETTING THAT THERE IS A LIST AS A PARENT NODE
+						listNode = upperNode;
+						}
+					}
+
+				// CHECKING IF THERE IS A LIST AS A PARENT NODE
+				if (listNode!=null)
+					{
+					// CHECKING IF THE CARET IS AT THE LAST ITEM OF THE LIST
+					if (listNode.lastChild==initialNode)
+						{
+						// CREATING A BREAKLINE
+						var tempAnchorEl = document.createElement("br");
+
+						// ADDING THE BREAKLINE AFTER THE LIST
+						listNode.parentNode.insertBefore(tempAnchorEl, listNode.nextSibling)
+
+						// WAITING 25 MS FOR THE UI TO BE UPDATED
+						setTimeout(function()
 							{
-							// SETTING A VARIABLE TO CHECK IF A BREAKLINE MUST BE ADDED
-							var mustAddBreakLine = true;
-
-							// CHECKING IF THERE IS A NEXT SIBLING
-							if (upperNode.nextSibling)
-								{
-								// CHECKING IF THE NEXT SIBLING IS A BREAKLINE
-								if (upperNode.nextSibling.nodeName=="BR")
-									{
-									// SETTING THAT THE BREAKLINE MUST NOT BE ADDED
-									mustAddBreakLine = false;
-									}
-								}
-
-							// CHECKING IF A BREAKLINE MUST BE ADDED
-							if (mustAddBreakLine==true)
-								{
-								// CREATING A BREAKLINE
-								var tempAnchorEl = document.createElement("br");
-
-								// ADDING THE BREAKLINE AFTER THE LIST
-								upperNode.parentNode.insertBefore(tempAnchorEl, upperNode.nextSibling)
-
-								// WAITING 25 MS FOR THE UI TO BE UPDATED
-								setTimeout(function()
-									{
-									// MOVING THE CARET TO THE BREAKLINE
-									var range = document.createRange();
-									range.selectNodeContents(tempAnchorEl);
-									range.setStartBefore(tempAnchorEl);
-									range.collapse(true);
-									var sel = window.getSelection();
-									sel.removeAllRanges();
-									sel.addRange(range);
-									},25);
-								}
-							}
+							// MOVING THE CARET TO THE BREAKLINE
+							var range = document.createRange();
+							range.selectNodeContents(tempAnchorEl);
+							range.setStartBefore(tempAnchorEl);
+							range.collapse(true);
+							var sel = window.getSelection();
+							sel.removeAllRanges();
+							sel.addRange(range);
+							},25);
 						}
 					}
 				}
