@@ -257,8 +257,10 @@ class tinyDOC2
 			this.document.innerHTML = documentText;
 			}
 
-		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI OR CHROME
+		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI
 		this.isUsingSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+		// ADDING A REGEX FOR CHECKING IF THE USER IS USING CHROME
 		this.isUsingChrome = /.*chrome/i.test(navigator.userAgent);
 
 		// SETTING THE CURRENT INSTANCE FOR LATER USE
