@@ -638,8 +638,12 @@ class tinyDOC2
 				tempAnchorEl.remove();
 				}
 
-			// RESTORING THE SELECTION
-			this.restoreSelection(this.document,currentSelection);
+			// CHECKING IF THERE IS SOMETHING TO SELECT
+			if (currentSelection.start!=currentSelection.end)
+				{
+				// RESTORING THE SELECTION
+				this.restoreSelection(this.document,currentSelection);
+				}
 			}
 			catch(err)
 			{
@@ -956,11 +960,11 @@ class tinyDOC2
 				if (selectedText=="")
 					{
 					// ADDING A BREAKLINE TO THE ITEM TAG (FOR MOVING THROUGH THE EMPTY LIST USING THE KEYS)
-					selectedText = "<br />";
+					selectedText = "&nbsp;";
 					}
 
 				// INSERTING THE LIST
-				this.insertHtmlAtCaret("<" + tag1 + "><" + tag2 + ">" + selectedText + "</" + tag2 + "></" + tag1 + ">");
+				this.insertHtmlAtCaret("<" + tag1 + "><" + tag2 + ">" + selectedText + "</" + tag2 + "></" + tag1 + ">",false);
 				}
 			}
 			catch(err)
@@ -1051,6 +1055,14 @@ class tinyDOC2
 							}
 						}
 					}
+				}
+				else
+				{
+				// CANCELING THE ENTER KEY EVENT
+				event.preventDefault();
+
+				// INSERTING THE BREAKLINE
+				this.insertHtmlAtCaret("<br />",false);
 				}
 			}
 			catch(err)
