@@ -952,54 +952,15 @@ class tinyDOC2
 				// GETTING THE SELECTED TEXT
 				var selectedText = window.getSelection().toString();
 
-				// GETTING THE CURRENT SELECTION
-				var selection = window.getSelection();
-				var range = selection.getRangeAt(0);
-				var selectedContent = range.extractContents();
-
-				// CREATING THE LIST TAG
-				var listTag = document.createElement(tag1);
-
-				// CREATING THE ITEM TAG
-				var itemTag = document.createElement(tag2);
-
 				// CHECKING IF THERE IS NO SELECTION
 				if (selectedText=="")
 					{
 					// ADDING A BREAKLINE TO THE ITEM TAG (FOR MOVING THROUGH THE EMPTY LIST USING THE KEYS)
-					itemTag.innerHTML = "<br />";
+					selectedText = "<br />";
 					}
 
-				// ADDING THE ITEM TO THE LIST
-				listTag.appendChild(itemTag);
-
-				// ADDING THE SELECTED CONTENT TO THE LIST ITEM
-				itemTag.appendChild(selectedContent);
-
-				// REMOVING THE SELECTED CONTENT
-				range.deleteContents();
-
 				// INSERTING THE LIST
-				range.insertNode(listTag);
-
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
-				setTimeout(function()
-					{
-					// MOVING THE CARET AFTER THE LIST
-					range = range.cloneRange();
-					range.setStartAfter(listTag);
-					selection.removeAllRanges();
-					selection.addRange(range);
-
-					// REGISTERING THE UNDO EVENT
-					thisTinyDOC.saveUndo();
-
-					// SETTING THE DOCUMENT AS DIRTY
-					window.onbeforeunload = function(e){return "Dirty"};
-					},25);
+				this.insertHtmlAtCaret("<" + tag1 + "><" + tag2 + ">" + selectedText + "</" + tag2 + "></" + tag1+ ">")
 				}
 			}
 			catch(err)
@@ -1009,25 +970,30 @@ class tinyDOC2
 
 	checkParentTag(tagToFind)
 		{
-		// GETTING THE SELECTED RANGE
-		var range = window.getSelection().getRangeAt(0);
-
-		// GETTING THE CURRENT FOCUS NODE
-		var upperNode = range.startContainer;
-
-		// LOOPING ALL THE PARENT NODES
-		while (upperNode.parentNode!=this.document)
+		try
 			{
-			// GETTING THE PARENT NODE
-			upperNode = upperNode.parentNode;
+			// GETTING THE SELECTED RANGE
+			var range = window.getSelection().getRangeAt(0);
 
-			// CHECKING IF THE PARENT NODE IS THE REQUESTED ONE
-			if (upperNode.nodeName==tagToFind)
+			// GETTING THE CURRENT FOCUS NODE
+			var upperNode = range.startContainer;
+
+			// LOOPING ALL THE PARENT NODES
+			while (upperNode.parentNode!=this.document)
 				{
-				return true;
+				// GETTING THE PARENT NODE
+				upperNode = upperNode.parentNode;
+
+				// CHECKING IF THE PARENT NODE IS THE REQUESTED ONE
+				if (upperNode.nodeName==tagToFind)
+					{
+					return true;
+					}
 				}
 			}
-
+			catch(err)
+			{
+			}
 		return false;
 		}
 
