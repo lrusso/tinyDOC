@@ -861,8 +861,12 @@ class tinyDOC2
 					// CHECKING IF THE USER IS USING CHROME
 					if (thisTinyDOC.isUsingChrome==true)
 						{
-						// AFTER TRIMMING THE SELECTION, EXECUTING THE FORMAT STYLE
-						thisTinyDOC.formatStyleExecute(myTag, myParameter);
+						// CHECKING IF THE SELECTED TEXT HAS NO BREAKLINES (NOT SELECTING MULTIPLE LIST ITEMS)
+						if (window.getSelection().toString().indexOf("\n")==-1)
+							{
+							// EXECUTING THE FORMAT STYLE
+							thisTinyDOC.formatStyleExecute(myTag, myParameter);
+							}
 						}
 					},25);
 
