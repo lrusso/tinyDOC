@@ -257,6 +257,9 @@ class tinyDOC2
 			this.document.innerHTML = documentText;
 			}
 
+		// SETTING A VARIABLE TO KNOW IF THE DOCUMENT CAN UNDO/REDO
+		this.canUndoRedo = true;
+
 		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI
 		this.isUsingSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
@@ -1250,11 +1253,17 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
 
+			// PREVENTING OVERLAPPING DURING THE UNDO/REDO RENDERING EVENT
+			if (this.canUndoRedo==false){return}
+
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
 
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
+			// DISABLING THE DOCUMENT
+			this.document.contentEditable = false;
+
+			// SETTING THAT THE DOCUMENT CANNOT DO A UNDO/REDO
+			this.canUndoRedo = false;
 
 			// GETTING THE CURRENT CARET POSITION
 			this.document_history_lastCaret = this.getCaretPosition(this.document);
@@ -1265,7 +1274,13 @@ class tinyDOC2
 				// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
 				this.document.innerHTML = this.document_history[this.document_history_index-1];
 
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				// ENABLING THE DOCUMENT
+				this.document.contentEditable = true;
+
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 100 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// MOVING THE CARET TO THE STORED POSITION
@@ -1279,11 +1294,20 @@ class tinyDOC2
 
 					// SHOWING THE CARET
 					thisTinyDOC.document.style.caretColor = "black";
-					},25);
+
+					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
+					thisTinyDOC.canUndoRedo = true;
+					},100);
 				}
 				else
 				{
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				// ENABLING THE DOCUMENT
+				this.document.contentEditable = true;
+
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 100 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// RESTORING THE CARET POSITION
@@ -1291,15 +1315,21 @@ class tinyDOC2
 
 					// SHOWING THE CARET
 					thisTinyDOC.document.style.caretColor = "black";
-					},25);
+
+					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
+					thisTinyDOC.canUndoRedo = true;
+					},100);
 				}
 			}
 			catch(err)
 			{
+			// ENABLING THE DOCUMENT
+			this.document.contentEditable = true;
+
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
-			// WAITING 25 MS FOR THE UI TO BE UPDATED
+			// WAITING 100 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
 				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
@@ -1307,7 +1337,10 @@ class tinyDOC2
 
 				// SHOWING THE CARET
 				thisTinyDOC.document.style.caretColor = "black";
-				},25);
+
+				// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
+				thisTinyDOC.canUndoRedo = true;
+				},100);
 			}
 		}
 
@@ -1318,11 +1351,17 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
 
+			// PREVENTING OVERLAPPING DURING THE UNDO/REDO RENDERING EVENT
+			if (this.canUndoRedo==false){return}
+
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
 
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
+			// DISABLING THE DOCUMENT
+			this.document.contentEditable = false;
+
+			// SETTING THAT THE DOCUMENT CANNOT DO A UNDO/REDO
+			this.canUndoRedo = false;
 
 			// GETTING THE CURRENT CARET POSITION
 			this.document_history_lastCaret = this.getCaretPosition(this.document);
@@ -1333,7 +1372,13 @@ class tinyDOC2
 				// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
 				this.document.innerHTML = this.document_history[this.document_history_index+1];
 
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				// ENABLING THE DOCUMENT
+				this.document.contentEditable = true;
+
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 100 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// MOVING THE CARET TO THE STORED POSITION
@@ -1347,11 +1392,20 @@ class tinyDOC2
 
 					// SHOWING THE CARET
 					thisTinyDOC.document.style.caretColor = "black";
-					},25);
+
+					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
+					thisTinyDOC.canUndoRedo = true;
+					},100);
 				}
 				else
 				{
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				// ENABLING THE DOCUMENT
+				this.document.contentEditable = true;
+
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 100 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// RESTORING THE CARET POSITION
@@ -1359,15 +1413,21 @@ class tinyDOC2
 
 					// SHOWING THE CARET
 					thisTinyDOC.document.style.caretColor = "black";
-					},25);
+
+					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
+					thisTinyDOC.canUndoRedo = true;
+					},100);
 				}
 			}
 			catch(err)
 			{
+			// ENABLING THE DOCUMENT
+			this.document.contentEditable = true;
+
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
-			// WAITING 25 MS FOR THE UI TO BE UPDATED
+			// WAITING 100 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
 				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
@@ -1375,7 +1435,10 @@ class tinyDOC2
 
 				// SHOWING THE CARET
 				thisTinyDOC.document.style.caretColor = "black";
-				},25);
+
+				// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
+				thisTinyDOC.canUndoRedo = true;
+				},100);
 			}
 		}
 
