@@ -858,8 +858,8 @@ class tinyDOC2
 					// RESTORING THE SELECTION
 					thisTinyDOC.restoreSelection(thisTinyDOC.document,currentSelection);
 
-					// CHECKING IF THE USER IS USING CHROME
-					if (thisTinyDOC.isUsingChrome==true)
+					// CHECKING IF THE USER IS USING CHROME OR SAFARI
+					if (thisTinyDOC.isUsingChrome==true || thisTinyDOC.isUsingSafari==true)
 						{
 						// CHECKING IF THE SELECTED TEXT HAS NO BREAKLINES (NOT SELECTING MULTIPLE LIST ITEMS)
 						if (window.getSelection().toString().indexOf("\n")==-1)
