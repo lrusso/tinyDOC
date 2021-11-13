@@ -257,8 +257,9 @@ class tinyDOC2
 			this.document.innerHTML = documentText;
 			}
 
-		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI
+		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI OR CHROME
 		this.isUsingSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+		this.isUsingChrome = /.*chrome/i.test(navigator.userAgent);
 
 		// SETTING THE CURRENT INSTANCE FOR LATER USE
 		var thisTinyDOC = this;
@@ -837,9 +838,48 @@ class tinyDOC2
 		{
 		try
 			{
+			// GETTING THE CURRENT SELECTION
+			var currentSelection = this.saveSelection(this.document);
+
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false){return}
 
+			// PREVENTING STYLING OF MULTIPLE LIST ITEMS
+			if((this.checkParentTag("LI")==true || this.checkParentTag("UL")==true || this.checkParentTag("OL")==true) && window.getSelection().toString().indexOf("\n")>-1)
+				{
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// RESTORING THE SELECTION
+					thisTinyDOC.restoreSelection(thisTinyDOC.document,currentSelection);
+
+					// CHECKING IF THE USER IS USING CHROME
+					if (thisTinyDOC.isUsingChrome==true)
+						{
+						// AFTER TRIMMING THE SELECTION, EXECUTING THE FORMAT STYLE
+						thisTinyDOC.formatStyleExecute(myTag, myParameter);
+						}
+					},25);
+
+				// NO POINT GOING ANY FURTHER
+				return;
+				}
+
+			// EXECUTING THE FORMAT STYLE
+			this.formatStyleExecute(myTag, myParameter);
+			}
+			catch(err)
+			{
+			}
+		}
+
+	formatStyleExecute(myTag, myParameter)
+		{
+		try
+			{
 			// REGISTERING THE UNDO EVENT
 			this.saveUndo();
 
