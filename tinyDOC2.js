@@ -1132,17 +1132,6 @@ class tinyDOC2
 							{
 							// GETTING THE PARENT NODE
 							upperNode = upperNode.parentNode;
-
-							// CHECKING IF THE FIRST NODE IS AN ELEMENT THAT CAN BE DELETED
-							if (upperNode.firstChild.nodeName=="B" || upperNode.firstChild.nodeName=="I" || upperNode.firstChild.nodeName=="U" || upperNode.firstChild.nodeName=="STRIKE" || upperNode.firstChild.nodeName=="SPAN")
-								{
-								// CHECKING IF THE FIRST NODE TEXT IS INSIDE THE SELECTED TEXT
-								if (upperNode.firstChild.innerText.length<=range.endOffset)
-									{
-									// REMOVING THE FIRST NODE
-									upperNode.removeChild(upperNode.firstChild);
-									}
-								}
 							}
 
 						// GETTING THE UPPER NODE
@@ -1162,21 +1151,6 @@ class tinyDOC2
 								{
 								// SETTING THAT THE LIST ITEM WAS FOUND
 								foundListItem = true;
-								}
-
-							// CHECKING IF THE NODE HAS A FIRST CHILD
-							if (lowerNode.firstChild)
-								{
-								// CHECKING IF THE FIRST NODE IS AN ELEMENT THAT CAN BE DELETED
-								if (lowerNode.firstChild.nodeName=="B" || lowerNode.firstChild.nodeName=="I" || lowerNode.firstChild.nodeName=="U" ||  lowerNode.firstChild.nodeName=="STRIKE" ||  lowerNode.firstChild.nodeName=="SPAN")
-									{
-									// CHECKING IF THE FIRST NODE TEXT IS INSIDE THE SELECTED TEXT
-									if (lowerNode.firstChild.innerText.length<=range.endOffset)
-										{
-										// REMOVING THE FIRST NODE
-										lowerNode.removeChild(lowerNode.firstChild);
-										}
-									}
 								}
 							}
 
