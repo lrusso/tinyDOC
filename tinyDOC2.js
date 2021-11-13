@@ -1014,6 +1014,7 @@ class tinyDOC2
 				// GETTING THE CURRENT FOCUS NODE
 				var upperNode = window.getSelection().focusNode;
 
+				// CREATING A VARIABLE TO KNOW IF A LIST NODE WAS FOUND
 				var listNode = null;
 
 				// LOOPING ALL THE PARENT NODES
