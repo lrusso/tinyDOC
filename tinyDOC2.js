@@ -1282,11 +1282,14 @@ class tinyDOC2
 			// CHECKING IF THERE IS A DOCUMENT HISTORY TO UNDO
 			if(this.document_history_index>0)
 				{
+				// LOOPING EVERY DOCUMENT CHILD
 				while (this.document.firstChild)
 					{
+					// REMOVING EVERY CHILD
 					this.document.removeChild(this.document.firstChild);
 					}
 
+				// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
 				this.insertHtmlAtCaret(this.document_history[this.document_history_index-1],false);
 
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
@@ -1372,8 +1375,10 @@ class tinyDOC2
 			// CHECKING IF THERE IS A DOCUMENT HISTORY TO REDO
 			if(this.document_history[this.document_history_index+1])
 				{
+				// LOOPING EVERY DOCUMENT CHILD
 				while (this.document.firstChild)
 					{
+					// REMOVING EVERY CHILD
 					this.document.removeChild(this.document.firstChild);
 					}
 
