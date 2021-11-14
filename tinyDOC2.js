@@ -427,8 +427,12 @@ class tinyDOC2
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
 
-				// REGISTERING THE UNDO EVENT
-				thisTinyDOC.saveUndo();
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// REGISTERING THE UNDO EVENT
+					thisTinyDOC.saveUndo();
+					},25);
 				}
 			});
 
