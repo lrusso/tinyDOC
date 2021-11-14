@@ -1422,23 +1422,23 @@ class tinyDOC2
 		{
 		try
 			{
-			// IF WE ALREADY USED UNDO BUTTON AND MADE MODIFICATION - DELETE ALL FORWARD HISTORY
-			if(this.document_history_index<this.document_history.length-1)
-				{
-				// REMOVING ALL FORWARD HISTORY
-				this.document_history = this.document_history.slice(0,this.document_history_index+1);
-				this.document_history_caret = this.document_history_caret.slice(0,this.document_history_index+1);
-
-				// UPDATING THE DOCUMENT HISTORY INDEX
-				this.document_history_index = this.document_history_index + 1;
-				}
-
 			// GETTING THE CURRENT DOCUMENT CONTENT OR STATE
 			var current_state = this.document.innerHTML;
 
 			// IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
 			if(current_state!=this.document_history[this.document_history_index])
 				{
+				// IF WE ALREADY USED UNDO BUTTON AND MADE MODIFICATION - DELETE ALL FORWARD HISTORY
+				if(this.document_history_index<=this.document_history.length-1)
+					{
+					// REMOVING ALL FORWARD HISTORY
+					this.document_history = this.document_history.slice(0,this.document_history_index+1);
+					this.document_history_caret = this.document_history_caret.slice(0,this.document_history_index+1);
+
+					// UPDATING THE DOCUMENT HISTORY INDEX
+					this.document_history_index = this.document_history_index + 1;
+					}
+
 				// ADDING THE CURRENT DOCUMENT CONTENT STATE TO THE DOCUMENT HISTORY
 				this.document_history.push(current_state);
 
