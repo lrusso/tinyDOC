@@ -1250,17 +1250,14 @@ class tinyDOC2
 		{
 		try
 			{
-			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
-
 			// PREVENTING OVERLAPPING DURING THE UNDO/REDO RENDERING EVENT
 			if (this.canUndoRedo==false){return}
 
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
+
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
-
-			// DISABLING THE DOCUMENT
-			this.document.contentEditable = false;
 
 			// SETTING THAT THE DOCUMENT CANNOT DO A UNDO/REDO
 			this.canUndoRedo = false;
@@ -1273,9 +1270,6 @@ class tinyDOC2
 				{
 				// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
 				this.document.innerHTML = this.document_history[this.document_history_index-1];
-
-				// ENABLING THE DOCUMENT
-				this.document.contentEditable = true;
 
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
@@ -1301,9 +1295,6 @@ class tinyDOC2
 				}
 				else
 				{
-				// ENABLING THE DOCUMENT
-				this.document.contentEditable = true;
-
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
@@ -1323,9 +1314,6 @@ class tinyDOC2
 			}
 			catch(err)
 			{
-			// ENABLING THE DOCUMENT
-			this.document.contentEditable = true;
-
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
@@ -1348,17 +1336,14 @@ class tinyDOC2
 		{
 		try
 			{
-			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
-
 			// PREVENTING OVERLAPPING DURING THE UNDO/REDO RENDERING EVENT
 			if (this.canUndoRedo==false){return}
 
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
+
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
-
-			// DISABLING THE DOCUMENT
-			this.document.contentEditable = false;
 
 			// SETTING THAT THE DOCUMENT CANNOT DO A UNDO/REDO
 			this.canUndoRedo = false;
@@ -1371,9 +1356,6 @@ class tinyDOC2
 				{
 				// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
 				this.document.innerHTML = this.document_history[this.document_history_index+1];
-
-				// ENABLING THE DOCUMENT
-				this.document.contentEditable = true;
 
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
@@ -1399,9 +1381,6 @@ class tinyDOC2
 				}
 				else
 				{
-				// ENABLING THE DOCUMENT
-				this.document.contentEditable = true;
-
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
@@ -1421,9 +1400,6 @@ class tinyDOC2
 			}
 			catch(err)
 			{
-			// ENABLING THE DOCUMENT
-			this.document.contentEditable = true;
-
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
