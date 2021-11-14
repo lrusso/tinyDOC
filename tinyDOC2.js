@@ -263,6 +263,9 @@ class tinyDOC2
 		// SETTING AN UNDO SAVE TIMEOUT VARIABLE TO PREVENT MULTI SAVE UNDO WHILE TYPING
 		this.undoSaveTimeout = null;
 
+		// SETTING A VARIABLE TO HANDLE THE KEY ENTER WHEN PRESSED
+		this.keyEnterPressed = false;
+
 		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI
 		this.isUsingSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
@@ -1081,6 +1084,9 @@ class tinyDOC2
 				{
 				// CANCELING THE ENTER KEY EVENT
 				event.preventDefault();
+
+				// SETTING THAT KEY ENTER WAS PRESSED
+				this.keyEnterPressed = true;
 
 				// INSERTING THE BREAKLINE
 				this.insertHtmlAtCaret("<br />",false);
@@ -1935,41 +1941,56 @@ class tinyDOC2
 					selection.addRange(range);
 					}
 
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
-				setTimeout(function()
+				// CHECKING IF THE ENTER KEY WAS PRESSED
+				if (this.keyEnterPressed==true)
 					{
-					if (lastNode)
-						{
-						range = range.cloneRange();
-						range.setStartAfter(lastNode);
-						if (selectPastedContent)
-							{
-							range.setStartBefore(firstNode);
-							}
-						else
-							{
-							range.collapse(true);
-							}
-						selection.removeAllRanges();
-						selection.addRange(range);
-						}
+					// SETTING THAT ENTER KEY WAS NOT PRESSED
+					this.keyEnterPressed=false;
 
-					// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
-					if (this.saveUndo==false)
-						{
-						// SCROLLING TO THE CARET
-						thisTinyDOC.scrollToCaret();
-
-						// REGISTERING THE UNDO EVENT
-						thisTinyDOC.saveUndo();
-						}
+					// SCROLLING TO THE CARET
+					this.scrollToCaret();
 
 					// SETTING THE DOCUMENT AS DIRTY
 					window.onbeforeunload = function(e){return "Dirty"};
-					},25);
+					}
+					else
+					{
+					// SETTING THE CURRENT INSTANCE FOR LATER USE
+					var thisTinyDOC = this;
+
+					// WAITING 25 MS FOR THE UI TO BE UPDATED
+					setTimeout(function()
+						{
+						if (lastNode)
+							{
+							range = range.cloneRange();
+							range.setStartAfter(lastNode);
+							if (selectPastedContent)
+								{
+								range.setStartBefore(firstNode);
+								}
+							else
+								{
+								range.collapse(true);
+								}
+							selection.removeAllRanges();
+							selection.addRange(range);
+							}
+
+						// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
+						if (this.saveUndo==false)
+							{
+							// SCROLLING TO THE CARET
+							thisTinyDOC.scrollToCaret();
+
+							// REGISTERING THE UNDO EVENT
+							thisTinyDOC.saveUndo();
+							}
+
+						// SETTING THE DOCUMENT AS DIRTY
+						window.onbeforeunload = function(e){return "Dirty"};
+						},25);
+					}
 				}
 			}
 			catch(err)
