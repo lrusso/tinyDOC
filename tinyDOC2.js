@@ -537,11 +537,17 @@ class tinyDOC2
 		{
 		try
 			{
-			// LOOPING EVERY DOCUMENT CHILD
-			while (this.document.firstChild)
+			try
 				{
-				// REMOVING EVERY CHILD
-				this.document.removeChild(this.document.firstChild);
+				// LOOPING EVERY DOCUMENT CHILD
+				while (this.document.firstChild)
+					{
+					// REMOVING EVERY CHILD
+					this.document.removeChild(this.document.firstChild);
+					}
+				}
+				catch(err)
+				{
 				}
 
 			// SETTING THE DOCUMENT AS CLEAN
@@ -550,22 +556,14 @@ class tinyDOC2
 			// CLEARING THE DOCUMENT UNDO/REDO HISTORY
 			this.clearUndoRedo();
 
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
-
-			// FOCUSING THE DOCUMENT AFTER 100 MS
-			setTimeout(function(){thisTinyDOC.document.focus()},100);
-
 			// TRYING TO MOVE THE CURSOR TO THE BEGINNING OF THE DOCUMENT
-			var range = document.createRange();
-			var sel = window.getSelection();
-			range.setStart(this.document.childNodes[0], 0);
-			range.collapse(true);
-			sel.removeAllRanges();
-			sel.addRange(range);
+			this.setCaretPosition(this.document,0);
 
 			// SCROLLING TO THE TOP OF THE DOCUMENT
 			this.scrollToTop();
+
+			// FOCUSING THE DOCUMENT
+			this.focus();
 			}
 			catch(err)
 			{
