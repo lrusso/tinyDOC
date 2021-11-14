@@ -247,7 +247,6 @@ class tinyDOC2
 		this.document = document.createElement("div");
 		this.document.className = "tinydoc_document";
 		this.document.contentEditable = true;
-		this.document.innerHTML = "<div></div>";
 		this.myContainer.appendChild(this.document);
 
 		// CHECKING IF THERE IS A DEFAULT DOCUMENT TEXT
@@ -255,6 +254,10 @@ class tinyDOC2
 			{
 			// SETTING THE DOCUMENT TEXT
 			this.document.innerHTML = documentText;
+			}
+			else
+			{
+			this.document.innerHTML = "<div></div>";
 			}
 
 		// SETTING A VARIABLE TO KNOW IF THE DOCUMENT CAN UNDO/REDO
@@ -265,6 +268,9 @@ class tinyDOC2
 
 		// SETTING A VARIABLE TO HANDLE THE KEY ENTER WHEN PRESSED
 		this.keyEnterPressed = false;
+
+		// SETTING A VARIABLE TO HANDLE WHEN A THE NEW TEXT IS SET
+		this.settingNewText = false;
 
 		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI
 		this.isUsingSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -531,8 +537,12 @@ class tinyDOC2
 		{
 		try
 			{
-			// CLEARING THE DOCUMENT DATA
-			this.document.innerHTML = "";
+			// LOOPING EVERY DOCUMENT CHILD
+			while (this.document.firstChild)
+				{
+				// REMOVING EVERY CHILD
+				this.document.removeChild(this.document.firstChild);
+				}
 
 			// SETTING THE DOCUMENT AS CLEAN
 			window.onbeforeunload = null;
@@ -745,8 +755,17 @@ class tinyDOC2
 			// CLEARING THE DOCUMENT
 			this.new();
 
+			// SETTING THAT A NEW TEXT WILL BE INSERTED
+			this.settingNewText = true;
+
 			// SETTING THE DOCUMENT TEXT
-			this.document.innerHTML = myText
+			this.insertHtmlAtCaret(myText,false);
+
+			// SETTING THE DOCUMENT AS CLEAN
+			window.onbeforeunload = null;
+
+			// CLEARING THE DOCUMENT UNDO/REDO HISTORY
+			this.clearUndoRedo();
 			}
 			catch(err)
 			{
@@ -1941,8 +1960,18 @@ class tinyDOC2
 					selection.addRange(range);
 					}
 
+				// CHECKING IF A NEW TEXT IS SET
+				if (this.settingNewText==true)
+					{
+					// SETTING THAT ENTER KEY WAS NOT PRESSED
+					this.settingNewText = false;
+
+					// MOVING THE CARET TO THE BEGINNING OF THE DOCUMENT
+					this.setCaretPosition(this.document,0);
+					}
+
 				// CHECKING IF THE ENTER KEY WAS PRESSED
-				if (this.keyEnterPressed==true)
+				else if (this.keyEnterPressed==true)
 					{
 					// SETTING THAT ENTER KEY WAS NOT PRESSED
 					this.keyEnterPressed=false;
