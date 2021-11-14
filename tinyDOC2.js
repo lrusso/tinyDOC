@@ -260,6 +260,9 @@ class tinyDOC2
 		// SETTING A VARIABLE TO KNOW IF THE DOCUMENT CAN UNDO/REDO
 		this.canUndoRedo = true;
 
+		// SETTING AN UNDO SAVE TIMEOUT VARIABLE TO PREVENT MULTI SAVE UNDO WHILE TYPING
+		this.undoSaveTimeout = null;
+
 		// ADDING A REGEX FOR CHECKING IF THE USER IS USING SAFARI
 		this.isUsingSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
@@ -427,12 +430,19 @@ class tinyDOC2
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
 
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
-				setTimeout(function()
+				// CHECKING IF THERE IS A PREVIOUS UNDO SAVE TIMEOUT
+				if (thisTinyDOC.undoSaveTimeout!=null)
+					{
+					// CLEARING THE PREVIOUS UNDO SAVE TIMEOUT
+					clearTimeout(thisTinyDOC.undoSaveTimeout);
+					}
+
+				// WAITING 100 MS FOR THE UI TO BE UPDATED
+				thisTinyDOC.undoSaveTimeout = setTimeout(function()
 					{
 					// REGISTERING THE UNDO EVENT
 					thisTinyDOC.saveUndo();
-					},25);
+					},100);
 				}
 			});
 
@@ -1278,7 +1288,7 @@ class tinyDOC2
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
-				// WAITING 100 MS FOR THE UI TO BE UPDATED
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// MOVING THE CARET TO THE STORED POSITION
@@ -1295,14 +1305,14 @@ class tinyDOC2
 
 					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
 					thisTinyDOC.canUndoRedo = true;
-					},100);
+					},25);
 				}
 				else
 				{
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
-				// WAITING 100 MS FOR THE UI TO BE UPDATED
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// RESTORING THE CARET POSITION
@@ -1313,7 +1323,7 @@ class tinyDOC2
 
 					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
 					thisTinyDOC.canUndoRedo = true;
-					},100);
+					},25);
 				}
 			}
 			catch(err)
@@ -1321,7 +1331,7 @@ class tinyDOC2
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
-			// WAITING 100 MS FOR THE UI TO BE UPDATED
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
 				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
@@ -1332,7 +1342,7 @@ class tinyDOC2
 
 				// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
 				thisTinyDOC.canUndoRedo = true;
-				},100);
+				},25);
 			}
 		}
 
@@ -1364,7 +1374,7 @@ class tinyDOC2
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
-				// WAITING 100 MS FOR THE UI TO BE UPDATED
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// MOVING THE CARET TO THE STORED POSITION
@@ -1381,14 +1391,14 @@ class tinyDOC2
 
 					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
 					thisTinyDOC.canUndoRedo = true;
-					},100);
+					},25);
 				}
 				else
 				{
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
-				// WAITING 100 MS FOR THE UI TO BE UPDATED
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
 					// RESTORING THE CARET POSITION
@@ -1399,7 +1409,7 @@ class tinyDOC2
 
 					// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
 					thisTinyDOC.canUndoRedo = true;
-					},100);
+					},25);
 				}
 			}
 			catch(err)
@@ -1407,7 +1417,7 @@ class tinyDOC2
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
-			// WAITING 100 MS FOR THE UI TO BE UPDATED
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
 			setTimeout(function()
 				{
 				// IN CASE OF ERROR, MOVING THE CARET TO THE FIRST POSITION
@@ -1418,7 +1428,7 @@ class tinyDOC2
 
 				// SETTING THAT THE DOCUMENT CAN DO A UNDO/REDO
 				thisTinyDOC.canUndoRedo = true;
-				},100);
+				},25);
 			}
 		}
 
