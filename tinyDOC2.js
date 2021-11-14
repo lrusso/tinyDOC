@@ -1282,8 +1282,12 @@ class tinyDOC2
 			// CHECKING IF THERE IS A DOCUMENT HISTORY TO UNDO
 			if(this.document_history_index>0)
 				{
-				// UPDATING THE DOCUMENT CONTENT WITH THE PREVIOUS STORED CONTENT
-				this.document.innerHTML = this.document_history[this.document_history_index-1];
+				while (this.document.firstChild)
+					{
+					this.document.removeChild(this.document.firstChild);
+					}
+
+				this.insertHtmlAtCaret(this.document_history[this.document_history_index-1],false);
 
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
@@ -1368,8 +1372,13 @@ class tinyDOC2
 			// CHECKING IF THERE IS A DOCUMENT HISTORY TO REDO
 			if(this.document_history[this.document_history_index+1])
 				{
+				while (this.document.firstChild)
+					{
+					this.document.removeChild(this.document.firstChild);
+					}
+
 				// UPDATING THE DOCUMENT CONTENT WITH THE NEXT STORED CONTENT
-				this.document.innerHTML = this.document_history[this.document_history_index+1];
+				this.insertHtmlAtCaret(this.document_history[this.document_history_index+1],false);
 
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
@@ -1878,8 +1887,12 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false){return}
 
-			// REGISTERING THE UNDO EVENT
-			this.saveUndo();
+			// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
+			if (this.saveUndo==false)
+				{
+				// REGISTERING THE UNDO EVENT
+				this.saveUndo();
+				}
 
 			var selection = window.getSelection();
 
@@ -1939,11 +1952,15 @@ class tinyDOC2
 						selection.addRange(range);
 						}
 
-					// SCROLLING TO THE CARET
-					thisTinyDOC.scrollToCaret();
+					// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
+					if (this.saveUndo==false)
+						{
+						// SCROLLING TO THE CARET
+						thisTinyDOC.scrollToCaret();
 
-					// REGISTERING THE UNDO EVENT
-					thisTinyDOC.saveUndo();
+						// REGISTERING THE UNDO EVENT
+						thisTinyDOC.saveUndo();
+						}
 
 					// SETTING THE DOCUMENT AS DIRTY
 					window.onbeforeunload = function(e){return "Dirty"};
