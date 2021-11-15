@@ -860,9 +860,6 @@ class tinyDOC2
 			else if(myCommand=="undo"){this.undo(false)}
 			else if(myCommand=="redo"){this.redo(false)}
 
-			// FIX FOR FIREFOX
-			this.document.blur();
-
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
 
