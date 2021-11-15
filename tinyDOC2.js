@@ -1913,7 +1913,7 @@ class tinyDOC2
 			if (this.isDocumentSelected()==false){return}
 
 			// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
-			if (this.saveUndo==false)
+			if (this.canUndoRedo==true)
 				{
 				// REGISTERING THE UNDO EVENT
 				this.saveUndo();
@@ -2002,7 +2002,7 @@ class tinyDOC2
 							}
 
 						// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
-						if (this.saveUndo==false)
+						if (thisTinyDOC.canUndoRedo==true)
 							{
 							// SCROLLING TO THE CARET
 							thisTinyDOC.scrollToCaret();
