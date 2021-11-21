@@ -882,7 +882,7 @@ class tinyDOC2
 			if (this.isDocumentSelected()==false){return}
 
 			// PREVENTING STYLING OF MULTIPLE LIST ITEMS
-			if((this.checkParentTag("LI")==true || this.checkParentTag("UL")==true || this.checkParentTag("OL")==true) && window.getSelection().toString().indexOf("\n")>-1)
+			if((this.getParentTag("LI")!=null || this.getParentTag("UL")!=null || this.getParentTag("OL")!=null) && window.getSelection().toString().indexOf("\n")>-1)
 				{
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
@@ -982,7 +982,7 @@ class tinyDOC2
 			if (this.isDocumentSelected()==false){return}
 
 			// PREVENTING NESTED LISTS
-			if(this.checkParentTag("LI")==false && this.checkParentTag("UL")==false && this.checkParentTag("OL")==false)
+			if(this.getParentTag("LI")==null && this.getParentTag("UL")==null && this.getParentTag("OL")==null)
 				{
 				// GETTING THE SELECTED TEXT
 				var selectedText = window.getSelection().toString();
@@ -1003,7 +1003,7 @@ class tinyDOC2
 			}
 		}
 
-	checkParentTag(tagToFind)
+	getParentTag(tagToFind)
 		{
 		try
 			{
@@ -1022,22 +1022,27 @@ class tinyDOC2
 				// CHECKING IF THE PARENT NODE IS THE REQUESTED ONE
 				if (upperNode.nodeName==tagToFind)
 					{
-					return true;
+					return upperNode;
 					}
 				}
 			}
 			catch(err)
 			{
 			}
-		return false;
+		return null;
 		}
 
 	handleBreakLineInList(event)
 		{
 		try
 			{
+			// SEARCHING FOR THE REQUIRED TAGS
+			var tagLI = this.getParentTag("LI");
+			var tagUL = this.getParentTag("UL");
+			var tagOL = this.getParentTag("OL");
+
 			// CHECKING IF THE CARET IS IN A LIST
-			if (this.checkParentTag("LI")==false && (this.checkParentTag("UL")==true || this.checkParentTag("OL")==true))
+			if (tagLI==null && (tagUL!=null || tagOL!=null))
 				{
 				// CANCELING THE ENTER KEY EVENT
 				event.preventDefault();
@@ -1094,7 +1099,7 @@ class tinyDOC2
 				}
 
 			// CHECKING IF THE CARET IS NOT IN A LIST
-			else if (this.checkParentTag("LI")==false)
+			else if (tagLI==null)
 				{
 				// CANCELING THE ENTER KEY EVENT
 				event.preventDefault();
