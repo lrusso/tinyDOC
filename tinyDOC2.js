@@ -17,9 +17,6 @@ class tinyDOC2
 		this.template2 = template2;
 		this.template3 = template3;
 
-		// SETTING THE DEFAULT VALUE FOR THE LINK CHECKER
-		this.linkFound = false;
-
 		// SETTING THAT THE DOCUMENT IS ENABLED
 		this.documentEnabled = true;
 
@@ -1032,6 +1029,35 @@ class tinyDOC2
 		return null;
 		}
 
+	getChildTag(tagToFind)
+		{
+		try
+			{
+			// GETTING THE SELECTED RANGE
+			var range = window.getSelection().getRangeAt(0);
+
+			// GETTING THE CURRENT FOCUS NODE
+			var childNode = range.startContainer;
+
+			// LOOPING ALL THE CHILD NODES
+			while (childNode.firstChild)
+				{
+				// GETTING THE CHILD NODE
+				childNode = childNode.firstChild;
+
+				// CHECKING IF THE CHILD NODE IS THE REQUESTED ONE
+				if (childNode.nodeName==tagToFind)
+					{
+					return childNode;
+					}
+				}
+			}
+			catch(err)
+			{
+			}
+		return null;
+		}
+
 	handleBreakLineInList(event)
 		{
 		try
@@ -1809,99 +1835,26 @@ class tinyDOC2
 		{
 		try
 			{
-			// SETTING THE LINK FOUND VALUE AS FALSE
-			this.linkFound = false;
+			// SEARCHING FOR A LINK TAG
+			var linkTag = this.getParentTag("A");
 
-			// GETTING THE CURRENT SELECTION
-			var selectedNode = window.getSelection().focusNode;
-
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
-
-			// GOING THROUGH EVERY NODE
-			for (var i=0;i<selectedNode.length;i++)
+			// CHECKING IF A LINK TAG WAS FOUND
+			if (linkTag!=null)
 				{
-				try
+				// GETTING THE URL (IF ANY)
+				var finalURL = linkTag.href;
+
+				// CHECKING IF THERE IS A VALUE
+				if(typeof finalURL !== "undefined")
 					{
-					// CHECKING IF THE NODE HAS AT LEAST ONE CHILD NODE
-					if (selectedNode.firstChild!=null)
-						{
-						// PERFORMING A RECURSIVE SEARCH FOR EVERY CHILD NODE
-						thisTinyDOC.checkForURL_AllDescendants(selectedNode);
-						}
-						else
-						{
-						// EXECUTING THE FIND AND SELECT FUNCTION WITHIN THE CURRENT NODE
-						thisTinyDOC.checkForURL_Update(selectedNode);
-						}
-					}
-					catch(err)
-					{
+					// ADDING THE VALUE TO THE URL VIEWER
+					this.urlViewer.innerHTML = "<a href='" + finalURL + "' target='_blank'>" + finalURL + "</a>";
 					}
 				}
-
-			// CHECKING IF A LINK WAS FOUND
-			if (this.linkFound==false)
+				else
 				{
 				// CLEARING THE URL VIEWER
 				this.urlViewer.innerHTML = "";
-				}
-			}
-			catch(err)
-			{
-			}
-		}
-
-	checkForURL_AllDescendants(latestChildNode)
-		{
-		try
-			{
-			// SETTING THE CURRENT INSTANCE FOR LATER USE
-			var thisTinyDOC = this;
-
-			// GOING THROUGH EVERY NODE
-			for (var i = 0; i < latestChildNode.childNodes.length; i++)
-				{
-				try
-					{
-					// CREATING A VARIABLE AND GETTING THE CHILD NODE
-					var child = latestChildNode.childNodes[i];
-
-					// CHECKING IF THAT CHILD NODE HAS A CHILD NODE
-					if (child.firstChild!=null)
-						{
-						// IF SO, THIS FUNCTION WILL BE EXECUTED ONE MORE TIME FOR THIS CHILD NODE
-						thisTinyDOC.checkForURL_AllDescendants(child);
-						}
-
-					// EXECUTING THE CHECK FOR URL FUNCTION WITHIN THE CURRENT NODE
-					thisTinyDOC.checkForURL_Update(child);
-					}
-					catch(err)
-					{
-					}
-				}
-			}
-			catch(err)
-			{
-			}
-		}
-
-	checkForURL_Update(selectedNode)
-		{
-		try
-			{
-			// GETTING THE URL (IF ANY)
-			var finalURL = selectedNode.parentNode.href;
-
-			// CHECKING IF THERE IS A VALUE
-			if(typeof finalURL !== "undefined")
-				{
-				// ADDING THE VALUE TO THE URL VIEWER
-				this.urlViewer.innerHTML = "<a href='" + finalURL + "' target='_blank'>" + finalURL + "</a>";
-
-				// SETTING THE LINK FOUND VALUE AS TRUE
-				this.linkFound = true;
 				}
 			}
 			catch(err)
