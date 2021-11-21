@@ -1010,6 +1010,12 @@ class tinyDOC2
 			// GETTING THE CURRENT FOCUS NODE
 			var upperNode = range.startContainer;
 
+			// CHECKING IF THE FIRST NODE IS THE REQUESTED ONE
+			if (upperNode.nodeName==tagToFind)
+				{
+				return true;
+				}
+
 			// LOOPING ALL THE PARENT NODES
 			while (upperNode.parentNode!=this.document)
 				{
