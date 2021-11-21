@@ -1010,12 +1010,6 @@ class tinyDOC2
 			// GETTING THE CURRENT FOCUS NODE
 			var upperNode = range.startContainer;
 
-			// CHECKING IF THE FIRST NODE IS THE REQUESTED ONE
-			if (upperNode.nodeName==tagToFind)
-				{
-				return true;
-				}
-
 			// LOOPING ALL THE PARENT NODES
 			while (upperNode.parentNode!=this.document)
 				{
@@ -1033,6 +1027,24 @@ class tinyDOC2
 			{
 			}
 		return null;
+		}
+
+	getCurrentTag()
+		{
+		var currentNode = null;
+		try
+			{
+			// GETTING THE SELECTED RANGE
+			var range = window.getSelection().getRangeAt(0);
+
+			// GETTING THE CURRENT FOCUS NODE
+			currentNode = range.startContainer;
+			}
+			catch(err)
+			{
+			}
+
+		return currentNode;
 		}
 
 	// https://stackoverflow.com/questions/16736680/get-caret-index-in-contenteditable-div-including-tags
@@ -1904,8 +1916,15 @@ class tinyDOC2
 			// SEARCHING FOR A LINK TAG
 			var linkTag = this.getParentTag("A");
 
+			// CHECKING IF A LINK TAG WASN'T FOUND
+			if (linkTag==null)
+				{
+				// GETTING THE CURRENT TAG WHERE THE CARET IS LOCATED (BACKSAFE)
+				linkTag = this.getCurrentTag();
+				}
+
 			// CHECKING IF A LINK TAG WAS FOUND
-			if (linkTag!=null)
+			if (linkTag.nodeName=="A")
 				{
 				// GETTING THE URL (IF ANY)
 				var finalURL = linkTag.href;
