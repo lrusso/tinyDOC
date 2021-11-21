@@ -348,7 +348,7 @@ class tinyDOC2
 						}
 					else if (event.keyCode==13)
 						{
-						// CHECKING AND HANDLING THE BREAKLINE EVENT
+						// HANDLING THE BREAKLINE EVENT
 						thisTinyDOC.handleBreakline(event);
 						}
 					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="s")
