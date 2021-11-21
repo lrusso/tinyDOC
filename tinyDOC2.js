@@ -348,8 +348,8 @@ class tinyDOC2
 						}
 					else if (event.keyCode==13)
 						{
-						// CHECKING AND HANDLING BREAKLINES IN A LIST
-						thisTinyDOC.handleBreakLineInList(event);
+						// CHECKING AND HANDLING THE BREAKLINE EVENT
+						thisTinyDOC.handleBreakline(event);
 						}
 					else if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase()=="s")
 						{
@@ -1029,7 +1029,25 @@ class tinyDOC2
 		return null;
 		}
 
-	handleBreakLineInList(event)
+	// https://stackoverflow.com/questions/16736680/get-caret-index-in-contenteditable-div-including-tags
+	getCaretCharacterOffsetWithin(element)
+		{
+		var caretOffset = 0;
+		try
+			{
+			var range = window.getSelection().getRangeAt(0);
+			var preCaretRange = range.cloneRange();
+			preCaretRange.selectNodeContents(element);
+			preCaretRange.setEnd(range.endContainer, range.endOffset);
+			caretOffset = preCaretRange.toString().length;
+			}
+			catch(err)
+			{
+			}
+		return caretOffset;
+		}
+
+	handleBreakline(event)
 		{
 		try
 			{
@@ -1073,24 +1091,12 @@ class tinyDOC2
 					// CHECKING IF THE CARET IS AT THE LAST ITEM OF THE LIST
 					if (listNode.lastChild==initialNode)
 						{
-						// CREATING A BREAKLINE
-						var tempAnchorEl = document.createElement("br");
-
-						// ADDING THE BREAKLINE AFTER THE LIST
-						listNode.parentNode.insertBefore(tempAnchorEl, listNode.nextSibling)
-
-						// WAITING 25 MS FOR THE UI TO BE UPDATED
-						setTimeout(function()
+						// CHECKING IF THE BREAKLINE WASN'T HANDLED WITHIN A LINK TAG
+						if (this.handleBreaklineInLink()==false)
 							{
-							// MOVING THE CARET TO THE BREAKLINE
-							var range = document.createRange();
-							range.selectNodeContents(tempAnchorEl);
-							range.setStartBefore(tempAnchorEl);
-							range.collapse(true);
-							var sel = window.getSelection();
-							sel.removeAllRanges();
-							sel.addRange(range);
-							},25);
+							// ADDING A BREAKLINE AFTER THE LIST NODE
+							this.addBreakLineAfter(listNode);
+							}
 						}
 					}
 				}
@@ -1101,12 +1107,95 @@ class tinyDOC2
 				// CANCELING THE ENTER KEY EVENT
 				event.preventDefault();
 
-				// SETTING THAT KEY ENTER WAS PRESSED
-				this.keyEnterPressed = true;
+				// CHECKING IF THE BREAKLINE WASN'T HANDLED WITHIN A LINK TAG
+				if (this.handleBreaklineInLink()==false)
+					{
+					// SETTING THAT KEY ENTER WAS PRESSED
+					this.keyEnterPressed = true;
 
-				// INSERTING THE BREAKLINE
-				this.insertHtmlAtCaret("<br />",false);
+					// INSERTING THE BREAKLINE
+					this.insertHtmlAtCaret("<br />",false);
+					}
 				}
+			}
+			catch(err)
+			{
+			}
+		}
+
+	handleBreaklineInLink()
+		{
+		try
+			{
+			// SEARCHING FOR A LINK TAG
+			var linkTag = this.getParentTag("A");
+
+			// CHECKING IF A LINK TAG WAS FOUND
+			if (linkTag!=null)
+				{
+				// CHECKING IF THE CARET IS AT THE LAST POSITION OF THE LINK TAG
+				if (this.getCaretCharacterOffsetWithin(linkTag)==linkTag.text.length)
+					{
+					// ADDING A BREAKLINE AFTER THE LINK TAG
+					this.addBreakLineAfter(linkTag);
+					return true;
+					}
+				}
+			}
+			catch(err)
+			{
+			}
+		return false;
+		}
+
+	addBreakLineAfter(currentNode)
+		{
+		try
+			{
+			// CREATING A BREAKLINE
+			var tempAnchorEl = document.createElement("br");
+
+			// ADDING THE BREAKLINE AFTER THE LIST
+			currentNode.parentNode.insertBefore(tempAnchorEl, currentNode.nextSibling);
+
+			// REGISTERING THE UNDO EVENT
+			this.saveUndo();
+
+			// SETTING THAT THE CARET MUST BE PLACED BEFORE THE INSERTED NODE
+			var startBefore = true;
+
+			// CHECKING IF THE CURRENT NODE IS NOT A LIST
+			if (currentNode.nodeName!="UL" && currentNode.nodeName!="OL")
+				{
+				// SETTING THAT THE CARET MUST BE PLACED AFTER THE INSERTED NODE
+				startBefore = false;
+				}
+
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				// MOVING THE CARET TO THE BREAKLINE
+				var range = document.createRange();
+				range.selectNodeContents(tempAnchorEl);
+				if (startBefore==true)
+					{
+					range.setStartBefore(tempAnchorEl);
+					}
+				else
+					{
+					range.setStartAfter(tempAnchorEl);
+					}
+				range.collapse(true);
+				var sel = window.getSelection();
+				sel.removeAllRanges();
+				sel.addRange(range);
+
+				// REGISTERING THE UNDO EVENT
+				thisTinyDOC.saveUndo();
+				},25);
 			}
 			catch(err)
 			{
