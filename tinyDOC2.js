@@ -1032,6 +1032,7 @@ class tinyDOC2
 	getCurrentTag()
 		{
 		var currentNode = null;
+
 		try
 			{
 			// GETTING THE SELECTED RANGE
