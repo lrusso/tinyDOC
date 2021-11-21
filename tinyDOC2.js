@@ -1171,14 +1171,14 @@ class tinyDOC2
 		{
 		try
 			{
+			// REGISTERING THE UNDO EVENT
+			this.saveUndo();
+
 			// CREATING A BREAKLINE
 			var tempAnchorEl = document.createElement("br");
 
 			// ADDING THE BREAKLINE AFTER THE LIST
 			currentNode.parentNode.insertBefore(tempAnchorEl, currentNode.nextSibling);
-
-			// REGISTERING THE UNDO EVENT
-			this.saveUndo();
 
 			// SETTING THAT THE CARET MUST BE PLACED BEFORE THE INSERTED NODE
 			var startBefore = true;
