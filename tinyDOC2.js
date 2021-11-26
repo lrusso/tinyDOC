@@ -1848,6 +1848,16 @@ class tinyDOC2
 								// CHECKING THE LINE
 								if (currentLine.length>0)
 									{
+									// TRIMMING THE CURRENT LINE
+									currentLine = currentLine.trim();
+
+									// CHECKING IF THE CURRENT LINE HAS A SPACE
+									if (currentLine.lastIndexOf(" ")>-1)
+										{
+										// GETTING THE CONTENT AFTER THE SPACE
+										currentLine = currentLine.substr(currentLine.lastIndexOf(" ")+1,currentLine.length);
+										}
+
 									// REMOVING INVALID CHARACTERS
 									currentLine = currentLine.replace(/[^0-9.]/g, "");
 
