@@ -1869,7 +1869,7 @@ class tinyDOC2
 								// IF SO, A BREAKLINE WILL BE ADDED BEFORE THE RESULT.
 								if (currentLine!="" && i==splitted.length-1)
 									{
-									lastLineBR = "\n";
+									lastLineBR = "<br>";
 									}
 								}
 								catch(err)
