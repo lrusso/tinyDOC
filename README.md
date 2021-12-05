@@ -76,3 +76,7 @@ $ 300.30
 ----------
 600.60
 ```
+
+## Suggested spellchecker:
+
+https://github.com/lrusso/JavaScriptSpellchecker
