@@ -1,6 +1,6 @@
 class tinyDOC2
 	{
-	constructor(myContainer, documentText, saveFunction, template1, template2, template3)
+	constructor(myContainer, documentText, saveFunction, spellcheckerEnabled, spellcheckerURL, template1, template2, template3)
 		{
 		// SETTING THE TINYDOC CONTAINER
 		this.myContainer = myContainer;
@@ -22,7 +22,7 @@ class tinyDOC2
 
 		// ADDING THE STYLESHEET
 		this.styleSheet = document.createElement("style");
-		this.styleSheet.innerText = ".tinydoc_menu_container{height:40px;border-bottom:thin solid #D3D3D3;overflow-y:hidden} .tinydoc_menu{background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:80px;overflow-x:scroll;overflow-y:hidden;outline:none;text-align:center;font-family:Arial;font-size:13px} .tinydoc_menu::-webkit-scrollbar{display:none} .tinydoc_menu_size{float:left;width:670px} .tinydoc_holder{float:left;padding-top:3px;padding-bottom:3px;margin:0} .tinydoc_separator{float:left;border-left:thin solid #D3D3D3;margin-left:5px;height:100px;width:1px} .tinydoc_separator2{float:left;border-left:thin solid #D3D3D3;margin-left:135px;height:100px;width:1px} .tinydoc_button_save{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAWElEQVQ4jWNgZGT8Tw5mYGA4z8DAoM9ArgFQQ94zIHH8cSiyZ2BgsEfj18P5SBJYXcMABTj59DCAn4GBgZ9sAwi6CF2CWDBqAI0M0CdBvz6GAWRnKEoNAABz05cZXE0N/gAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_save:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_print{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIABISH+2IiQAAAE9JREFUOMtj/PTpEwMlgAVdgI+P7z8+DZ8+fWJE5jMxUAgYKfUCIwMDw39KDCDbC7CwGDgXUM0AFmLiGl8aodwF6LbRPSXSJhAJeYOqeQEAZqYde9erwQ4AAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_print:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_undo{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAlElEQVR4XqWTQRHCMBREtx0E1AoOgoPigO8ACUgABakTkFApdVD28A97oCwNb+ZdOrPJ/vkpvlBhcOGVWvqN8AU/0ptwSQds0O24eaYPOkHoGmq/6JkuOcJuCq1+BM+Rztogcj7llEZWV0aKA1WCQppoaMrv9eMaTRM95A6De8qFrvTqthB2nY2M9Pnvj1bQyEBvEN4HjBvwG13/UAAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_undo:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_redo{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAjElEQVR4Xq2TXQ2EMBCElwYBSEEC5wAJoAALJwEHVAIoKA6QxE8yD80EJnvhvmTf+s022605mewl+1NIMD/dXUgphOqsmkPg9RzAh4ZcViEFdUwkKuIVEmjSkL3gBhA3CO7u+Su0JKw48EGRLIYIMarOag9Gj6wCFq/MAbNpIGsSDfNnmn/8ui820s0B6TsXTzSQVC8AAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_redo:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_bold{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIABYIhuO09wAAARBJREFUOMulkTGKhEAQRX8vG2tkJGhgaKT3MBBEzDo20XD3CDPHMPAEHsIjGBkZCIKBBTYqSG+0iyO6O+M++EHTVZ+qX4yI8B/etg9FUeRelmXJIAhkURS3Qwci+hEAeSZVVWWe57dtPRE9TrAzZl3XsSiKAADDMCDLso99HdtmoCiK3BoAwDzPME1TCiGgaRrqumanGfzFuq6/h7hnmiYkSSKFEAAA13Xx9ApHlGXJbNvG5RXCMJR93z9nQESMiFjbtsz3fQBA0zRI01S+dAUAEELAMAy5LAt0XUdVVezSCgCwLMtrGYzjiDiO5Xej4zgP/+9njUcXUVUVnPP7UwZbNE2D4zjgnN89z/s8DfEKX5+qlW3Q8GvUAAAAAElFTkSuQmCC\");background-repeat:no-repeat;background-position:center} .tinydoc_button_bold:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_italic{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIABo64oGqewAAAPBJREFUOMulk62ug0AQhb+5aUAhUBjeAIVdSUj4aXi8Pgkp3SYNci0vgUEhUGD2qmJaaLl31EzOzpfZnBzRWvOfOu2JeZ7bLU1rLQA/ewCttVwul3WOogittTyXPwIAmqZZ+6qqXvRdwDRNPB4PAHzfRyklhwBt29p5ngEoigLHcb6/wFpLXdcAiAhZlr19twnous72fQ+AUoogCOQQ4Hq9rv35fN785lvAMAzWGANAGIbEcSyHAPf7HWvtap2IfH/BsizcbjcAXNclSRLZc+oFYIyx4zgCkKYpnudxCPC0DqAsy49hkmcavwnOLuCv9QttsFRTIXyOUwAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_italic:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_underline{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIAB0gUKLFxgAAAK5JREFUOMvtk8EJhDAQRV9ksRLBCiwhEMFerCQHexGcSyoIWIFN5OwhewrsxrgsZI/7b5l5+TDMHyUi1Kh5fRhjojEm3sGlfkOl/gaZQdu2AJzneQFTLTFFg77vAdj3/bLKVEtM0UBrDYC1FudcDCEQQsA5F621b0ySypO4LEvctq047ziOzPOsPhoAeO/juq4cxwFA13VM08QwDCpnVe0tPPKsf/NJRNTPclA9whOE5kYCIDcMCQAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_underline:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_strikethrough{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACE7qTR11QAAARFJREFUOMutUyGOhEAQrLmg+QHhATzhNkgMeh6wi5w/kHkCCCSehGARSDwSNYqgRmDGQtJnbsmyxx3c7VXSoivdlXR1NzPG4BVYz8SyLGjblpqmwTAMAADXdREEAXzfZ5b11GKMWWOaJgghCMBuCCFomqZNzyZJk5QAEOeciqIgpRQppagoCuKcEwBKk5S+FbgX9X2/KTLGoO/7VfyRt86a5TgO2zP87TG5vF8AAFJK1HVNWms6Et6ozvOMOI4py7KVC8Pwxy2wT4f/DHZ0SFpr6roOVVWhLEukSYrr7cpOC9wxjiN5ngfOOfI8Z7smRlFEtm3TOI6nxzrcgtaa6romKeWm5t9O+YsHv30m9uo7fwChngRRWCWECgAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_strikethrough:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_dotted{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACQpJ/rw2AAAAFtJREFUOMvtkbsNgDAMBc+IabKW5bGyTybIIG8B0wCi45OCJidZ8nPlp7PWWtZaAXB3SinGGyIigQQyIlISkjhud7MwyOruZ7jukh5Vsf3dz4xX6L1PC9PC/xY2HshsE72V1dYAAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_dotted:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_numbered{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACgMwEtrkwAAAHJJREFUOMvNkzEKwDAMA6XiJT/LM/K1TBm9asnb0qlQSgOtM7Ta7EGIEyKAAQCSiIBMEnPO4/y83jNJ4oZF2cz5qQElLSXgATEKcpNEd2eYQWtt9N5RSgm1YLVWuDtTSt8w+EkL0R0AgN0Rf7WF1QTLDHbuCD9uIC7lSwAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_numbered:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_highlight{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIAwkdJCLg2wAAAN1JREFUOMvFk7GNhDAQRZ/vLKe0AJmdU5ITSqACSqAgOnBgBBESknOLbC5goz0JLdwhbbAT/hl/vz+W1TAMO2/UF2+WPhP3fafrOnLOABRFQdu2KKXuEaSUfg8D5JxJKd2PME0TAN57vPcH7ZZBjBFjDFVVUVUVxhhijPcMtm1jXVestWit0VpjrWVdV7Zt+3+JT9QQAiGEl15d138TjON4+WRnvQOBiDDPM2VZ0jTNYbDve+Z5RkQwxpwTLMuCiOCce7nJOYeIsCzLdYQn4pXBWQz18b+g9p/vzxI8ADfZZ0b8LW/QAAAAAElFTkSuQmCC\");background-repeat:no-repeat;background-position:center} .tinydoc_button_highlight:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_link{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIETgmTNZ5UwAAAcNJREFUOMuNkrGK8kAUhc9EG0sbbXyG9AbLXYvIFoomRrAwPoggPoAIVhmDWGiMKQQxhW4ZfIC08QlsgtNYxftX7ir8m90LUwzD+ebccy8TQuAvdTweabFYgIjQ6XSgqioDgOxfxJ7nEeccqqoik8lgMpnger2SYRjsV8Bms6HZbAbTNKFpGgOAYrFInHOUSiViaS0EQUCj0ehF/KjpdErn8xnSL79DVVVomsbiOH57frvf78hms+mAXC4HWZbhui4ZhnF8QNbrNe33e9TrdUAI8eOJogicc1IUhTjnJISAZVmkKArZtk1CCLxkcDgcyHEcAMBwOGSn04ls24ZpmigUCgjDEL7vo9/vo9VqMQDfANd1ybZtqKoKWZZxuVzwEJfLZTYYDAgA2u02qtXqd6BCiC+blmXR851zTlEUpbYpBUFAtm2j1+tB13UWx/Hbs+3xeExpQUvb7Ra1Wg26rjMAyOfzn6vV6l3TNBaGIW63W+qiSUmSQJJep5nP5z9d1yXf99FsNtMBjUYDu90Onud9WX0EapomKpUKSwMwIQQcx6H5fI6Pjw8kSQLf9/+7vj8CAMD3fVoul2CModvtvo4qpf4B6K4azkk8uZwAAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_link:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_template{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIEh4sbZutMAAAAFBJREFUOMtjZGBg+M9AAWBhYGBg+PTpEyM5mvn4+P4zMVAB/P/06RMD1Cv/0fmE2CzIJiF7BR+bj48PHm7U9wIxbGQ+I5QzGgsjOxYYKc3OAOmZja1ll10GAAAAAElFTkSuQmCC\");background-repeat:no-repeat;background-position:center} .tinydoc_button_template:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_calc{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkQFwIfp1os4AAAALRJREFUOMvVU7EKwjAQfVcjikvBpbufkULRjkV38TsrGS1oL6N+jenUcxJKEyFiF99yIXf38t4dAX4EvQ+51hcBthENTcu88xJaa4l5cVyn/IL8DEjldSao+cYH/9qDVMxMaZquNu65zLJsTkRr9NiHFKlPUo0xDgBwf6Asy77rOkQRiNB17NM5JzSjOkTgWbC2LURkMbRgjycV8h+cbmycbI3Jt0qimf9HgRp+khgSAhpMiRcKtVp0wswb6wAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_calc:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_clear{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACsnR9rBEAAAATxJREFUOMulk7FqwlAUhr+UbIKDGXwFsUJFRx/BVcggZGynzF7IC9y8Qt/DyckHEJUswhUujglk8G6CcLo0xSq0SfvBgQMXvnN+DtdzzlHRbreFmjjnPIAn/snTvbWq8/nsTadTAIwx396q6T9ucDqdZLlcMpvN6Ha7Xq0NbsmyDIDhcFg/wi273e7vguv1+iUYDAZvjQXH41FWqxXz+ZxOp/PeWFDlH41Gzc5Ysd1uP/O/NBdcLheyLGMymdDvP3sAeZ5LkiRSlqUGKMtSJ0kieZ7Lg+BwOMh6vabX69FqtQDwfT8tigKl1MIYI0qpRVEU+L6fPgj2+/1D/iAIlNY6BRiPxwBordMgCJR/L4iiyIuiqNF/kN/KWqvDMJQwDGWz2bxWvbVW1xIYYySOY7HW4pzT1lriOBZjjHwAufKy2MF7tKcAAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_clear:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_document{display:block;padding:8px;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;-webkit-text-size-adjust:none;-webkit-user-select:text;user-select:text} .tinydoc_document a{text-decoration:underline;color:#3a76b1} .tinydoc_urlviewer{display:inline-block;font-family:Arial;font-size:13px;line-height:2.6;margin-left:11px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1px;white-space:nowrap} .tinydoc_urlviewer a{text-decoration:none;color:#3a76b1;margin-right:11px} @media (pointer: coarse) { .tinydoc_button_save:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_print:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_undo:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_redo:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_bold:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_italic:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_underline:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_strikethrough:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_dotted:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_numbered:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_highlight:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_link:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_template:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_calc:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_clear:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}}";
+		this.styleSheet.innerText = ".tinydoc_menu_container{height:40px;border-bottom:thin solid #D3D3D3;overflow-y:hidden} .tinydoc_menu{background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:80px;overflow-x:scroll;overflow-y:hidden;outline:none;text-align:center;font-family:Arial;font-size:13px} .tinydoc_menu::-webkit-scrollbar{display:none} .tinydoc_menu_size{float:left;width:670px} .tinydoc_holder{float:left;padding-top:3px;padding-bottom:3px;margin:0} .tinydoc_separator{float:left;border-left:thin solid #D3D3D3;margin-left:5px;height:100px;width:1px} .tinydoc_separator2{float:left;border-left:thin solid #D3D3D3;margin-left:135px;height:100px;width:1px} .tinydoc_button_save{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAWElEQVQ4jWNgZGT8Tw5mYGA4z8DAoM9ArgFQQ94zIHH8cSiyZ2BgsEfj18P5SBJYXcMABTj59DCAn4GBgZ9sAwi6CF2CWDBqAI0M0CdBvz6GAWRnKEoNAABz05cZXE0N/gAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_spellcheck{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QwFFSYJ2JxnuQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAA5ElEQVQ4y72SLY6FQBCEPzZzESx2JmQckiOAfRrHAVBcAIFA4+EaIOY8JISkn9lJ2PfDj9lSk5rq7qpOBwBFUcg0TQBYa2nbNtBaC7/w3F4H4JwLANiL/fuM8/jhApRS3/9ep+zhOWMM8zwfN/B59o08p5SSbw4uRdi27TzCJ3g31lqcc1hrAd4c/h/qupamaeT2DvyxjePIuq73J2dZJlprqapKDoWPx0OMMX9EaZqK1lrKsvxY/LbFOI4FIM9zhmFgWRaMMXRdF1xq8HpMURTR931w65CSJAEgDMPD4tOtX9E9AfcIYrVZcljqAAAAAElFTkSuQmCC\");background-repeat:no-repeat;background-position:center} .tinydoc_button_save:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_spellcheck:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_print{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIABISH+2IiQAAAE9JREFUOMtj/PTpEwMlgAVdgI+P7z8+DZ8+fWJE5jMxUAgYKfUCIwMDw39KDCDbC7CwGDgXUM0AFmLiGl8aodwF6LbRPSXSJhAJeYOqeQEAZqYde9erwQ4AAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_print:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_undo{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAlElEQVR4XqWTQRHCMBREtx0E1AoOgoPigO8ACUgABakTkFApdVD28A97oCwNb+ZdOrPJ/vkpvlBhcOGVWvqN8AU/0ptwSQds0O24eaYPOkHoGmq/6JkuOcJuCq1+BM+Rztogcj7llEZWV0aKA1WCQppoaMrv9eMaTRM95A6De8qFrvTqthB2nY2M9Pnvj1bQyEBvEN4HjBvwG13/UAAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_undo:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_redo{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAjElEQVR4Xq2TXQ2EMBCElwYBSEEC5wAJoAALJwEHVAIoKA6QxE8yD80EJnvhvmTf+s022605mewl+1NIMD/dXUgphOqsmkPg9RzAh4ZcViEFdUwkKuIVEmjSkL3gBhA3CO7u+Su0JKw48EGRLIYIMarOag9Gj6wCFq/MAbNpIGsSDfNnmn/8ui820s0B6TsXTzSQVC8AAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_redo:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_bold{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIABYIhuO09wAAARBJREFUOMulkTGKhEAQRX8vG2tkJGhgaKT3MBBEzDo20XD3CDPHMPAEHsIjGBkZCIKBBTYqSG+0iyO6O+M++EHTVZ+qX4yI8B/etg9FUeRelmXJIAhkURS3Qwci+hEAeSZVVWWe57dtPRE9TrAzZl3XsSiKAADDMCDLso99HdtmoCiK3BoAwDzPME1TCiGgaRrqumanGfzFuq6/h7hnmiYkSSKFEAAA13Xx9ApHlGXJbNvG5RXCMJR93z9nQESMiFjbtsz3fQBA0zRI01S+dAUAEELAMAy5LAt0XUdVVezSCgCwLMtrGYzjiDiO5Xej4zgP/+9njUcXUVUVnPP7UwZbNE2D4zjgnN89z/s8DfEKX5+qlW3Q8GvUAAAAAElFTkSuQmCC\");background-repeat:no-repeat;background-position:center} .tinydoc_button_bold:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_italic{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIABo64oGqewAAAPBJREFUOMulk62ug0AQhb+5aUAhUBjeAIVdSUj4aXi8Pgkp3SYNci0vgUEhUGD2qmJaaLl31EzOzpfZnBzRWvOfOu2JeZ7bLU1rLQA/ewCttVwul3WOogittTyXPwIAmqZZ+6qqXvRdwDRNPB4PAHzfRyklhwBt29p5ngEoigLHcb6/wFpLXdcAiAhZlr19twnous72fQ+AUoogCOQQ4Hq9rv35fN785lvAMAzWGANAGIbEcSyHAPf7HWvtap2IfH/BsizcbjcAXNclSRLZc+oFYIyx4zgCkKYpnudxCPC0DqAsy49hkmcavwnOLuCv9QttsFRTIXyOUwAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_italic:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_underline{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIAB0gUKLFxgAAAK5JREFUOMvtk8EJhDAQRV9ksRLBCiwhEMFerCQHexGcSyoIWIFN5OwhewrsxrgsZI/7b5l5+TDMHyUi1Kh5fRhjojEm3sGlfkOl/gaZQdu2AJzneQFTLTFFg77vAdj3/bLKVEtM0UBrDYC1FudcDCEQQsA5F621b0ySypO4LEvctq047ziOzPOsPhoAeO/juq4cxwFA13VM08QwDCpnVe0tPPKsf/NJRNTPclA9whOE5kYCIDcMCQAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_underline:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_strikethrough{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACE7qTR11QAAARFJREFUOMutUyGOhEAQrLmg+QHhATzhNkgMeh6wi5w/kHkCCCSehGARSDwSNYqgRmDGQtJnbsmyxx3c7VXSoivdlXR1NzPG4BVYz8SyLGjblpqmwTAMAADXdREEAXzfZ5b11GKMWWOaJgghCMBuCCFomqZNzyZJk5QAEOeciqIgpRQppagoCuKcEwBKk5S+FbgX9X2/KTLGoO/7VfyRt86a5TgO2zP87TG5vF8AAFJK1HVNWms6Et6ozvOMOI4py7KVC8Pwxy2wT4f/DHZ0SFpr6roOVVWhLEukSYrr7cpOC9wxjiN5ngfOOfI8Z7smRlFEtm3TOI6nxzrcgtaa6romKeWm5t9O+YsHv30m9uo7fwChngRRWCWECgAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_strikethrough:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_dotted{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACQpJ/rw2AAAAFtJREFUOMvtkbsNgDAMBc+IabKW5bGyTybIIG8B0wCi45OCJidZ8nPlp7PWWtZaAXB3SinGGyIigQQyIlISkjhud7MwyOruZ7jukh5Vsf3dz4xX6L1PC9PC/xY2HshsE72V1dYAAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_dotted:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_numbered{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACgMwEtrkwAAAHJJREFUOMvNkzEKwDAMA6XiJT/LM/K1TBm9asnb0qlQSgOtM7Ta7EGIEyKAAQCSiIBMEnPO4/y83jNJ4oZF2cz5qQElLSXgATEKcpNEd2eYQWtt9N5RSgm1YLVWuDtTSt8w+EkL0R0AgN0Rf7WF1QTLDHbuCD9uIC7lSwAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_numbered:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_highlight{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIAwkdJCLg2wAAAN1JREFUOMvFk7GNhDAQRZ/vLKe0AJmdU5ITSqACSqAgOnBgBBESknOLbC5goz0JLdwhbbAT/hl/vz+W1TAMO2/UF2+WPhP3fafrOnLOABRFQdu2KKXuEaSUfg8D5JxJKd2PME0TAN57vPcH7ZZBjBFjDFVVUVUVxhhijPcMtm1jXVestWit0VpjrWVdV7Zt+3+JT9QQAiGEl15d138TjON4+WRnvQOBiDDPM2VZ0jTNYbDve+Z5RkQwxpwTLMuCiOCce7nJOYeIsCzLdYQn4pXBWQz18b+g9p/vzxI8ADfZZ0b8LW/QAAAAAElFTkSuQmCC\");background-repeat:no-repeat;background-position:center} .tinydoc_button_highlight:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_link{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIETgmTNZ5UwAAAcNJREFUOMuNkrGK8kAUhc9EG0sbbXyG9AbLXYvIFoomRrAwPoggPoAIVhmDWGiMKQQxhW4ZfIC08QlsgtNYxftX7ir8m90LUwzD+ebccy8TQuAvdTweabFYgIjQ6XSgqioDgOxfxJ7nEeccqqoik8lgMpnger2SYRjsV8Bms6HZbAbTNKFpGgOAYrFInHOUSiViaS0EQUCj0ehF/KjpdErn8xnSL79DVVVomsbiOH57frvf78hms+mAXC4HWZbhui4ZhnF8QNbrNe33e9TrdUAI8eOJogicc1IUhTjnJISAZVmkKArZtk1CCLxkcDgcyHEcAMBwOGSn04ls24ZpmigUCgjDEL7vo9/vo9VqMQDfANd1ybZtqKoKWZZxuVzwEJfLZTYYDAgA2u02qtXqd6BCiC+blmXR851zTlEUpbYpBUFAtm2j1+tB13UWx/Hbs+3xeExpQUvb7Ra1Wg26rjMAyOfzn6vV6l3TNBaGIW63W+qiSUmSQJJep5nP5z9d1yXf99FsNtMBjUYDu90Onud9WX0EapomKpUKSwMwIQQcx6H5fI6Pjw8kSQLf9/+7vj8CAMD3fVoul2CModvtvo4qpf4B6K4azkk8uZwAAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_link:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_template{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIEh4sbZutMAAAAFBJREFUOMtjZGBg+M9AAWBhYGBg+PTpEyM5mvn4+P4zMVAB/P/06RMD1Cv/0fmE2CzIJiF7BR+bj48PHm7U9wIxbGQ+I5QzGgsjOxYYKc3OAOmZja1ll10GAAAAAElFTkSuQmCC\");background-repeat:no-repeat;background-position:center} .tinydoc_button_template:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_calc{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkQFwIfp1os4AAAALRJREFUOMvVU7EKwjAQfVcjikvBpbufkULRjkV38TsrGS1oL6N+jenUcxJKEyFiF99yIXf38t4dAX4EvQ+51hcBthENTcu88xJaa4l5cVyn/IL8DEjldSao+cYH/9qDVMxMaZquNu65zLJsTkRr9NiHFKlPUo0xDgBwf6Asy77rOkQRiNB17NM5JzSjOkTgWbC2LURkMbRgjycV8h+cbmycbI3Jt0qimf9HgRp+khgSAhpMiRcKtVp0wswb6wAAAABJRU5ErkJggg==\");background-repeat:no-repeat;background-position:center} .tinydoc_button_calc:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_button_clear{display:block;font-family:Arial;font-size:15px;line-height:32px;height:32px;width:28px;background-color:#F2F2F2;border:thin solid #F2F2F2;margin-left:3px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;background:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wkIACsnR9rBEAAAATxJREFUOMulk7FqwlAUhr+UbIKDGXwFsUJFRx/BVcggZGynzF7IC9y8Qt/DyckHEJUswhUujglk8G6CcLo0xSq0SfvBgQMXvnN+DtdzzlHRbreFmjjnPIAn/snTvbWq8/nsTadTAIwx396q6T9ucDqdZLlcMpvN6Ha7Xq0NbsmyDIDhcFg/wi273e7vguv1+iUYDAZvjQXH41FWqxXz+ZxOp/PeWFDlH41Gzc5Ysd1uP/O/NBdcLheyLGMymdDvP3sAeZ5LkiRSlqUGKMtSJ0kieZ7Lg+BwOMh6vabX69FqtQDwfT8tigKl1MIYI0qpRVEU+L6fPgj2+/1D/iAIlNY6BRiPxwBordMgCJR/L4iiyIuiqNF/kN/KWqvDMJQwDGWz2bxWvbVW1xIYYySOY7HW4pzT1lriOBZjjHwAufKy2MF7tKcAAAAASUVORK5CYII=\");background-repeat:no-repeat;background-position:center} .tinydoc_button_clear:hover{background-color:#E3E3E3;border:thin solid #D3D3D3} .tinydoc_document{display:block;padding:8px;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;-webkit-text-size-adjust:none;-webkit-user-select:text;user-select:text} .tinydoc_document a{text-decoration:underline;color:#3a76b1} .tinydoc_contentviewer{display:inline-block;font-family:Arial;font-size:13px;line-height:2.6;margin-left:11px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1px;white-space:nowrap} .tinydoc_contentviewer a{text-decoration:none;color:#3a76b1;margin-right:11px} .tinydoc_contentviewer div{display:inline-block;margin-right:10px} .tinydoc_spellchecker_no_suggestions{color:gray} misspelled{text-decoration:underline;text-decoration-color:red;text-decoration-thickness:2px} @media (pointer: coarse) { .tinydoc_button_save:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_print:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_undo:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_redo:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_bold:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_italic:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_underline:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_strikethrough:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_dotted:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_numbered:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_highlight:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_link:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_template:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_calc:hover{background-color:#F2F2F2;border:thin solid #F2F2F2} .tinydoc_button_clear:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}}";
 		document.getElementsByTagName("head")[0].appendChild(this.styleSheet);
 
 		// ADDING THE MENU BAR
@@ -66,184 +66,208 @@ class tinyDOC2
 		this.separator2.className = "tinydoc_separator";
 		this.menu.appendChild(this.separator2);
 
-		// ADDING THE UNDO BUTTON
-		this.holder3 = document.createElement("div");
-		this.holder3.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder3);
-		this.buttonUndo = document.createElement("div");
-		this.buttonUndo.className = "tinydoc_button_undo";
-		this.holder3.appendChild(this.buttonUndo);
+		// CHECKING IF THE SPELLCHECKER IS ENABLED
+		if (spellcheckerEnabled==true)
+			{
+			// ADDING THE SPELLCHECKER BUTTON
+			this.holder3 = document.createElement("div");
+			this.holder3.className = "tinydoc_holder";
+			this.menu.appendChild(this.holder3);
+			this.buttonSpellcheck = document.createElement("div");
+			this.buttonSpellcheck.className = "tinydoc_button_spellcheck";
+			this.holder3.appendChild(this.buttonSpellcheck);
 
-		// ADDING THE REDO BUTTON
+			// ADDING A SEPARATOR
+			this.separator3 = document.createElement("div");
+			this.separator3.className = "tinydoc_separator";
+			this.menu.appendChild(this.separator3);
+			}
+
+		// ADDING THE UNDO BUTTON
 		this.holder4 = document.createElement("div");
 		this.holder4.className = "tinydoc_holder";
 		this.menu.appendChild(this.holder4);
-		this.buttonRedo = document.createElement("div");
-		this.buttonRedo.className = "tinydoc_button_redo";
-		this.holder4.appendChild(this.buttonRedo);
+		this.buttonUndo = document.createElement("div");
+		this.buttonUndo.className = "tinydoc_button_undo";
+		this.holder4.appendChild(this.buttonUndo);
 
-		// ADDING A SEPARATOR
-		this.separator3 = document.createElement("div");
-		this.separator3.className = "tinydoc_separator";
-		this.menu.appendChild(this.separator3);
-
-		// ADDING THE BOLD BUTTON
+		// ADDING THE REDO BUTTON
 		this.holder5 = document.createElement("div");
 		this.holder5.className = "tinydoc_holder";
 		this.menu.appendChild(this.holder5);
-		this.buttonBold = document.createElement("div");
-		this.buttonBold.className = "tinydoc_button_bold";
-		this.holder5.appendChild(this.buttonBold);
-
-		// ADDING THE ITALIC BUTTON
-		this.holder6 = document.createElement("div");
-		this.holder6.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder6);
-		this.buttonItalic = document.createElement("div");
-		this.buttonItalic.className = "tinydoc_button_italic";
-		this.holder6.appendChild(this.buttonItalic);
-
-		// ADDING THE UNDERLINE BUTTON
-		this.holder7 = document.createElement("div");
-		this.holder7.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder7);
-		this.buttonUnderline = document.createElement("div");
-		this.buttonUnderline.className = "tinydoc_button_underline";
-		this.holder7.appendChild(this.buttonUnderline);
-
-		// ADDING THE STRIKETHROUGH BUTTON
-		this.holder8 = document.createElement("div");
-		this.holder8.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder8);
-		this.buttonStrikethrough = document.createElement("div");
-		this.buttonStrikethrough.className = "tinydoc_button_strikethrough";
-		this.holder8.appendChild(this.buttonStrikethrough);
+		this.buttonRedo = document.createElement("div");
+		this.buttonRedo.className = "tinydoc_button_redo";
+		this.holder5.appendChild(this.buttonRedo);
 
 		// ADDING A SEPARATOR
 		this.separator4 = document.createElement("div");
 		this.separator4.className = "tinydoc_separator";
 		this.menu.appendChild(this.separator4);
 
-		// ADDING THE DOTTED BUTTON
+		// ADDING THE BOLD BUTTON
+		this.holder6 = document.createElement("div");
+		this.holder6.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder6);
+		this.buttonBold = document.createElement("div");
+		this.buttonBold.className = "tinydoc_button_bold";
+		this.holder6.appendChild(this.buttonBold);
+
+		// ADDING THE ITALIC BUTTON
+		this.holder7 = document.createElement("div");
+		this.holder7.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder7);
+		this.buttonItalic = document.createElement("div");
+		this.buttonItalic.className = "tinydoc_button_italic";
+		this.holder7.appendChild(this.buttonItalic);
+
+		// ADDING THE UNDERLINE BUTTON
+		this.holder8 = document.createElement("div");
+		this.holder8.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder8);
+		this.buttonUnderline = document.createElement("div");
+		this.buttonUnderline.className = "tinydoc_button_underline";
+		this.holder8.appendChild(this.buttonUnderline);
+
+		// ADDING THE STRIKETHROUGH BUTTON
 		this.holder9 = document.createElement("div");
 		this.holder9.className = "tinydoc_holder";
 		this.menu.appendChild(this.holder9);
-		this.buttonDotted = document.createElement("div");
-		this.buttonDotted.className = "tinydoc_button_dotted";
-		this.holder9.appendChild(this.buttonDotted);
-
-		// ADDING THE NUMBERED BUTTON
-		this.holder10 = document.createElement("div");
-		this.holder10.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder10);
-		this.buttonNumbered = document.createElement("div");
-		this.buttonNumbered.className = "tinydoc_button_numbered";
-		this.holder10.appendChild(this.buttonNumbered);
-
-		// ADDING THE HIGHLIGHT BUTTON
-		this.holder11 = document.createElement("div");
-		this.holder11.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder11);
-		this.buttonHighlight = document.createElement("div");
-		this.buttonHighlight.className = "tinydoc_button_highlight";
-		this.holder11.appendChild(this.buttonHighlight);
-
-		// ADDING THE LINK BUTTON
-		this.holder12 = document.createElement("div");
-		this.holder12.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder12);
-		this.buttonLink = document.createElement("div");
-		this.buttonLink.className = "tinydoc_button_link";
-		this.holder12.appendChild(this.buttonLink);
+		this.buttonStrikethrough = document.createElement("div");
+		this.buttonStrikethrough.className = "tinydoc_button_strikethrough";
+		this.holder9.appendChild(this.buttonStrikethrough);
 
 		// ADDING A SEPARATOR
 		this.separator5 = document.createElement("div");
 		this.separator5.className = "tinydoc_separator";
 		this.menu.appendChild(this.separator5);
 
+		// ADDING THE DOTTED BUTTON
+		this.holder10 = document.createElement("div");
+		this.holder10.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder10);
+		this.buttonDotted = document.createElement("div");
+		this.buttonDotted.className = "tinydoc_button_dotted";
+		this.holder10.appendChild(this.buttonDotted);
+
+		// ADDING THE NUMBERED BUTTON
+		this.holder11 = document.createElement("div");
+		this.holder11.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder11);
+		this.buttonNumbered = document.createElement("div");
+		this.buttonNumbered.className = "tinydoc_button_numbered";
+		this.holder11.appendChild(this.buttonNumbered);
+
+		// ADDING THE HIGHLIGHT BUTTON
+		this.holder12 = document.createElement("div");
+		this.holder12.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder12);
+		this.buttonHighlight = document.createElement("div");
+		this.buttonHighlight.className = "tinydoc_button_highlight";
+		this.holder12.appendChild(this.buttonHighlight);
+
+		// ADDING THE LINK BUTTON
+		this.holder13 = document.createElement("div");
+		this.holder13.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder13);
+		this.buttonLink = document.createElement("div");
+		this.buttonLink.className = "tinydoc_button_link";
+		this.holder13.appendChild(this.buttonLink);
+
+		// ADDING A SEPARATOR
+		this.separator6 = document.createElement("div");
+		this.separator6.className = "tinydoc_separator";
+		this.menu.appendChild(this.separator6);
+
 		// CHECKING IF THERE IS A TEMPLATE 1
 		if (template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
-			this.holder13 = document.createElement("div");
-			this.holder13.className = "tinydoc_holder";
-			this.menu.appendChild(this.holder13);
+			this.holder14 = document.createElement("div");
+			this.holder14.className = "tinydoc_holder";
+			this.menu.appendChild(this.holder14);
 			this.buttonTemplate1 = document.createElement("div");
 			this.buttonTemplate1.className = "tinydoc_button_template";
-			this.holder13.appendChild(this.buttonTemplate1);
+			this.holder14.appendChild(this.buttonTemplate1);
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
 		if (template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
-			this.holder14 = document.createElement("div");
-			this.holder14.className = "tinydoc_holder";
-			this.menu.appendChild(this.holder14);
+			this.holder15 = document.createElement("div");
+			this.holder15.className = "tinydoc_holder";
+			this.menu.appendChild(this.holder15);
 			this.buttonTemplate2 = document.createElement("div");
 			this.buttonTemplate2.className = "tinydoc_button_template";
-			this.holder14.appendChild(this.buttonTemplate2);
+			this.holder15.appendChild(this.buttonTemplate2);
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
 		if (template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
-			this.holder15 = document.createElement("div");
-			this.holder15.className = "tinydoc_holder";
-			this.menu.appendChild(this.holder15);
+			this.holder16 = document.createElement("div");
+			this.holder16.className = "tinydoc_holder";
+			this.menu.appendChild(this.holder16);
 			this.buttonTemplate3 = document.createElement("div");
 			this.buttonTemplate3.className = "tinydoc_button_template";
-			this.holder15.appendChild(this.buttonTemplate3);
+			this.holder16.appendChild(this.buttonTemplate3);
 			}
 
 		// CHECKING IF THERE IS ANY TEMPLATE
 		if (template1 || template2 || template3)
 			{
 			// ADDING A SEPARATOR
-			this.separator6 = document.createElement("div");
-			this.separator6.className = "tinydoc_separator";
-			this.menu.appendChild(this.separator6);
+			this.separator7 = document.createElement("div");
+			this.separator7.className = "tinydoc_separator";
+			this.menu.appendChild(this.separator7);
 			}
 
 		// ADDING THE CALC BUTTON
-		this.holder16 = document.createElement("div");
-		this.holder16.className = "tinydoc_holder";
-		this.menu.appendChild(this.holder16);
-		this.buttonCalc = document.createElement("div");
-		this.buttonCalc.className = "tinydoc_button_calc";
-		this.holder16.appendChild(this.buttonCalc);
-
-		// ADDING A SEPARATOR
-		this.separator7 = document.createElement("div");
-		this.separator7.className = "tinydoc_separator";
-		this.menu.appendChild(this.separator7);
-
-		// ADDING THE CLEAR FORMAT BUTTON
 		this.holder17 = document.createElement("div");
 		this.holder17.className = "tinydoc_holder";
 		this.menu.appendChild(this.holder17);
-		this.buttonClear = document.createElement("div");
-		this.buttonClear.className = "tinydoc_button_clear";
-		this.holder17.appendChild(this.buttonClear);
+		this.buttonCalc = document.createElement("div");
+		this.buttonCalc.className = "tinydoc_button_calc";
+		this.holder17.appendChild(this.buttonCalc);
 
 		// ADDING A SEPARATOR
 		this.separator8 = document.createElement("div");
 		this.separator8.className = "tinydoc_separator";
 		this.menu.appendChild(this.separator8);
 
-		// ADDING THE URL VIEWER
+		// ADDING THE CLEAR FORMAT BUTTON
 		this.holder18 = document.createElement("div");
 		this.holder18.className = "tinydoc_holder";
 		this.menu.appendChild(this.holder18);
-		this.urlViewer = document.createElement("div");
-		this.urlViewer.className = "tinydoc_urlviewer";
-		this.holder18.appendChild(this.urlViewer);
+		this.buttonClear = document.createElement("div");
+		this.buttonClear.className = "tinydoc_button_clear";
+		this.holder18.appendChild(this.buttonClear);
+
+		// ADDING A SEPARATOR
+		this.separator9 = document.createElement("div");
+		this.separator9.className = "tinydoc_separator";
+		this.menu.appendChild(this.separator9);
+
+		// ADDING THE CONTENT VIEWER
+		this.holder19 = document.createElement("div");
+		this.holder19.className = "tinydoc_holder";
+		this.menu.appendChild(this.holder19);
+		this.contentViewer = document.createElement("div");
+		this.contentViewer.className = "tinydoc_contentviewer";
+		this.holder19.appendChild(this.contentViewer);
 
 		// ADDING A EDITABLE DOCUMENT
 		this.document = document.createElement("div");
 		this.document.className = "tinydoc_document";
 		this.document.contentEditable = true;
+
+		// CHECKING IF THE SPELLCHECKER IS ENABLED
+		if (spellcheckerEnabled==true)
+			{
+			this.document.spellcheck = false;
+			}
+
 		this.myContainer.appendChild(this.document);
 
 		// CHECKING IF THERE IS A DEFAULT DOCUMENT TEXT
@@ -255,6 +279,81 @@ class tinyDOC2
 			else
 			{
 			this.document.innerHTML = "<div></div>";
+			}
+
+		// SETTING THE CURRENT INSTANCE FOR LATER USE
+		var thisTinyDOC = this;
+
+		// CREATING A VARIABLE TO STORE THE SPELLCHECKER RESULT
+		this.spellcheckerResult = null
+
+		// CREATING A VARIABLE TO SET THAT THE SPELLCHECKER STATUS
+		this.spellcheckerInProgress = true;
+
+		// CHECKING IF THE SPELLCHECKER IS ENABLED
+		if (spellcheckerEnabled==true)
+			{
+			// CREATING THE WEB WORKER FOR THE SPELLCHECKER SERVICE
+			this.myWorker = new Worker(spellcheckerURL);
+
+			// SETTING WHAT WILL HAPPEN WHEN A MESSAGE IS RECEIVED FROM THE WEB WORKER
+			this.myWorker.onmessage = function(e)
+				{
+				// GETTING THE WORKER MESSAGE
+				var words = e.data;
+
+				// GETTING THE SPELLCHECKER RESULT
+				thisTinyDOC.spellcheckerResult = words;
+
+				// GETTING THE DOCUMENT INNERHTML CONTENT
+				var originalHTML = thisTinyDOC.document.innerHTML;
+
+				// GETTING THE CARET POSITION
+				var originalCaretPosition = thisTinyDOC.getCaretPosition(thisTinyDOC.document);
+
+				// LOOPING EVERY WORD
+				for (var key in words)
+					{
+					// GETTING THE WORD THAT MUST BE UNDERLINED
+					var wordToUnderline = key;
+
+					// REGEX FOR FINDING A WORD NOT INSIDE A 'A' TAGNAME
+					var exp = new RegExp("\\b(" + wordToUnderline + ")\\b(?![^<a]*>|[^<>]*</a>)", "gi");
+
+					// ADDING A MISSPELLED TAG TO EVERY MISSPELLED WORD
+					originalHTML = originalHTML.replace(exp,function(m){return "<misspelled>" + m + "</misspelled>"});
+					}
+
+				try
+					{
+					// LOOPING EVERY DOCUMENT CHILD
+					while (thisTinyDOC.document.firstChild)
+						{
+						// REMOVING EVERY CHILD
+						thisTinyDOC.document.removeChild(thisTinyDOC.document.firstChild);
+						}
+					}
+					catch(err)
+					{
+					}
+
+				// SETTING THAT THE SPELLCHECKER IS IN PROGRESS
+				thisTinyDOC.spellcheckerInProgress = true;
+
+				// SETTING THE DOCUMENT TEXT WITH THE MISSPELLED WORDS UNDERLINED
+				thisTinyDOC.insertHtmlAtCaret(originalHTML,false);
+
+				// ENABLING THE DOCUMENT
+				thisTinyDOC.enable();
+
+				// RESTORING THE CARET POSITION
+				thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
+
+				// SETTING THAT THE SPELLCHECKER IS NOT IN PROGRESS
+				thisTinyDOC.spellcheckerInProgress = false;
+
+				return true;
+				}
 			}
 
 		// SETTING A VARIABLE TO KNOW IF THE DOCUMENT CAN UNDO/REDO
@@ -275,14 +374,17 @@ class tinyDOC2
 		// ADDING A REGEX FOR CHECKING IF THE USER IS USING CHROME
 		this.isUsingChrome = /.*chrome/i.test(navigator.userAgent);
 
-		// SETTING THE CURRENT INSTANCE FOR LATER USE
-		var thisTinyDOC = this;
-
 		// CHECKING IF THERE IS A SAVE FUNCTION
 		if (saveFunction)
 			{
 			// SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON THE SAVE BUTTON
 			this.buttonSave.addEventListener("mousedown",function(event){thisTinyDOC.save();event.preventDefault()});
+			}
+
+		// CHECKING IF THE SPELLCHECKER IS ENABLED
+		if (spellcheckerEnabled==true)
+			{
+			this.buttonSpellcheck.addEventListener("mousedown",function(event){thisTinyDOC.spellcheck();event.preventDefault()});
 			}
 
 		// SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON A MENU BUTTON
@@ -320,6 +422,23 @@ class tinyDOC2
 			// ADDING THE TEMPLATE 3 BUTTON
 			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template3,false);event.preventDefault()});
 			}
+
+		// SETTING WHAT WILL HAPPEN WHEN THE USER IS CLICKING
+		this.document.addEventListener("mousedown", function(event)
+			{
+			try
+				{
+				// CHECKING IF THE DOCUMENT IS DISABLED
+				if (thisTinyDOC.documentEnabled==false)
+					{
+					// PREVENTING ANY SELECTION TO BE MADE
+					event.preventDefault();
+					}
+				}
+				catch(err)
+				{
+				}
+			});
 
 		// SETTING WHAT WILL HAPPEN WHEN THE USER IS TYPING
 		this.document.addEventListener("keydown", function(event)
@@ -435,6 +554,7 @@ class tinyDOC2
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
+				thisTinyDOC.checkForMisspelled();
 
 				// CHECKING IF THERE IS A PREVIOUS UNDO SAVE TIMEOUT
 				if (thisTinyDOC.undoSaveTimeout!=null)
@@ -465,6 +585,7 @@ class tinyDOC2
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
+				thisTinyDOC.checkForMisspelled();
 				}
 			});
 
@@ -481,6 +602,7 @@ class tinyDOC2
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
+				thisTinyDOC.checkForMisspelled();
 				}
 			});
 
@@ -789,16 +911,23 @@ class tinyDOC2
 			return aRet.join("");
 			}
 
+		// GETTING THE DOCUMENT INNERHTML CONTENT
+		var originalHTML = this.document.innerHTML;
+
+		// CLEARING THE MISSPELLED TAGS
+		originalHTML = originalHTML.replace(/\<misspelled\>/gm, "");
+		originalHTML = originalHTML.replace(/\<\/misspelled\>/gm, "");
+
 		// CHECKING IF THE INNERHTML MUST BE ENCODED
 		if (mustEncode)
 			{
 			// RETURNING THE ENCODED INNERHTML
-			return encodeText(this.document.innerHTML);
+			return encodeText(originalHTML);
 			}
 			else
 			{
 			// RETURNING THE INNERHTML
-			return this.document.innerHTML;
+			return originalHTML;
 			}
 		}
 
@@ -1147,16 +1276,16 @@ class tinyDOC2
 		try
 			{
 			// SEARCHING FOR A LINK TAG
-			var linkTag = this.getParentTag("A");
+			var misspelledTag = this.getParentTag("A");
 
 			// CHECKING IF A LINK TAG WAS FOUND
-			if (linkTag!=null)
+			if (misspelledTag!=null)
 				{
 				// CHECKING IF THE CARET IS AT THE LAST POSITION OF THE LINK TAG
-				if (this.getCaretCharacterOffsetWithin(linkTag)==linkTag.text.length)
+				if (this.getCaretCharacterOffsetWithin(misspelledTag)==misspelledTag.text.length)
 					{
 					// ADDING A BREAKLINE AFTER THE LINK TAG
-					this.addBreakLineAfter(linkTag);
+					this.addBreakLineAfter(misspelledTag);
 					return true;
 					}
 				}
@@ -1354,6 +1483,87 @@ class tinyDOC2
 			}
 		}
 
+	spellcheck()
+		{
+		try
+			{
+			// CHECKING IF THE SPELLCHECKER WASN'T STARTED
+			if (this.spellcheckerResult==null)
+				{
+				// DISABLING THE DOCUMENT
+				this.disable();
+
+				// GETTING ALL THE WORDS FROM THE TEXT DOCUMENT
+				var results = this.document.innerText.match(/[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]+/g);
+
+				// CREATING THE DATA FOR THE REQUEST
+				var dataRequest = {};
+				dataRequest["lang"] = "en-US";
+				dataRequest["words"] = results;
+
+				// SENDING THE SPELLCHECKING REQUEST
+				this.myWorker.postMessage(dataRequest);
+				}
+				else
+				{
+				// GETTING THE CARET POSITION
+				var originalCaretPosition = this.getCaretPosition(this.document);
+
+				// CLEARING THE SPELLCHECKER RESULT
+				this.spellcheckerResult = null;
+
+				// GETTING THE DOCUMENT INNERHTML CONTENT
+				var originalHTML = this.document.innerHTML;
+
+				// CLEARING THE MISSPELLED TAGS
+				originalHTML = originalHTML.replace(/\<misspelled\>/gm, "");
+				originalHTML = originalHTML.replace(/\<\/misspelled\>/gm, "");
+
+				try
+					{
+					// LOOPING EVERY DOCUMENT CHILD
+					while (this.document.firstChild)
+						{
+						// REMOVING EVERY CHILD
+						this.document.removeChild(this.document.firstChild);
+						}
+					}
+					catch(err)
+					{
+					}
+
+				// SETTING THAT THE SPELLCHECKER IS IN PROGRESS (TO PREVENT A SAVE UNDO)
+				this.spellcheckerInProgress = true;
+
+				// SETTING THE DOCUMENT TEXT WITHOUT THE MISSPELLED WORDS UNDERLINED
+				this.insertHtmlAtCaret(originalHTML,false);
+
+				// CHECKING IF A SUGGESTION IS DISPLAYED
+				if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
+					{
+					// CLEARING ANY SUGGESTION
+					this.contentViewer.innerHTML = "";
+					}
+
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// SETTING THAT THE SPELLCHECKER IS NOT IN PROGRESS
+					thisTinyDOC.spellcheckerInProgress = false;
+
+					// RESTORING THE CARET POSITION
+					thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
+					},25);
+				}
+			}
+			catch(err)
+			{
+			}
+		}
+
 	print()
 		{
 		try
@@ -1399,6 +1609,9 @@ class tinyDOC2
 
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
+
+			// CLEARING THE SPELLCHECKER RESULT
+			this.spellcheckerResult = null;
 
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
@@ -1493,6 +1706,9 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
 
+			// CLEARING THE SPELLCHECKER RESULT
+			this.spellcheckerResult = null;
+
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
 
@@ -1582,6 +1798,10 @@ class tinyDOC2
 			{
 			// GETTING THE CURRENT DOCUMENT CONTENT OR STATE
 			var current_state = this.document.innerHTML;
+
+			// CLEARING THE MISSPELLED TAGS
+			current_state = current_state.replace(/\<misspelled\>/gm, "");
+			current_state = current_state.replace(/\<\/misspelled\>/gm, "");
 
 			// IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
 			if(current_state!=this.document_history[this.document_history_index])
@@ -1925,32 +2145,88 @@ class tinyDOC2
 		try
 			{
 			// SEARCHING FOR A LINK TAG
-			var linkTag = this.getParentTag("A");
+			var misspelledTag = this.getParentTag("A");
 
 			// CHECKING IF A LINK TAG WASN'T FOUND
-			if (linkTag==null)
+			if (misspelledTag==null)
 				{
 				// GETTING THE CURRENT TAG WHERE THE CARET IS LOCATED (BACKSAFE)
-				linkTag = this.getCurrentTag();
+				misspelledTag = this.getCurrentTag();
 				}
 
 			// CHECKING IF A LINK TAG WAS FOUND
-			if (linkTag.nodeName=="A")
+			if (misspelledTag.nodeName=="A")
 				{
 				// GETTING THE URL (IF ANY)
-				var finalURL = linkTag.href;
+				var finalURL = misspelledTag.href;
 
 				// CHECKING IF THERE IS A VALUE
 				if(typeof finalURL !== "undefined")
 					{
-					// ADDING THE VALUE TO THE URL VIEWER
-					this.urlViewer.innerHTML = "<a href='" + finalURL + "' target='_blank'>" + finalURL + "</a>";
+					// ADDING THE VALUE TO THE CONTENT VIEWER
+					this.contentViewer.innerHTML = "<a href='" + finalURL + "' target='_blank'>" + finalURL + "</a>";
 					}
 				}
 				else
 				{
-				// CLEARING THE URL VIEWER
-				this.urlViewer.innerHTML = "";
+				// CLEARING THE CONTENT VIEWER
+				this.contentViewer.innerHTML = "";
+				}
+			}
+			catch(err)
+			{
+			}
+		}
+
+	checkForMisspelled()
+		{
+		try
+			{
+			// SEARCHING FOR A MISSPELLED TAG
+			var misspelledTag = this.getParentTag("MISSPELLED");
+
+			// CHECKING IF A MISSPELLED TAG WASN'T FOUND
+			if (misspelledTag==null)
+				{
+				// GETTING THE CURRENT TAG WHERE THE CARET IS LOCATED (BACKSAFE)
+				misspelledTag = this.getCurrentTag();
+				}
+
+			// CHECKING IF A MISSPELLED TAG WAS FOUND
+			if (misspelledTag.nodeName=="MISSPELLED")
+				{
+				// GETTING THE MISSPELLED WORD (IF ANY)
+				var finalURL = misspelledTag.textContent;
+
+				// CHECKING IF THERE IS A VALUE
+				if(typeof finalURL !== "undefined")
+					{
+					// CLEARING THE CONTENT VIEWER
+					this.contentViewer.innerHTML = "";
+
+					// LOOPING EVERY SUGGESTED WORD
+					for (var i = 0; i < this.spellcheckerResult[finalURL].length; i++)
+						{
+						// ADDING THE SUGGESTED WORD
+						this.contentViewer.innerHTML = this.contentViewer.innerHTML + "<div>" + this.spellcheckerResult[finalURL][i] + "</div>";
+						}
+
+					// CHECKING IF THERE IS NO SUGGESTIONS
+					if(this.spellcheckerResult[finalURL].length==0)
+						{
+						// ADDING THE SUGGESTIONS LABEL
+						this.contentViewer.innerHTML = '<span class="tinydoc_spellchecker_no_suggestions">(no suggestions)</span>';
+						}
+					}
+				}
+				else
+				{
+				// CHECKING IF THE CARET IS IN A LINK TAG
+				if (this.getParentTag("A")==false || this.getCurrentTag("A")==false)
+					{
+					// CLEARING THE CONTENT VIEWER
+					this.contentViewer.innerHTML = "";
+					}
 				}
 			}
 			catch(err)
@@ -1966,8 +2242,8 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false){return}
 
-			// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
-			if (this.canUndoRedo==true)
+			// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT OR THE SPELLCHECKER IS IN PROGRESS
+			if (this.canUndoRedo==true && this.spellcheckerInProgress==false)
 				{
 				// REGISTERING THE UNDO EVENT
 				this.saveUndo();
@@ -2009,8 +2285,14 @@ class tinyDOC2
 					selection.addRange(range);
 					}
 
+				// CHECKING IF THE SPELLCHECKER IN PROGRESS
+				if (this.spellcheckerInProgress==true)
+					{
+					// NO POINT GOING ANY FURTHER
+					return;
+					}
 				// CHECKING IF A NEW TEXT IS SET
-				if (this.settingNewText==true)
+				else if (this.settingNewText==true)
 					{
 					// SETTING THAT ENTER KEY WAS NOT PRESSED
 					this.settingNewText = false;
