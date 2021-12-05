@@ -22,7 +22,7 @@ https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 | 8 | Template 2 | HTML template. |
 | 9 | Template 3 | HTML template. |
 
-**Example without spellchecker:**
+**Example without a spellchecker:**
 ```javascript
 new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction, false, undefined, undefined, "My Template1", "My Template2", "My Template3")
 ```
