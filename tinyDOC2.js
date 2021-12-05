@@ -1,6 +1,6 @@
 class tinyDOC2
 	{
-	constructor(myContainer, documentText, saveFunction, spellcheckerEnabled, spellcheckerLanguage,  spellcheckerURL, template1, template2, template3)
+	constructor(myContainer, documentText, saveFunction, spellcheckerEnabled, spellcheckerLanguage, spellcheckerURL, template1, template2, template3)
 		{
 		// SETTING THE TINYDOC CONTAINER
 		this.myContainer = myContainer;
