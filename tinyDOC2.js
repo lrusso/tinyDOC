@@ -1276,16 +1276,16 @@ class tinyDOC2
 		try
 			{
 			// SEARCHING FOR A LINK TAG
-			var misspelledTag = this.getParentTag("A");
+			var linkTag = this.getParentTag("A");
 
 			// CHECKING IF A LINK TAG WAS FOUND
-			if (misspelledTag!=null)
+			if (linkTag!=null)
 				{
 				// CHECKING IF THE CARET IS AT THE LAST POSITION OF THE LINK TAG
-				if (this.getCaretCharacterOffsetWithin(misspelledTag)==misspelledTag.text.length)
+				if (this.getCaretCharacterOffsetWithin(linkTag)==linkTag.text.length)
 					{
 					// ADDING A BREAKLINE AFTER THE LINK TAG
-					this.addBreakLineAfter(misspelledTag);
+					this.addBreakLineAfter(linkTag);
 					return true;
 					}
 				}
@@ -2145,20 +2145,20 @@ class tinyDOC2
 		try
 			{
 			// SEARCHING FOR A LINK TAG
-			var misspelledTag = this.getParentTag("A");
+			var linkTag = this.getParentTag("A");
 
 			// CHECKING IF A LINK TAG WASN'T FOUND
-			if (misspelledTag==null)
+			if (linkTag==null)
 				{
 				// GETTING THE CURRENT TAG WHERE THE CARET IS LOCATED (BACKSAFE)
-				misspelledTag = this.getCurrentTag();
+				linkTag = this.getCurrentTag();
 				}
 
 			// CHECKING IF A LINK TAG WAS FOUND
-			if (misspelledTag.nodeName=="A")
+			if (linkTag.nodeName=="A")
 				{
 				// GETTING THE URL (IF ANY)
-				var finalURL = misspelledTag.href;
+				var finalURL = linkTag.href;
 
 				// CHECKING IF THERE IS A VALUE
 				if(typeof finalURL !== "undefined")
