@@ -11,7 +11,7 @@ https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 ## TinyDOC 2 Constructor
 
 | # | PARAMETER | DETAILS |
-| :------------ |:---------------|
+| :------------ |:---------------:| :----- |
 | 1 | Container | The document container. | 
 | 2 | Default text | The default text. |
 | 3 | Save function | The save function (if any). |
