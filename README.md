@@ -14,7 +14,7 @@ https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 | :------------ |:---------------:| :----- |
 | 1 | Container | The document container. | 
 | 2 | Default text | The default text. |
-| 3 | Save function | The save function (if any). |
+| 3 | Save function | The save function. |
 | 4 | SpellcheckerEnabled | Boolean. |
 | 5 | SpellcheckerURL | Spellchecker URL. |
 | 6 | Template 1 | HTML template. |
