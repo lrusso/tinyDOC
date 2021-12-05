@@ -2196,23 +2196,23 @@ class tinyDOC2
 			if (misspelledTag.nodeName=="MISSPELLED")
 				{
 				// GETTING THE MISSPELLED WORD (IF ANY)
-				var finalURL = misspelledTag.textContent;
+				var finalMisspelled = misspelledTag.textContent;
 
 				// CHECKING IF THERE IS A VALUE
-				if(typeof finalURL !== "undefined")
+				if(typeof finalMisspelled !== "undefined")
 					{
 					// CLEARING THE CONTENT VIEWER
 					this.contentViewer.innerHTML = "";
 
 					// LOOPING EVERY SUGGESTED WORD
-					for (var i = 0; i < this.spellcheckerResult[finalURL].length; i++)
+					for (var i = 0; i < this.spellcheckerResult[finalMisspelled].length; i++)
 						{
 						// ADDING THE SUGGESTED WORD
 						this.contentViewer.innerHTML = this.contentViewer.innerHTML + "<div>" + this.spellcheckerResult[finalURL][i] + "</div>";
 						}
 
 					// CHECKING IF THERE IS NO SUGGESTIONS
-					if(this.spellcheckerResult[finalURL].length==0)
+					if(this.spellcheckerResult[finalMisspelled].length==0)
 						{
 						// ADDING THE SUGGESTIONS LABEL
 						this.contentViewer.innerHTML = '<span class="tinydoc_spellchecker_no_suggestions">(no suggestions)</span>';
