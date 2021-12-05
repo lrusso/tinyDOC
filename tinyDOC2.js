@@ -295,7 +295,7 @@ class tinyDOC2
 		this.spellcheckerResult = null
 
 		// CREATING A VARIABLE TO SET THAT THE SPELLCHECKER STATUS
-		this.spellcheckerWorking = true;
+		this.spellcheckerWorking = false;
 
 		// CHECKING IF THE SPELLCHECKER IS ENABLED
 		if (spellcheckerEnabled==true)
