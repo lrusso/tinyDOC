@@ -16,14 +16,20 @@ https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 | 2 | Default text | The default text. |
 | 3 | Save function | The save function. |
 | 4 | SpellcheckerEnabled | Boolean. |
-| 5 | SpellcheckerURL | Spellchecker URL. |
-| 6 | Template 1 | HTML template. |
-| 7 | Template 2 | HTML template. |
-| 8 | Template 3 | HTML template. |
+| 5 | SpellcheckerLanguage | Spellchecker Language. |
+| 6 | SpellcheckerURL | Spellchecker URL. |
+| 7 | Template 1 | HTML template. |
+| 8 | Template 2 | HTML template. |
+| 9 | Template 3 | HTML template. |
 
-**Example:**
+**Example without spellchecker:**
 ```javascript
-new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction, false, undefined, "My Template1", "My Template2", "My Template3")
+new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction, false, undefined, undefined, "My Template1", "My Template2", "My Template3")
+```
+
+**Example with a spellchecker:**
+```javascript
+new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction, true, "en-US", "JavaScriptSpellchecker.js", "My Template1", "My Template2", "My Template3")
 ```
 
 ## TinyDOC 2 Methods
