@@ -295,7 +295,7 @@ class tinyDOC2
 		this.spellcheckerResult = null
 
 		// CREATING A VARIABLE TO SET THAT THE SPELLCHECKER STATUS
-		this.spellcheckerInProgress = true;
+		this.spellcheckerWorking = true;
 
 		// CHECKING IF THE SPELLCHECKER IS ENABLED
 		if (spellcheckerEnabled==true)
@@ -344,8 +344,8 @@ class tinyDOC2
 					{
 					}
 
-				// SETTING THAT THE SPELLCHECKER IS IN PROGRESS
-				thisTinyDOC.spellcheckerInProgress = true;
+				// SETTING THAT THE SPELLCHECKER IS WORKING
+				thisTinyDOC.spellcheckerWorking = true;
 
 				// SETTING THE DOCUMENT TEXT WITH THE MISSPELLED WORDS UNDERLINED
 				thisTinyDOC.insertHtmlAtCaret(originalHTML,false);
@@ -356,8 +356,8 @@ class tinyDOC2
 				// RESTORING THE CARET POSITION
 				thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
 
-				// SETTING THAT THE SPELLCHECKER IS NOT IN PROGRESS
-				thisTinyDOC.spellcheckerInProgress = false;
+				// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+				thisTinyDOC.spellcheckerWorking = false;
 
 				return true;
 				}
@@ -943,6 +943,9 @@ class tinyDOC2
 		// SETTING THAT THE DOCUMENT IS ENABLED
 		this.documentEnabled = true;
 
+		// RESTORING THE DOCUMENT OPACITY
+		this.document.style.opacity = 1;
+
 		// SHOWING THE CARET
 		this.document.style.caretColor = "black";
 		}
@@ -951,6 +954,9 @@ class tinyDOC2
 		{
 		// SETTING THAT THE DOCUMENT IS DISABLED
 		this.documentEnabled = false;
+
+		// REDUCING THE DOCUMENT OPACITY
+		this.document.style.opacity = 0.35;
 
 		// HIDING THE CARET
 		this.document.style.caretColor = "transparent";
@@ -981,17 +987,21 @@ class tinyDOC2
 			// FOCUSING THE DOCUMENT
 			this.document.focus();
 
-			// CHECKING ALL THE POSSIBLE COMMANDS
-			if (myCommand=="bold"){this.formatStyle("b",myParameter)}
-			else if(myCommand=="italic") {this.formatStyle("i",myParameter)}
-			else if(myCommand=="underline"){this.formatStyle("u",myParameter)}
-			else if(myCommand=="strikethrough"){this.formatStyle("strike",myParameter)}
-			else if(myCommand=="BackColor"){this.formatStyle("span",myParameter)}
-			else if(myCommand=="insertunorderedlist"){this.formatList("ul","li")}
-			else if(myCommand=="insertorderedlist"){this.formatList("ol","li")}
-			else if(myCommand=="removeFormat"){this.removeFormat()}
-			else if(myCommand=="undo"){this.undo(false)}
-			else if(myCommand=="redo"){this.redo(false)}
+			// CHECKING THAT THE SPELLCHECKER IS NOT WORKING
+			if (this.spellcheckerWorking==false)
+				{
+				// CHECKING ALL THE POSSIBLE COMMANDS
+				if (myCommand=="bold"){this.formatStyle("b",myParameter)}
+				else if(myCommand=="italic") {this.formatStyle("i",myParameter)}
+				else if(myCommand=="underline"){this.formatStyle("u",myParameter)}
+				else if(myCommand=="strikethrough"){this.formatStyle("strike",myParameter)}
+				else if(myCommand=="BackColor"){this.formatStyle("span",myParameter)}
+				else if(myCommand=="insertunorderedlist"){this.formatList("ul","li")}
+				else if(myCommand=="insertorderedlist"){this.formatList("ol","li")}
+				else if(myCommand=="removeFormat"){this.removeFormat()}
+				else if(myCommand=="undo"){this.undo(false)}
+				else if(myCommand=="redo"){this.redo(false)}
+				}
 
 			// SETTING THE CURRENT INSTANCE FOR LATER USE
 			var thisTinyDOC = this;
@@ -1539,8 +1549,8 @@ class tinyDOC2
 					{
 					}
 
-				// SETTING THAT THE SPELLCHECKER IS IN PROGRESS (TO PREVENT A SAVE UNDO)
-				this.spellcheckerInProgress = true;
+				// SETTING THAT THE SPELLCHECKER IS WORKING (TO PREVENT A SAVE UNDO)
+				this.spellcheckerWorking = true;
 
 				// SETTING THE DOCUMENT TEXT WITHOUT THE MISSPELLED WORDS UNDERLINED
 				this.insertHtmlAtCaret(originalHTML,false);
@@ -1558,8 +1568,8 @@ class tinyDOC2
 				// WAITING 25 MS FOR THE UI TO BE UPDATED
 				setTimeout(function()
 					{
-					// SETTING THAT THE SPELLCHECKER IS NOT IN PROGRESS
-					thisTinyDOC.spellcheckerInProgress = false;
+					// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+					thisTinyDOC.spellcheckerWorking = false;
 
 					// RESTORING THE CARET POSITION
 					thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
@@ -1575,26 +1585,30 @@ class tinyDOC2
 		{
 		try
 			{
-			// CREATING A TEMP IFRAME
-			var newIframe = document.createElement("iframe");
-			newIframe.width = "0";
-			newIframe.height = "0";
-			newIframe.src = "about:blank";
-			newIframe.className = "tinydoc_frame";
+			// CHECKING THAT THE SPELLCHECKER IS NOT WORKING
+			if (this.spellcheckerWorking==false)
+				{
+				// CREATING A TEMP IFRAME
+				var newIframe = document.createElement("iframe");
+				newIframe.width = "0";
+				newIframe.height = "0";
+				newIframe.src = "about:blank";
+				newIframe.className = "tinydoc_frame";
 
-			// ADDING THE IFRAME TO THE DOCUMENT
-			document.body.appendChild(newIframe);
+				// ADDING THE IFRAME TO THE DOCUMENT
+				document.body.appendChild(newIframe);
 
-			// WRITING THE DOCUMENT CONTENT INTO THE IFRAME
-			newIframe.contentWindow.document.write("<!doctype html><html><head><title>Print<\/title><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
-			newIframe.contentWindow.document.close(); //important!
-			newIframe.contentWindow.focus(); //IE fix
+				// WRITING THE DOCUMENT CONTENT INTO THE IFRAME
+				newIframe.contentWindow.document.write("<!doctype html><html><head><title>Print<\/title><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
+				newIframe.contentWindow.document.close(); //important!
+				newIframe.contentWindow.focus(); //IE fix
 
-			// PRINTING THE IFRAME
-			newIframe.contentWindow.print();
+				// PRINTING THE IFRAME
+				newIframe.contentWindow.print();
 
-			// REMOVING THE IFRAME
-			document.body.removeChild(newIframe);
+				// REMOVING THE IFRAME
+				document.body.removeChild(newIframe);
+				}
 			}
 			catch(err)
 			{
@@ -1616,6 +1630,9 @@ class tinyDOC2
 
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
+
+			// PREVENTING TO UNDO CONTENT WHEN THE SPELLCHECKER IS WORKING
+			if (this.spellcheckerWorking==true){return}
 
 			// CLEARING THE SPELLCHECKER RESULT
 			this.spellcheckerResult = null;
@@ -1712,6 +1729,9 @@ class tinyDOC2
 
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false && keyboardRequest==false){return}
+
+			// PREVENTING TO UNDO CONTENT WHEN THE SPELLCHECKER IS WORKING
+			if (this.spellcheckerWorking==true){return}
 
 			// CLEARING THE SPELLCHECKER RESULT
 			this.spellcheckerResult = null;
@@ -2258,8 +2278,8 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false){return}
 
-			// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT OR THE SPELLCHECKER IS IN PROGRESS
-			if (this.canUndoRedo==true && this.spellcheckerInProgress==false)
+			// PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT OR THE SPELLCHECKER IS NOT WORKING
+			if (this.canUndoRedo==true && this.spellcheckerWorking==false)
 				{
 				// REGISTERING THE UNDO EVENT
 				this.saveUndo();
@@ -2301,8 +2321,8 @@ class tinyDOC2
 					selection.addRange(range);
 					}
 
-				// CHECKING IF THE SPELLCHECKER IN PROGRESS
-				if (this.spellcheckerInProgress==true)
+				// CHECKING IF THE SPELLCHECKER IS WORKING
+				if (this.spellcheckerWorking==true)
 					{
 					// NO POINT GOING ANY FURTHER
 					return;
