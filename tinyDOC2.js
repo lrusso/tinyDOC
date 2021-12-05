@@ -1,6 +1,6 @@
 class tinyDOC2
 	{
-	constructor(myContainer, documentText, saveFunction, spellcheckerEnabled, spellcheckerURL, template1, template2, template3)
+	constructor(myContainer, documentText, saveFunction, spellcheckerEnabled, spellcheckerLanguage,  spellcheckerURL, template1, template2, template3)
 		{
 		// SETTING THE TINYDOC CONTAINER
 		this.myContainer = myContainer;
@@ -10,6 +10,13 @@ class tinyDOC2
 			{
 			// SETTING THE SAVE FUNCTION
 			this.saveFunction = saveFunction;
+			}
+
+		// CHECKING IF THERE IS A SPELLCHECKER LANGUAGE
+		if (spellcheckerLanguage)
+			{
+			// SETTING THE SPELLCHECKER LANGUAGE
+			this.spellcheckerLanguage = spellcheckerLanguage;
 			}
 
 		// SETTING ALL THE TEMPLATES (IF ANY)
@@ -1498,7 +1505,7 @@ class tinyDOC2
 
 				// CREATING THE DATA FOR THE REQUEST
 				var dataRequest = {};
-				dataRequest["lang"] = "en-US";
+				dataRequest["lang"] = this.spellcheckerLanguage;
 				dataRequest["words"] = results;
 
 				// SENDING THE SPELLCHECKING REQUEST
