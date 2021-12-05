@@ -700,7 +700,12 @@ class tinyDOC2
 		{
 		try
 			{
-			this.saveFunction();
+			// CHECKING THAT THE SPELLCHECKER IS NOT WORKING
+			if (this.spellcheckerWorking==false)
+				{
+				// EXECUTING THE SAVE FUNCTION
+				this.saveFunction();
+				}
 			}
 			catch(err)
 			{
