@@ -923,6 +923,9 @@ class tinyDOC2
 			// CLEARING THE SPELLCHECKER RESULT
 			this.spellcheckerResult = [];
 
+			// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+			this.spellcheckerWorking = false;
+
 			// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
 			this.spellcheckerExecuted = false;
 
@@ -1539,6 +1542,13 @@ class tinyDOC2
 			// CHECKING IF THE SPELLCHECKER IS NOT WORKING
 			if (this.spellcheckerWorking==false)
 				{
+				// CHECKING IF A SUGGESTION IS DISPLAYED
+				if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
+					{
+					// CLEARING ANY SUGGESTION
+					this.contentViewer.innerHTML = "";
+					}
+
 				// CHECKING IF THE SPELLCHECKER WAS EXECUTED PREVIOUSLY
 				if (this.spellcheckerExecuted==true)
 					{
@@ -1574,13 +1584,6 @@ class tinyDOC2
 					// SETTING THE DOCUMENT TEXT WITHOUT THE MISSPELLED WORDS UNDERLINED
 					this.insertHtmlAtCaret(originalHTML,false);
 
-					// CHECKING IF A SUGGESTION IS DISPLAYED
-					if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
-						{
-						// CLEARING ANY SUGGESTION
-						this.contentViewer.innerHTML = "";
-						}
-
 					// SETTING THE CURRENT INSTANCE FOR LATER USE
 					var thisTinyDOC = this;
 
@@ -1610,13 +1613,6 @@ class tinyDOC2
 
 					// SETTING THAT THE SPELLCHECKER IS WORKING
 					this.spellcheckerWorking = true;
-
-					// CHECKING IF A SUGGESTION IS DISPLAYED
-					if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
-						{
-						// CLEARING ANY SUGGESTION
-						this.contentViewer.innerHTML = "";
-						}
 
 					// GETTING ALL THE WORDS FROM THE TEXT DOCUMENT
 					var results = this.document.innerText.match(/[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]+/g);
@@ -1691,6 +1687,12 @@ class tinyDOC2
 
 			// CLEARING THE SPELLCHECKER RESULT
 			this.spellcheckerResult = [];
+
+			// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+			this.spellcheckerWorking = false;
+
+			// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
+			this.spellcheckerExecuted = false;
 
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
@@ -1790,6 +1792,12 @@ class tinyDOC2
 
 			// CLEARING THE SPELLCHECKER RESULT
 			this.spellcheckerResult = [];
+
+			// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+			this.spellcheckerWorking = false;
+
+			// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
+			this.spellcheckerExecuted = false;
 
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
