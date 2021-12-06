@@ -375,6 +375,9 @@ class tinyDOC2
 
 						// SETTING THAT THE SPELLCHECKER WAS EXECUTED
 						thisTinyDOC.spellcheckerExecuted = true;
+
+						// RESTORING THE DOCUMENT OPACITY
+						thisTinyDOC.document.style.opacity = 1;
 						}
 					}
 					catch(err)
