@@ -19,6 +19,13 @@ class tinyDOC2
 			this.spellcheckerLanguage = spellcheckerLanguage;
 			}
 
+		// CHECKING IF THERE IS A SPELLCHECKER URL
+		if (spellcheckerURL)
+			{
+			// SETTING THE SPELLCHECKER URL
+			this.spellcheckerURL = spellcheckerURL;
+			}
+
 		if (spellcheckerNoSuggestionsLabel)
 			{
 			this.spellcheckerNoSuggestionsLabel = spellcheckerNoSuggestionsLabel;
@@ -309,83 +316,8 @@ class tinyDOC2
 		// CREATING A VARIABLE TO SET THAT THE SPELLCHECKER WAS EXECUTED
 		this.spellcheckerExecuted = false;
 
-		// CHECKING IF THE SPELLCHECKER IS ENABLED
-		if (spellcheckerEnabled==true)
-			{
-			// CREATING THE WEB WORKER FOR THE SPELLCHECKER SERVICE
-			this.myWorker = new Worker(spellcheckerURL);
-
-			// SETTING WHAT WILL HAPPEN WHEN A MESSAGE IS RECEIVED FROM THE WEB WORKER
-			this.myWorker.onmessage = function(e)
-				{
-				try
-					{
-					// CHECKING IF THE SPELLCHECKER IS WORKING
-					if (thisTinyDOC.spellcheckerWorking==true)
-						{
-						// GETTING THE WORKER MESSAGE
-						var words = e.data;
-
-						// GETTING THE SPELLCHECKER RESULT
-						thisTinyDOC.spellcheckerResult = words;
-
-						// GETTING THE DOCUMENT INNERHTML CONTENT
-						var originalHTML = thisTinyDOC.document.innerHTML;
-
-						// GETTING THE CARET POSITION
-						var originalCaretPosition = thisTinyDOC.getCaretPosition(thisTinyDOC.document);
-
-						// LOOPING EVERY WORD
-						for (var key in words)
-							{
-							// GETTING THE WORD THAT MUST BE UNDERLINED
-							var wordToUnderline = key;
-
-							// REGEX FOR FINDING A WORD NOT INSIDE A 'A' TAGNAME
-							var exp = new RegExp("\\b(" + wordToUnderline + ")\\b(?![^<a]*>|[^<>]*</a>)", "gi");
-
-							// ADDING A MISSPELLED TAG TO EVERY MISSPELLED WORD
-							originalHTML = originalHTML.replace(exp,function(m){return "<misspelled>" + m + "</misspelled>"});
-							}
-
-						try
-							{
-							// LOOPING EVERY DOCUMENT CHILD
-							while (thisTinyDOC.document.firstChild)
-								{
-								// REMOVING EVERY CHILD
-								thisTinyDOC.document.removeChild(thisTinyDOC.document.firstChild);
-								}
-							}
-							catch(err)
-							{
-							}
-
-						// SETTING THE DOCUMENT TEXT WITH THE MISSPELLED WORDS UNDERLINED
-						thisTinyDOC.insertHtmlAtCaret(originalHTML,false);
-
-						// ENABLING THE DOCUMENT
-						thisTinyDOC.enable();
-
-						// RESTORING THE CARET POSITION
-						thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
-
-						// SETTING THAT THE SPELLCHECKER IS NOT WORKING
-						thisTinyDOC.spellcheckerWorking = false;
-
-						// SETTING THAT THE SPELLCHECKER WAS EXECUTED
-						thisTinyDOC.spellcheckerExecuted = true;
-
-						// RESTORING THE DOCUMENT OPACITY
-						thisTinyDOC.document.style.opacity = 1;
-						}
-					}
-					catch(err)
-					{
-					}
-				return true;
-				}
-			}
+		// CREATING A VARIABLE TO SET THE SPELLCHECKER WEB WORKER
+		this.myWorker = null;
 
 		// SETTING A VARIABLE TO KNOW IF THE DOCUMENT CAN UNDO/REDO
 		this.canUndoRedo = true;
@@ -923,6 +855,13 @@ class tinyDOC2
 			// CLEARING THE SPELLCHECKER RESULT
 			this.spellcheckerResult = [];
 
+			// CHECKING IF THE SPELLCHECKER IS WORKING
+			if (this.spellcheckerWorking==true)
+				{
+				// ENABLING THE DOCUMENT
+				this.enable();
+				}
+
 			// SETTING THAT THE SPELLCHECKER IS NOT WORKING
 			this.spellcheckerWorking = false;
 
@@ -931,6 +870,13 @@ class tinyDOC2
 
 			// RESTORING THE DOCUMENT OPACITY
 			this.document.style.opacity = 1;
+
+			// CHECKING IF THERE IS A WORKER CREATED
+			if (this.myWorker!=null)
+				{
+				// TERMINATING THE WORKER
+				this.myWorker.terminate();
+				}
 			}
 			catch(err)
 			{
@@ -1549,6 +1495,13 @@ class tinyDOC2
 					this.contentViewer.innerHTML = "";
 					}
 
+				// CHECKING IF THERE IS A WORKER CREATED
+				if (this.myWorker!=null)
+					{
+					// TERMINATING THE WORKER
+					this.myWorker.terminate();
+					}
+
 				// CHECKING IF THE SPELLCHECKER WAS EXECUTED PREVIOUSLY
 				if (this.spellcheckerExecuted==true)
 					{
@@ -1621,6 +1574,83 @@ class tinyDOC2
 					var dataRequest = {};
 					dataRequest["lang"] = this.spellcheckerLanguage;
 					dataRequest["words"] = results;
+
+					// SETTING THE CURRENT INSTANCE FOR LATER USE
+					var thisTinyDOC = this;
+
+					// CREATING THE WEB WORKER FOR THE SPELLCHECKER SERVICE
+					this.myWorker = new Worker(this.spellcheckerURL);
+
+					// SETTING WHAT WILL HAPPEN WHEN A MESSAGE IS RECEIVED FROM THE WEB WORKER
+					this.myWorker.onmessage = function(e)
+						{
+						try
+							{
+							// CHECKING IF THE SPELLCHECKER IS WORKING
+							if (thisTinyDOC.spellcheckerWorking==true)
+								{
+								// GETTING THE WORKER MESSAGE
+								var words = e.data;
+
+								// GETTING THE SPELLCHECKER RESULT
+								thisTinyDOC.spellcheckerResult = words;
+
+								// GETTING THE DOCUMENT INNERHTML CONTENT
+								var originalHTML = thisTinyDOC.document.innerHTML;
+
+								// GETTING THE CARET POSITION
+								var originalCaretPosition = thisTinyDOC.getCaretPosition(thisTinyDOC.document);
+
+								// LOOPING EVERY WORD
+								for (var key in words)
+									{
+									// GETTING THE WORD THAT MUST BE UNDERLINED
+									var wordToUnderline = key;
+
+									// REGEX FOR FINDING A WORD NOT INSIDE A 'A' TAGNAME
+									var exp = new RegExp("\\b(" + wordToUnderline + ")\\b(?![^<a]*>|[^<>]*</a>)", "gi");
+
+									// ADDING A MISSPELLED TAG TO EVERY MISSPELLED WORD
+									originalHTML = originalHTML.replace(exp,function(m){return "<misspelled>" + m + "</misspelled>"});
+									}
+
+								try
+									{
+									// LOOPING EVERY DOCUMENT CHILD
+									while (thisTinyDOC.document.firstChild)
+										{
+										// REMOVING EVERY CHILD
+										thisTinyDOC.document.removeChild(thisTinyDOC.document.firstChild);
+										}
+									}
+									catch(err)
+									{
+									}
+
+								// SETTING THE DOCUMENT TEXT WITH THE MISSPELLED WORDS UNDERLINED
+								thisTinyDOC.insertHtmlAtCaret(originalHTML,false);
+
+								// ENABLING THE DOCUMENT
+								thisTinyDOC.enable();
+
+								// RESTORING THE CARET POSITION
+								thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
+
+								// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+								thisTinyDOC.spellcheckerWorking = false;
+
+								// SETTING THAT THE SPELLCHECKER WAS EXECUTED
+								thisTinyDOC.spellcheckerExecuted = true;
+
+								// RESTORING THE DOCUMENT OPACITY
+								thisTinyDOC.document.style.opacity = 1;
+								}
+							}
+							catch(err)
+							{
+							}
+						return true;
+						}
 
 					// SENDING THE SPELLCHECKING REQUEST
 					this.myWorker.postMessage(dataRequest);
