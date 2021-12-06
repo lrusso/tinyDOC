@@ -919,6 +919,9 @@ class tinyDOC2
 
 			// CLEARING THE SPELLCHECKER RESULT
 			this.spellcheckerResult = [];
+
+			// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
+			this.spellcheckerExecuted = false;
 			}
 			catch(err)
 			{
