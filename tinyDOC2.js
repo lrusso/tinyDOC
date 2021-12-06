@@ -922,6 +922,9 @@ class tinyDOC2
 
 			// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
 			this.spellcheckerExecuted = false;
+
+			// RESTORING THE DOCUMENT OPACITY
+			this.document.style.opacity = 1;
 			}
 			catch(err)
 			{
@@ -975,9 +978,6 @@ class tinyDOC2
 		// SETTING THAT THE DOCUMENT IS ENABLED
 		this.documentEnabled = true;
 
-		// RESTORING THE DOCUMENT OPACITY
-		this.document.style.opacity = 1;
-
 		// SHOWING THE CARET
 		this.document.style.caretColor = "black";
 		}
@@ -986,9 +986,6 @@ class tinyDOC2
 		{
 		// SETTING THAT THE DOCUMENT IS DISABLED
 		this.documentEnabled = false;
-
-		// REDUCING THE DOCUMENT OPACITY
-		this.document.style.opacity = 0.35;
 
 		// HIDING THE CARET
 		this.document.style.caretColor = "transparent";
@@ -1593,6 +1590,9 @@ class tinyDOC2
 						// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
 						thisTinyDOC.spellcheckerExecuted = false;
 
+						// RESTORING THE DOCUMENT OPACITY
+						thisTinyDOC.document.style.opacity = 1;
+
 						// RESTORING THE CARET POSITION
 						thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
 						},25);
@@ -1601,6 +1601,9 @@ class tinyDOC2
 					{
 					// DISABLING THE DOCUMENT
 					this.disable();
+
+					// REDUCING THE DOCUMENT OPACITY
+					this.document.style.opacity = 0.35;
 
 					// SETTING THAT THE SPELLCHECKER IS WORKING
 					this.spellcheckerWorking = true;
