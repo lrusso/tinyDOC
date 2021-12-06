@@ -301,10 +301,13 @@ class tinyDOC2
 		var thisTinyDOC = this;
 
 		// CREATING A VARIABLE TO STORE THE SPELLCHECKER RESULT
-		this.spellcheckerResult = null
+		this.spellcheckerResult = [];
 
 		// CREATING A VARIABLE TO SET THAT THE SPELLCHECKER STATUS
 		this.spellcheckerWorking = false;
+
+		// CREATING A VARIABLE TO SET THAT THE SPELLCHECKER WAS EXECUTED
+		this.spellcheckerExecuted = false;
 
 		// CHECKING IF THE SPELLCHECKER IS ENABLED
 		if (spellcheckerEnabled==true)
@@ -369,6 +372,9 @@ class tinyDOC2
 
 						// SETTING THAT THE SPELLCHECKER IS NOT WORKING
 						thisTinyDOC.spellcheckerWorking = false;
+
+						// SETTING THAT THE SPELLCHECKER WAS EXECUTED
+						thisTinyDOC.spellcheckerExecuted = true;
 						}
 					}
 					catch(err)
@@ -912,7 +918,7 @@ class tinyDOC2
 			this.clearUndoRedo();
 
 			// CLEARING THE SPELLCHECKER RESULT
-			this.spellcheckerResult = null;
+			this.spellcheckerResult = [];
 			}
 			catch(err)
 			{
@@ -1528,85 +1534,92 @@ class tinyDOC2
 		try
 			{
 			// CHECKING IF THE SPELLCHECKER WASN'T STARTED
-			if (this.spellcheckerResult==null && this.spellcheckerWorking==false)
+			if (this.spellcheckerWorking==false)
 				{
-				// DISABLING THE DOCUMENT
-				this.disable();
-
-				// SETTING THAT THE SPELLCHECKER IS WORKING
-				this.spellcheckerWorking = true;
-
-				// CHECKING IF A SUGGESTION IS DISPLAYED
-				if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
+				// CHECKING IF THE SPELLCHECKER WAS EXECUTED PREVIOUSLY
+				if (this.spellcheckerExecuted==true)
 					{
-					// CLEARING ANY SUGGESTION
-					this.contentViewer.innerHTML = "";
-					}
+					// GETTING THE CARET POSITION
+					var originalCaretPosition = this.getCaretPosition(this.document);
 
-				// GETTING ALL THE WORDS FROM THE TEXT DOCUMENT
-				var results = this.document.innerText.match(/[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]+/g);
+					// CLEARING THE SPELLCHECKER RESULT
+					this.spellcheckerResult = [];
 
-				// CREATING THE DATA FOR THE REQUEST
-				var dataRequest = {};
-				dataRequest["lang"] = this.spellcheckerLanguage;
-				dataRequest["words"] = results;
+					// GETTING THE DOCUMENT INNERHTML CONTENT
+					var originalHTML = this.document.innerHTML;
 
-				// SENDING THE SPELLCHECKING REQUEST
-				this.myWorker.postMessage(dataRequest);
-				}
-				else
-				{
-				// GETTING THE CARET POSITION
-				var originalCaretPosition = this.getCaretPosition(this.document);
+					// CLEARING THE MISSPELLED TAGS
+					originalHTML = originalHTML.replace(/\<misspelled\>/gm, "");
+					originalHTML = originalHTML.replace(/\<\/misspelled\>/gm, "");
 
-				// CLEARING THE SPELLCHECKER RESULT
-				this.spellcheckerResult = null;
-
-				// GETTING THE DOCUMENT INNERHTML CONTENT
-				var originalHTML = this.document.innerHTML;
-
-				// CLEARING THE MISSPELLED TAGS
-				originalHTML = originalHTML.replace(/\<misspelled\>/gm, "");
-				originalHTML = originalHTML.replace(/\<\/misspelled\>/gm, "");
-
-				try
-					{
-					// LOOPING EVERY DOCUMENT CHILD
-					while (this.document.firstChild)
+					try
 						{
-						// REMOVING EVERY CHILD
-						this.document.removeChild(this.document.firstChild);
+						// LOOPING EVERY DOCUMENT CHILD
+						while (this.document.firstChild)
+							{
+							// REMOVING EVERY CHILD
+							this.document.removeChild(this.document.firstChild);
+							}
 						}
+						catch(err)
+						{
+						}
+
+					// SETTING THAT THE SPELLCHECKER IS WORKING (TO PREVENT A SAVE UNDO)
+					this.spellcheckerWorking = true;
+
+					// SETTING THE DOCUMENT TEXT WITHOUT THE MISSPELLED WORDS UNDERLINED
+					this.insertHtmlAtCaret(originalHTML,false);
+
+					// CHECKING IF A SUGGESTION IS DISPLAYED
+					if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
+						{
+						// CLEARING ANY SUGGESTION
+						this.contentViewer.innerHTML = "";
+						}
+
+					// SETTING THE CURRENT INSTANCE FOR LATER USE
+					var thisTinyDOC = this;
+
+					// WAITING 25 MS FOR THE UI TO BE UPDATED
+					setTimeout(function()
+						{
+						// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+						thisTinyDOC.spellcheckerWorking = false;
+
+						// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
+						thisTinyDOC.spellcheckerExecuted = false;
+
+						// RESTORING THE CARET POSITION
+						thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
+						},25);
 					}
-					catch(err)
+					else
 					{
+					// DISABLING THE DOCUMENT
+					this.disable();
+
+					// SETTING THAT THE SPELLCHECKER IS WORKING
+					this.spellcheckerWorking = true;
+
+					// CHECKING IF A SUGGESTION IS DISPLAYED
+					if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
+						{
+						// CLEARING ANY SUGGESTION
+						this.contentViewer.innerHTML = "";
+						}
+
+					// GETTING ALL THE WORDS FROM THE TEXT DOCUMENT
+					var results = this.document.innerText.match(/[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]+/g);
+
+					// CREATING THE DATA FOR THE REQUEST
+					var dataRequest = {};
+					dataRequest["lang"] = this.spellcheckerLanguage;
+					dataRequest["words"] = results;
+
+					// SENDING THE SPELLCHECKING REQUEST
+					this.myWorker.postMessage(dataRequest);
 					}
-
-				// SETTING THAT THE SPELLCHECKER IS WORKING (TO PREVENT A SAVE UNDO)
-				this.spellcheckerWorking = true;
-
-				// SETTING THE DOCUMENT TEXT WITHOUT THE MISSPELLED WORDS UNDERLINED
-				this.insertHtmlAtCaret(originalHTML,false);
-
-				// CHECKING IF A SUGGESTION IS DISPLAYED
-				if (this.contentViewer.innerHTML.indexOf("tinydoc_spellchecker_no_suggestions")>-1)
-					{
-					// CLEARING ANY SUGGESTION
-					this.contentViewer.innerHTML = "";
-					}
-
-				// SETTING THE CURRENT INSTANCE FOR LATER USE
-				var thisTinyDOC = this;
-
-				// WAITING 25 MS FOR THE UI TO BE UPDATED
-				setTimeout(function()
-					{
-					// SETTING THAT THE SPELLCHECKER IS NOT WORKING
-					thisTinyDOC.spellcheckerWorking = false;
-
-					// RESTORING THE CARET POSITION
-					thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
-					},25);
 				}
 			}
 			catch(err)
@@ -1668,7 +1681,7 @@ class tinyDOC2
 			if (this.spellcheckerWorking==true){return}
 
 			// CLEARING THE SPELLCHECKER RESULT
-			this.spellcheckerResult = null;
+			this.spellcheckerResult = [];
 
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
@@ -1767,7 +1780,7 @@ class tinyDOC2
 			if (this.spellcheckerWorking==true){return}
 
 			// CLEARING THE SPELLCHECKER RESULT
-			this.spellcheckerResult = null;
+			this.spellcheckerResult = [];
 
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
