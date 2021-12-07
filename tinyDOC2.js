@@ -2280,6 +2280,10 @@ class tinyDOC2
 				// CHECKING IF THERE IS A VALUE
 				if(typeof finalURL !== "undefined")
 					{
+					// CLEARING THE MISSPELLED TAGS
+					finalURL = finalURL.replace(/\<misspelled\>/gm, "");
+					finalURL = finalURL.replace(/\<\/misspelled\>/gm, "");
+
 					// ADDING THE VALUE TO THE CONTENT VIEWER
 					this.contentViewer.innerHTML = "<a href='" + finalURL + "' target='_blank'>" + finalURL + "</a>";
 					}
