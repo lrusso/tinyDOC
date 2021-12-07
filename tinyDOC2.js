@@ -517,7 +517,6 @@ class tinyDOC2
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
-				thisTinyDOC.checkForMisspelled();
 
 				// CHECKING IF THERE IS A PREVIOUS UNDO SAVE TIMEOUT
 				if (thisTinyDOC.undoSaveTimeout!=null)
@@ -548,7 +547,6 @@ class tinyDOC2
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
-				thisTinyDOC.checkForMisspelled();
 				}
 			});
 
@@ -565,7 +563,6 @@ class tinyDOC2
 				{
 				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
-				thisTinyDOC.checkForMisspelled();
 				}
 			});
 
@@ -2291,6 +2288,9 @@ class tinyDOC2
 				{
 				// CLEARING THE CONTENT VIEWER
 				this.contentViewer.innerHTML = "";
+
+				// CHECKING FOR A MISSPELLED WORD
+				this.checkForMisspelled();
 				}
 			}
 			catch(err)
