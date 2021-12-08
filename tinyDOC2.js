@@ -515,7 +515,7 @@ class tinyDOC2
 				}
 			else
 				{
-				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
+				// CHECKING FOR ANY URL OR MISSPELLED WORD AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
 				thisTinyDOC.checkForMisspelled();
 
@@ -546,7 +546,7 @@ class tinyDOC2
 				}
 			else
 				{
-				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
+				// CHECKING FOR ANY URL OR MISSPELLED WORD AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
 				thisTinyDOC.checkForMisspelled();
 				}
@@ -563,7 +563,7 @@ class tinyDOC2
 				}
 			else
 				{
-				// CHECKING FOR ANY URL AT THE CURRENT CARET POSITION
+				// CHECKING FOR ANY URL OR MISSPELLED WORD AT THE CURRENT CARET POSITION
 				thisTinyDOC.checkForURL();
 				thisTinyDOC.checkForMisspelled();
 				}
@@ -1607,7 +1607,7 @@ class tinyDOC2
 									// GETTING THE WORD THAT MUST BE UNDERLINED
 									var wordToUnderline = key;
 
-									// REGEX FOR FINDING A WORD NOT INSIDE A 'A' TAGNAME
+									// REGEX FOR FINDING A WORD NOT INSIDE A TAG
 									var exp = new RegExp("\\b(" + wordToUnderline + ")\\b(?![^<]*>|[^<>]*>)", "gi");
 
 									// ADDING A MISSPELLED TAG TO EVERY MISSPELLED WORD
