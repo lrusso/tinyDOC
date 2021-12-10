@@ -1489,7 +1489,7 @@ class tinyDOC2
 			if (this.spellcheckerWorking==false)
 				{
 				// CHECKING IF A SUGGESTION IS DISPLAYED
-				if (this.contentViewer.innerHTML.indexOf(' class="tinydoc_spellchecker_')>-1)
+				if (this.contentViewer.innerHTML.indexOf("<span ")>-1)
 					{
 					// CLEARING ANY SUGGESTION
 					this.contentViewer.innerHTML = "";
@@ -2335,7 +2335,7 @@ class tinyDOC2
 						for (var i = 0; i < this.spellcheckerResult[finalMisspelled].length; i++)
 							{
 							// ADDING THE SUGGESTED WORD
-							this.contentViewer.innerHTML = this.contentViewer.innerHTML + "<div class='tinydoc_spellchecker_suggestions'>" + this.spellcheckerResult[finalMisspelled][i] + "</div>";
+							this.contentViewer.innerHTML = this.contentViewer.innerHTML + '<span class="tinydoc_spellchecker_suggestions">' + this.spellcheckerResult[finalMisspelled][i] + '</span>';
 							}
 
 						// CHECKING IF THERE IS NO SUGGESTIONS
