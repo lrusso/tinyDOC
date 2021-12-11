@@ -881,6 +881,13 @@ class tinyDOC2
 		{
 		try
 			{
+			// CHECKING IF THERE IS A WORKER CREATED
+			if (this.myWorker!=null)
+				{
+				// TERMINATING THE WORKER
+				this.myWorker.terminate();
+				}
+
 			// CLEARING THE DOCUMENT
 			this.new();
 
@@ -917,13 +924,6 @@ class tinyDOC2
 
 			// RESTORING THE SPELLCHECK BUTTON STYLE
 			this.buttonSpellcheck.className = "tinydoc_button_spellcheck";
-
-			// CHECKING IF THERE IS A WORKER CREATED
-			if (this.myWorker!=null)
-				{
-				// TERMINATING THE WORKER
-				this.myWorker.terminate();
-				}
 			}
 			catch(err)
 			{
