@@ -924,6 +924,16 @@ class tinyDOC2
 
 			// RESTORING THE SPELLCHECK BUTTON STYLE
 			this.buttonSpellcheck.className = "tinydoc_button_spellcheck";
+
+			// SETTING THE CURRENT INSTANCE FOR LATER USE
+			var thisTinyDOC = this;
+
+			// WAITING 25 MS FOR THE UI TO BE UPDATED
+			setTimeout(function()
+				{
+				// MOVING THE CARET TO THE FIRST CHARACTER
+				thisTinyDOC.setCaretPosition(thisTinyDOC.document,0);
+				},25);
 			}
 			catch(err)
 			{
