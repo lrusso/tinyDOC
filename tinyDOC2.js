@@ -298,6 +298,7 @@ class tinyDOC2
 		this.pleaseWait.style.opacity = 0.35;
 		this.myContainer.appendChild(this.pleaseWait);
 
+		// ADDING A PLEASE WAIT ICON
 		this.pleaseWaitIcon = document.createElement("div");
 		this.pleaseWaitIcon.style.backgroundColor = "white";
 		this.pleaseWaitIcon.style.position = "fixed";
@@ -718,19 +719,7 @@ class tinyDOC2
 			this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px";
 
 			// RESIZING THE DOCUMENT AFTER 100 MS
-			setTimeout(function(){try{this.document.style.width = (this.myContainer.offsetWidth - 16) + "px";this.document.style.height = (this.myContainer.offsetHeight - 57) + "px";this.pleaseWait.style.left = this.myContainer.offsetLeft + "px";this.pleaseWait.style.right = this.myContainer.offsetRight + "px";;this.pleaseWait.style.top = this.myContainer.offsetTop + "px";this.pleaseWait.style.bottom = this.myContainer.offsetBottom + "px";this.pleaseWait.style.width = this.myContainer.offsetWidth + "px";this.pleaseWait.style.height = this.myContainer.offsetHeight + "px";
-
-
-			// RESIZING THE PLEASE WAIT ICON CONTAINER
-			this.pleaseWaitIcon.style.left = this.myContainer.offsetLeft + "px";
-			this.pleaseWaitIcon.style.right = this.myContainer.offsetRight + "px";;
-			this.pleaseWaitIcon.style.top = this.myContainer.offsetTop + "px";
-			this.pleaseWaitIcon.style.bottom = this.myContainer.offsetBottom + "px";
-			this.pleaseWaitIcon.style.width = this.myContainer.offsetWidth + "px";
-			this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px";
-
-
-		}catch(err){}},100);
+			setTimeout(function(){try{this.document.style.width = (this.myContainer.offsetWidth - 16) + "px";this.document.style.height = (this.myContainer.offsetHeight - 57) + "px";this.pleaseWait.style.left = this.myContainer.offsetLeft + "px";this.pleaseWait.style.right = this.myContainer.offsetRight + "px";;this.pleaseWait.style.top = this.myContainer.offsetTop + "px";this.pleaseWait.style.bottom = this.myContainer.offsetBottom + "px";this.pleaseWait.style.width = this.myContainer.offsetWidth + "px";this.pleaseWait.style.height = this.myContainer.offsetHeight + "px";this.pleaseWaitIcon.style.left = this.myContainer.offsetLeft + "px";this.pleaseWaitIcon.style.right = this.myContainer.offsetRight + "px";;this.pleaseWaitIcon.style.top = this.myContainer.offsetTop + "px";this.pleaseWaitIcon.style.bottom = this.myContainer.offsetBottom + "px";this.pleaseWaitIcon.style.width = this.myContainer.offsetWidth + "px";this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px";}catch(err){}},100);
 			}
 			catch(err)
 			{
