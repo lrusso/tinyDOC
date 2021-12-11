@@ -47,6 +47,7 @@ new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction
 | 8 | scrollToTop | Scrolls to the top of the document. |
 | 9 | clearUndoRedo | Clears all the undo/redo history. |
 | 10 | getText(boolean) | Returns the document content with or without encoding. |
+| 11 | showPleaseWait(boolean) | Hides or shows a please wait screen. |
 
 ## Accessing the ContentEditable Div used by TinyDOC 2
 
