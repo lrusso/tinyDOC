@@ -1742,6 +1742,32 @@ class tinyDOC2
 						return true;
 						}
 
+					// SETTING WHAT WILL HAPPEN IF SOMETHING GOES WRONG WITH THE WORKER
+					this.myWorker.onerror = function(event)
+						{
+						// WAITING 25 MS FOR THE UI TO BE UPDATED
+						setTimeout(function()
+							{
+							// SETTING THAT THE SPELLCHECKER IS NOT WORKING
+							thisTinyDOC.spellcheckerWorking = false;
+
+							// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
+							thisTinyDOC.spellcheckerExecuted = false;
+
+							// RESTORING THE SPELLCHECK BUTTON STYLE
+							thisTinyDOC.buttonSpellcheck.className = "tinydoc_button_spellcheck";
+
+							// ENABLING THE DOCUMENT
+							thisTinyDOC.enable();
+
+							// RESTORING THE CARET POSITION
+							thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
+
+							// HIDING THE PLEASE WAIT ANIMATION
+							thisTinyDOC.showPleaseWait(false);
+							},25);
+						};
+
 					// SENDING THE SPELLCHECKING REQUEST
 					this.myWorker.postMessage(dataRequest);
 					}
