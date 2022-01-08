@@ -1,12 +1,12 @@
 class tinyDOC2
 	{
-	constructor(myObject)
+	constructor(editorConfig)
 		{
 		// SETTING THE TINYDOC CONTAINER
-		this.myContainer = myObject.container;
+		this.myContainer = editorConfig.container;
 
 		// CHECKING IF THERE IS NO SPELLCHECKER CONFIGURATION
-		if (typeof myObject.spellcheckerEnabled === 'undefined')
+		if (typeof editorConfig.spellcheckerEnabled === 'undefined')
 			{
 			// DISABLING THE SPELLCHECKER
 			this.spellcheckerEnabled = false;
@@ -14,33 +14,33 @@ class tinyDOC2
 		else
 			{
 			// USING THE SPELLCHECKER CONFIGURATION
-			this.spellcheckerEnabled = myObject.spellcheckerEnabled;
+			this.spellcheckerEnabled = editorConfig.spellcheckerEnabled;
 			}
 
 		// CHECKING IF THERE IS A SAVE FUNCTION
-		if (myObject.saveFunction)
+		if (editorConfig.saveFunction)
 			{
 			// SETTING THE SAVE FUNCTION
-			this.saveFunction = myObject.saveFunction;
+			this.saveFunction = editorConfig.saveFunction;
 			}
 
 		// CHECKING IF THERE IS A SPELLCHECKER LANGUAGE
-		if (myObject.spellcheckerLanguage)
+		if (editorConfig.spellcheckerLanguage)
 			{
 			// SETTING THE SPELLCHECKER LANGUAGE
-			this.spellcheckerLanguage = myObject.spellcheckerLanguage;
+			this.spellcheckerLanguage = editorConfig.spellcheckerLanguage;
 			}
 
 		// CHECKING IF THERE IS A SPELLCHECKER URL
-		if (myObject.spellcheckerURL)
+		if (editorConfig.spellcheckerURL)
 			{
 			// SETTING THE SPELLCHECKER URL
-			this.spellcheckerURL = myObject.spellcheckerURL;
+			this.spellcheckerURL = editorConfig.spellcheckerURL;
 			}
 
-		if (myObject.spellcheckerNoSuggestionsLabel)
+		if (editorConfig.spellcheckerNoSuggestionsLabel)
 			{
-			this.spellcheckerNoSuggestionsLabel = myObject.spellcheckerNoSuggestionsLabel;
+			this.spellcheckerNoSuggestionsLabel = editorConfig.spellcheckerNoSuggestionsLabel;
 			}
 			else
 			{
@@ -48,9 +48,9 @@ class tinyDOC2
 			}
 
 		// SETTING ALL THE TEMPLATES (IF ANY)
-		this.template1 = myObject.template1;
-		this.template2 = myObject.template2;
-		this.template3 = myObject.template3;
+		this.template1 = editorConfig.template1;
+		this.template2 = editorConfig.template2;
+		this.template3 = editorConfig.template3;
 
 		// SETTING THAT THE DOCUMENT IS ENABLED
 		this.documentEnabled = true;
@@ -214,7 +214,7 @@ class tinyDOC2
 		this.menu.appendChild(this.separator6);
 
 		// CHECKING IF THERE IS A TEMPLATE 1
-		if (myObject.template1)
+		if (editorConfig.template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
 			this.holder14 = document.createElement("div");
@@ -226,7 +226,7 @@ class tinyDOC2
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
-		if (myObject.template2)
+		if (editorConfig.template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
 			this.holder15 = document.createElement("div");
@@ -238,7 +238,7 @@ class tinyDOC2
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
-		if (myObject.template3)
+		if (editorConfig.template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
 			this.holder16 = document.createElement("div");
@@ -250,7 +250,7 @@ class tinyDOC2
 			}
 
 		// CHECKING IF THERE IS ANY TEMPLATE
-		if (myObject.template1 || myObject.template2 || myObject.template3)
+		if (editorConfig.template1 || editorConfig.template2 || editorConfig.template3)
 			{
 			// ADDING A SEPARATOR
 			this.separator7 = document.createElement("div");
@@ -336,10 +336,10 @@ class tinyDOC2
 		this.myContainer.appendChild(this.document);
 
 		// CHECKING IF THERE IS A DEFAULT DOCUMENT TEXT
-		if (myObject.documentText)
+		if (editorConfig.documentText)
 			{
 			// SETTING THE DOCUMENT TEXT
-			this.document.innerHTML = myObject.documentText;
+			this.document.innerHTML = editorConfig.documentText;
 			}
 			else
 			{
@@ -410,21 +410,21 @@ class tinyDOC2
 		this.buttonClear.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("removeFormat",null);event.preventDefault()});
 
 		// CHECKING IF THERE IS A TEMPLATE 1
-		if (myObject.template1)
+		if (editorConfig.template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
 			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template1,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
-		if (myObject.template2)
+		if (editorConfig.template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
 			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template2,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
-		if (myObject.template3)
+		if (editorConfig.template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
 			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template3,false);event.preventDefault()});
