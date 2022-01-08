@@ -1,34 +1,46 @@
 class tinyDOC2
 	{
-	constructor(myContainer, documentText, saveFunction, spellcheckerEnabled, spellcheckerLanguage, spellcheckerURL, spellcheckerNoSuggestionsLabel, template1, template2, template3)
+	constructor(myObject)
 		{
 		// SETTING THE TINYDOC CONTAINER
-		this.myContainer = myContainer;
+		this.myContainer = myObject.container;
+
+		// CHECKING IF THERE IS NO SPELLCHECKER CONFIGURATION
+		if (typeof myObject.spellcheckerEnabled === 'undefined')
+			{
+			// DISABLING THE SPELLCHECKER
+			this.spellcheckerEnabled = false;
+			}
+		else
+			{
+			// USING THE SPELLCHECKER CONFIGURATION
+			this.spellcheckerEnabled = myObject.spellcheckerEnabled;
+			}
 
 		// CHECKING IF THERE IS A SAVE FUNCTION
-		if (saveFunction)
+		if (myObject.saveFunction)
 			{
 			// SETTING THE SAVE FUNCTION
-			this.saveFunction = saveFunction;
+			this.saveFunction = myObject.saveFunction;
 			}
 
 		// CHECKING IF THERE IS A SPELLCHECKER LANGUAGE
-		if (spellcheckerLanguage)
+		if (myObject.spellcheckerLanguage)
 			{
 			// SETTING THE SPELLCHECKER LANGUAGE
-			this.spellcheckerLanguage = spellcheckerLanguage;
+			this.spellcheckerLanguage = myObject.spellcheckerLanguage;
 			}
 
 		// CHECKING IF THERE IS A SPELLCHECKER URL
-		if (spellcheckerURL)
+		if (myObject.spellcheckerURL)
 			{
 			// SETTING THE SPELLCHECKER URL
-			this.spellcheckerURL = spellcheckerURL;
+			this.spellcheckerURL = myObject.spellcheckerURL;
 			}
 
-		if (spellcheckerNoSuggestionsLabel)
+		if (myObject.spellcheckerNoSuggestionsLabel)
 			{
-			this.spellcheckerNoSuggestionsLabel = spellcheckerNoSuggestionsLabel;
+			this.spellcheckerNoSuggestionsLabel = myObject.spellcheckerNoSuggestionsLabel;
 			}
 			else
 			{
@@ -36,9 +48,9 @@ class tinyDOC2
 			}
 
 		// SETTING ALL THE TEMPLATES (IF ANY)
-		this.template1 = template1;
-		this.template2 = template2;
-		this.template3 = template3;
+		this.template1 = myObject.template1;
+		this.template2 = myObject.template2;
+		this.template3 = myObject.template3;
 
 		// SETTING THAT THE DOCUMENT IS ENABLED
 		this.documentEnabled = true;
@@ -90,7 +102,7 @@ class tinyDOC2
 		this.menu.appendChild(this.separator2);
 
 		// CHECKING IF THE SPELLCHECKER IS ENABLED
-		if (spellcheckerEnabled==true)
+		if (this.spellcheckerEnabled==true)
 			{
 			// ADDING THE SPELLCHECKER BUTTON
 			this.holder3 = document.createElement("div");
@@ -202,7 +214,7 @@ class tinyDOC2
 		this.menu.appendChild(this.separator6);
 
 		// CHECKING IF THERE IS A TEMPLATE 1
-		if (template1)
+		if (myObject.template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
 			this.holder14 = document.createElement("div");
@@ -214,7 +226,7 @@ class tinyDOC2
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
-		if (template2)
+		if (myObject.template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
 			this.holder15 = document.createElement("div");
@@ -226,7 +238,7 @@ class tinyDOC2
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
-		if (template3)
+		if (myObject.template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
 			this.holder16 = document.createElement("div");
@@ -238,7 +250,7 @@ class tinyDOC2
 			}
 
 		// CHECKING IF THERE IS ANY TEMPLATE
-		if (template1 || template2 || template3)
+		if (myObject.template1 || myObject.template2 || myObject.template3)
 			{
 			// ADDING A SEPARATOR
 			this.separator7 = document.createElement("div");
@@ -314,21 +326,24 @@ class tinyDOC2
 		this.document.contentEditable = true;
 
 		// CHECKING IF THE SPELLCHECKER IS ENABLED
-		if (spellcheckerEnabled==true)
+		if (this.spellcheckerEnabled==true)
 			{
+			// DISABLING THE BROWSER SPELLCHECKER FOR THE DOCUMENT
 			this.document.spellcheck = false;
 			}
 
+		// ADDING THE DOCUMENT TO THE CONTAINER
 		this.myContainer.appendChild(this.document);
 
 		// CHECKING IF THERE IS A DEFAULT DOCUMENT TEXT
-		if (documentText)
+		if (myObject.documentText)
 			{
 			// SETTING THE DOCUMENT TEXT
-			this.document.innerHTML = documentText;
+			this.document.innerHTML = myObject.documentText;
 			}
 			else
 			{
+			// SETTING AN EMPTY DOCUMENT TEXT
 			this.document.innerHTML = "<div></div>";
 			}
 
@@ -373,8 +388,9 @@ class tinyDOC2
 			}
 
 		// CHECKING IF THE SPELLCHECKER IS ENABLED
-		if (spellcheckerEnabled==true)
+		if (this.spellcheckerEnabled==true)
 			{
+			// SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON THE SPELLCHECKER BUTTON
 			this.buttonSpellcheck.addEventListener("mousedown",function(event){thisTinyDOC.spellcheck();event.preventDefault()});
 			}
 
@@ -394,21 +410,21 @@ class tinyDOC2
 		this.buttonClear.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("removeFormat",null);event.preventDefault()});
 
 		// CHECKING IF THERE IS A TEMPLATE 1
-		if (template1)
+		if (myObject.template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
 			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template1,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
-		if (template2)
+		if (myObject.template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
 			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template2,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
-		if (template3)
+		if (myObject.template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
 			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template3,false);event.preventDefault()});
