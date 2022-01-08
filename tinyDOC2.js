@@ -72,7 +72,7 @@ class tinyDOC2
 		this.myContainer.appendChild(this.menuContainer);
 
 		// CHECKING IF THERE IS A SAVE FUNCTION
-		if (saveFunction)
+		if (this.saveFunction)
 			{
 			// ADDING THE SAVE BUTTON
 			this.holder1 = document.createElement("div");
@@ -381,7 +381,7 @@ class tinyDOC2
 		this.isUsingChrome = /.*chrome/i.test(navigator.userAgent);
 
 		// CHECKING IF THERE IS A SAVE FUNCTION
-		if (saveFunction)
+		if (this.saveFunction)
 			{
 			// SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON THE SAVE BUTTON
 			this.buttonSave.addEventListener("mousedown",function(event){thisTinyDOC.save();event.preventDefault()});
