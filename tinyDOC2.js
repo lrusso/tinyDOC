@@ -413,21 +413,21 @@ class tinyDOC2
 		if (editorConfig.template1)
 			{
 			// ADDING THE TEMPLATE 1 BUTTON
-			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template1,false);event.preventDefault()});
+			this.buttonTemplate1.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(thisTinyDOC.template1,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 2
 		if (editorConfig.template2)
 			{
 			// ADDING THE TEMPLATE 2 BUTTON
-			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template2,false);event.preventDefault()});
+			this.buttonTemplate2.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(thisTinyDOC.template2,false);event.preventDefault()});
 			}
 
 		// CHECKING IF THERE IS A TEMPLATE 3
 		if (editorConfig.template3)
 			{
 			// ADDING THE TEMPLATE 3 BUTTON
-			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(template3,false);event.preventDefault()});
+			this.buttonTemplate3.addEventListener("mousedown",function(event){thisTinyDOC.insertHtmlAtCaret(thisTinyDOC.template3,false);event.preventDefault()});
 			}
 
 		// SETTING WHAT WILL HAPPEN WHEN THE USER IS CLICKING
