@@ -6,7 +6,7 @@ class tinyDOC2
 		this.myContainer = editorConfig.container;
 
 		// CHECKING IF THERE IS NO SPELLCHECKER CONFIGURATION
-		if (typeof editorConfig.spellcheckerEnabled === 'undefined')
+		if (typeof editorConfig.spellcheckerEnabled === "undefined")
 			{
 			// DISABLING THE SPELLCHECKER
 			this.spellcheckerEnabled = false;
@@ -38,12 +38,15 @@ class tinyDOC2
 			this.spellcheckerURL = editorConfig.spellcheckerURL;
 			}
 
+		// CHECKING IF THERE IS A SPELLCHECKER NO SUGGESTION LABEL
 		if (editorConfig.spellcheckerNoSuggestionsLabel)
 			{
+			// SETTING THE SPELLCHECKER NO SUGGESTION LABEL
 			this.spellcheckerNoSuggestionsLabel = editorConfig.spellcheckerNoSuggestionsLabel;
 			}
 			else
 			{
+			// SETTING THE DEFAULT SPELLCHECKER NO SUGGESTION LABEL
 			this.spellcheckerNoSuggestionsLabel = "(no suggestions)";
 			}
 
