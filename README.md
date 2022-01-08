@@ -47,7 +47,7 @@ new tinyDOC2({
               spellcheckerEnabled: true,
               spellcheckerLanguage: "en-US",
               spellcheckerURL: "JavaScriptSpellchecker.js",
-              spellcheckerNoSuggestionsLabel: "(No suggestions)",
+              spellcheckerNoSuggestionsLabel: "(No suggestions)"
               })
 ```
 
