@@ -8,35 +8,53 @@ TinyDOC 2 Editor is a HTML5 Rich Text Editor. The idea of this project is to pro
 
 https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 
-## TinyDOC 2 Constructor
+## TinyDOC 2 Configuration
 
-| # | PARAMETER | DETAILS |
-| :------------ |:---------------:| :----- |
-| 1 | Container | The document container. | 
-| 2 | Default text | The default text. |
-| 3 | Save function | The save function. |
-| 4 | SpellcheckerEnabled | Boolean. |
-| 5 | SpellcheckerLanguage | Spellchecker Language. |
-| 6 | SpellcheckerURL | Spellchecker URL. |
+| # | SETTING | DETAILS |
+| :------------ |:---------------| :----- |
+| 1 | container | The document container. | 
+| 2 | documentText | The default text. |
+| 3 | saveFunction | The save function. |
+| 4 | spellcheckerEnabled | Boolean. |
+| 5 | spellcheckerLanguage | Spellchecker Language. |
+| 6 | spellcheckerURL | Spellchecker URL. |
 | 7 | spellcheckerNoSuggestionsLabel | No suggestions String. |
-| 8 | Template 1 | HTML template. |
-| 9 | Template 2 | HTML template. |
-| 10 | Template 3 | HTML template. |
+| 8 | template1 | HTML template. |
+| 9 | template2 | HTML template. |
+| 10 | template3 | HTML template. |
 
 **Example without a spellchecker:**
 ```javascript
-new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction, false, undefined, undefined, "My Template1", "My Template2", "My Template3")
+new tinyDOC2({
+              container: document.getElementById("myTestContainer"), 
+              documentText: "Hello world",
+              saveFunction: () => {alert("saveFunction")},
+              template1: "My Template 1",
+              template2: "My Template 2",
+              template3: "My Template 3"
+              })
 ```
 
 **Example with a spellchecker:**
 ```javascript
-new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction, true, "en-US", "JavaScriptSpellchecker.js", "(no suggestions)", "My Template1", "My Template2", "My Template3")
+new tinyDOC2({
+              container: document.getElementById("myTestContainer"), 
+              documentText: "Hello world",
+              saveFunction: () => {alert("saveFunction")},
+              template1: "My Template 1",
+              template2: "My Template 2",
+              template3: "My Template 3",
+              spellcheckerEnabled: true,
+              spellcheckerLanguage: "en-US",
+              spellcheckerURL: "JavaScriptSpellchecker.js",
+              spellcheckerNoSuggestionsLabel: "(No suggestions)",
+              })
 ```
 
 ## TinyDOC 2 Methods
 
 | # | METHOD | DETAILS |
-| :------------ |:---------------:| :----- |
+| :------------ |:---------------| :----- |
 | 1 | new | Deletes the document content. | 
 | 2 | print | Prints the document content. |
 | 3 | save | Executes the save function. |
@@ -52,7 +70,7 @@ new tinyDOC2(document.getElementById("myTestContainer"), "Welcome", saveFunction
 ## Accessing the ContentEditable Div used by TinyDOC 2
 
 ```javascript
-let myExample = new tinyDOC2(document.getElementById("myTestContainer"))
+let myExample = new tinyDOC2({ container: document.getElementById("myTestContainer") })
 myExample.document.scrollTop = 0
 ```
 
