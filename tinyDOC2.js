@@ -1805,26 +1805,16 @@ class tinyDOC2
 			// CHECKING THAT THE SPELLCHECKER IS NOT WORKING
 			if (this.spellcheckerWorking==false)
 				{
-				// CREATING A TEMP IFRAME
-				var newIframe = document.createElement("iframe");
-				newIframe.width = "0";
-				newIframe.height = "0";
-				newIframe.src = "about:blank";
-				newIframe.className = "tinydoc_frame";
+				// OPENING A NEW WINDOW
+				var printingWindow = window.open("about:blank", "_blank");
 
-				// ADDING THE IFRAME TO THE DOCUMENT
-				document.body.appendChild(newIframe);
+				// UPDATING THE NEW WINDOW WITH THE DOCUMENT CONTENT
+				printingWindow.document.write("<!doctype html><html><head><title>" + this.encodeText(window.location.href)  + "<\/title><style>a{text-decoration:underline;color:#3a76b1}<\/style><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
+				printingWindow.document.close();
+				printingWindow.focus();
 
-				// WRITING THE DOCUMENT CONTENT INTO THE IFRAME
-				newIframe.contentWindow.document.write("<!doctype html><html><head><title>" + this.encodeText(window.location.href)  + "<\/title><style>a{text-decoration:underline;color:#3a76b1}<\/style><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
-				newIframe.contentWindow.document.close(); //important!
-				newIframe.contentWindow.focus(); //IE fix
-
-				// PRINTING THE IFRAME
-				newIframe.contentWindow.print();
-
-				// REMOVING THE IFRAME
-				document.body.removeChild(newIframe);
+				// PRINTING THE DOCUMENT CONTENT
+				printingWindow.print();
 				}
 			}
 			catch(err)
