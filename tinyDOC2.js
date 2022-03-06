@@ -1809,7 +1809,7 @@ class tinyDOC2
 				var printingWindow = window.open("about:blank", "_blank");
 
 				// UPDATING THE NEW WINDOW WITH THE DOCUMENT CONTENT
-				printingWindow.document.write("<!doctype html><html><head><title>" + this.encodeText(window.location.href)  + "<\/title><style>a{text-decoration:underline;color:#3a76b1}<\/style><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
+				printingWindow.document.write("<!DOCTYPE html><html><head><title>" + this.encodeText(window.location.href)  + "<\/title><style>a{text-decoration:underline;color:#3a76b1}<\/style><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
 				printingWindow.document.close();
 				printingWindow.focus();
 
