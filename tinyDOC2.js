@@ -1159,6 +1159,7 @@ class tinyDOC2
 				{
 				// SETTING THE BACKGROUND COLOR
 				newTag.style.backgroundColor = myParameter;
+				newTag.style.boxShadow = "inset 0 0 0 1000px " + myParameter;
 				}
 
 			// DELETING THE SELECTED CONTENT
@@ -1815,7 +1816,7 @@ class tinyDOC2
 				document.body.appendChild(newIframe);
 
 				// WRITING THE DOCUMENT CONTENT INTO THE IFRAME
-				newIframe.contentWindow.document.write("<!doctype html><html><head><title>" + this.encodeText(window.location.href)  + "<\/title><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
+				newIframe.contentWindow.document.write("<!doctype html><html><head><title>" + this.encodeText(window.location.href)  + "<\/title><style>a{text-decoration:underline;color:#3a76b1}<\/style><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
 				newIframe.contentWindow.document.close(); //important!
 				newIframe.contentWindow.focus(); //IE fix
 
