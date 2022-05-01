@@ -2508,7 +2508,7 @@ class tinyDOC2
 		try
 			{
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-			if (this.isDocumentSelected()==false){return}
+			if (this.isDocumentSelected()==false){this.contentViewer.innerHTML="";return}
 
 			// GETTING THE CURRENT TAG
 			var currentTag = this.getCurrentTag();
