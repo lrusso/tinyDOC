@@ -1947,14 +1947,15 @@ class tinyDOC2
 			// PREVENTING TO UNDO CONTENT WHEN THE SPELLCHECKER IS WORKING
 			if (this.spellcheckerWorking==true){return}
 
-			// CLEARING THE SPELLCHECKER RESULT
-			this.spellcheckerResult = [];
+			// CHECKING IF THE SPELLCHECKER WAS EXECUTED
+			if (this.spellcheckerExecuted==true)
+				{
+				// DISABLING THE SPELLCHECKER
+				this.spellcheck();
 
-			// SETTING THAT THE SPELLCHECKER IS NOT WORKING
-			this.spellcheckerWorking = false;
-
-			// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
-			this.spellcheckerExecuted = false;
+				// NO POINT GOING ANY FURTHER
+				return;
+				}
 
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
