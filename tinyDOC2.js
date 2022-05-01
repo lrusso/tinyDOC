@@ -2540,6 +2540,9 @@ class tinyDOC2
 				// REGISTERING THE UNDO EVENT
 				this.saveUndo();
 
+				// SETTING THE DOCUMENT AS DIRTY
+				window.onbeforeunload = function(e){return "Dirty"};
+
 				// SETTING THE CURRENT INSTANCE FOR LATER USE
 				var thisTinyDOC = this;
 
