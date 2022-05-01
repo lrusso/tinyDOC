@@ -2514,6 +2514,7 @@ class tinyDOC2
 			// GETTING THE CURRENT TAG
 			var currentTag = this.getCurrentTag();
 
+			// CHECKING IF THE CARET IS ON A MISSPELLED WORD
 			if (currentTag.parentNode.nodeName=="MISSPELLED")
 				{
 				// GETTING THE CARET POSITION
