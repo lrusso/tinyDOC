@@ -2516,6 +2516,9 @@ class tinyDOC2
 
 			if (currentTag.parentNode.nodeName=="MISSPELLED")
 				{
+				// GETTING THE CARET POSITION
+				var originalCaretPosition = this.getCaretPosition(this.document);
+
 				// REGISTERING THE UNDO EVENT
 				this.saveUndo();
 
@@ -2536,6 +2539,16 @@ class tinyDOC2
 
 				// REGISTERING THE UNDO EVENT
 				this.saveUndo();
+
+				// SETTING THE CURRENT INSTANCE FOR LATER USE
+				var thisTinyDOC = this;
+
+				// WAITING 25 MS FOR THE UI TO BE UPDATED
+				setTimeout(function()
+					{
+					// RESTORING THE CARET POSITION
+					thisTinyDOC.setCaretPosition(thisTinyDOC.document,originalCaretPosition);
+					});
 				}
 				else
 				{
