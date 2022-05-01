@@ -2510,26 +2510,37 @@ class tinyDOC2
 			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
 			if (this.isDocumentSelected()==false){return}
 
-			// REGISTERING THE UNDO EVENT
-			this.saveUndo();
-
 			// GETTING THE CURRENT TAG
 			var currentTag = this.getCurrentTag();
 
-			// REPLACING THE MISSPELLED WORD
-			currentTag.nodeValue = word;
+			if (currentTag.parentNode.nodeName=="MISSPELLED")
+				{
+				// REGISTERING THE UNDO EVENT
+				this.saveUndo();
 
-			// REMOVING THE HIGHTLIGHT FROM THE CORRECTED WORD
-			currentTag.parentNode.parentNode.replaceChild(currentTag.parentNode.firstChild, currentTag.parentNode);
+				// GETTING THE CURRENT TAG
+				var currentTag = this.getCurrentTag();
 
-			// CLEARING THE SUGGESTIONS
-			this.contentViewer.innerHTML = "";
+				// REPLACING THE MISSPELLED WORD
+				currentTag.nodeValue = word;
 
-			// FOCUSING THE DOCUMENT
-			this.focus();
+				// REMOVING THE HIGHTLIGHT FROM THE CORRECTED WORD
+				currentTag.parentNode.parentNode.replaceChild(currentTag.parentNode.firstChild, currentTag.parentNode);
 
-			// REGISTERING THE UNDO EVENT
-			this.saveUndo();
+				// CLEARING THE SUGGESTIONS
+				this.contentViewer.innerHTML = "";
+
+				// FOCUSING THE DOCUMENT
+				this.focus();
+
+				// REGISTERING THE UNDO EVENT
+				this.saveUndo();
+				}
+				else
+				{
+				// CLEARING THE SUGGESTIONS
+				this.contentViewer.innerHTML = "";
+				}
 			}
 			catch(err)
 			{
