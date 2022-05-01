@@ -1841,14 +1841,15 @@ class tinyDOC2
 			// PREVENTING TO UNDO CONTENT WHEN THE SPELLCHECKER IS WORKING
 			if (this.spellcheckerWorking==true){return}
 
-			// CLEARING THE SPELLCHECKER RESULT
-			this.spellcheckerResult = [];
+			// CHECKING IF THE SPELLCHECKER WAS EXECUTED
+			if (this.spellcheckerExecuted==true)
+				{
+				// DISABLING THE SPELLCHECKER
+				this.spellcheck();
 
-			// SETTING THAT THE SPELLCHECKER IS NOT WORKING
-			this.spellcheckerWorking = false;
-
-			// SETTING THAT THE SPELLCHECKER WAS NOT EXECUTED
-			this.spellcheckerExecuted = false;
+				// NO POINT GOING ANY FURTHER
+				return;
+				}
 
 			// HIDING THE CARET
 			this.document.style.caretColor = "transparent";
@@ -2457,11 +2458,20 @@ class tinyDOC2
 					// CHECKING IF THE WORD WAS REPORTED BY THE SPELLCHECKER
 					if (this.spellcheckerResult[finalMisspelled])
 						{
+						// SETTING THE CURRENT INSTANCE FOR LATER USE
+						var thisTinyDOC = this;
+
 						// LOOPING EVERY SUGGESTED WORD
 						for (var i = 0; i < this.spellcheckerResult[finalMisspelled].length; i++)
 							{
+							// CREATING THE SUGGESTED WORD
+							var suggestedWord = document.createElement("span");
+							suggestedWord.className = "tinydoc_spellchecker_suggestions";
+							suggestedWord.innerHTML = this.spellcheckerResult[finalMisspelled][i];
+							suggestedWord.addEventListener("mousedown",function(event){thisTinyDOC.replaceWith(this.innerHTML)});
+
 							// ADDING THE SUGGESTED WORD
-							this.contentViewer.innerHTML = this.contentViewer.innerHTML + '<span class="tinydoc_spellchecker_suggestions">' + this.spellcheckerResult[finalMisspelled][i] + '</span>';
+							this.contentViewer.appendChild(suggestedWord);
 							}
 
 						// CHECKING IF THERE IS NO SUGGESTIONS
@@ -2487,6 +2497,39 @@ class tinyDOC2
 					this.contentViewer.innerHTML = "";
 					}
 				}
+			}
+			catch(err)
+			{
+			}
+		}
+
+	replaceWith(word)
+		{
+		try
+			{
+			// PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
+			if (this.isDocumentSelected()==false){return}
+
+			// REGISTERING THE UNDO EVENT
+			this.saveUndo();
+
+			// GETTING THE CURRENT TAG
+			var currentTag = this.getCurrentTag();
+
+			// REPLACING THE MISSPELLED WORD
+			currentTag.nodeValue = word;
+
+			// REMOVING THE HIGHTLIGHT FROM THE CORRECTED WORD
+			currentTag.parentNode.parentNode.replaceChild(currentTag.parentNode.firstChild, currentTag.parentNode);
+
+			// CLEARING THE SUGGESTIONS
+			this.contentViewer.innerHTML = "";
+
+			// FOCUSING THE DOCUMENT
+			this.focus();
+
+			// REGISTERING THE UNDO EVENT
+			this.saveUndo();
 			}
 			catch(err)
 			{
