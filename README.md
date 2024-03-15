@@ -10,7 +10,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
 ## React version
 
-https://www.github.com/lrusso/tinyDOC
+https://github.com/lrusso/tinyDOC/blob/main/react/TinyDOC.js
 
 ## Suggested spellchecker:
 
