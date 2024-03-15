@@ -1,14 +1,14 @@
-# TinyDOC 2 Editor 
+# TinyDOC in Vanilla JavaScript (deprecated)
 
-TinyDOC 2 Editor is a HTML5 Rich Text Editor. The idea of this project is to provide a lightweight text editor with simple and easy-to-use features without **execCommand**.
+TinyDOC is a HTML5 Rich Text Editor. The idea of this project is to provide a lightweight text editor with simple and easy-to-use features without **execCommand**.
 
-![alt screenshot](https://raw.githubusercontent.com/lrusso/tinyDOC2/master/tinyDOC2.png)
+![alt screenshot](https://github.com/lrusso/tinyDOC/blob/main/vanilla/tinyDOC.png)
 
 ## Web
 
-https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
+https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
-## TinyDOC 2 Configuration
+## TinyDOC Configuration
 
 | # | SETTING | DETAILS |
 | :------------ |:---------------| :----- |
@@ -25,7 +25,7 @@ https://lrusso.github.io/tinyDOC2/tinyDOC2.htm
 
 **Example without a spellchecker:**
 ```javascript
-new tinyDOC2({
+new TinyDOC({
               container: document.getElementById("myTestContainer"), 
               documentText: "Hello world",
               saveFunction: () => {alert("saveFunction")},
@@ -37,7 +37,7 @@ new tinyDOC2({
 
 **Example with a spellchecker:**
 ```javascript
-new tinyDOC2({
+new TinyDOC({
               container: document.getElementById("myTestContainer"), 
               documentText: "Hello world",
               saveFunction: () => {alert("saveFunction")},
@@ -51,7 +51,7 @@ new tinyDOC2({
               })
 ```
 
-## TinyDOC 2 Methods
+## TinyDOC Methods
 
 | # | METHOD | DETAILS |
 | :------------ |:---------------| :----- |
@@ -67,10 +67,10 @@ new tinyDOC2({
 | 10 | getText(boolean) | Returns the document content with or without encoding. |
 | 11 | showPleaseWait(boolean) | Hides or shows a please wait screen. |
 
-## Accessing the ContentEditable Div used by TinyDOC 2
+## Accessing the ContentEditable Div used by TinyDOC
 
 ```javascript
-let myExample = new tinyDOC2({ container: document.getElementById("myTestContainer") })
+let myExample = new TinyDOC({ container: document.getElementById("myTestContainer") })
 myExample.document.scrollTop = 0
 ```
 
