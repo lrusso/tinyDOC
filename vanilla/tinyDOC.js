@@ -1,4 +1,4 @@
-class tinyDOC2
+class tinyDOC
 	{
 	constructor(editorConfig)
 		{
