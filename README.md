@@ -1,4 +1,4 @@
-# TinyDOC Editor 
+# TinyDOC
 
 TinyDOC Editor is a WYSIWYG Editor. The idea of this project is to provide a lightweight text editor with simple and easy-to-use features without **execCommand**.
 
