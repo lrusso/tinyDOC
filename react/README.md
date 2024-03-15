@@ -8,7 +8,7 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 ```javascript
 const [forceFocusCounter, setForceFocusCounter] = React.useState(0)
 
-return (<TinyDOC3
+return (<TinyDOC
    content="lorem ipsum"
    height={480}
    enabled
