@@ -4,13 +4,13 @@ TinyDOC Editor is a HTML5 Rich Text Editor. The idea of this project is to provi
 
 ![alt screenshot](https://github.com/lrusso/tinyDOC/blob/main/vanilla/tinyDOC.png)
 
-## Web (Vanilla JavaScript version)
-
-https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
-
-## React version
+## React version:
 
 https://github.com/lrusso/tinyDOC/blob/main/react/TinyDOC.js
+
+## Vanilla JavaScript version:
+
+https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
 ## Suggested spellchecker:
 
