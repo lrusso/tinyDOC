@@ -655,6 +655,7 @@ class tinyDOC {
     } catch (err) {}
   }
 
+  // https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
   scrollToCaret() {
     try {
       var currentSelection = this.saveSelection(this.document)
@@ -693,6 +694,7 @@ class tinyDOC {
     } catch (err) {}
   }
 
+  // https://stackoverflow.com/questions/6846230/coordinates-of-selected-text-in-browser-page
   getCaretY() {
     try {
       var sel = document.selection
@@ -1023,6 +1025,7 @@ class tinyDOC {
     return currentNode
   }
 
+  // https://stackoverflow.com/questions/16736680/get-caret-index-in-contenteditable-div-including-tags
   getCaretCharacterOffsetWithin(element) {
     var caretOffset = 0
     try {
@@ -1619,6 +1622,8 @@ class tinyDOC {
     this.saveUndo()
   }
 
+  // https://gist.github.com/isLishude/6ccd1fbf42d1eaac667d6873e7b134f8
+  // https://codepen.io/jeffward/pen/OJjPKYo
   setCaretPosition(container, position) {
     try {
       if (position === null) {
@@ -1669,6 +1674,7 @@ class tinyDOC {
     } catch (err) {}
   }
 
+  // https://stackoverflow.com/questions/3972014/get-contenteditable-caret-position
   getCaretPosition(element) {
     try {
       if (!this.isDocumentSelected()) {
@@ -1957,6 +1963,7 @@ class tinyDOC {
     } catch (err) {}
   }
 
+  // https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
   insertHtmlAtCaret(html, selectPastedContent) {
     try {
       if (!this.isDocumentSelected()) {
@@ -2044,6 +2051,7 @@ class tinyDOC {
     } catch (err) {}
   }
 
+  // https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
   saveSelection(containerEl) {
     try {
       var doc = containerEl.ownerDocument
@@ -2059,6 +2067,7 @@ class tinyDOC {
     }
   }
 
+  // https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
   restoreSelection(containerEl, savedSel) {
     try {
       var doc = containerEl.ownerDocument,
