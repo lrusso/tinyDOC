@@ -523,7 +523,9 @@ class tinyDOC {
           // PREVENTING ANY SELECTION TO BE MADE
           event.preventDefault()
         }
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     })
 
     // SETTING WHAT WILL HAPPEN WHEN THE USER IS TYPING
@@ -605,7 +607,9 @@ class tinyDOC {
             thisTinyDOC.redo(true)
           }
         }
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     })
 
     // SETTING WHAT WILL HAPPEN WHEN THE USER IS TYPING
@@ -647,7 +651,7 @@ class tinyDOC {
         thisTinyDOC.checkForMisspelled()
 
         // CHECKING IF THERE IS A PREVIOUS UNDO SAVE TIMEOUT
-        if (thisTinyDOC.undoSaveTimeout != null) {
+        if (thisTinyDOC.undoSaveTimeout !== null) {
           // CLEARING THE PREVIOUS UNDO SAVE TIMEOUT
           clearTimeout(thisTinyDOC.undoSaveTimeout)
         }
@@ -707,13 +711,15 @@ class tinyDOC {
 
         // PASTING THE PLAIN TEXT
         thisTinyDOC.insertHtmlAtCaret(text, false)
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     })
 
     // SETTING WHAT WILL HAPPEN WHEN THERE IS AN INPUT IN THE DOCUMENT
-    this.document.addEventListener("input", function (event) {
+    this.document.addEventListener("input", function () {
       // SETTING THE DOCUMENT AS DIRTY
-      window.onbeforeunload = function (e) {
+      window.onbeforeunload = function () {
         return "Dirty"
       }
     })
@@ -736,7 +742,9 @@ class tinyDOC {
           // REMOVING EVERY CHILD
           this.document.removeChild(this.document.firstChild)
         }
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
 
       // SETTING THE DOCUMENT AS CLEAN
       window.onbeforeunload = null
@@ -752,7 +760,9 @@ class tinyDOC {
 
       // FOCUSING THE DOCUMENT
       this.focus()
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   save() {
@@ -762,7 +772,9 @@ class tinyDOC {
         // EXECUTING THE SAVE FUNCTION
         this.saveFunction()
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   resize() {
@@ -804,16 +816,22 @@ class tinyDOC {
           this.pleaseWaitIcon.style.bottom = this.myContainer.offsetBottom + "px"
           this.pleaseWaitIcon.style.width = this.myContainer.offsetWidth + "px"
           this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px"
-        } catch (err) {}
+        } catch (err) {
+          //
+        }
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   scrollToTop() {
     try {
       // SCROLLING TO THE TOP OF THE DOCUMENT
       this.document.scrollTop = 0
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
@@ -863,11 +881,13 @@ class tinyDOC {
       }
 
       // CHECKING IF THERE IS SOMETHING TO SELECT
-      if (currentSelection.start != currentSelection.end) {
+      if (currentSelection.start !== currentSelection.end) {
         // RESTORING THE SELECTION
         this.restoreSelection(this.document, currentSelection)
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/6846230/coordinates-of-selected-text-in-browser-page
@@ -923,14 +943,16 @@ class tinyDOC {
         }
       }
       return y
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return 0
   }
 
   setText(myText) {
     try {
       // CHECKING IF THERE IS A WORKER CREATED
-      if (this.myWorker != null) {
+      if (this.myWorker !== null) {
         // TERMINATING THE WORKER
         this.myWorker.terminate()
       }
@@ -979,7 +1001,9 @@ class tinyDOC {
         // MOVING THE CARET TO THE FIRST CHARACTER
         thisTinyDOC.setCaretPosition(thisTinyDOC.document, 0)
       }, 25)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   getText(mustEncode) {
@@ -1062,7 +1086,9 @@ class tinyDOC {
       setTimeout(function () {
         thisTinyDOC.document.focus()
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatDoc(myCommand, myParameter) {
@@ -1103,7 +1129,9 @@ class tinyDOC {
       setTimeout(function () {
         thisTinyDOC.document.focus()
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatStyle(myTag, myParameter) {
@@ -1118,9 +1146,9 @@ class tinyDOC {
 
       // PREVENTING STYLING OF MULTIPLE LIST ITEMS
       if (
-        (this.getParentTag("LI") != null ||
-          this.getParentTag("UL") != null ||
-          this.getParentTag("OL") != null) &&
+        (this.getParentTag("LI") !== null ||
+          this.getParentTag("UL") !== null ||
+          this.getParentTag("OL") !== null) &&
         window.getSelection().toString().indexOf("\n") > -1
       ) {
         // SETTING THE CURRENT INSTANCE FOR LATER USE
@@ -1147,7 +1175,9 @@ class tinyDOC {
 
       // EXECUTING THE FORMAT STYLE
       this.formatStyleExecute(myTag, myParameter)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatStyleExecute(myTag, myParameter) {
@@ -1196,11 +1226,13 @@ class tinyDOC {
         thisTinyDOC.saveUndo()
 
         // SETTING THE DOCUMENT AS DIRTY
-        window.onbeforeunload = function (e) {
+        window.onbeforeunload = function () {
           return "Dirty"
         }
       }, 25)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatList(tag1, tag2) {
@@ -1241,7 +1273,9 @@ class tinyDOC {
           false
         )
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   getParentTag(tagToFind) {
@@ -1253,7 +1287,7 @@ class tinyDOC {
       var upperNode = range.startContainer
 
       // LOOPING ALL THE PARENT NODES
-      while (upperNode.parentNode != this.document) {
+      while (upperNode.parentNode !== this.document) {
         // GETTING THE PARENT NODE
         upperNode = upperNode.parentNode
 
@@ -1262,7 +1296,9 @@ class tinyDOC {
           return upperNode
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return null
   }
 
@@ -1275,7 +1311,9 @@ class tinyDOC {
 
       // GETTING THE CURRENT FOCUS NODE
       currentNode = range.startContainer
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
 
     return currentNode
   }
@@ -1289,7 +1327,9 @@ class tinyDOC {
       preCaretRange.selectNodeContents(element)
       preCaretRange.setEnd(range.endContainer, range.endOffset)
       caretOffset = preCaretRange.toString().length
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return caretOffset
   }
 
@@ -1301,7 +1341,7 @@ class tinyDOC {
       var tagOL = this.getParentTag("OL")
 
       // CHECKING IF THE CARET IS IN A LIST
-      if (tagLI === null && (tagUL != null || tagOL != null)) {
+      if (tagLI === null && (tagUL !== null || tagOL !== null)) {
         // CANCELING THE ENTER KEY EVENT
         event.preventDefault()
 
@@ -1327,7 +1367,7 @@ class tinyDOC {
         }
 
         // CHECKING IF THERE IS A LIST AS A PARENT NODE
-        if (listNode != null) {
+        if (listNode !== null) {
           // CHECKING IF THE CARET IS AT THE LAST ITEM OF THE LIST
           if (listNode.lastChild === initialNode) {
             // CHECKING IF THE BREAKLINE WASN'T HANDLED WITHIN A LINK TAG
@@ -1353,7 +1393,9 @@ class tinyDOC {
           this.insertHtmlAtCaret("<br />", false)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   handleBreaklineInLink() {
@@ -1362,7 +1404,7 @@ class tinyDOC {
       var linkTag = this.getParentTag("A")
 
       // CHECKING IF A LINK TAG WAS FOUND
-      if (linkTag != null) {
+      if (linkTag !== null) {
         // CHECKING IF THE CARET IS AT THE LAST POSITION OF THE LINK TAG
         if (this.getCaretCharacterOffsetWithin(linkTag) === linkTag.text.length) {
           // ADDING A BREAKLINE AFTER THE LINK TAG
@@ -1370,7 +1412,9 @@ class tinyDOC {
           return true
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return false
   }
 
@@ -1389,7 +1433,7 @@ class tinyDOC {
       var startBefore = true
 
       // CHECKING IF THE CURRENT NODE IS NOT A LIST
-      if (currentNode.nodeName != "UL" && currentNode.nodeName != "OL") {
+      if (currentNode.nodeName !== "UL" && currentNode.nodeName !== "OL") {
         // SETTING THAT THE CARET MUST BE PLACED AFTER THE INSERTED NODE
         startBefore = false
       }
@@ -1415,7 +1459,9 @@ class tinyDOC {
         // REGISTERING THE UNDO EVENT
         thisTinyDOC.saveUndo()
       }, 25)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   isDocumentSelected() {
@@ -1497,8 +1543,8 @@ class tinyDOC {
 
             // LOOPING ALL THE PARENT NODES UNTIL HIT THE DOCUMENT OR A LIST ITEM
             while (
-              upperNode.parentNode != this.document &&
-              upperNode.parentNode.nodeName != "LI"
+              upperNode.parentNode !== this.document &&
+              upperNode.parentNode.nodeName !== "LI"
             ) {
               // GETTING THE PARENT NODE
               upperNode = upperNode.parentNode
@@ -1531,12 +1577,16 @@ class tinyDOC {
               }
             }
           }
-        } catch (err) {}
+        } catch (err) {
+          //
+        }
 
         // INSERTING THE PLAIN TEXT
         this.insertHtmlAtCaret(plainText, true)
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   spellcheck() {
@@ -1555,7 +1605,7 @@ class tinyDOC {
         }
 
         // CHECKING IF THERE IS A WORKER CREATED
-        if (this.myWorker != null) {
+        if (this.myWorker !== null) {
           // TERMINATING THE WORKER
           this.myWorker.terminate()
         }
@@ -1581,7 +1631,9 @@ class tinyDOC {
               // REMOVING EVERY CHILD
               this.document.removeChild(this.document.firstChild)
             }
-          } catch (err) {}
+          } catch (err) {
+            //
+          }
 
           // SETTING THAT THE SPELLCHECKER IS WORKING (TO PREVENT A SAVE UNDO)
           this.spellcheckerWorking = true
@@ -1684,7 +1736,9 @@ class tinyDOC {
                     // REMOVING EVERY CHILD
                     thisTinyDOC.document.removeChild(thisTinyDOC.document.firstChild)
                   }
-                } catch (err) {}
+                } catch (err) {
+                  //
+                }
 
                 // SETTING THE DOCUMENT TEXT WITH THE MISSPELLED WORDS UNDERLINED
                 thisTinyDOC.insertHtmlAtCaret(originalHTML, false)
@@ -1710,12 +1764,14 @@ class tinyDOC {
                   thisTinyDOC.spellcheckerExecuted = true
                 }, 500)
               }
-            } catch (err) {}
+            } catch (err) {
+              //
+            }
             return true
           }
 
           // SETTING WHAT WILL HAPPEN IF SOMETHING GOES WRONG WITH THE WORKER
-          this.myWorker.onerror = function (event) {
+          this.myWorker.onerror = function () {
             // WAITING 25 MS FOR THE UI TO BE UPDATED
             setTimeout(function () {
               // SETTING THAT THE SPELLCHECKER IS NOT WORKING
@@ -1745,7 +1801,9 @@ class tinyDOC {
           this.myWorker.postMessage(dataRequest)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   print() {
@@ -1782,7 +1840,9 @@ class tinyDOC {
         setTimeout(() => {
           thisTinyDOC.document.focus()
         }, 25)
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     } else {
       try {
         const printingWindow = window.open("about:blank", "_blank")
@@ -1800,7 +1860,9 @@ class tinyDOC {
         setTimeout(() => {
           printingWindow.print()
         }, 500)
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     }
   }
 
@@ -2036,7 +2098,7 @@ class tinyDOC {
       current_state = current_state.replace(/\<\/misspelled\>/gm, "")
 
       // IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
-      if (current_state != this.document_history[this.document_history_index]) {
+      if (current_state !== this.document_history[this.document_history_index]) {
         // IF WE ALREADY USED UNDO BUTTON AND MADE MODIFICATION - DELETE ALL FORWARD HISTORY
         if (this.document_history_index <= this.document_history.length - 1) {
           // REMOVING ALL FORWARD HISTORY
@@ -2062,7 +2124,9 @@ class tinyDOC {
         // UPDATING THE DOCUMENT HISTORY INDEX
         this.document_history_index = this.document_history.length - 1
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   clearUndoRedo() {
@@ -2121,7 +2185,9 @@ class tinyDOC {
           selection.addRange(range)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/3972014/get-contenteditable-caret-position
@@ -2160,7 +2226,7 @@ class tinyDOC {
       var selectedText = window.getSelection().toString()
 
       // CHECKING THE SELECTED TEXT
-      if (selectedText != null) {
+      if (selectedText !== null) {
         // IF THERE IS A SELECTED TEXT
         if (selectedText.length > 0) {
           // VALIDATORS FOR KNOWING IF THE SELECTED TEXT IS A HTTP, HTTPS OR MAILTO LINK
@@ -2211,7 +2277,9 @@ class tinyDOC {
       setTimeout(function () {
         thisTinyDOC.document.focus()
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   insertCalc() {
@@ -2220,13 +2288,15 @@ class tinyDOC {
       var selectedText = window.getSelection().toString()
 
       // CHECKING THE SELECTED TEXT
-      if (selectedText != null) {
+      if (selectedText !== null) {
         // IF THERE IS A SELECTED TEXT
         if (selectedText.length > 0) {
           // MOVING THE CARET AFTER THE SELECTED TEXT
           try {
             document.getSelection().collapseToEnd()
-          } catch (err) {}
+          } catch (err) {
+            //
+          }
 
           // SPLITTING THE SELECTED TEXT BY BREAKLINES
           var splitted = selectedText.split("\n")
@@ -2296,10 +2366,12 @@ class tinyDOC {
 
                 // CHECKING IF THE LAST LINE AND IS NOT A BREAKLINE.
                 // IF SO, A BREAKLINE WILL BE ADDED BEFORE THE RESULT.
-                if (currentLine != "" && i === splitted.length - 1) {
+                if (currentLine !== "" && i === splitted.length - 1) {
                   lastLineBR = "<br>"
                 }
-              } catch (err) {}
+              } catch (err) {
+                //
+              }
             }
 
             try {
@@ -2329,7 +2401,9 @@ class tinyDOC {
           }
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
 
     // SETTING THE CURRENT INSTANCE FOR LATER USE
     var thisTinyDOC = this
@@ -2370,7 +2444,9 @@ class tinyDOC {
         // CLEARING THE CONTENT VIEWER
         this.contentViewer.innerHTML = ""
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   checkForMisspelled() {
@@ -2409,7 +2485,7 @@ class tinyDOC {
               var suggestedWord = document.createElement("span")
               suggestedWord.className = "tinydoc_spellchecker_suggestions"
               suggestedWord.innerHTML = this.spellcheckerResult[finalMisspelled][i]
-              suggestedWord.addEventListener("mousedown", function (event) {
+              suggestedWord.addEventListener("mousedown", function () {
                 thisTinyDOC.replaceWith(this.innerHTML)
               })
 
@@ -2440,7 +2516,9 @@ class tinyDOC {
           this.contentViewer.innerHTML = ""
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   replaceWith(word) {
@@ -2481,7 +2559,7 @@ class tinyDOC {
         this.saveUndo()
 
         // SETTING THE DOCUMENT AS DIRTY
-        window.onbeforeunload = function (e) {
+        window.onbeforeunload = function () {
           return "Dirty"
         }
 
@@ -2497,7 +2575,9 @@ class tinyDOC {
         // CLEARING THE SUGGESTIONS
         this.contentViewer.innerHTML = ""
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
@@ -2569,7 +2649,7 @@ class tinyDOC {
           this.scrollToCaret()
 
           // SETTING THE DOCUMENT AS DIRTY
-          window.onbeforeunload = function (e) {
+          window.onbeforeunload = function () {
             return "Dirty"
           }
         } else {
@@ -2600,13 +2680,15 @@ class tinyDOC {
             }
 
             // SETTING THE DOCUMENT AS DIRTY
-            window.onbeforeunload = function (e) {
+            window.onbeforeunload = function () {
               return "Dirty"
             }
           }, 25)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
@@ -2670,6 +2752,8 @@ class tinyDOC {
       var sel = win.getSelection()
       sel.removeAllRanges()
       sel.addRange(range)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 }
