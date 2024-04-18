@@ -2162,8 +2162,12 @@ class tinyDOC {
   // https://codepen.io/jeffward/pen/OJjPKYo
   setCaretPosition(container, position) {
     try {
+      if (position === null) {
+        position = 0
+      }
+
       const createRange = (node, chars, range) => {
-        if (range === null) {
+        if (range === null || typeof range === "undefined") {
           range = window.document.createRange()
           range.selectNode(node)
           range.setStart(node, 0)
@@ -2180,10 +2184,10 @@ class tinyDOC {
               chars.count = 0
             }
           } else {
-            var _g = 0
-            var _g1 = node.childNodes.length
+            let _g = 0
+            const _g1 = node.childNodes.length
             while (_g < _g1) {
-              var lp = _g++
+              const lp = _g++
               range = createRange(node.childNodes[lp], chars, range)
               if (chars.count === 0) {
                 break
@@ -2195,8 +2199,8 @@ class tinyDOC {
       }
 
       if (position >= 0) {
-        var selection = window.getSelection()
-        var range = createRange(container, { count: position })
+        const selection = window.getSelection()
+        const range = createRange(container, { count: position })
         if (range !== null) {
           range.collapse(false)
           selection.removeAllRanges()
