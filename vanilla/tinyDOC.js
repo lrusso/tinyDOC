@@ -838,7 +838,7 @@ class tinyDOC
 
 			if (sel)
 				{
-				if (sel.type != "Control")
+				if (sel.type !== "Control")
 					{
 					range = sel.createRange();
 					range.collapse(true);
@@ -867,7 +867,7 @@ class tinyDOC
 						}
 
 					// FALLING BACK TO INSERTING A TEMPORARY ELEMENT
-					if (x == 0 && y == 0)
+					if (x === 0 && y === 0)
 						{
 						var span = document.createElement("span");
 						if (span.getClientRects)
@@ -2100,20 +2100,20 @@ class tinyDOC
 			{
 			function createRange(node,chars,range)
 				{
-				if(range == null)
+				if(range === null)
 					{
 					range = window.document.createRange();
 					range.selectNode(node);
 					range.setStart(node,0);
 					}
 
-				if(chars.count == 0)
+				if(chars.count === 0)
 					{
 					range.setEnd(node,chars.count);
 					}
-				else if(node != null && chars.count > 0)
+				else if(node !== null && chars.count > 0)
 					{
-					if(node.nodeType == 3)
+					if(node.nodeType === 3)
 						{
 						if(node.textContent.length < chars.count)
 							{
@@ -2133,7 +2133,7 @@ class tinyDOC
 							{
 							var lp = _g++;
 							range = createRange(node.childNodes[lp],chars,range);
-							if(chars.count == 0)
+							if(chars.count === 0)
 								{
 								break;
 								}
@@ -2147,7 +2147,7 @@ class tinyDOC
 				{
 				var selection = window.getSelection();
 				var range = createRange(container,{ count : position});
-				if(range != null)
+				if(range !== null)
 					{
 					range.collapse(false);
 					selection.removeAllRanges();
@@ -2722,7 +2722,7 @@ class tinyDOC
 
 			while (!stop && (node = nodeStack.pop()))
 				{
-				if (node.nodeType == 3)
+				if (node.nodeType === 3)
 					{
 					var nextCharIndex = charIndex + node.length;
 					if (!foundStart && savedSel.start >= charIndex && savedSel.start < nextCharIndex)
