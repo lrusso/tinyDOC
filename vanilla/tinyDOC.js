@@ -291,14 +291,14 @@ class tinyDOC
 		this.separator8.className = "tinydoc_separator";
 		this.menu.appendChild(this.separator8);
 
-		// ADDING THE CLEAR FORMAT BUTTON
+		// ADDING THE REMOVE FORMAT BUTTON
 		this.holder18 = document.createElement("div");
 		this.holder18.className = "tinydoc_holder";
 		this.menu.appendChild(this.holder18);
-		this.buttonClear = document.createElement("div");
-		this.buttonClear.className = "tinydoc_button_clear";
-		this.buttonClear.innerHTML = "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M0 64h576v-128h-576v128zM192 960h704v-128h-704v128zM277 128l205 784l124 -32l-196 -752h-133zM930 -64l-130 130l-130 -130l-62 62l130 130l-130 130l62 62l130 -130l130 130l62 -62l-130 -130l130 -130z' transform='translate(0 915) scale(-0.97,0.97) rotate(180)'/></svg>";
-		this.holder18.appendChild(this.buttonClear);
+		this.buttonRemoveFormat = document.createElement("div");
+		this.buttonRemoveFormat.className = "tinydoc_button_clear";
+		this.buttonRemoveFormat.innerHTML = "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M0 64h576v-128h-576v128zM192 960h704v-128h-704v128zM277 128l205 784l124 -32l-196 -752h-133zM930 -64l-130 130l-130 -130l-62 62l130 130l-130 130l62 62l130 -130l130 130l62 -62l-130 -130l130 -130z' transform='translate(0 915) scale(-0.97,0.97) rotate(180)'/></svg>";
+		this.holder18.appendChild(this.buttonRemoveFormat);
 
 		// ADDING A SEPARATOR
 		this.separator9 = document.createElement("div");
@@ -431,7 +431,7 @@ class tinyDOC
 		this.buttonHighlight.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("BackColor","#FFFF00");event.preventDefault()});
 		this.buttonLink.addEventListener("mousedown",function(event){thisTinyDOC.insertLink();event.preventDefault()});
 		this.buttonCalc.addEventListener("mousedown",function(event){thisTinyDOC.insertCalc();event.preventDefault()});
-		this.buttonClear.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("removeFormat",null);event.preventDefault()});
+		this.buttonRemoveFormat.addEventListener("mousedown",function(event){thisTinyDOC.formatDoc("removeFormat",null);event.preventDefault()});
 
 		// CHECKING IF THERE IS A TEMPLATE 1
 		if (editorConfig.template1)
