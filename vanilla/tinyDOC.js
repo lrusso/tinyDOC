@@ -99,7 +99,7 @@ class tinyDOC {
     this.menu.appendChild(this.separator2)
 
     // CHECKING IF THE SPELLCHECKER IS ENABLED
-    if (this.spellcheckerEnabled == true) {
+    if (this.spellcheckerEnabled) {
       // ADDING THE SPELLCHECKER BUTTON
       this.holder3 = document.createElement("div")
       this.holder3.className = "tinydoc_holder"
@@ -355,7 +355,7 @@ class tinyDOC {
     this.document.contentEditable = true
 
     // CHECKING IF THE SPELLCHECKER IS ENABLED
-    if (this.spellcheckerEnabled == true) {
+    if (this.spellcheckerEnabled) {
       // DISABLING THE BROWSER SPELLCHECKER FOR THE DOCUMENT
       this.document.spellcheck = false
     }
@@ -426,7 +426,7 @@ class tinyDOC {
     }
 
     // CHECKING IF THE SPELLCHECKER IS ENABLED
-    if (this.spellcheckerEnabled == true) {
+    if (this.spellcheckerEnabled) {
       // SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON THE SPELLCHECKER BUTTON
       this.buttonSpellcheck.addEventListener("mousedown", function (event) {
         thisTinyDOC.spellcheck()
@@ -519,7 +519,7 @@ class tinyDOC {
     this.document.addEventListener("mousedown", function (event) {
       try {
         // CHECKING IF THE DOCUMENT IS DISABLED
-        if (thisTinyDOC.documentEnabled == false) {
+        if (!thisTinyDOC.documentEnabled) {
           // PREVENTING ANY SELECTION TO BE MADE
           event.preventDefault()
         }
@@ -530,12 +530,12 @@ class tinyDOC {
     this.document.addEventListener("keydown", function (event) {
       try {
         // CHECKING IF THE DOCUMENT IS DISABLED
-        if (thisTinyDOC.documentEnabled == false) {
+        if (!thisTinyDOC.documentEnabled) {
           // PREVENTING ANY INPUT
           event.preventDefault()
         } else {
           //CODE FOR ADDING SPACES (TABS) WHEN THE TAB KEY IS DOWN
-          if (event.keyCode == 9) {
+          if (event.keyCode === 9) {
             // CANCELING THE TAB KEY EVENT
             event.preventDefault()
 
@@ -549,12 +549,12 @@ class tinyDOC {
             setTimeout(function () {
               thisTinyDOC.document.focus()
             }, 100)
-          } else if (event.keyCode == 13) {
+          } else if (event.keyCode === 13) {
             // HANDLING THE BREAKLINE EVENT
             thisTinyDOC.handleBreakline(event)
           } else if (
             (event.ctrlKey || event.metaKey) &&
-            String.fromCharCode(event.which).toLowerCase() == "s"
+            String.fromCharCode(event.which).toLowerCase() === "s"
           ) {
             // CHECKING IF THERE IS A SAVE FUNCTION
             if (thisTinyDOC.saveFunction) {
@@ -567,7 +567,7 @@ class tinyDOC {
           } else if (
             (event.ctrlKey || event.metaKey) &&
             !event.shiftKey &&
-            String.fromCharCode(event.which).toLowerCase() == "z"
+            String.fromCharCode(event.which).toLowerCase() === "z"
           ) {
             // CANCELING THE NATIVE UNDO EVENT
             event.preventDefault()
@@ -577,7 +577,7 @@ class tinyDOC {
           } else if (
             event.shiftKey &&
             event.metaKey &&
-            String.fromCharCode(event.which).toLowerCase() == "z"
+            String.fromCharCode(event.which).toLowerCase() === "z"
           ) {
             // CANCELING THE NATIVE REDO EVENT
             event.preventDefault()
@@ -587,7 +587,7 @@ class tinyDOC {
           } else if (
             event.ctrlKey &&
             event.shiftKey &&
-            String.fromCharCode(event.which).toLowerCase() == "z"
+            String.fromCharCode(event.which).toLowerCase() === "z"
           ) {
             // CANCELING THE NATIVE UNDO EVENT
             event.preventDefault()
@@ -596,7 +596,7 @@ class tinyDOC {
             thisTinyDOC.undo(true)
           } else if (
             event.ctrlKey &&
-            String.fromCharCode(event.which).toLowerCase() == "y"
+            String.fromCharCode(event.which).toLowerCase() === "y"
           ) {
             // CANCELING THE NATIVE REDO EVENT
             event.preventDefault()
@@ -611,33 +611,33 @@ class tinyDOC {
     // SETTING WHAT WILL HAPPEN WHEN THE USER IS TYPING
     this.document.addEventListener("keyup", function (event) {
       // CHECKING IF THE DOCUMENT IS DISABLED
-      if (thisTinyDOC.documentEnabled == false) {
+      if (!thisTinyDOC.documentEnabled) {
         // PREVENTING ANY INPUT
         event.preventDefault()
       } else if (
         (event.ctrlKey || event.metaKey) &&
         !event.shiftKey &&
-        String.fromCharCode(event.which).toLowerCase() == "z"
+        String.fromCharCode(event.which).toLowerCase() === "z"
       ) {
         // CANCELING THE NATIVE UNDO EVENT
         event.preventDefault()
       } else if (
         event.shiftKey &&
         event.metaKey &&
-        String.fromCharCode(event.which).toLowerCase() == "z"
+        String.fromCharCode(event.which).toLowerCase() === "z"
       ) {
         // CANCELING THE NATIVE REDO EVENT
         event.preventDefault()
       } else if (
         event.ctrlKey &&
         event.shiftKey &&
-        String.fromCharCode(event.which).toLowerCase() == "z"
+        String.fromCharCode(event.which).toLowerCase() === "z"
       ) {
         // CANCELING THE NATIVE UNDO EVENT
         event.preventDefault()
       } else if (
         event.ctrlKey &&
-        String.fromCharCode(event.which).toLowerCase() == "y"
+        String.fromCharCode(event.which).toLowerCase() === "y"
       ) {
         // CANCELING THE NATIVE REDO EVENT
         event.preventDefault()
@@ -663,7 +663,7 @@ class tinyDOC {
     // SETTING WHAT WILL HAPPEN WHEN THE USER IS CLICKING
     this.document.addEventListener("click", function (event) {
       // CHECKING IF THE DOCUMENT IS DISABLED
-      if (thisTinyDOC.documentEnabled == false) {
+      if (!thisTinyDOC.documentEnabled) {
         // PREVENTING ANY INPUT
         event.preventDefault()
       } else {
@@ -676,7 +676,7 @@ class tinyDOC {
     // SETTING WHAT WILL HAPPEN WHEN THE USER IS RIGHT CLICKING
     this.document.addEventListener("contextmenu", function (event) {
       // CHECKING IF THE DOCUMENT IS DISABLED
-      if (thisTinyDOC.documentEnabled == false) {
+      if (!thisTinyDOC.documentEnabled) {
         // PREVENTING ANY INPUT
         event.preventDefault()
       } else {
@@ -758,7 +758,7 @@ class tinyDOC {
   save() {
     try {
       // CHECKING THAT THE SPELLCHECKER IS NOT WORKING
-      if (this.spellcheckerWorking == false) {
+      if (!this.spellcheckerWorking) {
         // EXECUTING THE SAVE FUNCTION
         this.saveFunction()
       }
@@ -954,7 +954,7 @@ class tinyDOC {
       this.spellcheckerResult = []
 
       // CHECKING IF THE SPELLCHECKER IS WORKING
-      if (this.spellcheckerWorking == true) {
+      if (this.spellcheckerWorking) {
         // ENABLING THE DOCUMENT
         this.enable()
       }
@@ -1008,10 +1008,10 @@ class tinyDOC {
       var tempChar = str[i].charCodeAt()
       if (
         tempChar > 126 ||
-        tempChar == 34 ||
-        tempChar == 39 ||
-        tempChar == 60 ||
-        tempChar == 62
+        tempChar === 34 ||
+        tempChar === 39 ||
+        tempChar === 60 ||
+        tempChar === 62
       ) {
         aRet[i] = "&#" + tempChar + ";"
       } else {
@@ -1039,7 +1039,7 @@ class tinyDOC {
 
   showPleaseWait(mustShow) {
     // CHECKING IF THE PLEASE WAIT SCREEN MUST BE DISPLAYED
-    if (mustShow == true) {
+    if (mustShow) {
       // DISPLAYING THE PLEASE WAIT SCREEN
       this.pleaseWait.style.display = "block"
       this.pleaseWaitIcon.style.display = "block"
@@ -1071,27 +1071,27 @@ class tinyDOC {
       this.document.focus()
 
       // CHECKING THAT THE SPELLCHECKER IS NOT WORKING
-      if (this.spellcheckerWorking == false) {
+      if (!this.spellcheckerWorking) {
         // CHECKING ALL THE POSSIBLE COMMANDS
-        if (myCommand == "bold") {
+        if (myCommand === "bold") {
           this.formatStyle("b", myParameter)
-        } else if (myCommand == "italic") {
+        } else if (myCommand === "italic") {
           this.formatStyle("i", myParameter)
-        } else if (myCommand == "underline") {
+        } else if (myCommand === "underline") {
           this.formatStyle("u", myParameter)
-        } else if (myCommand == "strikethrough") {
+        } else if (myCommand === "strikethrough") {
           this.formatStyle("strike", myParameter)
-        } else if (myCommand == "BackColor") {
+        } else if (myCommand === "BackColor") {
           this.formatStyle("span", myParameter)
-        } else if (myCommand == "insertunorderedlist") {
+        } else if (myCommand === "insertunorderedlist") {
           this.formatList("ul", "li")
-        } else if (myCommand == "insertorderedlist") {
+        } else if (myCommand === "insertorderedlist") {
           this.formatList("ol", "li")
-        } else if (myCommand == "removeFormat") {
+        } else if (myCommand === "removeFormat") {
           this.removeFormat()
-        } else if (myCommand == "undo") {
+        } else if (myCommand === "undo") {
           this.undo(false)
-        } else if (myCommand == "redo") {
+        } else if (myCommand === "redo") {
           this.redo(false)
         }
       }
@@ -1112,7 +1112,7 @@ class tinyDOC {
       var currentSelection = this.saveSelection(this.document)
 
       // PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-      if (this.isDocumentSelected() == false) {
+      if (!this.isDocumentSelected()) {
         return
       }
 
@@ -1132,12 +1132,9 @@ class tinyDOC {
           thisTinyDOC.restoreSelection(thisTinyDOC.document, currentSelection)
 
           // CHECKING IF THE USER IS USING CHROME OR SAFARI
-          if (
-            thisTinyDOC.isUsingChrome == true ||
-            thisTinyDOC.isUsingSafari == true
-          ) {
+          if (thisTinyDOC.isUsingChrome || thisTinyDOC.isUsingSafari) {
             // CHECKING IF THE SELECTED TEXT HAS NO BREAKLINES (NOT SELECTING MULTIPLE LIST ITEMS)
-            if (window.getSelection().toString().indexOf("\n") == -1) {
+            if (window.getSelection().toString().indexOf("\n") === -1) {
               // EXECUTING THE FORMAT STYLE
               thisTinyDOC.formatStyleExecute(myTag, myParameter)
             }
@@ -1172,7 +1169,7 @@ class tinyDOC {
       newTag.appendChild(selectedContent)
 
       // CHECKING IF IT IS A SPAN ELEMENT (IN THIS PROJECT, USED FOR HIGHLIGHT)
-      if (myTag == "span") {
+      if (myTag === "span") {
         // SETTING THE BACKGROUND COLOR
         newTag.style.backgroundColor = myParameter
         newTag.style.boxShadow = "inset 0 0 0 1000px " + myParameter
@@ -1209,21 +1206,21 @@ class tinyDOC {
   formatList(tag1, tag2) {
     try {
       // PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-      if (this.isDocumentSelected() == false) {
+      if (!this.isDocumentSelected()) {
         return
       }
 
       // PREVENTING NESTED LISTS
       if (
-        this.getParentTag("LI") == null &&
-        this.getParentTag("UL") == null &&
-        this.getParentTag("OL") == null
+        this.getParentTag("LI") === null &&
+        this.getParentTag("UL") === null &&
+        this.getParentTag("OL") === null
       ) {
         // GETTING THE SELECTED TEXT
         var selectedText = window.getSelection().toString()
 
         // CHECKING IF THERE IS NO SELECTION
-        if (selectedText == "") {
+        if (selectedText === "") {
           // ADDING A BREAKLINE TO THE ITEM TAG (FOR MOVING THROUGH THE EMPTY LIST USING THE KEYS)
           selectedText = "<br />"
         }
@@ -1261,7 +1258,7 @@ class tinyDOC {
         upperNode = upperNode.parentNode
 
         // CHECKING IF THE PARENT NODE IS THE REQUESTED ONE
-        if (upperNode.nodeName == tagToFind) {
+        if (upperNode.nodeName === tagToFind) {
           return upperNode
         }
       }
@@ -1304,7 +1301,7 @@ class tinyDOC {
       var tagOL = this.getParentTag("OL")
 
       // CHECKING IF THE CARET IS IN A LIST
-      if (tagLI == null && (tagUL != null || tagOL != null)) {
+      if (tagLI === null && (tagUL != null || tagOL != null)) {
         // CANCELING THE ENTER KEY EVENT
         event.preventDefault()
 
@@ -1323,7 +1320,7 @@ class tinyDOC {
           upperNode = upperNode.parentNode
 
           // CHECKING IF THE ELEMENT IS A LIST TYPE
-          if (upperNode.nodeName == "UL" || upperNode.nodeName == "OL") {
+          if (upperNode.nodeName === "UL" || upperNode.nodeName === "OL") {
             // SETTING THAT THERE IS A LIST AS A PARENT NODE
             listNode = upperNode
           }
@@ -1332,9 +1329,9 @@ class tinyDOC {
         // CHECKING IF THERE IS A LIST AS A PARENT NODE
         if (listNode != null) {
           // CHECKING IF THE CARET IS AT THE LAST ITEM OF THE LIST
-          if (listNode.lastChild == initialNode) {
+          if (listNode.lastChild === initialNode) {
             // CHECKING IF THE BREAKLINE WASN'T HANDLED WITHIN A LINK TAG
-            if (this.handleBreaklineInLink() == false) {
+            if (!this.handleBreaklineInLink()) {
               // ADDING A BREAKLINE AFTER THE LIST NODE
               this.addBreakLineAfter(listNode)
             }
@@ -1343,12 +1340,12 @@ class tinyDOC {
       }
 
       // CHECKING IF THE CARET IS NOT IN A LIST
-      else if (tagLI == null) {
+      else if (tagLI === null) {
         // CANCELING THE ENTER KEY EVENT
         event.preventDefault()
 
         // CHECKING IF THE BREAKLINE WASN'T HANDLED WITHIN A LINK TAG
-        if (this.handleBreaklineInLink() == false) {
+        if (!this.handleBreaklineInLink()) {
           // SETTING THAT KEY ENTER WAS PRESSED
           this.keyEnterPressed = true
 
@@ -1367,7 +1364,7 @@ class tinyDOC {
       // CHECKING IF A LINK TAG WAS FOUND
       if (linkTag != null) {
         // CHECKING IF THE CARET IS AT THE LAST POSITION OF THE LINK TAG
-        if (this.getCaretCharacterOffsetWithin(linkTag) == linkTag.text.length) {
+        if (this.getCaretCharacterOffsetWithin(linkTag) === linkTag.text.length) {
           // ADDING A BREAKLINE AFTER THE LINK TAG
           this.addBreakLineAfter(linkTag)
           return true
@@ -1405,7 +1402,7 @@ class tinyDOC {
         // MOVING THE CARET TO THE BREAKLINE
         var range = document.createRange()
         range.selectNodeContents(tempAnchorEl)
-        if (startBefore == true) {
+        if (startBefore) {
           range.setStartBefore(tempAnchorEl)
         } else {
           range.setStartAfter(tempAnchorEl)
@@ -1430,7 +1427,7 @@ class tinyDOC {
       var upperNode = window.getSelection().focusNode
 
       // CHECKING IF THAT NODE IS THE ONE THAT NEEDS TO BE FOUND
-      if (upperNode == this.document) {
+      if (upperNode === this.document) {
         // SETTING THAT THE DOCUMENT WAS FOUND
         docFound = true
       }
@@ -1441,7 +1438,7 @@ class tinyDOC {
         upperNode = upperNode.parentNode
 
         // CHECKING IF THAT NODE IS THE ONE THAT NEEDS TO BE FOUND
-        if (upperNode == this.document) {
+        if (upperNode === this.document) {
           // SETTING THAT THE DOCUMENT WAS FOUND
           docFound = true
         }
@@ -1491,9 +1488,9 @@ class tinyDOC {
 
           // CHECKING IF AN ENTIRE TAG WAS SELECTED
           if (
-            range.startOffset == 0 &&
-            (range.endOffset == 0 ||
-              range.endOffset == window.getSelection().toString().length)
+            range.startOffset === 0 &&
+            (range.endOffset === 0 ||
+              range.endOffset === window.getSelection().toString().length)
           ) {
             // GETTING THE CURRENT FOCUS NODE
             var upperNode = range.startContainer
@@ -1519,16 +1516,16 @@ class tinyDOC {
               lowerNode = lowerNode.firstChild
 
               // CHECKING IF THE NODE IS A LIST ITEM
-              if (lowerNode.nodeName == "LI") {
+              if (lowerNode.nodeName === "LI") {
                 // SETTING THAT THE LIST ITEM WAS FOUND
                 foundListItem = true
               }
             }
 
             // CHECKING IF THERE IS NO LIST ITEM SELECTED
-            if (foundListItem == false) {
+            if (!foundListItem) {
               // CHECKING IF THE UPPER NODE TEXT IS THE SELECTED TEXT
-              if (upperNode.innerText.length == range.endOffset) {
+              if (upperNode.innerText.length === range.endOffset) {
                 // REMOVING THE PARENT NODE
                 upperNode.parentNode.removeChild(upperNode)
               }
@@ -1545,9 +1542,9 @@ class tinyDOC {
   spellcheck() {
     try {
       // CHECKING IF THE SPELLCHECKER IS NOT WORKING
-      if (this.spellcheckerWorking == false) {
+      if (!this.spellcheckerWorking) {
         // PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-        if (this.isDocumentSelected() == false) {
+        if (!this.isDocumentSelected()) {
           return
         }
 
@@ -1564,7 +1561,7 @@ class tinyDOC {
         }
 
         // CHECKING IF THE SPELLCHECKER WAS EXECUTED PREVIOUSLY
-        if (this.spellcheckerExecuted == true) {
+        if (this.spellcheckerExecuted) {
           // GETTING THE CARET POSITION
           var originalCaretPosition = this.getCaretPosition(this.document)
 
@@ -1646,7 +1643,7 @@ class tinyDOC {
           this.myWorker.onmessage = function (e) {
             try {
               // CHECKING IF THE SPELLCHECKER IS WORKING
-              if (thisTinyDOC.spellcheckerWorking == true) {
+              if (thisTinyDOC.spellcheckerWorking) {
                 // FOCUSING THE DOCUMENT
                 thisTinyDOC.focus()
 
@@ -1753,7 +1750,7 @@ class tinyDOC {
 
   print() {
     // CHECKING IF THE SPELLCHECKER IS WORKING
-    if (this.spellcheckerWorking == true) {
+    if (this.spellcheckerWorking) {
       // NO POINT GOING ANY FURTHER
       return
     }
@@ -1810,22 +1807,22 @@ class tinyDOC {
   undo(keyboardRequest) {
     try {
       // PREVENTING OVERLAPPING DURING THE UNDO/REDO RENDERING EVENT
-      if (this.canUndoRedo == false) {
+      if (!this.canUndoRedo) {
         return
       }
 
       // PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-      if (this.isDocumentSelected() == false && keyboardRequest == false) {
+      if (!this.isDocumentSelected() && !keyboardRequest) {
         return
       }
 
       // PREVENTING TO UNDO CONTENT WHEN THE SPELLCHECKER IS WORKING
-      if (this.spellcheckerWorking == true) {
+      if (this.spellcheckerWorking) {
         return
       }
 
       // CHECKING IF THE SPELLCHECKER WAS EXECUTED
-      if (this.spellcheckerExecuted == true) {
+      if (this.spellcheckerExecuted) {
         // DISABLING THE SPELLCHECKER
         this.spellcheck()
 
@@ -1921,22 +1918,22 @@ class tinyDOC {
   redo(keyboardRequest) {
     try {
       // PREVENTING OVERLAPPING DURING THE UNDO/REDO RENDERING EVENT
-      if (this.canUndoRedo == false) {
+      if (!this.canUndoRedo) {
         return
       }
 
       // PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-      if (this.isDocumentSelected() == false && keyboardRequest == false) {
+      if (!this.isDocumentSelected() && !keyboardRequest) {
         return
       }
 
       // PREVENTING TO UNDO CONTENT WHEN THE SPELLCHECKER IS WORKING
-      if (this.spellcheckerWorking == true) {
+      if (this.spellcheckerWorking) {
         return
       }
 
       // CHECKING IF THE SPELLCHECKER WAS EXECUTED
-      if (this.spellcheckerExecuted == true) {
+      if (this.spellcheckerExecuted) {
         // DISABLING THE SPELLCHECKER
         this.spellcheck()
 
@@ -2131,7 +2128,7 @@ class tinyDOC {
   getCaretPosition(element) {
     try {
       // CHECKING IF THE CARET IS IN THE DOCUMENT
-      if (this.isDocumentSelected() == false) {
+      if (!this.isDocumentSelected()) {
         return 0
       }
 
@@ -2176,13 +2173,13 @@ class tinyDOC {
 
           // VALIDATING THE SELECTED TEXT
           if (
-            selectedTextURLChecker1 == -1 &&
-            (selectedTextURLChecker2 == 0 ||
-              selectedTextURLChecker3 == 0 ||
-              selectedTextURLChecker4 == true)
+            selectedTextURLChecker1 === -1 &&
+            (selectedTextURLChecker2 === 0 ||
+              selectedTextURLChecker3 === 0 ||
+              selectedTextURLChecker4)
           ) {
             // CHECKING IF IT IS A URL OR EMAIL
-            if (selectedTextURLChecker4 == true) {
+            if (selectedTextURLChecker4) {
               // INSERTING THE MAILTO LINK INTO THE DOCUMENT
               this.insertHtmlAtCaret(
                 "<a href='mailto:" +
@@ -2235,7 +2232,7 @@ class tinyDOC {
           var splitted = selectedText.split("\n")
 
           // CHECK IF IT IS A SINGLE LINE EXPRESSION OR A MULTILINE ADDING OPERATION
-          if (splitted.length == 1) {
+          if (splitted.length === 1) {
             // REMOVING INVALID CHARACTERS
             selectedText = selectedText.replace(/[^0-9.*\/()+-]/g, "")
 
@@ -2244,7 +2241,7 @@ class tinyDOC {
               var finalResult = eval(selectedText)
 
               // CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
-              if (isNaN(finalResult) == true) {
+              if (isNaN(finalResult)) {
                 // INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
                 this.insertHtmlAtCaret(" = ERROR", false)
               } else {
@@ -2299,7 +2296,7 @@ class tinyDOC {
 
                 // CHECKING IF THE LAST LINE AND IS NOT A BREAKLINE.
                 // IF SO, A BREAKLINE WILL BE ADDED BEFORE THE RESULT.
-                if (currentLine != "" && i == splitted.length - 1) {
+                if (currentLine != "" && i === splitted.length - 1) {
                   lastLineBR = "<br>"
                 }
               } catch (err) {}
@@ -2307,7 +2304,7 @@ class tinyDOC {
 
             try {
               // CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
-              if (isNaN(finalResult) == true) {
+              if (isNaN(finalResult)) {
                 // INSERTING AN ERROR TEXT IF THE EXPRESSION RESULT COULD NOT BE EVALUATED
                 this.insertHtmlAtCaret(lastLineBR + "----------<br />ERROR", false)
               } else {
@@ -2349,13 +2346,13 @@ class tinyDOC {
       var linkTag = this.getParentTag("A")
 
       // CHECKING IF A LINK TAG WASN'T FOUND
-      if (linkTag == null) {
+      if (linkTag === null) {
         // GETTING THE CURRENT TAG WHERE THE CARET IS LOCATED (BACKSAFE)
         linkTag = this.getCurrentTag()
       }
 
       // CHECKING IF A LINK TAG WAS FOUND
-      if (linkTag.nodeName == "A") {
+      if (linkTag.nodeName === "A") {
         // GETTING THE URL (IF ANY)
         var finalURL = linkTag.href
 
@@ -2382,13 +2379,13 @@ class tinyDOC {
       var misspelledTag = this.getParentTag("MISSPELLED")
 
       // CHECKING IF A MISSPELLED TAG WASN'T FOUND
-      if (misspelledTag == null) {
+      if (misspelledTag === null) {
         // GETTING THE CURRENT TAG WHERE THE CARET IS LOCATED (BACKSAFE)
         misspelledTag = this.getCurrentTag()
       }
 
       // CHECKING IF A MISSPELLED TAG WAS FOUND
-      if (misspelledTag.nodeName == "MISSPELLED") {
+      if (misspelledTag.nodeName === "MISSPELLED") {
         // GETTING THE MISSPELLED WORD (IF ANY)
         var finalMisspelled = misspelledTag.textContent
 
@@ -2421,7 +2418,7 @@ class tinyDOC {
             }
 
             // CHECKING IF THERE IS NO SUGGESTIONS
-            if (this.spellcheckerResult[finalMisspelled].length == 0) {
+            if (this.spellcheckerResult[finalMisspelled].length === 0) {
               // ADDING THE SUGGESTIONS LABEL
               this.contentViewer.innerHTML =
                 '<span class="tinydoc_spellchecker_no_suggestions">' +
@@ -2438,7 +2435,7 @@ class tinyDOC {
         }
       } else {
         // CHECKING IF THE CARET IS IN A LINK TAG
-        if (this.getParentTag("A") == false || this.getCurrentTag("A") == false) {
+        if (!this.getParentTag("A") || !this.getCurrentTag("A")) {
           // CLEARING THE CONTENT VIEWER
           this.contentViewer.innerHTML = ""
         }
@@ -2449,7 +2446,7 @@ class tinyDOC {
   replaceWith(word) {
     try {
       // PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-      if (this.isDocumentSelected() == false) {
+      if (!this.isDocumentSelected()) {
         this.contentViewer.innerHTML = ""
         return
       }
@@ -2458,7 +2455,7 @@ class tinyDOC {
       var currentTag = this.getCurrentTag()
 
       // CHECKING IF THE CARET IS ON A MISSPELLED WORD
-      if (currentTag.parentNode.nodeName == "MISSPELLED") {
+      if (currentTag.parentNode.nodeName === "MISSPELLED") {
         // GETTING THE CARET POSITION
         var originalCaretPosition = this.getCaretPosition(this.document)
 
@@ -2507,12 +2504,12 @@ class tinyDOC {
   insertHtmlAtCaret(html, selectPastedContent) {
     try {
       // PREVENTING TO ADD CONTENT OUTSIDE THE DOCUMENT
-      if (this.isDocumentSelected() == false) {
+      if (!this.isDocumentSelected()) {
         return
       }
 
       // PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT OR THE SPELLCHECKER IS NOT WORKING
-      if (this.canUndoRedo == true && this.spellcheckerWorking == false) {
+      if (this.canUndoRedo && !this.spellcheckerWorking) {
         // REGISTERING THE UNDO EVENT
         this.saveUndo()
       }
@@ -2550,12 +2547,12 @@ class tinyDOC {
         }
 
         // CHECKING IF THE SPELLCHECKER IS WORKING
-        if (this.spellcheckerWorking == true) {
+        if (this.spellcheckerWorking) {
           // NO POINT GOING ANY FURTHER
           return
         }
         // CHECKING IF A NEW TEXT IS SET
-        else if (this.settingNewText == true) {
+        else if (this.settingNewText) {
           // SETTING THAT ENTER KEY WAS NOT PRESSED
           this.settingNewText = false
 
@@ -2564,7 +2561,7 @@ class tinyDOC {
         }
 
         // CHECKING IF THE ENTER KEY WAS PRESSED
-        else if (this.keyEnterPressed == true) {
+        else if (this.keyEnterPressed) {
           // SETTING THAT ENTER KEY WAS NOT PRESSED
           this.keyEnterPressed = false
 
@@ -2594,7 +2591,7 @@ class tinyDOC {
             }
 
             // PREVENTING SAVING AN UNDO EVENT DURING AN UNDO/REDO EVENT
-            if (thisTinyDOC.canUndoRedo == true) {
+            if (thisTinyDOC.canUndoRedo) {
               // SCROLLING TO THE CARET
               thisTinyDOC.scrollToCaret()
 
