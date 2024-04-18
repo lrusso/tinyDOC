@@ -1803,13 +1803,16 @@ class tinyDOC
 
 	print()
 		{
+		// CHECKING IF THE SPELLCHECKER IS WORKING
 		if (this.spellcheckerWorking==true)
 			{
+			// NO POINT GOING ANY FURTHER
 			return;
 			}
 
 		const webLinkColor = "#3A76B1";
 
+		// CHECKING IF IT IS A DESKTOP DEVICE
 		if (!this.isMobileDevice)
 			{
 			try
