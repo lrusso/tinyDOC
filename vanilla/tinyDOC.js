@@ -373,7 +373,8 @@ class tinyDOC {
     }
 
     // SETTING THE CURRENT INSTANCE FOR LATER USE
-    var thisTinyDOC = this
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let thisTinyDOC = this
 
     // CREATING A VARIABLE TO STORE THE SPELLCHECKER RESULT
     this.spellcheckerResult = []
@@ -994,7 +995,8 @@ class tinyDOC {
       this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
 
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // WAITING 25 MS FOR THE UI TO BE UPDATED
       setTimeout(function () {
@@ -1080,7 +1082,8 @@ class tinyDOC {
       this.document.focus()
 
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // FOCUSING THE DOCUMENT AFTER 100 MS
       setTimeout(function () {
@@ -1123,7 +1126,8 @@ class tinyDOC {
       }
 
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // FOCUSING THE DOCUMENT AFTER 100 MS
       setTimeout(function () {
@@ -1152,7 +1156,8 @@ class tinyDOC {
         window.getSelection().toString().indexOf("\n") > -1
       ) {
         // SETTING THE CURRENT INSTANCE FOR LATER USE
-        var thisTinyDOC = this
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        let thisTinyDOC = this
 
         // WAITING 25 MS FOR THE UI TO BE UPDATED
         setTimeout(function () {
@@ -1212,7 +1217,8 @@ class tinyDOC {
       range.insertNode(newTag)
 
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // WAITING 25 MS FOR THE UI TO BE UPDATED
       setTimeout(function () {
@@ -1439,7 +1445,8 @@ class tinyDOC {
       }
 
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // WAITING 25 MS FOR THE UI TO BE UPDATED
       setTimeout(function () {
@@ -1491,7 +1498,8 @@ class tinyDOC {
       }
 
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // FOCUSING THE DOCUMENT AFTER 100 MS
       setTimeout(function () {
@@ -1502,7 +1510,8 @@ class tinyDOC {
       return docFound
     } catch (err) {
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // FOCUSING THE DOCUMENT AFTER 100 MS
       setTimeout(function () {
@@ -1642,7 +1651,8 @@ class tinyDOC {
           this.insertHtmlAtCaret(originalHTML, false)
 
           // SETTING THE CURRENT INSTANCE FOR LATER USE
-          var thisTinyDOC = this
+          // eslint-disable-next-line @typescript-eslint/no-this-alias
+          let thisTinyDOC = this
 
           // WAITING 25 MS FOR THE UI TO BE UPDATED
           setTimeout(function () {
@@ -1686,7 +1696,8 @@ class tinyDOC {
           dataRequest["words"] = results
 
           // SETTING THE CURRENT INSTANCE FOR LATER USE
-          var thisTinyDOC = this
+          // eslint-disable-next-line @typescript-eslint/no-this-alias
+          let thisTinyDOC = this
 
           // CREATING THE WEB WORKER FOR THE SPELLCHECKER SERVICE
           this.myWorker = new Worker(this.spellcheckerURL)
@@ -1836,6 +1847,7 @@ class tinyDOC {
         newIframe.contentWindow.focus()
         newIframe.contentWindow.print()
         document.body.removeChild(newIframe)
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const thisTinyDOC = this
         setTimeout(() => {
           thisTinyDOC.document.focus()
@@ -1916,7 +1928,8 @@ class tinyDOC {
         )
 
         // SETTING THE CURRENT INSTANCE FOR LATER USE
-        var thisTinyDOC = this
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        let thisTinyDOC = this
 
         // WAITING 25 MS FOR THE UI TO BE UPDATED
         setTimeout(function () {
@@ -1942,7 +1955,8 @@ class tinyDOC {
         }, 25)
       } else {
         // SETTING THE CURRENT INSTANCE FOR LATER USE
-        var thisTinyDOC = this
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        let thisTinyDOC = this
 
         // WAITING 25 MS FOR THE UI TO BE UPDATED
         setTimeout(function () {
@@ -1961,7 +1975,8 @@ class tinyDOC {
       }
     } catch (err) {
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // WAITING 25 MS FOR THE UI TO BE UPDATED
       setTimeout(function () {
@@ -2027,7 +2042,8 @@ class tinyDOC {
         )
 
         // SETTING THE CURRENT INSTANCE FOR LATER USE
-        var thisTinyDOC = this
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        let thisTinyDOC = this
 
         // WAITING 25 MS FOR THE UI TO BE UPDATED
         setTimeout(function () {
@@ -2053,7 +2069,8 @@ class tinyDOC {
         }, 25)
       } else {
         // SETTING THE CURRENT INSTANCE FOR LATER USE
-        var thisTinyDOC = this
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        let thisTinyDOC = this
 
         // WAITING 25 MS FOR THE UI TO BE UPDATED
         setTimeout(function () {
@@ -2072,7 +2089,8 @@ class tinyDOC {
       }
     } catch (err) {
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // WAITING 25 MS FOR THE UI TO BE UPDATED
       setTimeout(function () {
@@ -2271,7 +2289,8 @@ class tinyDOC {
       }
 
       // SETTING THE CURRENT INSTANCE FOR LATER USE
-      var thisTinyDOC = this
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      let thisTinyDOC = this
 
       // FOCUSING THE DOCUMENT AFTER 100 MS
       setTimeout(function () {
@@ -2308,6 +2327,7 @@ class tinyDOC {
 
             try {
               // EVALUATING THE EXPRESSION
+              // eslint-disable-next-line no-eval
               var finalResult = eval(selectedText)
 
               // CHECKING IF THE FINAL RESULT IS NAN (NOT A NUMBER)
@@ -2406,7 +2426,8 @@ class tinyDOC {
     }
 
     // SETTING THE CURRENT INSTANCE FOR LATER USE
-    var thisTinyDOC = this
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let thisTinyDOC = this
 
     // FOCUSING THE DOCUMENT AFTER 100 MS
     setTimeout(function () {
@@ -2473,7 +2494,8 @@ class tinyDOC {
           // CHECKING IF THE WORD WAS REPORTED BY THE SPELLCHECKER
           if (this.spellcheckerResult[finalMisspelled]) {
             // SETTING THE CURRENT INSTANCE FOR LATER USE
-            var thisTinyDOC = this
+            // eslint-disable-next-line @typescript-eslint/no-this-alias
+            let thisTinyDOC = this
 
             // LOOPING EVERY SUGGESTED WORD
             for (
@@ -2564,7 +2586,8 @@ class tinyDOC {
         }
 
         // SETTING THE CURRENT INSTANCE FOR LATER USE
-        var thisTinyDOC = this
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        let thisTinyDOC = this
 
         // WAITING 25 MS FOR THE UI TO BE UPDATED
         setTimeout(function () {
@@ -2654,7 +2677,8 @@ class tinyDOC {
           }
         } else {
           // SETTING THE CURRENT INSTANCE FOR LATER USE
-          var thisTinyDOC = this
+          // eslint-disable-next-line @typescript-eslint/no-this-alias
+          let thisTinyDOC = this
 
           // WAITING 25 MS FOR THE UI TO BE UPDATED
           setTimeout(function () {
