@@ -1010,7 +1010,7 @@ class tinyDOC {
 
   getText(mustEncode) {
     // GETTING THE DOCUMENT INNERHTML CONTENT
-    var originalHTML = this.document.innerHTML
+    let originalHTML = this.document.innerHTML
 
     // CLEARING THE MISSPELLED TAGS
     originalHTML = originalHTML.replace(/<misspelled>/gm, "")
@@ -1628,7 +1628,7 @@ class tinyDOC {
           this.spellcheckerResult = []
 
           // GETTING THE DOCUMENT INNERHTML CONTENT
-          var originalHTML = this.document.innerHTML
+          let originalHTML = this.document.innerHTML
 
           // CLEARING THE MISSPELLED TAGS
           originalHTML = originalHTML.replace(/<misspelled>/gm, "")
@@ -2162,7 +2162,7 @@ class tinyDOC {
   // https://codepen.io/jeffward/pen/OJjPKYo
   setCaretPosition(container, position) {
     try {
-      function createRange(node, chars, range) {
+      const createRange = (node, chars, range) => {
         if (range === null) {
           range = window.document.createRange()
           range.selectNode(node)
@@ -2234,7 +2234,7 @@ class tinyDOC {
 
   insertLink() {
     try {
-      function checkForEmail(email) {
+      const checkForEmail = (email) => {
         var re =
           /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         return re.test(String(email).toLowerCase())
