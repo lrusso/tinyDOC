@@ -383,6 +383,9 @@ class tinyDOC
 		// ADDING A REGEX FOR CHECKING IF THE USER IS USING CHROME
 		this.isUsingChrome = /.*chrome/i.test(navigator.userAgent);
 
+		// ADDING A VALIDATION FOR CHECKING IF THE USER IS USING A MOBILE DEVICE
+		this.isMobileDevice = !!(window.navigator.userAgent.match(/Android/i) || window.navigator.userAgent.match(/webOS/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPod/i) || window.navigator.userAgent.match(/BlackBerry/i) || window.navigator.userAgent.match(/Windows Phone/i));
+		
 		// CHECKING IF THERE IS A SAVE FUNCTION
 		if (this.saveFunction)
 			{
@@ -1800,32 +1803,48 @@ class tinyDOC
 
 	print()
 		{
-		try
+		if (this.spellcheckerWorking==true)
 			{
-			// CHECKING THAT THE SPELLCHECKER IS NOT WORKING
-			if (this.spellcheckerWorking==false)
+			return;
+			}
+
+		const webLinkColor = "#3A76B1";
+
+		if (!this.isMobileDevice)
+			{
+			try
 				{
-				// OPENING A NEW WINDOW
-				var printingWindow = window.open("about:blank", "_blank");
-
-				// UPDATING THE NEW WINDOW WITH THE DOCUMENT CONTENT
-				printingWindow.document.write("<!DOCTYPE html><html><head><title>" + this.encodeText(window.location.href)  + "<\/title><style>a{text-decoration:underline;color:#3a76b1}<\/style><\/head><body style='font-family:Arial;font-size:16px'>" + this.document.innerHTML + "<\/body><\/html>");
-				printingWindow.document.close();
-				printingWindow.focus();
-
-				// PRINTING THE DOCUMENT CONTENT
-				printingWindow.print();
+				const newIframe = document.createElement("iframe");
+				newIframe.width = "0";
+				newIframe.height = "0";
+				newIframe.src = "about:blank";
+				document.body.appendChild(newIframe);
+				newIframe.contentWindow.document.write("<!DOCTYPE html><html><head><title>" + this.encodeText(window.location.href) + "</title><style>a{text-decoration:underline;color:" + webLinkColor + "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap'>" + this.document.innerHTML + "</body></html>");
+				newIframe.contentWindow.document.close();
+				newIframe.contentWindow.focus();
+				newIframe.contentWindow.print();
+				document.body.removeChild(newIframe);
+				const thisTinyDOC = this;
+				setTimeout(()=>{thisTinyDOC.document.focus()},25);
+				}
+			catch (err)
+				{
 				}
 			}
-			catch(err)
+		else
 			{
+			try
+				{
+				const printingWindow = window.open("about:blank", "_blank");
+				printingWindow.document.write("<!DOCTYPE html><html><head><title>" + this.encodeText(window.location.href) + "</title><style>a{text-decoration:underline;color:" + webLinkColor + "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap'>" + this.document.innerHTML + "</body></html>");
+				printingWindow.document.close();
+				printingWindow.focus();
+				setTimeout(() => {printingWindow.print()}, 500);
+				}
+			catch (err)
+				{
+				}
 			}
-
-		// SETTING THE CURRENT INSTANCE FOR LATER USE
-		var thisTinyDOC = this;
-
-		// FOCUSING THE DOCUMENT AFTER 100 MS
-		setTimeout(function(){thisTinyDOC.document.focus()},100);
 		}
 
 	undo(keyboardRequest)
