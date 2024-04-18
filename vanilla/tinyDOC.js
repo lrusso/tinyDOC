@@ -1011,8 +1011,8 @@ class tinyDOC {
     var originalHTML = this.document.innerHTML
 
     // CLEARING THE MISSPELLED TAGS
-    originalHTML = originalHTML.replace(/\<misspelled\>/gm, "")
-    originalHTML = originalHTML.replace(/\<\/misspelled\>/gm, "")
+    originalHTML = originalHTML.replace(/<misspelled>/gm, "")
+    originalHTML = originalHTML.replace(/<\/misspelled>/gm, "")
 
     // CHECKING IF THE INNERHTML MUST BE ENCODED
     if (mustEncode) {
@@ -1622,8 +1622,8 @@ class tinyDOC {
           var originalHTML = this.document.innerHTML
 
           // CLEARING THE MISSPELLED TAGS
-          originalHTML = originalHTML.replace(/\<misspelled\>/gm, "")
-          originalHTML = originalHTML.replace(/\<\/misspelled\>/gm, "")
+          originalHTML = originalHTML.replace(/<misspelled>/gm, "")
+          originalHTML = originalHTML.replace(/<\/misspelled>/gm, "")
 
           try {
             // LOOPING EVERY DOCUMENT CHILD
@@ -1677,7 +1677,7 @@ class tinyDOC {
 
           // GETTING ALL THE WORDS FROM THE TEXT DOCUMENT
           var results = this.document.innerText.match(
-            /[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]+/g
+            /[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:",.<>{}[\]\\/\s]+/g
           )
 
           // CREATING THE DATA FOR THE REQUEST
@@ -2094,8 +2094,8 @@ class tinyDOC {
       var current_state = this.document.innerHTML
 
       // CLEARING THE MISSPELLED TAGS
-      current_state = current_state.replace(/\<misspelled\>/gm, "")
-      current_state = current_state.replace(/\<\/misspelled\>/gm, "")
+      current_state = current_state.replace(/<misspelled>/gm, "")
+      current_state = current_state.replace(/<\/misspelled>/gm, "")
 
       // IF CURRENT STATE IDENTICAL TO PREVIOUS DON'T SAVE IDENTICAL STATES
       if (current_state !== this.document_history[this.document_history_index]) {
@@ -2218,7 +2218,7 @@ class tinyDOC {
     try {
       function checkForEmail(email) {
         var re =
-          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         return re.test(String(email).toLowerCase())
       }
 
@@ -2304,7 +2304,7 @@ class tinyDOC {
           // CHECK IF IT IS A SINGLE LINE EXPRESSION OR A MULTILINE ADDING OPERATION
           if (splitted.length === 1) {
             // REMOVING INVALID CHARACTERS
-            selectedText = selectedText.replace(/[^0-9.*\/()+-]/g, "")
+            selectedText = selectedText.replace(/[^0-9.*/()+-]/g, "")
 
             try {
               // EVALUATING THE EXPRESSION
@@ -2433,8 +2433,8 @@ class tinyDOC {
         // CHECKING IF THERE IS A VALUE
         if (typeof finalURL !== "undefined") {
           // CLEARING THE MISSPELLED TAGS
-          finalURL = finalURL.replace(/\<misspelled\>/gm, "")
-          finalURL = finalURL.replace(/\<\/misspelled\>/gm, "")
+          finalURL = finalURL.replace(/<misspelled>/gm, "")
+          finalURL = finalURL.replace(/<\/misspelled>/gm, "")
 
           // ADDING THE VALUE TO THE CONTENT VIEWER
           this.contentViewer.innerHTML =
