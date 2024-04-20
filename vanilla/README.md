@@ -20,6 +20,7 @@ const myEditor = new TinyDOC({
               template2: "My Template 2",
               template3: "My Template 3",
               calcEnabled: true,
+              useCtrlSForSaving: true,
               spellcheckerEnabled: true,
               spellcheckerStarted: () => {console.log("spellcheckerStarted")},
               spellcheckerEnded: () => {console.log("spellcheckerEnded")},
