@@ -250,6 +250,9 @@ class tinyDOC {
       this.buttonTemplate1.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate1.addEventListener("mousedown", (event) => {
+        if (this.spellcheckerWorking || !this.documentEnabled) {
+          return
+        }
         this.insertHtmlAtCaret(this.editorConfig.template1, false)
         event.preventDefault()
       })
@@ -265,6 +268,9 @@ class tinyDOC {
       this.buttonTemplate2.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate2.addEventListener("mousedown", (event) => {
+        if (this.spellcheckerWorking || !this.documentEnabled) {
+          return
+        }
         this.insertHtmlAtCaret(this.editorConfig.template2, false)
         event.preventDefault()
       })
@@ -280,6 +286,9 @@ class tinyDOC {
       this.buttonTemplate3.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate3.addEventListener("mousedown", (event) => {
+        if (this.spellcheckerWorking || !this.documentEnabled) {
+          return
+        }
         this.insertHtmlAtCaret(this.editorConfig.template3, false)
         event.preventDefault()
       })
@@ -754,30 +763,32 @@ class tinyDOC {
 
   formatDoc(myCommand, myParameter) {
     try {
+      if (this.spellcheckerWorking || !this.documentEnabled) {
+        return
+      }
+
       this.document.focus()
 
-      if (!this.spellcheckerWorking) {
-        if (myCommand === "bold") {
-          this.formatStyle("b", myParameter)
-        } else if (myCommand === "italic") {
-          this.formatStyle("i", myParameter)
-        } else if (myCommand === "underline") {
-          this.formatStyle("u", myParameter)
-        } else if (myCommand === "strikethrough") {
-          this.formatStyle("strike", myParameter)
-        } else if (myCommand === "BackColor") {
-          this.formatStyle("span", myParameter)
-        } else if (myCommand === "insertunorderedlist") {
-          this.formatList("ul", "li")
-        } else if (myCommand === "insertorderedlist") {
-          this.formatList("ol", "li")
-        } else if (myCommand === "removeFormat") {
-          this.removeFormat()
-        } else if (myCommand === "undo") {
-          this.undo(false)
-        } else if (myCommand === "redo") {
-          this.redo(false)
-        }
+      if (myCommand === "bold") {
+        this.formatStyle("b", myParameter)
+      } else if (myCommand === "italic") {
+        this.formatStyle("i", myParameter)
+      } else if (myCommand === "underline") {
+        this.formatStyle("u", myParameter)
+      } else if (myCommand === "strikethrough") {
+        this.formatStyle("strike", myParameter)
+      } else if (myCommand === "BackColor") {
+        this.formatStyle("span", myParameter)
+      } else if (myCommand === "insertunorderedlist") {
+        this.formatList("ul", "li")
+      } else if (myCommand === "insertorderedlist") {
+        this.formatList("ol", "li")
+      } else if (myCommand === "removeFormat") {
+        this.removeFormat()
+      } else if (myCommand === "undo") {
+        this.undo(false)
+      } else if (myCommand === "redo") {
+        this.redo(false)
       }
 
       setTimeout(() => {
@@ -1602,6 +1613,10 @@ class tinyDOC {
 
   insertCalc() {
     try {
+      if (this.spellcheckerWorking || !this.documentEnabled) {
+        return
+      }
+
       let selectedText = window.getSelection().toString()
 
       if (selectedText !== null) {
