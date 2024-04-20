@@ -286,13 +286,17 @@ class tinyDOC {
       this.holder16.appendChild(this.buttonTemplate3)
     }
 
-    if (this.editorConfig.template1 || this.editorConfig.template2 || this.editorConfig.template3) {
+    if (
+      this.editorConfig.template1 ||
+      this.editorConfig.template2 ||
+      this.editorConfig.template3
+    ) {
       this.separator7 = document.createElement("div")
       this.separator7.className = "tinydoc_separator"
       this.menu.appendChild(this.separator7)
     }
 
-    if (this.calcEnabled) {
+    if (this.editorConfig.calcEnabled) {
       this.holder17 = document.createElement("div")
       this.holder17.className = "tinydoc_holder"
       this.menu.appendChild(this.holder17)
