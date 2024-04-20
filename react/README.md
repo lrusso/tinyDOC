@@ -39,32 +39,25 @@ return (<TinyDOC
 
 ## Calc Button Sample 1 - Single Line Evaluation
 
+**SAMPLE TEXT**
+
 ```
 lorem ipsum (5.40+4.70-3.90)*2/1 lorem ipsum
 ```
-Select (5.40+4.70-3.90)*2/1, then click in the Calc Button, and the result will be inserted next to the selected text.
 
-```
-lorem ipsum (5.40+4.70-3.90)*2/1 = 12.40 lorem ipsum
-```
+Select ```(5.40+4.70-3.90)*2/1```, then click on the Calc Button and the result will be inserted next to the selected text.
 
 ## Calc Button Sample 2 - Multi Line Addition Operation
 
+**SAMPLE TEXT**
+
 ```
 $ 100.10
 $ 200.20
 $ 300.30
 ```
 
-Select all, then click in the Calc Button, and the result will be inserted below to the selected text.
-
-```
-$ 100.10
-$ 200.20
-$ 300.30
-----------
-600.60
-```
+Select all, then click on the Calc Button and the result will be inserted below to the selected text.
 
 ## Suggested spellchecker:
 
