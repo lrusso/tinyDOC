@@ -15,7 +15,7 @@ class tinyDOC {
       .tinydoc_document a{text-decoration:underline;color:#3a76b1}
       .tinydoc_contentviewer{display:inline-block;font-family:Arial;font-size:13px;line-height:2.6;margin-left:11px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1px;white-space:nowrap}
       .tinydoc_contentviewer a{text-decoration:none;color:#3a76b1;margin-right:11px}
-      .tinydoc_spellchecker_suggestions{display:inline-block;color:black;margin-right:20px;cursor:pointer}
+      .tinydoc_spellchecker_suggestions{display:inline-block;color:black;margin-right:20px;cursor:default}
       .tinydoc_spellchecker_no_suggestions{color:gray}
       misspelled{text-decoration:underline;text-decoration-color:red;text-decoration-thickness:2px;text-decoration-style:dotted}
       @media (pointer: coarse)
