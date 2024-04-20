@@ -56,6 +56,10 @@ class tinyDOC {
       this.buttonSave.className = "tinydoc_button_save"
       this.buttonSave.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M896 960h-896v-1024h1024v896zM512 832h128v-256h-128v256zM896 64h-768v768h64v-320h576v320h75l53 -53v-715z' transform='translate(-10 930) scale(-1,1) rotate(180)'/></svg>"
+      this.buttonSave.addEventListener("mousedown", (event) => {
+        this.save()
+        event.preventDefault()
+      })
       this.holder1.appendChild(this.buttonSave)
 
       this.separator1 = document.createElement("div")
@@ -70,6 +74,10 @@ class tinyDOC {
     this.buttonPrint.className = "tinydoc_button_print"
     this.buttonPrint.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M256 896h512v-128h-512v128zM960 704h-896q-26 0 -45 -19t-19 -45v-320q0 -26 19 -45t45 -19h192v-256h512v256h192q26 0 45 19t19 45v320q0 26 -19 45t-45 19zM704 64h-384v320h384v-320zM974 608q0 -19 -13.5 -32.5t-32.5 -13.5t-32.5 13.5t-13.5 32.5t13.5 32.5 t32.5 13.5t32.5 -13.5t13.5 -32.5z' transform='translate(0 930) scale(-0.97,0.97) rotate(180)'/></svg>"
+    this.buttonPrint.addEventListener("mousedown", (event) => {
+      this.print()
+      event.preventDefault()
+    })
     this.holder2.appendChild(this.buttonPrint)
 
     this.separator2 = document.createElement("div")
@@ -84,6 +92,10 @@ class tinyDOC {
       this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
       this.buttonSpellcheck.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M128 704h128v-192h64v384q0 26 -19 45t-45 19h-128q-26 0 -45 -19t-19 -45v-384h64v192zM128 896h128v-128h-128v128zM960 896v64h-192q-26 0 -45 -19t-19 -45v-320q0 -26 19 -45t45 -19h192v64h-192v320h192zM640 800v96q0 26 -19 45t-45 19h-192v-448h192q26 0 45 19 t19 45v96q0 26 -9 45t-35 19q26 0 35 19t9 45zM576 576h-128v128h128v-128zM576 768h-128v128h128v-128zM832 384l-416 -448l-224 288l82 70l142 -148l352 302z' transform='translate(0 950) scale(-0.97,0.97) rotate(180)'/></svg>"
+      this.buttonSpellcheck.addEventListener("mousedown", (event) => {
+        this.spellcheck()
+        event.preventDefault()
+      })
       this.holder3.appendChild(this.buttonSpellcheck)
 
       this.separator3 = document.createElement("div")
@@ -332,24 +344,6 @@ class tinyDOC {
       window.navigator.userAgent.match(/Windows Phone/i)
     )
 
-    if (this.saveFunction) {
-      this.buttonSave.addEventListener("mousedown", (event) => {
-        this.save()
-        event.preventDefault()
-      })
-    }
-
-    if (this.spellcheckerEnabled) {
-      this.buttonSpellcheck.addEventListener("mousedown", (event) => {
-        this.spellcheck()
-        event.preventDefault()
-      })
-    }
-
-    this.buttonPrint.addEventListener("mousedown", (event) => {
-      this.print()
-      event.preventDefault()
-    })
     this.buttonUndo.addEventListener("mousedown", (event) => {
       this.formatDoc("undo", null)
       event.preventDefault()
