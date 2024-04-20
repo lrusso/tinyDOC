@@ -701,17 +701,13 @@ class tinyDOC {
     }
   }
 
-  getText(mustEncode) {
+  getText() {
     let originalHTML = this.document.innerHTML
 
     originalHTML = originalHTML.replace(/<misspelled>/gm, "")
     originalHTML = originalHTML.replace(/<\/misspelled>/gm, "")
 
-    if (mustEncode) {
-      return this.encodeText(originalHTML)
-    } else {
-      return originalHTML
-    }
+    return this.encodeText(originalHTML)
   }
 
   encodeText(str) {

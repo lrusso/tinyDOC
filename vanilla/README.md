@@ -54,9 +54,7 @@ new TinyDOC({
 | 6 | disable | Disables the document. |
 | 7 | resize | Resizes the document to fit the container. |
 | 8 | scrollToTop | Scrolls to the top of the document. |
-| 9 | clearUndoRedo | Clears all the undo/redo history. |
-| 10 | getText(boolean) | Returns the document content with or without encoding. |
-| 11 | showPleaseWait(boolean) | Hides or shows a please wait screen. |
+| 9 | getText | Returns the document content. |
 
 ## Accessing the ContentEditable Div used by TinyDOC
 
