@@ -27,11 +27,11 @@ class tinyDOC {
     }
 
     if (this.editorConfig.wordCountValue === undefined) {
-      this.editorConfig.wordCountValue = "words"
+      this.editorConfig.wordCountValue = " words and "
     }
 
     if (this.editorConfig.charCountValue === undefined) {
-      this.editorConfig.charCountValue = "characters"
+      this.editorConfig.charCountValue = " characters."
     }
 
     this.styleSheet = document.createElement("style")
@@ -1126,11 +1126,8 @@ class tinyDOC {
       const charCount = textPlain.length
       this.insertHtmlAtCaret(
         wordCounter +
-          " " +
           this.editorConfig.wordCountValue +
-          " " +
           charCount +
-          " " +
           this.editorConfig.charCountValue +
           "<br />"
       )
