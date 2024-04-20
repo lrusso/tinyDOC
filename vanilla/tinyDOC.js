@@ -585,9 +585,7 @@ class tinyDOC {
     })
 
     this.clearUndoRedo()
-
     this.resize()
-
     this.scrollToTop()
   }
 
@@ -604,11 +602,8 @@ class tinyDOC {
       window.onbeforeunload = null
 
       this.clearUndoRedo()
-
       this.setCaretPosition(this.document, 0)
-
       this.scrollToTop()
-
       this.focus()
     } catch (err) {
       //
@@ -681,7 +676,6 @@ class tinyDOC {
   scrollToCaret() {
     try {
       const currentSelection = this.saveSelection(this.document)
-
       const caretPositionY = this.getCaretY() - this.document.offsetTop + 16
 
       if (caretPositionY < 0 || caretPositionY > this.document.offsetHeight) {
@@ -781,15 +775,10 @@ class tinyDOC {
       }
 
       this.new()
-
       this.settingNewText = true
-
       this.insertHtmlAtCaret(myText, false)
-
       window.onbeforeunload = null
-
       this.clearUndoRedo()
-
       this.spellcheckerResult = []
 
       if (this.spellcheckerWorking) {
@@ -797,11 +786,8 @@ class tinyDOC {
       }
 
       this.spellcheckerWorking = false
-
       this.spellcheckerExecuted = false
-
       this.showPleaseWait(false)
-
       this.buttonSpellcheck.className = "tinydoc_button"
 
       setTimeout(() => {
@@ -847,13 +833,11 @@ class tinyDOC {
 
   enable() {
     this.documentEnabled = true
-
     this.document.style.caretColor = "black"
   }
 
   disable() {
     this.documentEnabled = false
-
     this.document.style.caretColor = "transparent"
   }
 
@@ -956,7 +940,6 @@ class tinyDOC {
       let range = selection.getRangeAt(0)
 
       const selectedContent = range.extractContents()
-
       const newTag = document.createElement(myTag)
 
       newTag.appendChild(selectedContent)
@@ -967,7 +950,6 @@ class tinyDOC {
       }
 
       range.deleteContents()
-
       range.insertNode(newTag)
 
       setTimeout(() => {
@@ -1048,7 +1030,6 @@ class tinyDOC {
 
     try {
       const range = window.getSelection().getRangeAt(0)
-
       currentNode = range.startContainer
     } catch (err) {
       //
@@ -1082,9 +1063,7 @@ class tinyDOC {
         event.preventDefault()
 
         const initialNode = window.getSelection().focusNode
-
         let upperNode = window.getSelection().focusNode
-
         let listNode = null
 
         while (upperNode.parentNode) {
@@ -1107,7 +1086,6 @@ class tinyDOC {
 
         if (!this.handleBreaklineInLink()) {
           this.keyEnterPressed = true
-
           this.insertHtmlAtCaret("<br />", false)
         }
       }
@@ -1135,9 +1113,7 @@ class tinyDOC {
   addBreakLineAfter(currentNode) {
     try {
       this.saveUndo()
-
       const tempAnchorEl = document.createElement("br")
-
       currentNode.parentNode.insertBefore(tempAnchorEl, currentNode.nextSibling)
 
       let startBefore = true
@@ -1169,7 +1145,6 @@ class tinyDOC {
   isDocumentSelected() {
     try {
       let docFound = false
-
       let upperNode = window.getSelection().focusNode
 
       if (upperNode === this.document) {
@@ -1178,7 +1153,6 @@ class tinyDOC {
 
       while (upperNode.parentNode) {
         upperNode = upperNode.parentNode
-
         if (upperNode === this.document) {
           docFound = true
         }
@@ -1227,12 +1201,10 @@ class tinyDOC {
             }
 
             let lowerNode = upperNode
-
             let foundListItem = false
 
             while (lowerNode.firstChild) {
               lowerNode = lowerNode.firstChild
-
               if (lowerNode.nodeName === "LI") {
                 foundListItem = true
               }
@@ -1278,7 +1250,6 @@ class tinyDOC {
           this.spellcheckerResult = []
 
           let originalHTML = this.document.innerHTML
-
           originalHTML = originalHTML.replace(/<misspelled>/gm, "")
           originalHTML = originalHTML.replace(/<\/misspelled>/gm, "")
 
@@ -1291,27 +1262,19 @@ class tinyDOC {
           }
 
           this.spellcheckerWorking = true
-
           this.insertHtmlAtCaret(originalHTML, false)
 
           setTimeout(() => {
             this.spellcheckerWorking = false
-
             this.spellcheckerExecuted = false
-
             this.showPleaseWait(false)
-
             this.buttonSpellcheck.className = "tinydoc_button"
-
             this.setCaretPosition(this.document, originalCaretPosition)
           }, 25)
         } else {
           this.disable()
-
           this.showPleaseWait(true)
-
           this.buttonSpellcheck.className = "tinydoc_button"
-
           this.spellcheckerWorking = true
 
           const results = this.document.innerText.match(
@@ -1323,7 +1286,6 @@ class tinyDOC {
           dataRequest["words"] = results
 
           this.myWorker = new Worker(this.spellcheckerURL)
-
           this.myWorker.onmessage = (e) => {
             try {
               if (this.spellcheckerWorking) {
@@ -1359,16 +1321,12 @@ class tinyDOC {
                 }
 
                 this.insertHtmlAtCaret(originalHTML, false)
-
                 this.enable()
-
                 this.setCaretPosition(this.document, originalCaretPosition)
-
                 this.showPleaseWait(false)
 
                 setTimeout(() => {
                   this.spellcheckerWorking = false
-
                   this.spellcheckerExecuted = true
                 }, 500)
               }
@@ -1381,15 +1339,10 @@ class tinyDOC {
           this.myWorker.onerror = () => {
             setTimeout(() => {
               this.spellcheckerWorking = false
-
               this.spellcheckerExecuted = false
-
               this.buttonSpellcheck.className = "tinydoc_button"
-
               this.enable()
-
               this.setCaretPosition(this.document, originalCaretPosition)
-
               this.showPleaseWait(false)
             }, 25)
           }
@@ -1480,9 +1433,7 @@ class tinyDOC {
       }
 
       this.document.style.caretColor = "transparent"
-
       this.canUndoRedo = false
-
       this.document_history_lastCaret = this.getCaretPosition(this.document)
 
       if (this.document_history_index > 0) {
@@ -1502,28 +1453,21 @@ class tinyDOC {
           )
 
           this.document_history_index = this.document_history_index - 1
-
           this.scrollToCaret()
-
           this.document.style.caretColor = "black"
-
           this.canUndoRedo = true
         }, 25)
       } else {
         setTimeout(() => {
           this.setCaretPosition(this.document, this.document_history_lastCaret)
-
           this.document.style.caretColor = "black"
-
           this.canUndoRedo = true
         }, 25)
       }
     } catch (err) {
       setTimeout(() => {
         this.setCaretPosition(this.document, 0)
-
         this.document.style.caretColor = "black"
-
         this.canUndoRedo = true
       }, 25)
     }
@@ -1550,9 +1494,7 @@ class tinyDOC {
       }
 
       this.document.style.caretColor = "transparent"
-
       this.canUndoRedo = false
-
       this.document_history_lastCaret = this.getCaretPosition(this.document)
 
       if (this.document_history[this.document_history_index + 1]) {
@@ -1572,28 +1514,21 @@ class tinyDOC {
           )
 
           this.document_history_index = this.document_history_index + 1
-
           this.scrollToCaret()
-
           this.document.style.caretColor = "black"
-
           this.canUndoRedo = true
         }, 25)
       } else {
         setTimeout(() => {
           this.setCaretPosition(this.document, this.document_history_lastCaret)
-
           this.document.style.caretColor = "black"
-
           this.canUndoRedo = true
         }, 25)
       }
     } catch (err) {
       setTimeout(() => {
         this.setCaretPosition(this.document, 0)
-
         this.document.style.caretColor = "black"
-
         this.canUndoRedo = true
       }, 25)
     }
@@ -1602,7 +1537,6 @@ class tinyDOC {
   saveUndo() {
     try {
       let current_state = this.document.innerHTML
-
       current_state = current_state.replace(/<misspelled>/gm, "")
       current_state = current_state.replace(/<\/misspelled>/gm, "")
 
@@ -1621,9 +1555,7 @@ class tinyDOC {
         }
 
         this.document_history.push(current_state)
-
         this.document_history_caret.push(this.getCaretPosition(this.document))
-
         this.document_history_index = this.document_history.length - 1
       }
     } catch (err) {
@@ -1705,7 +1637,6 @@ class tinyDOC {
 
       const range = window.getSelection().getRangeAt(0)
       const preCaretRange = range.cloneRange()
-
       preCaretRange.selectNodeContents(element)
       preCaretRange.setEnd(range.endContainer, range.endOffset)
 
@@ -1974,11 +1905,8 @@ class tinyDOC {
         )
 
         this.contentViewer.innerHTML = ""
-
         this.focus()
-
         this.saveUndo()
-
         window.onbeforeunload = () => {
           return "Dirty"
         }
