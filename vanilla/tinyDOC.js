@@ -26,6 +26,14 @@ class tinyDOC {
       this.editorConfig.linkColor = "#3A76B1"
     }
 
+    if (this.editorConfig.wordCountValue === undefined) {
+      this.editorConfig.wordCountValue = "words"
+    }
+
+    if (this.editorConfig.charCountValue === undefined) {
+      this.editorConfig.charCountValue = "characters"
+    }
+
     this.styleSheet = document.createElement("style")
     this.styleSheet.innerText =
       `
@@ -359,15 +367,18 @@ class tinyDOC {
     this.holder18 = document.createElement("div")
     this.holder18.className = "tinydoc_holder"
     this.menu.appendChild(this.holder18)
-    this.buttonRemoveFormat = document.createElement("div")
-    this.buttonRemoveFormat.className = "tinydoc_button"
-    this.buttonRemoveFormat.innerHTML =
-      "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M0 64h576v-128h-576v128zM192 960h704v-128h-704v128zM277 128l205 784l124 -32l-196 -752h-133zM930 -64l-130 130l-130 -130l-62 62l130 130l-130 130l62 62l130 -130l130 130l62 -62l-130 -130l130 -130z' transform='translate(0 915) scale(-0.97,0.97) rotate(180)'/></svg>"
-    this.buttonRemoveFormat.addEventListener("mousedown", (event) => {
-      this.formatDoc("removeFormat")
+    this.buttonWordCount = document.createElement("div")
+    this.buttonWordCount.className = "tinydoc_button"
+    this.buttonWordCount.innerHTML =
+      "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M0 480h1024v-64h-1024v64zM304 912v-339h-67v272h-67v67h134zM445 694v-54h134v-67h-201v153l134 64v55h-134v67h201v-154zM854 912v-339h-204v67h137v67h-137v71h137v67h-137v67h204zM115 166q3 44 29.5 64t79.5 20q29 0 50.5 -7t35.5 -19q15 -12 20.5 -28t5.5 -42v-112 q0 -20 1 -26t9 -16h-74q-2 7 -3 9.5t-3 9.5q-17 -14 -33 -19.5t-38 -5.5q-41 0 -65 21.5t-24 54.5q0 34 23 53.5t76 26.5l38 7q12 2 17.5 5.5t5.5 10.5q0 9 -10 15.5t-29 6.5t-30.5 -7t-14.5 -22h-67v0zM262 115q-4 -2 -10 -4t-15 -2l-26 -7q-19 -4 -28.5 -11.5t-9.5 -16.5 q0 -12 9 -19t26 -7t31 7.5t23 24.5v35v0zM390 336h74v-112q17 12 32.5 17t34.5 5q48 0 77 -34.5t29 -89.5q0 -58 -30.5 -96.5t-78.5 -38.5q-24 0 -38.5 8t-28.5 27v-28h-71v342v0zM461 122q0 -32 14.5 -51.5t36.5 -19.5t36.5 19.5t14.5 51.5q0 33 -13.5 51.5t-37.5 18.5 q-22 0 -36.5 -19.5t-14.5 -50.5zM851 154q-2 16 -13.5 25.5t-31.5 9.5q-24 0 -37.5 -18.5t-13.5 -52.5q0 -36 13.5 -54.5t37.5 -18.5q20 0 31.5 10t13.5 31l71 -3q-8 -45 -39.5 -70.5t-79.5 -25.5q-55 0 -88 35.5t-33 92.5q0 60 33.5 95.5t90.5 35.5q48 0 79 -25t33 -71h-67 v4z' transform='translate(-10 930) scale(-1,1) rotate(180)'/></svg>"
+    this.buttonWordCount.addEventListener("mousedown", (event) => {
+      if (this.spellcheckerWorking || !this.documentEnabled) {
+        return
+      }
+      this.wordCount()
       event.preventDefault()
     })
-    this.holder18.appendChild(this.buttonRemoveFormat)
+    this.holder18.appendChild(this.buttonWordCount)
 
     this.separator9 = document.createElement("div")
     this.separator9.className = "tinydoc_separator"
@@ -376,9 +387,26 @@ class tinyDOC {
     this.holder19 = document.createElement("div")
     this.holder19.className = "tinydoc_holder"
     this.menu.appendChild(this.holder19)
+    this.buttonRemoveFormat = document.createElement("div")
+    this.buttonRemoveFormat.className = "tinydoc_button"
+    this.buttonRemoveFormat.innerHTML =
+      "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M0 64h576v-128h-576v128zM192 960h704v-128h-704v128zM277 128l205 784l124 -32l-196 -752h-133zM930 -64l-130 130l-130 -130l-62 62l130 130l-130 130l62 62l130 -130l130 130l62 -62l-130 -130l130 -130z' transform='translate(0 915) scale(-0.97,0.97) rotate(180)'/></svg>"
+    this.buttonRemoveFormat.addEventListener("mousedown", (event) => {
+      this.formatDoc("removeFormat")
+      event.preventDefault()
+    })
+    this.holder19.appendChild(this.buttonRemoveFormat)
+
+    this.separator10 = document.createElement("div")
+    this.separator10.className = "tinydoc_separator"
+    this.menu.appendChild(this.separator10)
+
+    this.holder20 = document.createElement("div")
+    this.holder20.className = "tinydoc_holder"
+    this.menu.appendChild(this.holder20)
     this.contentViewer = document.createElement("div")
     this.contentViewer.className = "tinydoc_contentviewer"
-    this.holder19.appendChild(this.contentViewer)
+    this.holder20.appendChild(this.contentViewer)
 
     this.document = document.createElement("div")
     this.document.className = "tinydoc_document"
@@ -1082,6 +1110,35 @@ class tinyDOC {
       return docFound
     } catch (err) {
       return false
+    }
+  }
+
+  wordCount() {
+    if (this.spellcheckerWorking || !this.documentEnabled) {
+      return
+    }
+
+    try {
+      const textPlain = this.document.innerText
+      const wordCounter = textPlain.split(" ").filter((n) => {
+        return n !== ""
+      }).length
+      const charCount = textPlain.length
+      this.insertHtmlAtCaret(
+        wordCounter +
+          " " +
+          this.editorConfig.wordCountValue +
+          " " +
+          charCount +
+          " " +
+          this.editorConfig.charCountValue +
+          "<br />"
+      )
+      setTimeout(() => {
+        this.document.focus()
+      }, 25)
+    } catch (err) {
+      //
     }
   }
 
