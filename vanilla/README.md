@@ -28,7 +28,7 @@ const myEditor = new TinyDOC({
               })
 ```
 
-## TinyDOC methods:
+## Methods:
 
 | # | METHOD | DETAILS |
 | :------------ |:---------------| :----- |
