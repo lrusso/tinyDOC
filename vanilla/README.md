@@ -70,7 +70,7 @@ new TinyDOC({
 ## Accessing the ContentEditable Div used by TinyDOC
 
 ```javascript
-let myExample = new TinyDOC({ container: document.getElementById("myTestContainer") })
+const myExample = new TinyDOC({ container: document.getElementById("myTestContainer") })
 myExample.document.scrollTop = 0
 ```
 
