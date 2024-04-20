@@ -557,8 +557,10 @@ class tinyDOC {
 
   save() {
     try {
-      if (!this.spellcheckerWorking) {
-        this.editorConfig.saveCallback()
+      if (!this.spellcheckerWorking && this.documentEnabled) {
+        if (this.editorConfig.saveCallback) {
+          this.editorConfig.saveCallback()
+        }
       }
     } catch (err) {
       //
@@ -1065,16 +1067,8 @@ class tinyDOC {
         }
       }
 
-      setTimeout(() => {
-        this.document.focus()
-      }, 100)
-
       return docFound
     } catch (err) {
-      setTimeout(() => {
-        this.document.focus()
-      }, 100)
-
       return false
     }
   }
@@ -1136,131 +1130,129 @@ class tinyDOC {
 
   spellcheck() {
     try {
-      if (!this.spellcheckerWorking) {
-        if (!this.isDocumentSelected()) {
-          return
+      if (!this.spellcheckerWorking || !this.isDocumentSelected()) {
+        return
+      }
+
+      if (this.contentViewer.innerHTML.indexOf("<span ") > -1) {
+        this.contentViewer.innerHTML = ""
+      }
+
+      if (this.myWorker !== null) {
+        this.myWorker.terminate()
+      }
+
+      let originalCaretPosition
+
+      if (this.spellcheckerExecuted) {
+        originalCaretPosition = this.getCaretPosition(this.document)
+
+        this.spellcheckerResult = []
+
+        let originalHTML = this.document.innerHTML
+        originalHTML = originalHTML.replace(/<misspelled>/gm, "")
+        originalHTML = originalHTML.replace(/<\/misspelled>/gm, "")
+
+        try {
+          while (this.document.firstChild) {
+            this.document.removeChild(this.document.firstChild)
+          }
+        } catch (err) {
+          //
         }
 
-        if (this.contentViewer.innerHTML.indexOf("<span ") > -1) {
-          this.contentViewer.innerHTML = ""
+        this.spellcheckerWorking = true
+        this.insertHtmlAtCaret(originalHTML, false)
+
+        setTimeout(() => {
+          this.spellcheckerWorking = false
+          this.spellcheckerExecuted = false
+          if (this.editorConfig.spellcheckerEnded) {
+            this.editorConfig.spellcheckerEnded()
+          }
+          this.setCaretPosition(this.document, originalCaretPosition)
+        }, 25)
+      } else {
+        this.disable()
+        if (this.editorConfig.spellcheckerStarted) {
+          this.editorConfig.spellcheckerStarted()
         }
+        this.spellcheckerWorking = true
 
-        if (this.myWorker !== null) {
-          this.myWorker.terminate()
-        }
+        const wordsToCheck = this.document.innerText.match(
+          /[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:",.<>{}[\]\\/\s]+/g
+        )
 
-        let originalCaretPosition
-
-        if (this.spellcheckerExecuted) {
-          originalCaretPosition = this.getCaretPosition(this.document)
-
-          this.spellcheckerResult = []
-
-          let originalHTML = this.document.innerHTML
-          originalHTML = originalHTML.replace(/<misspelled>/gm, "")
-          originalHTML = originalHTML.replace(/<\/misspelled>/gm, "")
-
+        this.myWorker = new Worker(this.editorConfig.spellcheckerURL)
+        this.myWorker.onmessage = (e) => {
           try {
-            while (this.document.firstChild) {
-              this.document.removeChild(this.document.firstChild)
-            }
-          } catch (err) {
-            //
-          }
+            if (this.spellcheckerWorking) {
+              this.focus()
 
-          this.spellcheckerWorking = true
-          this.insertHtmlAtCaret(originalHTML, false)
+              const words = e.data
 
-          setTimeout(() => {
-            this.spellcheckerWorking = false
-            this.spellcheckerExecuted = false
-            if (this.editorConfig.spellcheckerEnded) {
-              this.editorConfig.spellcheckerEnded()
-            }
-            this.setCaretPosition(this.document, originalCaretPosition)
-          }, 25)
-        } else {
-          this.disable()
-          if (this.editorConfig.spellcheckerStarted) {
-            this.editorConfig.spellcheckerStarted()
-          }
-          this.spellcheckerWorking = true
+              this.spellcheckerResult = words
 
-          const wordsToCheck = this.document.innerText.match(
-            /[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:",.<>{}[\]\\/\s]+/g
-          )
+              let originalHTML = this.document.innerHTML
 
-          this.myWorker = new Worker(this.editorConfig.spellcheckerURL)
-          this.myWorker.onmessage = (e) => {
-            try {
-              if (this.spellcheckerWorking) {
-                this.focus()
+              originalCaretPosition = this.getCaretPosition(this.document)
 
-                const words = e.data
+              for (const key in words) {
+                const wordToUnderline = key
 
-                this.spellcheckerResult = words
+                const exp = new RegExp(
+                  "\\b(" + wordToUnderline + ")\\b(?![^<]*>|[^<>]*>)",
+                  "gi"
+                )
 
-                let originalHTML = this.document.innerHTML
-
-                originalCaretPosition = this.getCaretPosition(this.document)
-
-                for (const key in words) {
-                  const wordToUnderline = key
-
-                  const exp = new RegExp(
-                    "\\b(" + wordToUnderline + ")\\b(?![^<]*>|[^<>]*>)",
-                    "gi"
-                  )
-
-                  originalHTML = originalHTML.replace(exp, (m) => {
-                    return "<misspelled>" + m + "</misspelled>"
-                  })
-                }
-
-                try {
-                  while (this.document.firstChild) {
-                    this.document.removeChild(this.document.firstChild)
-                  }
-                } catch (err) {
-                  //
-                }
-
-                this.insertHtmlAtCaret(originalHTML, false)
-                this.enable()
-                this.setCaretPosition(this.document, originalCaretPosition)
-                if (this.editorConfig.spellcheckerEnded) {
-                  this.editorConfig.spellcheckerEnded()
-                }
-
-                setTimeout(() => {
-                  this.spellcheckerWorking = false
-                  this.spellcheckerExecuted = true
-                }, 500)
+                originalHTML = originalHTML.replace(exp, (m) => {
+                  return "<misspelled>" + m + "</misspelled>"
+                })
               }
-            } catch (err) {
-              //
-            }
-            return true
-          }
 
-          this.myWorker.onerror = () => {
-            setTimeout(() => {
-              this.spellcheckerWorking = false
-              this.spellcheckerExecuted = false
+              try {
+                while (this.document.firstChild) {
+                  this.document.removeChild(this.document.firstChild)
+                }
+              } catch (err) {
+                //
+              }
+
+              this.insertHtmlAtCaret(originalHTML, false)
               this.enable()
               this.setCaretPosition(this.document, originalCaretPosition)
               if (this.editorConfig.spellcheckerEnded) {
                 this.editorConfig.spellcheckerEnded()
               }
-            }, 25)
-          }
 
-          this.myWorker.postMessage({
-            lang: this.editorConfig.spellcheckerLanguage,
-            words: wordsToCheck,
-            suggestions: this.editorConfig.spellcheckerMaxSuggestions,
-          })
+              setTimeout(() => {
+                this.spellcheckerWorking = false
+                this.spellcheckerExecuted = true
+              }, 500)
+            }
+          } catch (err) {
+            //
+          }
+          return true
         }
+
+        this.myWorker.onerror = () => {
+          setTimeout(() => {
+            this.spellcheckerWorking = false
+            this.spellcheckerExecuted = false
+            this.enable()
+            this.setCaretPosition(this.document, originalCaretPosition)
+            if (this.editorConfig.spellcheckerEnded) {
+              this.editorConfig.spellcheckerEnded()
+            }
+          }, 25)
+        }
+
+        this.myWorker.postMessage({
+          lang: this.editorConfig.spellcheckerLanguage,
+          words: wordsToCheck,
+          suggestions: this.editorConfig.spellcheckerMaxSuggestions,
+        })
       }
     } catch (err) {
       //
