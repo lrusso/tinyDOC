@@ -426,7 +426,9 @@ class tinyDOC {
         if (!thisTinyDOC.documentEnabled) {
           event.preventDefault()
         }
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     })
 
     this.document.addEventListener("keydown", function (event) {
@@ -489,7 +491,9 @@ class tinyDOC {
             thisTinyDOC.redo(true)
           }
         }
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     })
 
     this.document.addEventListener("keyup", function (event) {
@@ -565,7 +569,9 @@ class tinyDOC {
         thisTinyDOC.document.focus()
 
         thisTinyDOC.insertHtmlAtCaret(text, false)
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     })
 
     this.document.addEventListener("input", function () {
@@ -587,7 +593,9 @@ class tinyDOC {
         while (this.document.firstChild) {
           this.document.removeChild(this.document.firstChild)
         }
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
 
       window.onbeforeunload = null
 
@@ -598,7 +606,9 @@ class tinyDOC {
       this.scrollToTop()
 
       this.focus()
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   save() {
@@ -606,7 +616,9 @@ class tinyDOC {
       if (!this.spellcheckerWorking) {
         this.saveFunction()
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   resize() {
@@ -644,15 +656,21 @@ class tinyDOC {
           this.pleaseWaitIcon.style.bottom = this.myContainer.offsetBottom + "px"
           this.pleaseWaitIcon.style.width = this.myContainer.offsetWidth + "px"
           this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px"
-        } catch (err) {}
+        } catch (err) {
+          //
+        }
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   scrollToTop() {
     try {
       this.document.scrollTop = 0
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
@@ -691,7 +709,9 @@ class tinyDOC {
       if (currentSelection.start !== currentSelection.end) {
         this.restoreSelection(this.document, currentSelection)
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/6846230/coordinates-of-selected-text-in-browser-page
@@ -744,7 +764,9 @@ class tinyDOC {
         }
       }
       return y
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return 0
   }
 
@@ -783,7 +805,9 @@ class tinyDOC {
       setTimeout(function () {
         thisTinyDOC.setCaretPosition(thisTinyDOC.document, 0)
       }, 25)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   getText(mustEncode) {
@@ -850,7 +874,9 @@ class tinyDOC {
       setTimeout(function () {
         thisTinyDOC.document.focus()
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatDoc(myCommand, myParameter) {
@@ -886,7 +912,9 @@ class tinyDOC {
       setTimeout(function () {
         thisTinyDOC.document.focus()
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatStyle(myTag, myParameter) {
@@ -919,7 +947,9 @@ class tinyDOC {
       }
 
       this.formatStyleExecute(myTag, myParameter)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatStyleExecute(myTag, myParameter) {
@@ -958,7 +988,9 @@ class tinyDOC {
           return "Dirty"
         }
       }, 25)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   formatList(tag1, tag2) {
@@ -993,7 +1025,9 @@ class tinyDOC {
           false
         )
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   getParentTag(tagToFind) {
@@ -1009,7 +1043,9 @@ class tinyDOC {
           return upperNode
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return null
   }
 
@@ -1020,7 +1056,9 @@ class tinyDOC {
       var range = window.getSelection().getRangeAt(0)
 
       currentNode = range.startContainer
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
 
     return currentNode
   }
@@ -1034,7 +1072,9 @@ class tinyDOC {
       preCaretRange.selectNodeContents(element)
       preCaretRange.setEnd(range.endContainer, range.endOffset)
       caretOffset = preCaretRange.toString().length
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return caretOffset
   }
 
@@ -1077,7 +1117,9 @@ class tinyDOC {
           this.insertHtmlAtCaret("<br />", false)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   handleBreaklineInLink() {
@@ -1090,7 +1132,9 @@ class tinyDOC {
           return true
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
     return false
   }
 
@@ -1125,7 +1169,9 @@ class tinyDOC {
 
         thisTinyDOC.saveUndo()
       }, 25)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   isDocumentSelected() {
@@ -1210,11 +1256,15 @@ class tinyDOC {
               }
             }
           }
-        } catch (err) {}
+        } catch (err) {
+          //
+        }
 
         this.insertHtmlAtCaret(plainText, true)
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   spellcheck() {
@@ -1246,7 +1296,9 @@ class tinyDOC {
             while (this.document.firstChild) {
               this.document.removeChild(this.document.firstChild)
             }
-          } catch (err) {}
+          } catch (err) {
+            //
+          }
 
           this.spellcheckerWorking = true
 
@@ -1319,7 +1371,9 @@ class tinyDOC {
                   while (thisTinyDOC.document.firstChild) {
                     thisTinyDOC.document.removeChild(thisTinyDOC.document.firstChild)
                   }
-                } catch (err) {}
+                } catch (err) {
+                  //
+                }
 
                 thisTinyDOC.insertHtmlAtCaret(originalHTML, false)
 
@@ -1338,7 +1392,9 @@ class tinyDOC {
                   thisTinyDOC.spellcheckerExecuted = true
                 }, 500)
               }
-            } catch (err) {}
+            } catch (err) {
+              //
+            }
             return true
           }
 
@@ -1364,7 +1420,9 @@ class tinyDOC {
           this.myWorker.postMessage(dataRequest)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   print() {
@@ -1399,7 +1457,9 @@ class tinyDOC {
         setTimeout(() => {
           thisTinyDOC.document.focus()
         }, 25)
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     } else {
       try {
         const printingWindow = window.open("about:blank", "_blank")
@@ -1417,7 +1477,9 @@ class tinyDOC {
         setTimeout(() => {
           printingWindow.print()
         }, 500)
-      } catch (err) {}
+      } catch (err) {
+        //
+      }
     }
   }
 
@@ -1610,7 +1672,9 @@ class tinyDOC {
 
         this.document_history_index = this.document_history.length - 1
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   clearUndoRedo() {
@@ -1671,7 +1735,9 @@ class tinyDOC {
           selection.addRange(range)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/3972014/get-contenteditable-caret-position
@@ -1750,7 +1816,9 @@ class tinyDOC {
       setTimeout(function () {
         thisTinyDOC.document.focus()
       }, 100)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   insertCalc() {
@@ -1761,7 +1829,9 @@ class tinyDOC {
         if (selectedText.length > 0) {
           try {
             document.getSelection().collapseToEnd()
-          } catch (err) {}
+          } catch (err) {
+            //
+          }
 
           var splitted = selectedText.split("\n")
 
@@ -1812,7 +1882,9 @@ class tinyDOC {
                 if (currentLine !== "" && i === splitted.length - 1) {
                   lastLineBR = "<br>"
                 }
-              } catch (err) {}
+              } catch (err) {
+                //
+              }
             }
 
             try {
@@ -1836,7 +1908,9 @@ class tinyDOC {
           }
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
 
     let thisTinyDOC = this
 
@@ -1866,7 +1940,9 @@ class tinyDOC {
       } else {
         this.contentViewer.innerHTML = ""
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   checkForMisspelled() {
@@ -1918,7 +1994,9 @@ class tinyDOC {
           this.contentViewer.innerHTML = ""
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   replaceWith(word) {
@@ -1960,7 +2038,9 @@ class tinyDOC {
       } else {
         this.contentViewer.innerHTML = ""
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
@@ -2048,7 +2128,9 @@ class tinyDOC {
           }, 25)
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 
   // https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
@@ -2112,6 +2194,8 @@ class tinyDOC {
       var sel = win.getSelection()
       sel.removeAllRanges()
       sel.addRange(range)
-    } catch (err) {}
+    } catch (err) {
+      //
+    }
   }
 }
