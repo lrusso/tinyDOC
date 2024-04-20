@@ -14,7 +14,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 | :------------ |:---------------| :----- |
 | 1 | container | Container. | 
 | 2 | documentText | Default text. |
-| 3 | saveFunction | Callback function. |
+| 3 | saveCallback | Callback function. |
 | 4 | calcEnabled | Boolean. |
 | 5 | spellcheckerEnabled | Boolean. |
 | 6 | spellcheckerStarted | Callback function. |
