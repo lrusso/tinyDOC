@@ -785,7 +785,6 @@ class tinyDOC {
       this.spellcheckerWorking = false
       this.spellcheckerExecuted = false
       this.showPleaseWait(false)
-      this.buttonSpellcheck.className = "tinydoc_button"
 
       setTimeout(() => {
         this.setCaretPosition(this.document, 0)
@@ -1265,13 +1264,11 @@ class tinyDOC {
             this.spellcheckerWorking = false
             this.spellcheckerExecuted = false
             this.showPleaseWait(false)
-            this.buttonSpellcheck.className = "tinydoc_button"
             this.setCaretPosition(this.document, originalCaretPosition)
           }, 25)
         } else {
           this.disable()
           this.showPleaseWait(true)
-          this.buttonSpellcheck.className = "tinydoc_button"
           this.spellcheckerWorking = true
 
           const results = this.document.innerText.match(
@@ -1337,7 +1334,6 @@ class tinyDOC {
             setTimeout(() => {
               this.spellcheckerWorking = false
               this.spellcheckerExecuted = false
-              this.buttonSpellcheck.className = "tinydoc_button"
               this.enable()
               this.setCaretPosition(this.document, originalCaretPosition)
               this.showPleaseWait(false)
