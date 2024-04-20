@@ -33,7 +33,7 @@ return (<TinyDOC
    spellcheckerEnabled
    spellcheckerStarted={() => {console.log("spellcheckerStarted")}
    spellcheckerEnded={() => {console.log("spellcheckerEnded")}
-   spellcheckerNoSuggestions={"No suggestions"}
+   spellcheckerNoSuggestions={"(No suggestions)"}
    spellcheckerMaxSuggestions={5}
    spellcheckerLanguage="en"
    linkColor="#ff0000"
