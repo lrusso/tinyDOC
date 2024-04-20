@@ -11,7 +11,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 **How to use it**
 
 ```javascript
-new TinyDOC({
+const myEditor = new TinyDOC({
               container: document.getElementById("myTestContainer"), 
               content: "Hello world",
               saveCallback: () => {console.log("saveCallback")},
