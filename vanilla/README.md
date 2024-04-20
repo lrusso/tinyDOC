@@ -12,17 +12,19 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
 | # | SETTING | DETAILS |
 | :------------ |:---------------| :----- |
-| 1 | container | The document container. | 
-| 2 | documentText | The default text. |
-| 3 | saveFunction | The save function. |
+| 1 | container | Container. | 
+| 2 | documentText | Default text. |
+| 3 | saveFunction | Callback function. |
 | 4 | calcEnabled | Boolean. |
 | 5 | spellcheckerEnabled | Boolean. |
-| 6 | spellcheckerLanguage | Spellchecker Language. |
-| 7 | spellcheckerURL | Spellchecker URL. |
-| 8 | spellcheckerNoSuggestionsLabel | No suggestions String. |
-| 9 | template1 | HTML template. |
-| 10 | template2 | HTML template. |
-| 11 | template3 | HTML template. |
+| 6 | spellcheckerStarted | Callback function. |
+| 7 | spellcheckerEnded | Callback function. |
+| 8 | spellcheckerLanguage | Spellchecker Language. |
+| 9 | spellcheckerURL | Spellchecker URL. |
+| 10 | spellcheckerNoSuggestionsLabel | No suggestions String. |
+| 11 | template1 | HTML template. |
+| 12 | template2 | HTML template. |
+| 13 | template3 | HTML template. |
 
 **Example without the spellchecker:**
 
