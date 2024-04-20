@@ -460,29 +460,6 @@ class tinyDOC {
     this.document.addEventListener("keyup", (event) => {
       if (!this.documentEnabled) {
         event.preventDefault()
-      } else if (
-        (event.ctrlKey || event.metaKey) &&
-        !event.shiftKey &&
-        String.fromCharCode(event.which).toLowerCase() === "z"
-      ) {
-        event.preventDefault()
-      } else if (
-        event.shiftKey &&
-        event.metaKey &&
-        String.fromCharCode(event.which).toLowerCase() === "z"
-      ) {
-        event.preventDefault()
-      } else if (
-        event.ctrlKey &&
-        event.shiftKey &&
-        String.fromCharCode(event.which).toLowerCase() === "z"
-      ) {
-        event.preventDefault()
-      } else if (
-        event.ctrlKey &&
-        String.fromCharCode(event.which).toLowerCase() === "y"
-      ) {
-        event.preventDefault()
       } else {
         this.checkForMisspelledOrURLs()
 
