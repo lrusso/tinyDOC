@@ -42,6 +42,8 @@ Select ```(5.40+4.70-3.90)*2/1```, then click in the Calc Button, and the result
 
 ## Calc Button Sample 2 - Multi Line Addition Operation
 
+**SAMPLE TEXT**
+
 ```
 $ 100.10
 $ 200.20
@@ -49,14 +51,6 @@ $ 300.30
 ```
 
 Select all, then click in the Calc Button, and the result will be inserted below to the selected text.
-
-```
-$ 100.10
-$ 200.20
-$ 300.30
-----------
-600.60
-```
 
 ## Suggested spellchecker:
 
