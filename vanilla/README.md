@@ -1,4 +1,4 @@
-# TinyDOC in Vanilla JavaScript (deprecated)
+# TinyDOC in Vanilla JavaScript
 
 TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweight text editor with simple and easy-to-use features without **execCommand**.
 
@@ -23,7 +23,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 | 9 | template2 | HTML template. |
 | 10 | template3 | HTML template. |
 
-**Example without a spellchecker:**
+**Example without the spellchecker:**
 ```javascript
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
@@ -35,7 +35,7 @@ new TinyDOC({
               })
 ```
 
-**Example with a spellchecker:**
+**Example with the spellchecker:**
 ```javascript
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
