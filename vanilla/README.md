@@ -22,6 +22,7 @@ const myEditor = new TinyDOC({
               calcEnabled: true,
               useCtrlSForSaving: true,
               useCtrlPForPrinting: true,
+              replaceTabWithSpaces: true,
               spellcheckerEnabled: true,
               spellcheckerStarted: () => {console.log("spellcheckerStarted")},
               spellcheckerEnded: () => {console.log("spellcheckerEnded")},
