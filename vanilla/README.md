@@ -15,7 +15,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 | 1 | container | The document container. | 
 | 2 | documentText | The default text. |
 | 3 | saveFunction | The save function. |
-| 4 | CalcEnabled | Boolean. |
+| 4 | calcEnabled | Boolean. |
 | 5 | spellcheckerEnabled | Boolean. |
 | 6 | spellcheckerLanguage | Spellchecker Language. |
 | 7 | spellcheckerURL | Spellchecker URL. |
@@ -49,7 +49,7 @@ new TinyDOC({
               template3: "My Template 3",
               spellcheckerEnabled: true,
               spellcheckerLanguage: "en-US",
-              spellcheckerURL: "JavaScriptSpellchecker.js",
+              spellcheckerURL: "spellchecker.js",
               spellcheckerNoSuggestionsLabel: "(No suggestions)"
               })
 ```
