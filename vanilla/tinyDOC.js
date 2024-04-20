@@ -527,8 +527,7 @@ class tinyDOC {
       ) {
         event.preventDefault()
       } else {
-        this.checkForURL()
-        this.checkForMisspelled()
+        this.checkForMisspelledOrURLs()
 
         if (this.undoSaveTimeout !== null) {
           clearTimeout(this.undoSaveTimeout)
@@ -544,8 +543,7 @@ class tinyDOC {
       if (!this.documentEnabled) {
         event.preventDefault()
       } else {
-        this.checkForURL()
-        this.checkForMisspelled()
+        this.checkForMisspelledOrURLs()
       }
     })
 
@@ -553,8 +551,7 @@ class tinyDOC {
       if (!this.documentEnabled) {
         event.preventDefault()
       } else {
-        this.checkForURL()
-        this.checkForMisspelled()
+        this.checkForMisspelledOrURLs()
       }
     })
 
@@ -1805,6 +1802,12 @@ class tinyDOC {
     }, 100)
   }
 
+  checkForMisspelledOrURLs = () => {
+    if (!this.checkForURL()){
+      this.checkForMisspelled()
+    }
+  }
+
   checkForURL() {
     try {
       let linkTag = this.getParentTag("A")
@@ -1822,6 +1825,7 @@ class tinyDOC {
 
           this.contentViewer.innerHTML =
             "<a href='" + finalURL + "' target='_blank'>" + finalURL + "</a>"
+          return true
         }
       } else {
         this.contentViewer.innerHTML = ""
@@ -1829,6 +1833,7 @@ class tinyDOC {
     } catch (err) {
       //
     }
+    return false
   }
 
   checkForMisspelled() {
