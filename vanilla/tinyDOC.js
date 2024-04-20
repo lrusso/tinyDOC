@@ -12,7 +12,7 @@ class tinyDOC {
       .tinydoc_button{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
       .tinydoc_button:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
       .tinydoc_button_selected{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#E3E3E3;border:thin solid #D3D3D3;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_document{display:block;padding:8px;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;-webkit-text-size-adjust:none;-webkit-user-select:text;user-select:text}
+      .tinydoc_document{display:block;padding:8px;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;white-space:pre-wrap;word-break:break-word;-webkit-text-size-adjust:none;-webkit-user-select:text;user-select:text}
       .tinydoc_document a{text-decoration:underline;color:#3a76b1}
       .tinydoc_contentviewer{display:inline-block;font-family:Arial;font-size:13px;line-height:2.6;margin-left:11px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1px;white-space:nowrap}
       .tinydoc_contentviewer a{text-decoration:none;color:#3a76b1;margin-right:11px}
@@ -45,6 +45,10 @@ class tinyDOC {
 
     if (this.editorConfig.useCtrlPForPrinting === undefined) {
       this.editorConfig.useCtrlPForPrinting = true
+    }
+
+    if (this.editorConfig.replaceTabWithSpaces === undefined) {
+      this.editorConfig.replaceTabWithSpaces = true
     }
 
     this.menuContainer = document.createElement("div")
@@ -438,10 +442,14 @@ class tinyDOC {
           if (KEY_TAB) {
             event.preventDefault()
 
-            this.insertHtmlAtCaret(
-              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-              false
-            )
+            if (this.editorConfig.replaceTabWithSpaces) {
+              this.insertHtmlAtCaret(
+                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+                false
+              )
+            } else {
+              this.insertHtmlAtCaret("&#009", false)
+            }
 
             setTimeout(() => {
               this.document.focus()
@@ -1278,7 +1286,7 @@ class tinyDOC {
             this.encodeText(window.location.href) +
             "</title><style>a{text-decoration:underline;color:" +
             webLinkColor +
-            "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap'>" +
+            "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap;word-break:break-word'>" +
             this.document.innerHTML +
             "</body></html>"
         )
@@ -1301,7 +1309,7 @@ class tinyDOC {
             this.encodeText(window.location.href) +
             "</title><style>a{text-decoration:underline;color:" +
             webLinkColor +
-            "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap'>" +
+            "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap;word-break:break-word'>" +
             this.document.innerHTML +
             "</body></html>"
         )
