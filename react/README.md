@@ -23,6 +23,8 @@ return (<TinyDOC
    calcEnabled
    useCtrlSForSaving
    useCtrlPForPrinting
+   replaceTabWithSpaces
+   linkColor="#ff0000"
    wordCountValue="words"
    charCountValue="characters"
    spellcheckerEnabled
@@ -32,8 +34,6 @@ return (<TinyDOC
    spellcheckerURL="spellchecker.js"
    spellcheckerNoSuggestions="(No suggestions)"
    spellcheckerMaxSuggestions={5}
-   linkColor="#ff0000"
-   replaceTabWithSpaces
 />)
 ```
 
