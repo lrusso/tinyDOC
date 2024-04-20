@@ -12,6 +12,6 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
 https://github.com/lrusso/tinyDOC/tree/main/react
 
-## Vanilla JavaScript version (deprecated):
+## Vanilla JavaScript version:
 
 https://github.com/lrusso/tinyDOC/tree/main/vanilla
