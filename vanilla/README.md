@@ -30,6 +30,20 @@ const myEditor = new TinyDOC({
               })
 ```
 
+## Methods
+
+| # | METHOD | DETAILS |
+| :------------ |:---------------| :----- |
+| 1 | new | Deletes the document content. | 
+| 2 | print | Prints the document content. |
+| 3 | save | Executes the save function. |
+| 4 | focus | Focus the document. |
+| 5 | enable | Enables the document. |
+| 6 | disable | Disables the document. |
+| 7 | resize | Resizes the document to fit the container. |
+| 8 | scrollToTop | Scrolls to the top of the document. |
+| 9 | getText | Returns the document content. |
+
 ## Calc Button - Single Line Evaluation
 
 **SAMPLE TEXT**
