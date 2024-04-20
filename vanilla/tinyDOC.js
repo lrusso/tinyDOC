@@ -1255,6 +1255,7 @@ class tinyDOC {
 
         this.myWorker.onerror = () => {
           setTimeout(() => {
+            this.buttonSpellcheck.className = "tinydoc_button"
             this.spellcheckerWorking = false
             this.spellcheckerExecuted = false
             this.enable()
