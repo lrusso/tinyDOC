@@ -8,24 +8,6 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 
 https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
-## TinyDOC Settings:
-
-| # | SETTING | DETAILS |
-| :------------ |:---------------| :----- |
-| 1 | container | Container. | 
-| 2 | documentText | Default text. |
-| 3 | saveCallback | Callback function. |
-| 4 | calcEnabled | Boolean. |
-| 5 | spellcheckerEnabled | Boolean. |
-| 6 | spellcheckerStarted | Callback function. |
-| 7 | spellcheckerEnded | Callback function. |
-| 8 | spellcheckerLanguage | Spellchecker Language. |
-| 9 | spellcheckerURL | Spellchecker URL. |
-| 10 | spellcheckerNoSuggestions | String. |
-| 11 | template1 | HTML template. |
-| 12 | template2 | HTML template. |
-| 13 | template3 | HTML template. |
-
 **Example without the spellchecker:**
 
 ```javascript
