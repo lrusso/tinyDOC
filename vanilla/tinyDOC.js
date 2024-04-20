@@ -275,7 +275,7 @@ class tinyDOC {
     this.pleaseWait.style.display = "none"
     this.pleaseWait.style.zIndex = 98
     this.pleaseWait.style.opacity = 0.5
-    this.pleaseWait.addEventListener("mousedown", function (event) {
+    this.pleaseWait.addEventListener("mousedown", (event) => {
       event.preventDefault()
     })
     this.myContainer.appendChild(this.pleaseWait)
@@ -291,7 +291,7 @@ class tinyDOC {
     this.pleaseWaitIcon.style.zIndex = 99
     this.pleaseWaitIcon.style.background =
       "url('data:image/gif;base64,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') no-repeat center"
-    this.pleaseWaitIcon.addEventListener("mousedown", function (event) {
+    this.pleaseWaitIcon.addEventListener("mousedown", (event) => {
       event.preventDefault()
     })
     this.myContainer.appendChild(this.pleaseWaitIcon)
@@ -312,7 +312,6 @@ class tinyDOC {
       this.document.innerHTML = "<div></div>"
     }
 
-    let thisTinyDOC = this
     this.spellcheckerResult = []
     this.spellcheckerWorking = false
     this.spellcheckerExecuted = false
@@ -334,96 +333,96 @@ class tinyDOC {
     )
 
     if (this.saveFunction) {
-      this.buttonSave.addEventListener("mousedown", function (event) {
-        thisTinyDOC.save()
+      this.buttonSave.addEventListener("mousedown", (event) => {
+        this.save()
         event.preventDefault()
       })
     }
 
     if (this.spellcheckerEnabled) {
-      this.buttonSpellcheck.addEventListener("mousedown", function (event) {
-        thisTinyDOC.spellcheck()
+      this.buttonSpellcheck.addEventListener("mousedown", (event) => {
+        this.spellcheck()
         event.preventDefault()
       })
     }
 
-    this.buttonPrint.addEventListener("mousedown", function (event) {
-      thisTinyDOC.print()
+    this.buttonPrint.addEventListener("mousedown", (event) => {
+      this.print()
       event.preventDefault()
     })
-    this.buttonUndo.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("undo", null)
+    this.buttonUndo.addEventListener("mousedown", (event) => {
+      this.formatDoc("undo", null)
       event.preventDefault()
     })
-    this.buttonRedo.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("redo", null)
+    this.buttonRedo.addEventListener("mousedown", (event) => {
+      this.formatDoc("redo", null)
       event.preventDefault()
     })
-    this.buttonBold.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("bold", null)
+    this.buttonBold.addEventListener("mousedown", (event) => {
+      this.formatDoc("bold", null)
       event.preventDefault()
     })
-    this.buttonItalic.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("italic", null)
+    this.buttonItalic.addEventListener("mousedown", (event) => {
+      this.formatDoc("italic", null)
       event.preventDefault()
     })
-    this.buttonUnderline.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("underline", null)
+    this.buttonUnderline.addEventListener("mousedown", (event) => {
+      this.formatDoc("underline", null)
       event.preventDefault()
     })
-    this.buttonStrikethrough.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("strikethrough", null)
+    this.buttonStrikethrough.addEventListener("mousedown", (event) => {
+      this.formatDoc("strikethrough", null)
       event.preventDefault()
     })
-    this.buttonDotted.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("insertunorderedlist", null)
+    this.buttonDotted.addEventListener("mousedown", (event) => {
+      this.formatDoc("insertunorderedlist", null)
       event.preventDefault()
     })
-    this.buttonNumbered.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("insertorderedlist", null)
+    this.buttonNumbered.addEventListener("mousedown", (event) => {
+      this.formatDoc("insertorderedlist", null)
       event.preventDefault()
     })
-    this.buttonHighlight.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("BackColor", "#FFFF00")
+    this.buttonHighlight.addEventListener("mousedown", (event) => {
+      this.formatDoc("BackColor", "#FFFF00")
       event.preventDefault()
     })
-    this.buttonLink.addEventListener("mousedown", function (event) {
-      thisTinyDOC.insertLink()
+    this.buttonLink.addEventListener("mousedown", (event) => {
+      this.insertLink()
       event.preventDefault()
     })
-    this.buttonCalc.addEventListener("mousedown", function (event) {
-      thisTinyDOC.insertCalc()
+    this.buttonCalc.addEventListener("mousedown", (event) => {
+      this.insertCalc()
       event.preventDefault()
     })
-    this.buttonRemoveFormat.addEventListener("mousedown", function (event) {
-      thisTinyDOC.formatDoc("removeFormat", null)
+    this.buttonRemoveFormat.addEventListener("mousedown", (event) => {
+      this.formatDoc("removeFormat", null)
       event.preventDefault()
     })
 
     if (editorConfig.template1) {
-      this.buttonTemplate1.addEventListener("mousedown", function (event) {
-        thisTinyDOC.insertHtmlAtCaret(thisTinyDOC.template1, false)
+      this.buttonTemplate1.addEventListener("mousedown", (event) => {
+        this.insertHtmlAtCaret(this.template1, false)
         event.preventDefault()
       })
     }
 
     if (editorConfig.template2) {
-      this.buttonTemplate2.addEventListener("mousedown", function (event) {
-        thisTinyDOC.insertHtmlAtCaret(thisTinyDOC.template2, false)
+      this.buttonTemplate2.addEventListener("mousedown", (event) => {
+        this.insertHtmlAtCaret(this.template2, false)
         event.preventDefault()
       })
     }
 
     if (editorConfig.template3) {
-      this.buttonTemplate3.addEventListener("mousedown", function (event) {
-        thisTinyDOC.insertHtmlAtCaret(thisTinyDOC.template3, false)
+      this.buttonTemplate3.addEventListener("mousedown", (event) => {
+        this.insertHtmlAtCaret(this.template3, false)
         event.preventDefault()
       })
     }
 
-    this.document.addEventListener("mousedown", function (event) {
+    this.document.addEventListener("mousedown", (event) => {
       try {
-        if (!thisTinyDOC.documentEnabled) {
+        if (!this.documentEnabled) {
           event.preventDefault()
         }
       } catch (err) {
@@ -431,32 +430,32 @@ class tinyDOC {
       }
     })
 
-    this.document.addEventListener("keydown", function (event) {
+    this.document.addEventListener("keydown", (event) => {
       try {
-        if (!thisTinyDOC.documentEnabled) {
+        if (!this.documentEnabled) {
           event.preventDefault()
         } else {
           if (event.keyCode === 9) {
             event.preventDefault()
 
-            thisTinyDOC.insertHtmlAtCaret(
+            this.insertHtmlAtCaret(
               "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
               false
             )
 
-            setTimeout(function () {
-              thisTinyDOC.document.focus()
+            setTimeout(() => {
+              this.document.focus()
             }, 100)
           } else if (event.keyCode === 13) {
-            thisTinyDOC.handleBreakline(event)
+            this.handleBreakline(event)
           } else if (
             (event.ctrlKey || event.metaKey) &&
             String.fromCharCode(event.which).toLowerCase() === "s"
           ) {
-            if (thisTinyDOC.saveFunction) {
+            if (this.saveFunction) {
               event.preventDefault()
 
-              thisTinyDOC.save()
+              this.save()
             }
           } else if (
             (event.ctrlKey || event.metaKey) &&
@@ -465,7 +464,7 @@ class tinyDOC {
           ) {
             event.preventDefault()
 
-            thisTinyDOC.undo(true)
+            this.undo(true)
           } else if (
             event.shiftKey &&
             event.metaKey &&
@@ -473,7 +472,7 @@ class tinyDOC {
           ) {
             event.preventDefault()
 
-            thisTinyDOC.redo(true)
+            this.redo(true)
           } else if (
             event.ctrlKey &&
             event.shiftKey &&
@@ -481,14 +480,14 @@ class tinyDOC {
           ) {
             event.preventDefault()
 
-            thisTinyDOC.undo(true)
+            this.undo(true)
           } else if (
             event.ctrlKey &&
             String.fromCharCode(event.which).toLowerCase() === "y"
           ) {
             event.preventDefault()
 
-            thisTinyDOC.redo(true)
+            this.redo(true)
           }
         }
       } catch (err) {
@@ -496,8 +495,8 @@ class tinyDOC {
       }
     })
 
-    this.document.addEventListener("keyup", function (event) {
-      if (!thisTinyDOC.documentEnabled) {
+    this.document.addEventListener("keyup", (event) => {
+      if (!this.documentEnabled) {
         event.preventDefault()
       } else if (
         (event.ctrlKey || event.metaKey) &&
@@ -523,38 +522,38 @@ class tinyDOC {
       ) {
         event.preventDefault()
       } else {
-        thisTinyDOC.checkForURL()
-        thisTinyDOC.checkForMisspelled()
+        this.checkForURL()
+        this.checkForMisspelled()
 
-        if (thisTinyDOC.undoSaveTimeout !== null) {
-          clearTimeout(thisTinyDOC.undoSaveTimeout)
+        if (this.undoSaveTimeout !== null) {
+          clearTimeout(this.undoSaveTimeout)
         }
 
-        thisTinyDOC.undoSaveTimeout = setTimeout(function () {
-          thisTinyDOC.saveUndo()
+        this.undoSaveTimeout = setTimeout(() => {
+          this.saveUndo()
         }, 100)
       }
     })
 
-    this.document.addEventListener("click", function (event) {
-      if (!thisTinyDOC.documentEnabled) {
+    this.document.addEventListener("click", (event) => {
+      if (!this.documentEnabled) {
         event.preventDefault()
       } else {
-        thisTinyDOC.checkForURL()
-        thisTinyDOC.checkForMisspelled()
+        this.checkForURL()
+        this.checkForMisspelled()
       }
     })
 
-    this.document.addEventListener("contextmenu", function (event) {
-      if (!thisTinyDOC.documentEnabled) {
+    this.document.addEventListener("contextmenu", (event) => {
+      if (!this.documentEnabled) {
         event.preventDefault()
       } else {
-        thisTinyDOC.checkForURL()
-        thisTinyDOC.checkForMisspelled()
+        this.checkForURL()
+        this.checkForMisspelled()
       }
     })
 
-    this.document.addEventListener("paste", function (event) {
+    this.document.addEventListener("paste", (event) => {
       try {
         event.preventDefault()
 
@@ -566,16 +565,16 @@ class tinyDOC {
         text = text.replace(/ {2}/gm, "&nbsp;&nbsp;")
         text = text.replace(/\n/gm, "<br />")
 
-        thisTinyDOC.document.focus()
+        this.document.focus()
 
-        thisTinyDOC.insertHtmlAtCaret(text, false)
+        this.insertHtmlAtCaret(text, false)
       } catch (err) {
         //
       }
     })
 
-    this.document.addEventListener("input", function () {
-      window.onbeforeunload = function () {
+    this.document.addEventListener("input", () => {
+      window.onbeforeunload = () => {
         return "Dirty"
       }
     })
@@ -640,7 +639,7 @@ class tinyDOC {
       this.pleaseWaitIcon.style.width = this.myContainer.offsetWidth + "px"
       this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px"
 
-      setTimeout(function () {
+      setTimeout(() => {
         try {
           this.document.style.width = this.myContainer.offsetWidth - 16 + "px"
           this.document.style.height = this.myContainer.offsetHeight - 57 + "px"
@@ -800,10 +799,8 @@ class tinyDOC {
 
       this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
 
-      let thisTinyDOC = this
-
-      setTimeout(function () {
-        thisTinyDOC.setCaretPosition(thisTinyDOC.document, 0)
+      setTimeout(() => {
+        this.setCaretPosition(this.document, 0)
       }, 25)
     } catch (err) {
       //
@@ -869,10 +866,8 @@ class tinyDOC {
     try {
       this.document.focus()
 
-      let thisTinyDOC = this
-
-      setTimeout(function () {
-        thisTinyDOC.document.focus()
+      setTimeout(() => {
+        this.document.focus()
       }, 100)
     } catch (err) {
       //
@@ -907,10 +902,8 @@ class tinyDOC {
         }
       }
 
-      let thisTinyDOC = this
-
-      setTimeout(function () {
-        thisTinyDOC.document.focus()
+      setTimeout(() => {
+        this.document.focus()
       }, 100)
     } catch (err) {
       //
@@ -931,14 +924,12 @@ class tinyDOC {
           this.getParentTag("OL") !== null) &&
         window.getSelection().toString().indexOf("\n") > -1
       ) {
-        let thisTinyDOC = this
+        setTimeout(() => {
+          this.restoreSelection(this.document, currentSelection)
 
-        setTimeout(function () {
-          thisTinyDOC.restoreSelection(thisTinyDOC.document, currentSelection)
-
-          if (thisTinyDOC.isUsingChrome || thisTinyDOC.isUsingSafari) {
+          if (this.isUsingChrome || this.isUsingSafari) {
             if (window.getSelection().toString().indexOf("\n") === -1) {
-              thisTinyDOC.formatStyleExecute(myTag, myParameter)
+              this.formatStyleExecute(myTag, myParameter)
             }
           }
         }, 25)
@@ -974,17 +965,15 @@ class tinyDOC {
 
       range.insertNode(newTag)
 
-      let thisTinyDOC = this
-
-      setTimeout(function () {
+      setTimeout(() => {
         range = range.cloneRange()
         range.setStartBefore(newTag)
         selection.removeAllRanges()
         selection.addRange(range)
 
-        thisTinyDOC.saveUndo()
+        this.saveUndo()
 
-        window.onbeforeunload = function () {
+        window.onbeforeunload = () => {
           return "Dirty"
         }
       }, 25)
@@ -1152,9 +1141,7 @@ class tinyDOC {
         startBefore = false
       }
 
-      let thisTinyDOC = this
-
-      setTimeout(function () {
+      setTimeout(() => {
         var range = document.createRange()
         range.selectNodeContents(tempAnchorEl)
         if (startBefore) {
@@ -1167,7 +1154,7 @@ class tinyDOC {
         sel.removeAllRanges()
         sel.addRange(range)
 
-        thisTinyDOC.saveUndo()
+        this.saveUndo()
       }, 25)
     } catch (err) {
       //
@@ -1192,18 +1179,14 @@ class tinyDOC {
         }
       }
 
-      let thisTinyDOC = this
-
-      setTimeout(function () {
-        thisTinyDOC.document.focus()
+      setTimeout(() => {
+        this.document.focus()
       }, 100)
 
       return docFound
     } catch (err) {
-      let thisTinyDOC = this
-
-      setTimeout(function () {
-        thisTinyDOC.document.focus()
+      setTimeout(() => {
+        this.document.focus()
       }, 100)
 
       return false
@@ -1306,18 +1289,16 @@ class tinyDOC {
 
           this.insertHtmlAtCaret(originalHTML, false)
 
-          let thisTinyDOC = this
+          setTimeout(() => {
+            this.spellcheckerWorking = false
 
-          setTimeout(function () {
-            thisTinyDOC.spellcheckerWorking = false
+            this.spellcheckerExecuted = false
 
-            thisTinyDOC.spellcheckerExecuted = false
+            this.showPleaseWait(false)
 
-            thisTinyDOC.showPleaseWait(false)
+            this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
 
-            thisTinyDOC.buttonSpellcheck.className = "tinydoc_button_spellcheck"
-
-            thisTinyDOC.setCaretPosition(thisTinyDOC.document, originalCaretPosition)
+            this.setCaretPosition(this.document, originalCaretPosition)
           }, 25)
         } else {
           this.disable()
@@ -1337,24 +1318,20 @@ class tinyDOC {
           dataRequest["lang"] = this.spellcheckerLanguage
           dataRequest["words"] = results
 
-          let thisTinyDOC = this
-
           this.myWorker = new Worker(this.spellcheckerURL)
 
-          this.myWorker.onmessage = function (e) {
+          this.myWorker.onmessage = (e) => {
             try {
-              if (thisTinyDOC.spellcheckerWorking) {
-                thisTinyDOC.focus()
+              if (this.spellcheckerWorking) {
+                this.focus()
 
                 var words = e.data
 
-                thisTinyDOC.spellcheckerResult = words
+                this.spellcheckerResult = words
 
-                var originalHTML = thisTinyDOC.document.innerHTML
+                var originalHTML = this.document.innerHTML
 
-                originalCaretPosition = thisTinyDOC.getCaretPosition(
-                  thisTinyDOC.document
-                )
+                originalCaretPosition = this.getCaretPosition(this.document)
 
                 for (var key in words) {
                   var wordToUnderline = key
@@ -1364,34 +1341,31 @@ class tinyDOC {
                     "gi"
                   )
 
-                  originalHTML = originalHTML.replace(exp, function (m) {
+                  originalHTML = originalHTML.replace(exp, (m) => {
                     return "<misspelled>" + m + "</misspelled>"
                   })
                 }
 
                 try {
-                  while (thisTinyDOC.document.firstChild) {
-                    thisTinyDOC.document.removeChild(thisTinyDOC.document.firstChild)
+                  while (this.document.firstChild) {
+                    this.document.removeChild(this.document.firstChild)
                   }
                 } catch (err) {
                   //
                 }
 
-                thisTinyDOC.insertHtmlAtCaret(originalHTML, false)
+                this.insertHtmlAtCaret(originalHTML, false)
 
-                thisTinyDOC.enable()
+                this.enable()
 
-                thisTinyDOC.setCaretPosition(
-                  thisTinyDOC.document,
-                  originalCaretPosition
-                )
+                this.setCaretPosition(this.document, originalCaretPosition)
 
-                thisTinyDOC.showPleaseWait(false)
+                this.showPleaseWait(false)
 
-                setTimeout(function () {
-                  thisTinyDOC.spellcheckerWorking = false
+                setTimeout(() => {
+                  this.spellcheckerWorking = false
 
-                  thisTinyDOC.spellcheckerExecuted = true
+                  this.spellcheckerExecuted = true
                 }, 500)
               }
             } catch (err) {
@@ -1400,22 +1374,19 @@ class tinyDOC {
             return true
           }
 
-          this.myWorker.onerror = function () {
-            setTimeout(function () {
-              thisTinyDOC.spellcheckerWorking = false
+          this.myWorker.onerror = () => {
+            setTimeout(() => {
+              this.spellcheckerWorking = false
 
-              thisTinyDOC.spellcheckerExecuted = false
+              this.spellcheckerExecuted = false
 
-              thisTinyDOC.buttonSpellcheck.className = "tinydoc_button_spellcheck"
+              this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
 
-              thisTinyDOC.enable()
+              this.enable()
 
-              thisTinyDOC.setCaretPosition(
-                thisTinyDOC.document,
-                originalCaretPosition
-              )
+              this.setCaretPosition(this.document, originalCaretPosition)
 
-              thisTinyDOC.showPleaseWait(false)
+              this.showPleaseWait(false)
             }, 25)
           }
 
@@ -1455,9 +1426,8 @@ class tinyDOC {
         newIframe.contentWindow.print()
         document.body.removeChild(newIframe)
 
-        const thisTinyDOC = this
         setTimeout(() => {
-          thisTinyDOC.document.focus()
+          this.document.focus()
         }, 25)
       } catch (err) {
         //
@@ -1521,47 +1491,36 @@ class tinyDOC {
           false
         )
 
-        let thisTinyDOC = this
-
-        setTimeout(function () {
-          thisTinyDOC.setCaretPosition(
-            thisTinyDOC.document,
-            thisTinyDOC.document_history_caret[
-              thisTinyDOC.document_history_index - 1
-            ]
+        setTimeout(() => {
+          this.setCaretPosition(
+            this.document,
+            this.document_history_caret[this.document_history_index - 1]
           )
 
-          thisTinyDOC.document_history_index = thisTinyDOC.document_history_index - 1
+          this.document_history_index = this.document_history_index - 1
 
-          thisTinyDOC.scrollToCaret()
+          this.scrollToCaret()
 
-          thisTinyDOC.document.style.caretColor = "black"
+          this.document.style.caretColor = "black"
 
-          thisTinyDOC.canUndoRedo = true
+          this.canUndoRedo = true
         }, 25)
       } else {
-        let thisTinyDOC = this
+        setTimeout(() => {
+          this.setCaretPosition(this.document, this.document_history_lastCaret)
 
-        setTimeout(function () {
-          thisTinyDOC.setCaretPosition(
-            thisTinyDOC.document,
-            thisTinyDOC.document_history_lastCaret
-          )
+          this.document.style.caretColor = "black"
 
-          thisTinyDOC.document.style.caretColor = "black"
-
-          thisTinyDOC.canUndoRedo = true
+          this.canUndoRedo = true
         }, 25)
       }
     } catch (err) {
-      let thisTinyDOC = this
+      setTimeout(() => {
+        this.setCaretPosition(this.document, 0)
 
-      setTimeout(function () {
-        thisTinyDOC.setCaretPosition(thisTinyDOC.document, 0)
+        this.document.style.caretColor = "black"
 
-        thisTinyDOC.document.style.caretColor = "black"
-
-        thisTinyDOC.canUndoRedo = true
+        this.canUndoRedo = true
       }, 25)
     }
   }
@@ -1602,47 +1561,36 @@ class tinyDOC {
           false
         )
 
-        let thisTinyDOC = this
-
-        setTimeout(function () {
-          thisTinyDOC.setCaretPosition(
-            thisTinyDOC.document,
-            thisTinyDOC.document_history_caret[
-              thisTinyDOC.document_history_index + 1
-            ]
+        setTimeout(() => {
+          this.setCaretPosition(
+            this.document,
+            this.document_history_caret[this.document_history_index + 1]
           )
 
-          thisTinyDOC.document_history_index = thisTinyDOC.document_history_index + 1
+          this.document_history_index = this.document_history_index + 1
 
-          thisTinyDOC.scrollToCaret()
+          this.scrollToCaret()
 
-          thisTinyDOC.document.style.caretColor = "black"
+          this.document.style.caretColor = "black"
 
-          thisTinyDOC.canUndoRedo = true
+          this.canUndoRedo = true
         }, 25)
       } else {
-        let thisTinyDOC = this
+        setTimeout(() => {
+          this.setCaretPosition(this.document, this.document_history_lastCaret)
 
-        setTimeout(function () {
-          thisTinyDOC.setCaretPosition(
-            thisTinyDOC.document,
-            thisTinyDOC.document_history_lastCaret
-          )
+          this.document.style.caretColor = "black"
 
-          thisTinyDOC.document.style.caretColor = "black"
-
-          thisTinyDOC.canUndoRedo = true
+          this.canUndoRedo = true
         }, 25)
       }
     } catch (err) {
-      let thisTinyDOC = this
+      setTimeout(() => {
+        this.setCaretPosition(this.document, 0)
 
-      setTimeout(function () {
-        thisTinyDOC.setCaretPosition(thisTinyDOC.document, 0)
+        this.document.style.caretColor = "black"
 
-        thisTinyDOC.document.style.caretColor = "black"
-
-        thisTinyDOC.canUndoRedo = true
+        this.canUndoRedo = true
       }, 25)
     }
   }
@@ -1813,10 +1761,8 @@ class tinyDOC {
         }
       }
 
-      let thisTinyDOC = this
-
-      setTimeout(function () {
-        thisTinyDOC.document.focus()
+      setTimeout(() => {
+        this.document.focus()
       }, 100)
     } catch (err) {
       //
@@ -1917,10 +1863,8 @@ class tinyDOC {
       //
     }
 
-    let thisTinyDOC = this
-
-    setTimeout(function () {
-      thisTinyDOC.document.focus()
+    setTimeout(() => {
+      this.document.focus()
     }, 100)
   }
 
@@ -1965,8 +1909,6 @@ class tinyDOC {
           this.contentViewer.innerHTML = ""
 
           if (this.spellcheckerResult[finalMisspelled]) {
-            let thisTinyDOC = this
-
             for (
               var i = 0;
               i < this.spellcheckerResult[finalMisspelled].length;
@@ -1975,8 +1917,8 @@ class tinyDOC {
               var suggestedWord = document.createElement("span")
               suggestedWord.className = "tinydoc_spellchecker_suggestions"
               suggestedWord.innerHTML = this.spellcheckerResult[finalMisspelled][i]
-              suggestedWord.addEventListener("mousedown", function () {
-                thisTinyDOC.replaceWith(this.innerHTML)
+              suggestedWord.addEventListener("mousedown", () => {
+                this.replaceWith(this.innerHTML)
               })
 
               this.contentViewer.appendChild(suggestedWord)
@@ -2031,14 +1973,12 @@ class tinyDOC {
 
         this.saveUndo()
 
-        window.onbeforeunload = function () {
+        window.onbeforeunload = () => {
           return "Dirty"
         }
 
-        let thisTinyDOC = this
-
-        setTimeout(function () {
-          thisTinyDOC.setCaretPosition(thisTinyDOC.document, originalCaretPosition)
+        setTimeout(() => {
+          this.setCaretPosition(this.document, originalCaretPosition)
         })
       } else {
         this.contentViewer.innerHTML = ""
@@ -2102,13 +2042,11 @@ class tinyDOC {
 
           this.scrollToCaret()
 
-          window.onbeforeunload = function () {
+          window.onbeforeunload = () => {
             return "Dirty"
           }
         } else {
-          let thisTinyDOC = this
-
-          setTimeout(function () {
+          setTimeout(() => {
             if (lastNode) {
               range = range.cloneRange()
               range.setStartAfter(lastNode)
@@ -2121,13 +2059,13 @@ class tinyDOC {
               selection.addRange(range)
             }
 
-            if (thisTinyDOC.canUndoRedo) {
-              thisTinyDOC.scrollToCaret()
+            if (this.canUndoRedo) {
+              this.scrollToCaret()
 
-              thisTinyDOC.saveUndo()
+              this.saveUndo()
             }
 
-            window.onbeforeunload = function () {
+            window.onbeforeunload = () => {
               return "Dirty"
             }
           }, 25)
