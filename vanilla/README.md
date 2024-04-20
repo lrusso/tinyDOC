@@ -24,6 +24,8 @@ const myEditor = new TinyDOC({
               useCtrlPForPrinting: true,
               replaceTabWithSpaces: true,
               linkColor: "#3A76B1",
+              wordCountValue: "words",
+              charCountValue: "characters",
               spellcheckerEnabled: true,
               spellcheckerStarted: () => {console.log("spellcheckerStarted")},
               spellcheckerEnded: () => {console.log("spellcheckerEnded")},
