@@ -32,17 +32,17 @@ const myEditor = new TinyDOC({
 
 ## Methods
 
-| # | METHOD | DETAILS |
-| :------------ |:---------------| :----- |
-| 1 | new | Deletes the document content. | 
-| 2 | print | Prints the document content. |
-| 3 | save | Executes the save function. |
-| 4 | focus | Focus the document. |
-| 5 | enable | Enables the document. |
-| 6 | disable | Disables the document. |
-| 7 | resize | Resizes the document to fit the container. |
-| 8 | scrollToTop | Scrolls to the top of the document. |
-| 9 | getText | Returns the document content. |
+| METHOD | DETAILS |
+| :---------------| :----- |
+| new | Deletes the document content. | 
+| print | Prints the document content. |
+| save | Executes the save function. |
+| focus | Focus the document. |
+| enable | Enables the document. |
+| disable | Disables the document. |
+| resize | Resizes the document to fit the container. |
+| scrollToTop | Scrolls to the top of the document. |
+| getText | Returns the document content. |
 
 ## Calc Button - Single Line Evaluation
 
