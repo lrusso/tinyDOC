@@ -8,7 +8,7 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 
 https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
-## How to use it:
+## How to use it
 
 ```javascript
 const myEditor = new TinyDOC({
@@ -28,7 +28,7 @@ const myEditor = new TinyDOC({
               })
 ```
 
-## Methods:
+## Methods
 
 | # | METHOD | DETAILS |
 | :------------ |:---------------| :----- |
