@@ -114,7 +114,7 @@ class tinyDOC {
     this.buttonUndo.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M762 -64q43 77 62 168t-9 168t-113.5 127.5t-253.5 46.5v-254l-384 384l384 384v-248q201 5 314.5 -73t148.5 -196t-4.5 -255.5t-144.5 -251.5z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonUndo.addEventListener("mousedown", (event) => {
-      this.formatDoc("undo", null)
+      this.formatDoc("undo")
       event.preventDefault()
     })
     this.holder4.appendChild(this.buttonUndo)
@@ -127,7 +127,7 @@ class tinyDOC {
     this.buttonRedo.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M576 712v248l384 -384l-384 -384v254q-168 4 -253.5 -46.5t-113.5 -127.5t-9 -168t62 -168q-105 114 -144.5 251.5t-4.5 255.5t148.5 196t314.5 73v0z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonRedo.addEventListener("mousedown", (event) => {
-      this.formatDoc("redo", null)
+      this.formatDoc("redo")
       event.preventDefault()
     })
     this.holder5.appendChild(this.buttonRedo)
@@ -144,7 +144,7 @@ class tinyDOC {
     this.buttonBold.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M708 475q28 34 44 76t16 89q0 53 -20 99.5t-55 81.5t-81.5 55t-99.5 20h-320v-896h384q53 0 99.5 20t81.5 55t55 81.5t20 99.5q0 70 -34 128t-90 91zM384 768h101q42 0 72 -37.5t30 -90.5t-30 -90.5t-71 -37.5h-102v256zM543 128h-159v256h159q44 0 75 -37.5t31 -90.5 t-31 -90.5t-75 -37.5z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonBold.addEventListener("mousedown", (event) => {
-      this.formatDoc("bold", null)
+      this.formatDoc("bold")
       event.preventDefault()
     })
     this.holder6.appendChild(this.buttonBold)
@@ -157,7 +157,7 @@ class tinyDOC {
     this.buttonItalic.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M896 896v-64h-128l-320 -768h128v-64h-448v64h128l320 768h-128v64h448z' transform='translate(0 955) scale(-1,1) rotate(180)'/></svg>"
     this.buttonItalic.addEventListener("mousedown", (event) => {
-      this.formatDoc("italic", null)
+      this.formatDoc("italic")
       event.preventDefault()
     })
     this.holder7.appendChild(this.buttonItalic)
@@ -170,7 +170,7 @@ class tinyDOC {
     this.buttonUnderline.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M704 896h128v-416q0 -60 -25 -112.5t-68.5 -91.5t-102 -61.5t-124.5 -22.5t-124.5 22.5t-102 61.5t-68.5 91.5t-25 112.5v416h128v-416q0 -30 13.5 -58t37.5 -51q28 -24 64.5 -37.5t76.5 -13.5t76.5 13.5t64.5 37.5q24 23 37.5 51t13.5 58v416zM192 128h640v-128h-640 v128z' transform='translate(0 975) scale(-1,1) rotate(180)'/></svg>"
     this.buttonUnderline.addEventListener("mousedown", (event) => {
-      this.formatDoc("underline", null)
+      this.formatDoc("underline")
       event.preventDefault()
     })
     this.holder8.appendChild(this.buttonUnderline)
@@ -183,7 +183,7 @@ class tinyDOC {
     this.buttonStrikethrough.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M731 443q48 -36 74.5 -85t26.5 -102t-26.5 -102t-74.5 -85q-44 -33 -100.5 -51t-118.5 -18t-118.5 18t-100.5 51q-48 36 -74.5 85t-26.5 102h128q0 -52 57 -90t135 -38t135 38t57 90t-57 90t-135 38q-62 0 -118.5 18t-100.5 51q-48 36 -74.5 85t-26.5 102t26.5 102 t74.5 85q44 33 100.5 51t118.5 18t118.5 -18t100.5 -51q48 -36 74.5 -85t26.5 -102h-128q0 52 -57 90t-135 38t-135 -38t-57 -90t57 -90t135 -38q62 0 118.5 -18t100.5 -51v0zM0 448h1024v-64h-1024v64z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonStrikethrough.addEventListener("mousedown", (event) => {
-      this.formatDoc("strikethrough", null)
+      this.formatDoc("strikethrough")
       event.preventDefault()
     })
     this.holder9.appendChild(this.buttonStrikethrough)
@@ -200,7 +200,7 @@ class tinyDOC {
     this.buttonDotted.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 896h640v-128h-640v128zM384 512h640v-128h-640v128zM384 128h640v-128h-640v128zM0 832q0 53 37.5 90.5t90.5 37.5t90.5 -37.5t37.5 -90.5t-37.5 -90.5t-90.5 -37.5t-90.5 37.5t-37.5 90.5zM0 448q0 53 37.5 90.5t90.5 37.5t90.5 -37.5t37.5 -90.5t-37.5 -90.5 t-90.5 -37.5t-90.5 37.5t-37.5 90.5zM0 64q0 53 37.5 90.5t90.5 37.5t90.5 -37.5t37.5 -90.5t-37.5 -90.5t-90.5 -37.5t-90.5 37.5t-37.5 90.5z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonDotted.addEventListener("mousedown", (event) => {
-      this.formatDoc("insertunorderedlist", null)
+      this.formatDoc("insertunorderedlist")
       event.preventDefault()
     })
     this.holder10.appendChild(this.buttonDotted)
@@ -213,7 +213,7 @@ class tinyDOC {
     this.buttonNumbered.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 128h640v-128h-640v128zM384 512h640v-128h-640v128zM384 896h640v-128h-640v128zM192 960v-256h-64v192h-64v64h128zM128 434v-50h128v-64h-192v146l128 60v50h-128v64h192v-146zM256 256v-320h-192v64h128v64h-128v64h128v64h-128v64h192z' transform='translate(-50 940) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonNumbered.addEventListener("mousedown", (event) => {
-      this.formatDoc("insertorderedlist", null)
+      this.formatDoc("insertorderedlist")
       event.preventDefault()
     })
     this.holder11.appendChild(this.buttonNumbered)
@@ -342,7 +342,7 @@ class tinyDOC {
     this.buttonRemoveFormat.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M0 64h576v-128h-576v128zM192 960h704v-128h-704v128zM277 128l205 784l124 -32l-196 -752h-133zM930 -64l-130 130l-130 -130l-62 62l130 130l-130 130l62 62l130 -130l130 130l62 -62l-130 -130l130 -130z' transform='translate(0 915) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonRemoveFormat.addEventListener("mousedown", (event) => {
-      this.formatDoc("removeFormat", null)
+      this.formatDoc("removeFormat")
       event.preventDefault()
     })
     this.holder18.appendChild(this.buttonRemoveFormat)
