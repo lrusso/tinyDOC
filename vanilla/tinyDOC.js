@@ -1282,8 +1282,10 @@ class tinyDOC {
           this.myWorker.terminate()
         }
 
+        let originalCaretPosition
+
         if (this.spellcheckerExecuted) {
-          var originalCaretPosition = this.getCaretPosition(this.document)
+          originalCaretPosition = this.getCaretPosition(this.document)
 
           this.spellcheckerResult = []
 
@@ -1350,7 +1352,7 @@ class tinyDOC {
 
                 var originalHTML = thisTinyDOC.document.innerHTML
 
-                var originalCaretPosition = thisTinyDOC.getCaretPosition(
+                originalCaretPosition = thisTinyDOC.getCaretPosition(
                   thisTinyDOC.document
                 )
 
@@ -1839,6 +1841,7 @@ class tinyDOC {
             selectedText = selectedText.replace(/[^0-9.*/()+-]/g, "")
 
             try {
+              // eslint-disable-next-line no-eval
               var finalResult = eval(selectedText)
 
               if (isNaN(finalResult)) {
