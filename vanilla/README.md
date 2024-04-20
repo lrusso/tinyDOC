@@ -24,7 +24,8 @@ const myEditor = new TinyDOC({
               spellcheckerEnded: () => {console.log("spellcheckerEnded")},
               spellcheckerLanguage: "en-US",
               spellcheckerURL: "spellchecker.js",
-              spellcheckerNoSuggestions: "(No suggestions)"
+              spellcheckerNoSuggestions: "(No suggestions)",
+              spellcheckerMaxSuggestions: 5
               })
 ```
 
