@@ -33,10 +33,10 @@ return (<TinyDOC
    spellcheckerEnabled
    spellcheckerStarted={() => {console.log("spellcheckerStarted")}
    spellcheckerEnded={() => {console.log("spellcheckerEnded")}
+   spellcheckerLanguage="en-US"
+   spellcheckerURL="spellchecker.js"
    spellcheckerNoSuggestions={"(No suggestions)"}
    spellcheckerMaxSuggestions={5}
-   spellcheckerURL="spellchecker.js"
-   spellcheckerLanguage="en"
    linkColor="#ff0000"
    replaceTabWithSpaces
 />)
