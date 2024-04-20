@@ -317,22 +317,24 @@ class tinyDOC {
       this.menu.appendChild(this.separator7)
     }
 
-    this.holder17 = document.createElement("div")
-    this.holder17.className = "tinydoc_holder"
-    this.menu.appendChild(this.holder17)
-    this.buttonCalc = document.createElement("div")
-    this.buttonCalc.className = "tinydoc_button"
-    this.buttonCalc.innerHTML =
-      "<svg width='16' height='16' viewBox='0 0 512.001 512.001'><path d='M403.432,0H108.57C86.583,0,68.695,17.887,68.695,39.874v432.253c0,21.987,17.887,39.874,39.874,39.874h294.862 c21.987,0,39.874-17.887,39.874-39.874V39.874C443.305,17.887,425.417,0,403.432,0z M424.297,472.127h-0.001 c0,11.505-9.36,20.865-20.865,20.865H108.57c-11.505,0-20.865-9.36-20.865-20.865V39.874c0-11.505,9.36-20.865,20.865-20.865 h294.862c11.505,0,20.865,9.36,20.865,20.865V472.127z'/><path d='M382.1,51.081H129.901c-5.25,0-9.504,4.255-9.504,9.504v82.322c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504V60.585C391.604,55.336,387.349,51.081,382.1,51.081z M372.596,133.403h-233.19V70.089h233.19 V133.403z'/><path d='M185.115,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,185.809,190.366,181.553,185.115,181.553z M175.611,240.889h-36.205v-40.327 h36.205V240.889z'/><path d='M185.115,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,287.952,190.366,283.696,185.115,283.696z M175.611,343.032h-36.205v-40.327 h36.205V343.032z'/><path d='M185.115,385.84h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,390.095,190.366,385.84,185.115,385.84z M175.611,445.175h-36.205v-40.327h36.205 V445.175z'/><path d='M283.608,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,185.809,288.857,181.553,283.608,181.553z M274.103,240.889h-36.205v-40.327 h36.205V240.889z'/><path d='M283.608,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,287.952,288.857,283.696,283.608,283.696z M274.103,343.032h-36.205v-40.327 h36.205V343.032z'/><path d='M283.608,385.84h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,390.095,288.857,385.84,283.608,385.84z M274.103,445.175h-36.205v-40.327 h36.205V445.175z'/><path d='M382.1,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504v-59.335C391.604,185.809,387.349,181.553,382.1,181.553z M372.596,240.889H336.39v-40.327h36.205 V240.889z'/><path d='M382.1,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504V454.68c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504V293.201C391.604,287.952,387.349,283.696,382.1,283.696z M372.596,445.175H336.39v-142.47h36.205 V445.175z'/></svg>"
-    this.buttonCalc.addEventListener("mousedown", (event) => {
-      this.insertCalc()
-      event.preventDefault()
-    })
-    this.holder17.appendChild(this.buttonCalc)
+    if (this.calcEnabled) {
+      this.holder17 = document.createElement("div")
+      this.holder17.className = "tinydoc_holder"
+      this.menu.appendChild(this.holder17)
+      this.buttonCalc = document.createElement("div")
+      this.buttonCalc.className = "tinydoc_button"
+      this.buttonCalc.innerHTML =
+        "<svg width='16' height='16' viewBox='0 0 512.001 512.001'><path d='M403.432,0H108.57C86.583,0,68.695,17.887,68.695,39.874v432.253c0,21.987,17.887,39.874,39.874,39.874h294.862 c21.987,0,39.874-17.887,39.874-39.874V39.874C443.305,17.887,425.417,0,403.432,0z M424.297,472.127h-0.001 c0,11.505-9.36,20.865-20.865,20.865H108.57c-11.505,0-20.865-9.36-20.865-20.865V39.874c0-11.505,9.36-20.865,20.865-20.865 h294.862c11.505,0,20.865,9.36,20.865,20.865V472.127z'/><path d='M382.1,51.081H129.901c-5.25,0-9.504,4.255-9.504,9.504v82.322c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504V60.585C391.604,55.336,387.349,51.081,382.1,51.081z M372.596,133.403h-233.19V70.089h233.19 V133.403z'/><path d='M185.115,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,185.809,190.366,181.553,185.115,181.553z M175.611,240.889h-36.205v-40.327 h36.205V240.889z'/><path d='M185.115,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,287.952,190.366,283.696,185.115,283.696z M175.611,343.032h-36.205v-40.327 h36.205V343.032z'/><path d='M185.115,385.84h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,390.095,190.366,385.84,185.115,385.84z M175.611,445.175h-36.205v-40.327h36.205 V445.175z'/><path d='M283.608,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,185.809,288.857,181.553,283.608,181.553z M274.103,240.889h-36.205v-40.327 h36.205V240.889z'/><path d='M283.608,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,287.952,288.857,283.696,283.608,283.696z M274.103,343.032h-36.205v-40.327 h36.205V343.032z'/><path d='M283.608,385.84h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,390.095,288.857,385.84,283.608,385.84z M274.103,445.175h-36.205v-40.327 h36.205V445.175z'/><path d='M382.1,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504v-59.335C391.604,185.809,387.349,181.553,382.1,181.553z M372.596,240.889H336.39v-40.327h36.205 V240.889z'/><path d='M382.1,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504V454.68c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504V293.201C391.604,287.952,387.349,283.696,382.1,283.696z M372.596,445.175H336.39v-142.47h36.205 V445.175z'/></svg>"
+      this.buttonCalc.addEventListener("mousedown", (event) => {
+        this.insertCalc()
+        event.preventDefault()
+      })
+      this.holder17.appendChild(this.buttonCalc)
 
-    this.separator8 = document.createElement("div")
-    this.separator8.className = "tinydoc_separator"
-    this.menu.appendChild(this.separator8)
+      this.separator8 = document.createElement("div")
+      this.separator8.className = "tinydoc_separator"
+      this.menu.appendChild(this.separator8)
+    }
 
     this.holder18 = document.createElement("div")
     this.holder18.className = "tinydoc_holder"
@@ -440,7 +442,16 @@ class tinyDOC {
         if (!this.documentEnabled) {
           event.preventDefault()
         } else {
-          if (event.keyCode === 9) {
+          const KEY_TAB = event.key === "Tab"
+          const KEY_ENTER = event.key === "Enter"
+          const KEY_CTRL_S = event.ctrlKey && event.key === "s"
+          const KEY_UNDO_MAC = event.ctrlKey && event.shiftKey && event.key === "z"
+          const KEY_UNDO_WINDOWS =
+            (event.ctrlKey || event.metaKey) && !event.shiftKey && event.key === "z"
+          const KEY_REDO_MAC = event.shiftKey && event.metaKey && event.key === "z"
+          const KEY_REDO_WINDOWS = event.ctrlKey && event.key === "y"
+
+          if (KEY_TAB) {
             event.preventDefault()
 
             this.insertHtmlAtCaret(
@@ -451,47 +462,18 @@ class tinyDOC {
             setTimeout(() => {
               this.document.focus()
             }, 100)
-          } else if (event.keyCode === 13) {
+          } else if (KEY_ENTER) {
             this.handleBreakline(event)
-          } else if (
-            (event.ctrlKey || event.metaKey) &&
-            String.fromCharCode(event.which).toLowerCase() === "s"
-          ) {
+          } else if (KEY_CTRL_S) {
             if (this.saveFunction) {
               event.preventDefault()
-
               this.save()
             }
-          } else if (
-            (event.ctrlKey || event.metaKey) &&
-            !event.shiftKey &&
-            String.fromCharCode(event.which).toLowerCase() === "z"
-          ) {
+          } else if (KEY_UNDO_MAC || KEY_UNDO_WINDOWS) {
             event.preventDefault()
-
             this.undo(true)
-          } else if (
-            event.shiftKey &&
-            event.metaKey &&
-            String.fromCharCode(event.which).toLowerCase() === "z"
-          ) {
+          } else if (KEY_REDO_MAC || KEY_REDO_WINDOWS) {
             event.preventDefault()
-
-            this.redo(true)
-          } else if (
-            event.ctrlKey &&
-            event.shiftKey &&
-            String.fromCharCode(event.which).toLowerCase() === "z"
-          ) {
-            event.preventDefault()
-
-            this.undo(true)
-          } else if (
-            event.ctrlKey &&
-            String.fromCharCode(event.which).toLowerCase() === "y"
-          ) {
-            event.preventDefault()
-
             this.redo(true)
           }
         }
