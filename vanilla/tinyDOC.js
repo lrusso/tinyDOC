@@ -30,8 +30,8 @@ class tinyDOC {
 
     this.editorConfig = editorConfig
 
-    if (!this.editorConfig.spellcheckerNoSuggestionsLabel) {
-      this.editorConfig.spellcheckerNoSuggestionsLabel = "(No suggestions)"
+    if (!this.editorConfig.spellcheckerNoSuggestions) {
+      this.editorConfig.spellcheckerNoSuggestions = "(No suggestions)"
     }
 
     this.menuContainer = document.createElement("div")
@@ -1766,7 +1766,7 @@ class tinyDOC {
             if (this.spellcheckerResult[finalMisspelled].length === 0) {
               this.contentViewer.innerHTML =
                 '<span class="tinydoc_spellchecker_no_suggestions">' +
-                this.editorConfig.spellcheckerNoSuggestionsLabel +
+                this.editorConfig.spellcheckerNoSuggestions +
                 "</span>"
             }
           } else {

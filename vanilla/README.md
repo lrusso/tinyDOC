@@ -21,7 +21,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 | 7 | spellcheckerEnded | Callback function. |
 | 8 | spellcheckerLanguage | Spellchecker Language. |
 | 9 | spellcheckerURL | Spellchecker URL. |
-| 10 | spellcheckerNoSuggestionsLabel | No suggestions String. |
+| 10 | spellcheckerNoSuggestions | No suggestions String. |
 | 11 | template1 | HTML template. |
 | 12 | template2 | HTML template. |
 | 13 | template3 | HTML template. |
@@ -56,7 +56,7 @@ new TinyDOC({
               spellcheckerEnded: () => {console.log("spellcheckerEnded")},
               spellcheckerLanguage: "en-US",
               spellcheckerURL: "spellchecker.js",
-              spellcheckerNoSuggestionsLabel: "(No suggestions)"
+              spellcheckerNoSuggestions: "(No suggestions)"
               })
 ```
 
