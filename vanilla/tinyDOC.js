@@ -349,8 +349,8 @@ class tinyDOC {
 
     this.myContainer.appendChild(this.document)
 
-    if (editorConfig.documentText) {
-      this.document.innerHTML = editorConfig.documentText
+    if (editorConfig.content) {
+      this.document.innerHTML = editorConfig.content
     } else {
       this.document.innerHTML = "<div></div>"
     }

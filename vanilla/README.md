@@ -13,7 +13,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 ```javascript
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
-              documentText: "Hello world",
+              content: "Hello world",
               saveCallback: () => {console.log("saveCallback")},
               template1: "My Template 1",
               template2: "My Template 2",
@@ -27,7 +27,7 @@ new TinyDOC({
 ```javascript
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
-              documentText: "Hello world",
+              content: "Hello world",
               saveCallback: () => {console.log("saveCallback")},
               template1: "My Template 1",
               template2: "My Template 2",
