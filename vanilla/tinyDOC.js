@@ -339,37 +339,6 @@ class tinyDOC {
     this.contentViewer.className = "tinydoc_contentviewer"
     this.holder19.appendChild(this.contentViewer)
 
-    this.pleaseWait = document.createElement("div")
-    this.pleaseWait.style.backgroundColor = "white"
-    this.pleaseWait.style.position = "absolute"
-    this.pleaseWait.style.left = 0
-    this.pleaseWait.style.right = 0
-    this.pleaseWait.style.top = 0
-    this.pleaseWait.style.bottom = 0
-    this.pleaseWait.style.display = "none"
-    this.pleaseWait.style.zIndex = 98
-    this.pleaseWait.style.opacity = 0.5
-    this.pleaseWait.addEventListener("mousedown", (event) => {
-      event.preventDefault()
-    })
-    this.myContainer.appendChild(this.pleaseWait)
-
-    this.pleaseWaitIcon = document.createElement("div")
-    this.pleaseWaitIcon.style.backgroundColor = "white"
-    this.pleaseWaitIcon.style.position = "absolute"
-    this.pleaseWaitIcon.style.left = 0
-    this.pleaseWaitIcon.style.right = 0
-    this.pleaseWaitIcon.style.top = 0
-    this.pleaseWaitIcon.style.bottom = 0
-    this.pleaseWaitIcon.style.display = "none"
-    this.pleaseWaitIcon.style.zIndex = 99
-    this.pleaseWaitIcon.style.background =
-      "url('data:image/gif;base64,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') no-repeat center"
-    this.pleaseWaitIcon.addEventListener("mousedown", (event) => {
-      event.preventDefault()
-    })
-    this.myContainer.appendChild(this.pleaseWaitIcon)
-
     this.document = document.createElement("div")
     this.document.className = "tinydoc_document"
     this.document.contentEditable = true
@@ -584,36 +553,10 @@ class tinyDOC {
       this.document.style.width = this.myContainer.offsetWidth - 16 + "px"
       this.document.style.height = this.myContainer.offsetHeight - 57 + "px"
 
-      this.pleaseWait.style.left = this.myContainer.offsetLeft + "px"
-      this.pleaseWait.style.right = this.myContainer.offsetRight + "px"
-      this.pleaseWait.style.top = this.myContainer.offsetTop + "px"
-      this.pleaseWait.style.bottom = this.myContainer.offsetBottom + "px"
-      this.pleaseWait.style.width = this.myContainer.offsetWidth + "px"
-      this.pleaseWait.style.height = this.myContainer.offsetHeight + "px"
-
-      this.pleaseWaitIcon.style.left = this.myContainer.offsetLeft + "px"
-      this.pleaseWaitIcon.style.right = this.myContainer.offsetRight + "px"
-      this.pleaseWaitIcon.style.top = this.myContainer.offsetTop + "px"
-      this.pleaseWaitIcon.style.bottom = this.myContainer.offsetBottom + "px"
-      this.pleaseWaitIcon.style.width = this.myContainer.offsetWidth + "px"
-      this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px"
-
       setTimeout(() => {
         try {
           this.document.style.width = this.myContainer.offsetWidth - 16 + "px"
           this.document.style.height = this.myContainer.offsetHeight - 57 + "px"
-          this.pleaseWait.style.left = this.myContainer.offsetLeft + "px"
-          this.pleaseWait.style.right = this.myContainer.offsetRight + "px"
-          this.pleaseWait.style.top = this.myContainer.offsetTop + "px"
-          this.pleaseWait.style.bottom = this.myContainer.offsetBottom + "px"
-          this.pleaseWait.style.width = this.myContainer.offsetWidth + "px"
-          this.pleaseWait.style.height = this.myContainer.offsetHeight + "px"
-          this.pleaseWaitIcon.style.left = this.myContainer.offsetLeft + "px"
-          this.pleaseWaitIcon.style.right = this.myContainer.offsetRight + "px"
-          this.pleaseWaitIcon.style.top = this.myContainer.offsetTop + "px"
-          this.pleaseWaitIcon.style.bottom = this.myContainer.offsetBottom + "px"
-          this.pleaseWaitIcon.style.width = this.myContainer.offsetWidth + "px"
-          this.pleaseWaitIcon.style.height = this.myContainer.offsetHeight + "px"
         } catch (err) {
           //
         }
@@ -746,7 +689,9 @@ class tinyDOC {
 
       this.spellcheckerWorking = false
       this.spellcheckerExecuted = false
-      this.showPleaseWait(false)
+      if (this.editorConfig.spellcheckerEnded) {
+        this.editorConfig.spellcheckerEnded()
+      }
 
       setTimeout(() => {
         this.setCaretPosition(this.document, 0)
@@ -797,16 +742,6 @@ class tinyDOC {
   disable() {
     this.documentEnabled = false
     this.document.style.caretColor = "transparent"
-  }
-
-  showPleaseWait(mustShow) {
-    if (mustShow) {
-      this.pleaseWait.style.display = "block"
-      this.pleaseWaitIcon.style.display = "block"
-    } else {
-      this.pleaseWait.style.display = "none"
-      this.pleaseWaitIcon.style.display = "none"
-    }
   }
 
   focus() {
@@ -1225,12 +1160,16 @@ class tinyDOC {
           setTimeout(() => {
             this.spellcheckerWorking = false
             this.spellcheckerExecuted = false
-            this.showPleaseWait(false)
+            if (this.editorConfig.spellcheckerEnded) {
+              this.editorConfig.spellcheckerEnded()
+            }
             this.setCaretPosition(this.document, originalCaretPosition)
           }, 25)
         } else {
           this.disable()
-          this.showPleaseWait(true)
+          if (this.editorConfig.spellcheckerStarted) {
+            this.editorConfig.spellcheckerStarted()
+          }
           this.spellcheckerWorking = true
 
           const results = this.document.innerText.match(
@@ -1279,7 +1218,9 @@ class tinyDOC {
                 this.insertHtmlAtCaret(originalHTML, false)
                 this.enable()
                 this.setCaretPosition(this.document, originalCaretPosition)
-                this.showPleaseWait(false)
+                if (this.editorConfig.spellcheckerEnded) {
+                  this.editorConfig.spellcheckerEnded()
+                }
 
                 setTimeout(() => {
                   this.spellcheckerWorking = false
@@ -1298,7 +1239,9 @@ class tinyDOC {
               this.spellcheckerExecuted = false
               this.enable()
               this.setCaretPosition(this.document, originalCaretPosition)
-              this.showPleaseWait(false)
+              if (this.editorConfig.spellcheckerEnded) {
+                this.editorConfig.spellcheckerEnded()
+              }
             }, 25)
           }
 
