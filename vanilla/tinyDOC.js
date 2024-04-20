@@ -1,34 +1,5 @@
 class tinyDOC {
   constructor(editorConfig) {
-    this.styleSheet = document.createElement("style")
-    this.styleSheet.innerText = `
-      .tinydoc_menu_container{height:40px;background-color:#F2F2F2;border-bottom:thin solid #D3D3D3;overflow-y:hidden}
-      .tinydoc_menu{background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:80px;margin-left:3px;overflow-x:scroll;overflow-y:hidden;outline:none;text-align:center;font-family:Arial;font-size:13px}
-      .tinydoc_menu::-webkit-scrollbar{display:none}
-      .tinydoc_menu_size{float:left;width:800px}
-      .tinydoc_holder{float:left;padding-top:3px;padding-bottom:3px;padding-right:3px;margin:0}
-      .tinydoc_separator{float:left;border-left:thin solid #D3D3D3;margin-left:1px;margin-right:3px;height:100px;width:1px}
-      .tinydoc_separator2{float:left;border-left:thin solid #D3D3D3;margin-left:135px;height:100px;width:1px}
-      .tinydoc_button{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_selected{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#E3E3E3;border:thin solid #D3D3D3;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_document{display:block;padding:8px;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;white-space:pre-wrap;word-break:break-word;-webkit-text-size-adjust:none;-webkit-user-select:text;user-select:text}
-      .tinydoc_document a{text-decoration:underline;color:#3a76b1}
-      .tinydoc_contentviewer{display:inline-block;font-family:Arial;font-size:13px;line-height:2.6;margin-left:11px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1px;white-space:nowrap}
-      .tinydoc_contentviewer a{text-decoration:none;color:#3a76b1;margin-right:11px}
-      .tinydoc_spellchecker_suggestions{display:inline-block;color:black;margin-right:20px;cursor:default}
-      .tinydoc_spellchecker_no_suggestions{color:gray}
-      misspelled{text-decoration:underline;text-decoration-color:red;text-decoration-thickness:2px;text-decoration-style:dotted}
-      @media (pointer: coarse)
-        {
-        .tinydoc_button:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        }
-      `
-    document.getElementsByTagName("head")[0].appendChild(this.styleSheet)
-
-    this.myContainer = editorConfig.container
-
     this.editorConfig = editorConfig
 
     if (!this.editorConfig.spellcheckerNoSuggestions) {
@@ -50,6 +21,44 @@ class tinyDOC {
     if (this.editorConfig.replaceTabWithSpaces === undefined) {
       this.editorConfig.replaceTabWithSpaces = true
     }
+
+    if (this.editorConfig.linkColor === undefined) {
+      this.editorConfig.linkColor = "#3A76B1"
+    }
+
+    this.styleSheet = document.createElement("style")
+    this.styleSheet.innerText =
+      `
+      .tinydoc_menu_container{height:40px;background-color:#F2F2F2;border-bottom:thin solid #D3D3D3;overflow-y:hidden}
+      .tinydoc_menu{background-color:#F2F2F2;left:0;right:0;padding-top:0;padding-bottom:0;height:80px;margin-left:3px;overflow-x:scroll;overflow-y:hidden;outline:none;text-align:center;font-family:Arial;font-size:13px}
+      .tinydoc_menu::-webkit-scrollbar{display:none}
+      .tinydoc_menu_size{float:left;width:800px}
+      .tinydoc_holder{float:left;padding-top:3px;padding-bottom:3px;padding-right:3px;margin:0}
+      .tinydoc_separator{float:left;border-left:thin solid #D3D3D3;margin-left:1px;margin-right:3px;height:100px;width:1px}
+      .tinydoc_separator2{float:left;border-left:thin solid #D3D3D3;margin-left:135px;height:100px;width:1px}
+      .tinydoc_button{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+      .tinydoc_button:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
+      .tinydoc_button_selected{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#E3E3E3;border:thin solid #D3D3D3;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+      .tinydoc_document{display:block;padding:8px;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;white-space:pre-wrap;word-break:break-word;-webkit-text-size-adjust:none;-webkit-user-select:text;user-select:text}
+      .tinydoc_document a{text-decoration:underline;color:` +
+      this.editorConfig.linkColor +
+      `}
+      .tinydoc_contentviewer{display:inline-block;font-family:Arial;font-size:13px;line-height:2.6;margin-left:11px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1px;white-space:nowrap}
+      .tinydoc_contentviewer a{text-decoration:none;color:` +
+      this.editorConfig.linkColor +
+      `;margin-right:11px}
+      .tinydoc_spellchecker_suggestions{display:inline-block;color:black;margin-right:20px;cursor:default}
+      .tinydoc_spellchecker_no_suggestions{color:gray}
+      misspelled{text-decoration:underline;text-decoration-color:red;text-decoration-thickness:2px;text-decoration-style:dotted}
+      @media (pointer: coarse)
+        {
+        .tinydoc_button:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+        .tinydoc_button:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+        }
+      `
+    document.getElementsByTagName("head")[0].appendChild(this.styleSheet)
+
+    this.myContainer = editorConfig.container
 
     this.menuContainer = document.createElement("div")
     this.menuContainer.className = "tinydoc_menu_container"
@@ -1272,8 +1281,6 @@ class tinyDOC {
       return
     }
 
-    const webLinkColor = "#3A76B1"
-
     if (!this.isMobileDevice) {
       try {
         const newIframe = document.createElement("iframe")
@@ -1285,7 +1292,7 @@ class tinyDOC {
           "<!DOCTYPE html><html><head><title>" +
             this.encodeText(window.location.href) +
             "</title><style>a{text-decoration:underline;color:" +
-            webLinkColor +
+            linkColor +
             "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap;word-break:break-word'>" +
             this.document.innerHTML +
             "</body></html>"
@@ -1308,7 +1315,7 @@ class tinyDOC {
           "<!DOCTYPE html><html><head><title>" +
             this.encodeText(window.location.href) +
             "</title><style>a{text-decoration:underline;color:" +
-            webLinkColor +
+            linkColor +
             "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap;word-break:break-word'>" +
             this.document.innerHTML +
             "</body></html>"
