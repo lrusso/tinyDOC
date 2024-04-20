@@ -1837,12 +1837,14 @@ class tinyDOC {
 
           var splitted = selectedText.split("\n")
 
+          let finalResult
+
           if (splitted.length === 1) {
             selectedText = selectedText.replace(/[^0-9.*/()+-]/g, "")
 
             try {
               // eslint-disable-next-line no-eval
-              var finalResult = eval(selectedText)
+              finalResult = eval(selectedText)
 
               if (isNaN(finalResult)) {
                 this.insertHtmlAtCaret(" = ERROR", false)
@@ -1859,7 +1861,7 @@ class tinyDOC {
               this.insertHtmlAtCaret(" = ERROR", false)
             }
           } else {
-            var finalResult = 0
+            finalResult = 0
 
             var lastLineBR = ""
 
