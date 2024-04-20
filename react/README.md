@@ -35,6 +35,7 @@ return (<TinyDOC
    spellcheckerEnded={() => {console.log("spellcheckerEnded")}
    spellcheckerNoSuggestions={"(No suggestions)"}
    spellcheckerMaxSuggestions={5}
+   spellcheckerURL="spellchecker.js"
    spellcheckerLanguage="en"
    linkColor="#ff0000"
    replaceTabWithSpaces
