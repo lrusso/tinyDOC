@@ -21,6 +21,7 @@ const myEditor = new TinyDOC({
               template3: "My Template 3",
               calcEnabled: true,
               useCtrlSForSaving: true,
+              useCtrlPForPrinting: true,
               spellcheckerEnabled: true,
               spellcheckerStarted: () => {console.log("spellcheckerStarted")},
               spellcheckerEnded: () => {console.log("spellcheckerEnded")},
