@@ -4,12 +4,6 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 
 ![alt screenshot](https://github.com/lrusso/tinyDOC/blob/main/tinyDOC.png)
 
-## Differences with the Vanilla JavaScript version:
-
-* The icons are in SVG format instead of JPG.
-* Word Count icon on the toolbar.
-* Bug fixes.
-
 ## How to use it
 ```javascript
 const [forceFocusCounter, setForceFocusCounter] = React.useState(0)
