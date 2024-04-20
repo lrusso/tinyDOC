@@ -389,6 +389,12 @@ class tinyDOC {
       window.navigator.userAgent.match(/Windows Phone/i)
     )
 
+    this.document.addEventListener("input", () => {
+      if (this.editorConfig.dirtyCallback) {
+        this.editorConfig.dirtyCallback()
+      }
+    })
+
     this.document.addEventListener("mousedown", (event) => {
       try {
         if (!this.documentEnabled) {
@@ -519,12 +525,6 @@ class tinyDOC {
       }
     })
 
-    this.document.addEventListener("input", () => {
-      window.onbeforeunload = () => {
-        return "Dirty"
-      }
-    })
-
     this.clearUndoRedo()
     this.resize()
     this.scrollToTop()
@@ -539,8 +539,6 @@ class tinyDOC {
       } catch (err) {
         //
       }
-
-      window.onbeforeunload = null
 
       this.clearUndoRedo()
       this.setCaretPosition(this.document, 0)
@@ -692,7 +690,6 @@ class tinyDOC {
       this.new()
       this.settingNewText = true
       this.insertHtmlAtCaret(myText, false)
-      window.onbeforeunload = null
       this.clearUndoRedo()
       this.spellcheckerResult = []
 
@@ -864,8 +861,8 @@ class tinyDOC {
 
         this.saveUndo()
 
-        window.onbeforeunload = () => {
-          return "Dirty"
+        if (this.editorConfig.dirtyCallback) {
+          this.editorConfig.dirtyCallback()
         }
       }, 25)
     } catch (err) {
@@ -1852,8 +1849,8 @@ class tinyDOC {
 
           this.scrollToCaret()
 
-          window.onbeforeunload = () => {
-            return "Dirty"
+          if (this.editorConfig.dirtyCallback) {
+            this.editorConfig.dirtyCallback()
           }
         } else {
           setTimeout(() => {
@@ -1875,8 +1872,8 @@ class tinyDOC {
               this.saveUndo()
             }
 
-            window.onbeforeunload = () => {
-              return "Dirty"
+            if (this.editorConfig.dirtyCallback) {
+              this.editorConfig.dirtyCallback()
             }
           }, 25)
         }

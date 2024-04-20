@@ -37,11 +37,11 @@
 
 		<script src="tinyDOC.js"></script>
 		<script>
-			var userLanguage = window.navigator.userLanguage || window.navigator.language;
+			const userLanguage = window.navigator.userLanguage || window.navigator.language;
 
-			var STRING_WELCOME = "";
-			var STRING_NO_SUGGESTIONS = "";
-			var SPELLCHECKER_LANGUAGE = "";
+			let STRING_WELCOME = "";
+			let STRING_NO_SUGGESTIONS = "";
+			let SPELLCHECKER_LANGUAGE = "";
 
 			if (userLanguage.substring(0,2)=="es")
 				{
@@ -56,32 +56,42 @@
 				SPELLCHECKER_LANGUAGE = "en-US";
 				}
 
-			function saveCallback()
+			const saveCallback = () =>
 				{
-				console.log("getText()");
+				console.log("getText");
 				console.log(myTinyDOC.getText());
 				alert("saveCallback - See the console log to know the data that will be saved.");
 				myTinyDOC.focus();
 				}
 
-			function showLoading()
+			const dirtyCallback = () =>
+				{
+				console.log("dirtyCallback");
+				window.onbeforeunload = () =>
+					{
+					return "Dirty";
+					}
+				}
+
+			const showLoading = () =>
 				{
 				document.getElementById("loading").style.display = "block";
 				}
 
-			function hideLoading()
+			const hideLoading = () =>
 				{
 				document.getElementById("loading").style.display = "none";
 				}
 
-			var template1 = "My Template 1<br />Example 1<br /><br />";
-			var template2 = "My Template 2<br />Example 2<br /><br />";
-			var template3 = "My Template 3<br />Example 3<br /><br />";
+			const template1 = "My Template 1<br />Example 1<br /><br />";
+			const template2 = "My Template 2<br />Example 2<br /><br />";
+			const template3 = "My Template 3<br />Example 3<br /><br />";
 
-			var myTinyDOC = new tinyDOC({
+			const myTinyDOC = new tinyDOC({
 											container: document.getElementById("myTestContainer"), 
 											content: STRING_WELCOME,
 											saveCallback: saveCallback,
+											dirtyCallback: dirtyCallback,
 											spellcheckerEnabled: true,
 											spellcheckerStarted: showLoading,
 											spellcheckerEnded: hideLoading,
