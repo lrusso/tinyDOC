@@ -4,11 +4,11 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 
 ![alt screenshot](https://github.com/lrusso/tinyDOC/blob/main/tinyDOC.png)
 
-## Web
+## Web:
 
 https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
-## TinyDOC Configuration
+## TinyDOC Settings:
 
 | # | SETTING | DETAILS |
 | :------------ |:---------------| :----- |
@@ -24,6 +24,7 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 | 10 | template3 | HTML template. |
 
 **Example without the spellchecker:**
+
 ```javascript
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
@@ -36,6 +37,7 @@ new TinyDOC({
 ```
 
 **Example with the spellchecker:**
+
 ```javascript
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
@@ -51,7 +53,7 @@ new TinyDOC({
               })
 ```
 
-## TinyDOC Methods
+## TinyDOC methods:
 
 | # | METHOD | DETAILS |
 | :------------ |:---------------| :----- |
@@ -70,8 +72,8 @@ new TinyDOC({
 ## Accessing the ContentEditable Div used by TinyDOC
 
 ```javascript
-const myExample = new TinyDOC({ container: document.getElementById("myTestContainer") })
-myExample.document.scrollTop = 0
+const myEditor = new TinyDOC({ container: document.getElementById("myTestContainer") })
+myEditor.document.scrollTop = 0
 ```
 
 ## Calc Button Sample 1 - Single Line Evaluation
