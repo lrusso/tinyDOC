@@ -557,7 +557,7 @@ class tinyDOC {
       try {
         event.preventDefault()
 
-        var text = (event.originalEvent || event).clipboardData.getData("text/plain")
+        let text = (event.originalEvent || event).clipboardData.getData("text/plain")
 
         text = text.replace(/&/gm, "&amp;")
         text = text.replace(/</gm, "&lt;")
@@ -675,24 +675,24 @@ class tinyDOC {
   // https://stackoverflow.com/questions/47361276/javascript-scroll-to-cursor-post-a-paste-in-contenteditable-div
   scrollToCaret() {
     try {
-      var currentSelection = this.saveSelection(this.document)
+      const currentSelection = this.saveSelection(this.document)
 
-      var caretPositionY = this.getCaretY() - this.document.offsetTop + 16
+      const caretPositionY = this.getCaretY() - this.document.offsetTop + 16
 
       if (caretPositionY < 0 || caretPositionY > this.document.offsetHeight) {
-        var selection = window.getSelection()
+        const selection = window.getSelection()
 
         if (!selection.rangeCount) {
           return
         }
 
-        var firstRange = selection.getRangeAt(0)
+        const firstRange = selection.getRangeAt(0)
 
         if (firstRange.commonAncestorContainer === document) {
           return
         }
 
-        var tempAnchorEl = document.createElement("br")
+        const tempAnchorEl = document.createElement("br")
 
         firstRange.insertNode(tempAnchorEl)
 
@@ -716,11 +716,11 @@ class tinyDOC {
   // https://stackoverflow.com/questions/6846230/coordinates-of-selected-text-in-browser-page
   getCaretY() {
     try {
-      var sel = document.selection
-      var range
-      var rect
-      var x = 0
-      var y = 0
+      let sel = document.selection
+      let range
+      let rect
+      let x = 0
+      let y = 0
 
       if (sel) {
         if (sel.type !== "Control") {
@@ -746,7 +746,7 @@ class tinyDOC {
           }
 
           if (x === 0 && y === 0) {
-            var span = document.createElement("span")
+            const span = document.createElement("span")
             if (span.getClientRects) {
               span.appendChild(document.createTextNode("\u200b"))
               range.insertNode(span)
@@ -754,7 +754,7 @@ class tinyDOC {
               x = rect.left
               y = rect.top
 
-              var spanParent = span.parentNode
+              const spanParent = span.parentNode
               spanParent.removeChild(span)
 
               spanParent.normalize()
@@ -821,10 +821,10 @@ class tinyDOC {
   }
 
   encodeText(str) {
-    var i = str.length
-    var aRet = []
+    let i = str.length
+    const aRet = []
     while (i--) {
-      var tempChar = str[i].charCodeAt()
+      const tempChar = str[i].charCodeAt()
       if (
         tempChar > 126 ||
         tempChar === 34 ||
@@ -912,7 +912,7 @@ class tinyDOC {
 
   formatStyle(myTag, myParameter) {
     try {
-      var currentSelection = this.saveSelection(this.document)
+      const currentSelection = this.saveSelection(this.document)
 
       if (!this.isDocumentSelected()) {
         return
@@ -947,12 +947,12 @@ class tinyDOC {
     try {
       this.saveUndo()
 
-      var selection = window.getSelection()
-      var range = selection.getRangeAt(0)
+      const selection = window.getSelection()
+      let range = selection.getRangeAt(0)
 
-      var selectedContent = range.extractContents()
+      const selectedContent = range.extractContents()
 
-      var newTag = document.createElement(myTag)
+      const newTag = document.createElement(myTag)
 
       newTag.appendChild(selectedContent)
 
@@ -993,7 +993,7 @@ class tinyDOC {
         this.getParentTag("UL") === null &&
         this.getParentTag("OL") === null
       ) {
-        var selectedText = window.getSelection().toString()
+        let selectedText = window.getSelection().toString()
 
         if (selectedText === "") {
           selectedText = "<br />"
@@ -1021,9 +1021,9 @@ class tinyDOC {
 
   getParentTag(tagToFind) {
     try {
-      var range = window.getSelection().getRangeAt(0)
+      const range = window.getSelection().getRangeAt(0)
 
-      var upperNode = range.startContainer
+      let upperNode = range.startContainer
 
       while (upperNode.parentNode !== this.document) {
         upperNode = upperNode.parentNode
@@ -1039,10 +1039,10 @@ class tinyDOC {
   }
 
   getCurrentTag() {
-    var currentNode = null
+    let currentNode = null
 
     try {
-      var range = window.getSelection().getRangeAt(0)
+      const range = window.getSelection().getRangeAt(0)
 
       currentNode = range.startContainer
     } catch (err) {
@@ -1054,10 +1054,10 @@ class tinyDOC {
 
   // https://stackoverflow.com/questions/16736680/get-caret-index-in-contenteditable-div-including-tags
   getCaretCharacterOffsetWithin(element) {
-    var caretOffset = 0
+    let caretOffset = 0
     try {
-      var range = window.getSelection().getRangeAt(0)
-      var preCaretRange = range.cloneRange()
+      const range = window.getSelection().getRangeAt(0)
+      const preCaretRange = range.cloneRange()
       preCaretRange.selectNodeContents(element)
       preCaretRange.setEnd(range.endContainer, range.endOffset)
       caretOffset = preCaretRange.toString().length
@@ -1069,18 +1069,18 @@ class tinyDOC {
 
   handleBreakline(event) {
     try {
-      var tagLI = this.getParentTag("LI")
-      var tagUL = this.getParentTag("UL")
-      var tagOL = this.getParentTag("OL")
+      const tagLI = this.getParentTag("LI")
+      const tagUL = this.getParentTag("UL")
+      const tagOL = this.getParentTag("OL")
 
       if (tagLI === null && (tagUL !== null || tagOL !== null)) {
         event.preventDefault()
 
-        var initialNode = window.getSelection().focusNode
+        const initialNode = window.getSelection().focusNode
 
-        var upperNode = window.getSelection().focusNode
+        let upperNode = window.getSelection().focusNode
 
-        var listNode = null
+        let listNode = null
 
         while (upperNode.parentNode) {
           upperNode = upperNode.parentNode
@@ -1113,7 +1113,7 @@ class tinyDOC {
 
   handleBreaklineInLink() {
     try {
-      var linkTag = this.getParentTag("A")
+      const linkTag = this.getParentTag("A")
 
       if (linkTag !== null) {
         if (this.getCaretCharacterOffsetWithin(linkTag) === linkTag.text.length) {
@@ -1131,18 +1131,18 @@ class tinyDOC {
     try {
       this.saveUndo()
 
-      var tempAnchorEl = document.createElement("br")
+      const tempAnchorEl = document.createElement("br")
 
       currentNode.parentNode.insertBefore(tempAnchorEl, currentNode.nextSibling)
 
-      var startBefore = true
+      let startBefore = true
 
       if (currentNode.nodeName !== "UL" && currentNode.nodeName !== "OL") {
         startBefore = false
       }
 
       setTimeout(() => {
-        var range = document.createRange()
+        const range = document.createRange()
         range.selectNodeContents(tempAnchorEl)
         if (startBefore) {
           range.setStartBefore(tempAnchorEl)
@@ -1150,7 +1150,7 @@ class tinyDOC {
           range.setStartAfter(tempAnchorEl)
         }
         range.collapse(true)
-        var sel = window.getSelection()
+        const sel = window.getSelection()
         sel.removeAllRanges()
         sel.addRange(range)
 
@@ -1163,9 +1163,9 @@ class tinyDOC {
 
   isDocumentSelected() {
     try {
-      var docFound = false
+      let docFound = false
 
-      var upperNode = window.getSelection().focusNode
+      let upperNode = window.getSelection().focusNode
 
       if (upperNode === this.document) {
         docFound = true
@@ -1196,7 +1196,7 @@ class tinyDOC {
   removeFormat() {
     try {
       if (window.getSelection().toString()) {
-        var plainText = window.getSelection().toString()
+        let plainText = window.getSelection().toString()
 
         plainText = plainText.replace(/&/gm, "&amp;")
         plainText = plainText.replace(/</gm, "&lt;")
@@ -1205,14 +1205,14 @@ class tinyDOC {
         plainText = plainText.replace(/\n/gm, "<br />")
 
         try {
-          var range = window.getSelection().getRangeAt(0)
+          const range = window.getSelection().getRangeAt(0)
 
           if (
             range.startOffset === 0 &&
             (range.endOffset === 0 ||
               range.endOffset === window.getSelection().toString().length)
           ) {
-            var upperNode = range.startContainer
+            let upperNode = range.startContainer
 
             while (
               upperNode.parentNode !== this.document &&
@@ -1221,9 +1221,9 @@ class tinyDOC {
               upperNode = upperNode.parentNode
             }
 
-            var lowerNode = upperNode
+            let lowerNode = upperNode
 
-            var foundListItem = false
+            let foundListItem = false
 
             while (lowerNode.firstChild) {
               lowerNode = lowerNode.firstChild
@@ -1310,11 +1310,11 @@ class tinyDOC {
 
           this.spellcheckerWorking = true
 
-          var results = this.document.innerText.match(
+          const results = this.document.innerText.match(
             /[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:",.<>{}[\]\\/\s]+/g
           )
 
-          var dataRequest = {}
+          const dataRequest = {}
           dataRequest["lang"] = this.spellcheckerLanguage
           dataRequest["words"] = results
 
@@ -1325,18 +1325,18 @@ class tinyDOC {
               if (this.spellcheckerWorking) {
                 this.focus()
 
-                var words = e.data
+                const words = e.data
 
                 this.spellcheckerResult = words
 
-                var originalHTML = this.document.innerHTML
+                let originalHTML = this.document.innerHTML
 
                 originalCaretPosition = this.getCaretPosition(this.document)
 
-                for (var key in words) {
-                  var wordToUnderline = key
+                for (const key in words) {
+                  const wordToUnderline = key
 
-                  var exp = new RegExp(
+                  const exp = new RegExp(
                     "\\b(" + wordToUnderline + ")\\b(?![^<]*>|[^<>]*>)",
                     "gi"
                   )
@@ -1597,7 +1597,7 @@ class tinyDOC {
 
   saveUndo() {
     try {
-      var current_state = this.document.innerHTML
+      let current_state = this.document.innerHTML
 
       current_state = current_state.replace(/<misspelled>/gm, "")
       current_state = current_state.replace(/<\/misspelled>/gm, "")
@@ -1697,10 +1697,10 @@ class tinyDOC {
         return 0
       }
 
-      var caretOffset = 0
+      let caretOffset = 0
 
-      var range = window.getSelection().getRangeAt(0)
-      var preCaretRange = range.cloneRange()
+      const range = window.getSelection().getRangeAt(0)
+      const preCaretRange = range.cloneRange()
 
       preCaretRange.selectNodeContents(element)
       preCaretRange.setEnd(range.endContainer, range.endOffset)
@@ -1716,21 +1716,23 @@ class tinyDOC {
   insertLink() {
     try {
       const checkForEmail = (email) => {
-        var re =
+        const re =
           /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         return re.test(String(email).toLowerCase())
       }
 
-      var selectedText = window.getSelection().toString()
+      const selectedText = window.getSelection().toString()
 
       if (selectedText !== null) {
         if (selectedText.length > 0) {
-          var selectedTextURLChecker1 = selectedText.toLowerCase().indexOf(" ")
-          var selectedTextURLChecker2 = selectedText.toLowerCase().indexOf("http://")
-          var selectedTextURLChecker3 = selectedText
+          const selectedTextURLChecker1 = selectedText.toLowerCase().indexOf(" ")
+          const selectedTextURLChecker2 = selectedText
+            .toLowerCase()
+            .indexOf("http://")
+          const selectedTextURLChecker3 = selectedText
             .toLowerCase()
             .indexOf("https://")
-          var selectedTextURLChecker4 = checkForEmail(selectedText)
+          const selectedTextURLChecker4 = checkForEmail(selectedText)
 
           if (
             selectedTextURLChecker1 === -1 &&
@@ -1771,7 +1773,7 @@ class tinyDOC {
 
   insertCalc() {
     try {
-      var selectedText = window.getSelection().toString()
+      let selectedText = window.getSelection().toString()
 
       if (selectedText !== null) {
         if (selectedText.length > 0) {
@@ -1781,7 +1783,7 @@ class tinyDOC {
             //
           }
 
-          var splitted = selectedText.split("\n")
+          const splitted = selectedText.split("\n")
 
           let finalResult
 
@@ -1809,11 +1811,11 @@ class tinyDOC {
           } else {
             finalResult = 0
 
-            var lastLineBR = ""
+            let lastLineBR = ""
 
-            for (var i = 0; i < splitted.length; i++) {
+            for (let i = 0; i < splitted.length; i++) {
               try {
-                var currentLine = splitted[i]
+                let currentLine = splitted[i]
 
                 if (currentLine.length > 0) {
                   currentLine = currentLine.trim()
@@ -1870,14 +1872,14 @@ class tinyDOC {
 
   checkForURL() {
     try {
-      var linkTag = this.getParentTag("A")
+      let linkTag = this.getParentTag("A")
 
       if (linkTag === null) {
         linkTag = this.getCurrentTag()
       }
 
       if (linkTag.nodeName === "A") {
-        var finalURL = linkTag.href
+        let finalURL = linkTag.href
 
         if (typeof finalURL !== "undefined") {
           finalURL = finalURL.replace(/<misspelled>/gm, "")
@@ -1896,25 +1898,25 @@ class tinyDOC {
 
   checkForMisspelled() {
     try {
-      var misspelledTag = this.getParentTag("MISSPELLED")
+      let misspelledTag = this.getParentTag("MISSPELLED")
 
       if (misspelledTag === null) {
         misspelledTag = this.getCurrentTag()
       }
 
       if (misspelledTag.nodeName === "MISSPELLED") {
-        var finalMisspelled = misspelledTag.textContent
+        const finalMisspelled = misspelledTag.textContent
 
         if (typeof finalMisspelled !== "undefined") {
           this.contentViewer.innerHTML = ""
 
           if (this.spellcheckerResult[finalMisspelled]) {
             for (
-              var i = 0;
+              let i = 0;
               i < this.spellcheckerResult[finalMisspelled].length;
               i++
             ) {
-              var suggestedWord = document.createElement("span")
+              const suggestedWord = document.createElement("span")
               suggestedWord.className = "tinydoc_spellchecker_suggestions"
               suggestedWord.innerHTML = this.spellcheckerResult[finalMisspelled][i]
               suggestedWord.addEventListener("mousedown", () => {
@@ -1953,10 +1955,10 @@ class tinyDOC {
         return
       }
 
-      var currentTag = this.getCurrentTag()
+      const currentTag = this.getCurrentTag()
 
       if (currentTag.parentNode.nodeName === "MISSPELLED") {
-        var originalCaretPosition = this.getCaretPosition(this.document)
+        const originalCaretPosition = this.getCaretPosition(this.document)
 
         this.saveUndo()
 
@@ -1999,24 +2001,24 @@ class tinyDOC {
         this.saveUndo()
       }
 
-      var selection = window.getSelection()
+      const selection = window.getSelection()
 
       if (selection.getRangeAt && selection.rangeCount) {
-        var range = selection.getRangeAt(0)
+        let range = selection.getRangeAt(0)
         range.deleteContents()
 
-        var el = document.createElement("div")
+        const el = document.createElement("div")
         el.innerHTML = html
 
-        var frag = document.createDocumentFragment(),
-          node,
-          lastNode
+        let frag = document.createDocumentFragment()
+        let node
+        let lastNode
 
         while ((node = el.firstChild)) {
           lastNode = frag.appendChild(node)
         }
 
-        var firstNode = frag.firstChild
+        const firstNode = frag.firstChild
         range.insertNode(frag)
 
         if (lastNode) {
@@ -2079,13 +2081,13 @@ class tinyDOC {
   // https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
   saveSelection(containerEl) {
     try {
-      var doc = containerEl.ownerDocument
-      var win = doc.defaultView
-      var range = win.getSelection().getRangeAt(0)
-      var preSelectionRange = range.cloneRange()
+      const doc = containerEl.ownerDocument
+      const win = doc.defaultView
+      const range = win.getSelection().getRangeAt(0)
+      const preSelectionRange = range.cloneRange()
       preSelectionRange.selectNodeContents(containerEl)
       preSelectionRange.setEnd(range.startContainer, range.startOffset)
-      var start = preSelectionRange.toString().length
+      const start = preSelectionRange.toString().length
       return { start: start, end: start + range.toString().length }
     } catch (err) {
       return { start: 0, end: 0 }
@@ -2095,20 +2097,20 @@ class tinyDOC {
   // https://stackoverflow.com/questions/17678843/cant-restore-selection-after-html-modify-even-if-its-the-same-html
   restoreSelection(containerEl, savedSel) {
     try {
-      var doc = containerEl.ownerDocument,
+      const doc = containerEl.ownerDocument,
         win = doc.defaultView
-      var charIndex = 0,
-        range = doc.createRange()
+      let charIndex = 0
+      let range = doc.createRange()
       range.setStart(containerEl, 0)
       range.collapse(true)
-      var nodeStack = [containerEl],
-        node,
-        foundStart = false,
-        stop = false
+      let nodeStack = [containerEl]
+      let node
+      let foundStart = false
+      let stop = false
 
       while (!stop && (node = nodeStack.pop())) {
         if (node.nodeType === 3) {
-          var nextCharIndex = charIndex + node.length
+          const nextCharIndex = charIndex + node.length
           if (
             !foundStart &&
             savedSel.start >= charIndex &&
@@ -2127,14 +2129,14 @@ class tinyDOC {
           }
           charIndex = nextCharIndex
         } else {
-          var i = node.childNodes.length
+          let i = node.childNodes.length
           while (i--) {
             nodeStack.push(node.childNodes[i])
           }
         }
       }
 
-      var sel = win.getSelection()
+      const sel = win.getSelection()
       sel.removeAllRanges()
       sel.addRange(range)
     } catch (err) {
