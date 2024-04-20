@@ -37,7 +37,7 @@ return (<TinyDOC
 />)
 ```
 
-## Calc Button Sample 1 - Single Line Evaluation
+## Calc Button - Single Line Evaluation
 
 **SAMPLE TEXT**
 
@@ -47,7 +47,7 @@ lorem ipsum (5.40+4.70-3.90)*2/1 lorem ipsum
 
 Select ```(5.40+4.70-3.90)*2/1```, then click on the Calc Button and the result will be inserted next to the selected text.
 
-## Calc Button Sample 2 - Multi Line Addition Operation
+## Calc Button - Multi Line Addition Operation
 
 **SAMPLE TEXT**
 
