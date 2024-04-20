@@ -1854,10 +1854,6 @@ class tinyDOC {
               const suggestedWord = document.createElement("span")
               suggestedWord.className = "tinydoc_spellchecker_suggestions"
               suggestedWord.innerHTML = this.spellcheckerResult[finalMisspelled][i]
-              suggestedWord.addEventListener("mousedown", () => {
-                this.replaceWith(this.innerHTML)
-              })
-
               this.contentViewer.appendChild(suggestedWord)
             }
 
@@ -1869,53 +1865,12 @@ class tinyDOC {
             }
           } else {
             this.contentViewer.innerHTML = ""
-
-            this.replaceWith(misspelledTag.textContent)
           }
         }
       } else {
         if (!this.getParentTag("A") || !this.getCurrentTag("A")) {
           this.contentViewer.innerHTML = ""
         }
-      }
-    } catch (err) {
-      //
-    }
-  }
-
-  replaceWith(word) {
-    try {
-      if (!this.isDocumentSelected()) {
-        this.contentViewer.innerHTML = ""
-        return
-      }
-
-      const currentTag = this.getCurrentTag()
-
-      if (currentTag.parentNode.nodeName === "MISSPELLED") {
-        const originalCaretPosition = this.getCaretPosition(this.document)
-
-        this.saveUndo()
-
-        currentTag.nodeValue = word
-
-        currentTag.parentNode.parentNode.replaceChild(
-          currentTag.parentNode.firstChild,
-          currentTag.parentNode
-        )
-
-        this.contentViewer.innerHTML = ""
-        this.focus()
-        this.saveUndo()
-        window.onbeforeunload = () => {
-          return "Dirty"
-        }
-
-        setTimeout(() => {
-          this.setCaretPosition(this.document, originalCaretPosition)
-        })
-      } else {
-        this.contentViewer.innerHTML = ""
       }
     } catch (err) {
       //
