@@ -563,7 +563,7 @@ class tinyDOC {
         text = text.replace(/&/gm, "&amp;")
         text = text.replace(/</gm, "&lt;")
         text = text.replace(/>/gm, "&gt;")
-        text = text.replace(/  /gm, "&nbsp;&nbsp;")
+        text = text.replace(/ {2}/gm, "&nbsp;&nbsp;")
         text = text.replace(/\n/gm, "<br />")
 
         thisTinyDOC.document.focus()
@@ -1218,7 +1218,7 @@ class tinyDOC {
         plainText = plainText.replace(/&/gm, "&amp;")
         plainText = plainText.replace(/</gm, "&lt;")
         plainText = plainText.replace(/>/gm, "&gt;")
-        plainText = plainText.replace(/  /gm, "&nbsp;&nbsp;")
+        plainText = plainText.replace(/ {2}/gm, "&nbsp;&nbsp;")
         plainText = plainText.replace(/\n/gm, "<br />")
 
         try {
