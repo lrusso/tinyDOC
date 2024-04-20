@@ -75,4 +75,3 @@ Select all, then click on the Calc Button and the result will be inserted below 
 ## Suggested spellchecker:
 
 https://github.com/lrusso/JavaScriptSpellchecker
-
