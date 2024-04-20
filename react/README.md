@@ -24,7 +24,7 @@ return (<TinyDOC
    useCtrlSForSaving
    useCtrlPForPrinting
    replaceTabWithSpaces
-   linkColor="#ff0000"
+   linkColor="#3A76B1"
    wordCountValue="words"
    charCountValue="characters"
    spellcheckerEnabled
