@@ -58,7 +58,6 @@
 
 			const saveCallback = () =>
 				{
-				console.log("getText");
 				console.log(myTinyDOC.getText());
 				alert("saveCallback - See the console log to know the data that will be saved.");
 				myTinyDOC.focus();
@@ -96,6 +95,7 @@
 											template2: template2,
 											template3: template3,
 											calcEnabled: true,
+											useCtrlSForSaving: true,
 											spellcheckerEnabled: true,
 											spellcheckerStarted: showLoading,
 											spellcheckerEnded: hideLoading,

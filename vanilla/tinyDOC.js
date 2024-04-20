@@ -39,6 +39,10 @@ class tinyDOC {
       this.editorConfig.spellcheckerMaxSuggestions = 3
     }
 
+    if (this.editorConfig.useCtrlSForSaving === undefined) {
+      this.editorConfig.useCtrlSForSaving = true
+    }
+
     this.menuContainer = document.createElement("div")
     this.menuContainer.className = "tinydoc_menu_container"
     this.menuWrapper = document.createElement("div")
@@ -419,7 +423,7 @@ class tinyDOC {
         } else {
           const KEY_TAB = event.key === "Tab"
           const KEY_ENTER = event.key === "Enter"
-          const KEY_CTRL_S = event.ctrlKey && event.key === "s"
+          const KEY_CTRL_S = (event.ctrlKey || event.metaKey) && event.key === "s"
           const KEY_UNDO_MAC = event.ctrlKey && event.shiftKey && event.key === "z"
           const KEY_UNDO_WINDOWS =
             (event.ctrlKey || event.metaKey) && !event.shiftKey && event.key === "z"
@@ -440,7 +444,10 @@ class tinyDOC {
           } else if (KEY_ENTER) {
             this.handleBreakline(event)
           } else if (KEY_CTRL_S) {
-            if (this.editorConfig.saveCallback) {
+            if (
+              this.editorConfig.saveCallback &&
+              this.editorConfig.useCtrlSForSaving
+            ) {
               event.preventDefault()
               this.save()
             }
