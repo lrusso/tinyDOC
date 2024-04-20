@@ -8,21 +8,7 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 
 https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 
-**Example without the spellchecker:**
-
-```javascript
-new TinyDOC({
-              container: document.getElementById("myTestContainer"), 
-              content: "Hello world",
-              saveCallback: () => {console.log("saveCallback")},
-              template1: "My Template 1",
-              template2: "My Template 2",
-              template3: "My Template 3",
-              calcEnabled: true
-              })
-```
-
-**Example with the spellchecker:**
+**How to use it**
 
 ```javascript
 new TinyDOC({
