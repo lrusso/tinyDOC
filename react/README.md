@@ -4,7 +4,7 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 
 ![alt screenshot](https://github.com/lrusso/tinyDOC/blob/main/tinyDOC.png)
 
-## How to use it
+## How to use it:
 
 ```javascript
 const [forceFocusCounter, setForceFocusCounter] = React.useState(0)
