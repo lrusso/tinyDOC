@@ -32,10 +32,11 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
               documentText: "Hello world",
-              saveFunction: () => {alert("saveFunction")},
+              saveCallback: () => {console.log("saveCallback")},
               template1: "My Template 1",
               template2: "My Template 2",
-              template3: "My Template 3"
+              template3: "My Template 3",
+              calcEnabled: true
               })
 ```
 
@@ -45,13 +46,14 @@ new TinyDOC({
 new TinyDOC({
               container: document.getElementById("myTestContainer"), 
               documentText: "Hello world",
-              saveCallback={() => {console.log("saveCallback")},
+              saveCallback: () => {console.log("saveCallback")},
               template1: "My Template 1",
               template2: "My Template 2",
               template3: "My Template 3",
+              calcEnabled: true,
               spellcheckerEnabled: true,
-              spellcheckerStarted={() => {console.log("spellcheckerStarted")},
-              spellcheckerEnded={() => {console.log("spellcheckerEnded")},
+              spellcheckerStarted: () => {console.log("spellcheckerStarted")},
+              spellcheckerEnded: () => {console.log("spellcheckerEnded")},
               spellcheckerLanguage: "en-US",
               spellcheckerURL: "spellchecker.js",
               spellcheckerNoSuggestionsLabel: "(No suggestions)"
