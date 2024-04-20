@@ -34,6 +34,10 @@ class tinyDOC {
       this.editorConfig.spellcheckerNoSuggestions = "(No suggestions)"
     }
 
+    if (!this.editorConfig.spellcheckerMaxSuggestions) {
+      this.editorConfig.spellcheckerMaxSuggestions = 3
+    }
+
     this.menuContainer = document.createElement("div")
     this.menuContainer.className = "tinydoc_menu_container"
     this.menuWrapper = document.createElement("div")
@@ -1179,13 +1183,9 @@ class tinyDOC {
           }
           this.spellcheckerWorking = true
 
-          const results = this.document.innerText.match(
+          const wordsToCheck = this.document.innerText.match(
             /[^ ?,.1234567890·!¡¿,`~!@#$%^&*()_|+\-=?;:",.<>{}[\]\\/\s]+/g
           )
-
-          const dataRequest = {}
-          dataRequest["lang"] = this.editorConfig.spellcheckerLanguage
-          dataRequest["words"] = results
 
           this.myWorker = new Worker(this.editorConfig.spellcheckerURL)
           this.myWorker.onmessage = (e) => {
@@ -1252,7 +1252,11 @@ class tinyDOC {
             }, 25)
           }
 
-          this.myWorker.postMessage(dataRequest)
+          this.myWorker.postMessage({
+            lang: this.editorConfig.spellcheckerLanguage,
+            words: wordsToCheck,
+            suggestions: this.editorConfig.spellcheckerMaxSuggestions,
+          })
         }
       }
     } catch (err) {
