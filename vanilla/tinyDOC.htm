@@ -56,11 +56,11 @@
 				SPELLCHECKER_LANGUAGE = "en-US";
 				}
 
-			function saveFunction()
+			function saveCallback()
 				{
 				console.log("getText()");
 				console.log(myTinyDOC.getText());
-				alert("saveFunction - See the console log to know the data that will be saved.");
+				alert("saveCallback - See the console log to know the data that will be saved.");
 				myTinyDOC.focus();
 				}
 
@@ -81,7 +81,7 @@
 			var myTinyDOC = new tinyDOC({
 											container: document.getElementById("myTestContainer"), 
 											documentText: STRING_WELCOME,
-											saveFunction: saveFunction,
+											saveCallback: saveCallback,
 											spellcheckerEnabled: true,
 											spellcheckerStarted: showLoading,
 											spellcheckerEnded: hideLoading,

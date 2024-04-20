@@ -44,7 +44,7 @@ class tinyDOC {
     this.menuWrapper.appendChild(this.menu)
     this.myContainer.appendChild(this.menuContainer)
 
-    if (this.editorConfig.saveFunction) {
+    if (this.editorConfig.saveCallback) {
       this.holder1 = document.createElement("div")
       this.holder1.className = "tinydoc_holder"
       this.menu.appendChild(this.holder1)
@@ -414,7 +414,7 @@ class tinyDOC {
           } else if (KEY_ENTER) {
             this.handleBreakline(event)
           } else if (KEY_CTRL_S) {
-            if (this.editorConfig.saveFunction) {
+            if (this.editorConfig.saveCallback) {
               event.preventDefault()
               this.save()
             }
@@ -541,7 +541,7 @@ class tinyDOC {
   save() {
     try {
       if (!this.spellcheckerWorking) {
-        this.editorConfig.saveFunction()
+        this.editorConfig.saveCallback()
       }
     } catch (err) {
       //
