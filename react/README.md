@@ -10,7 +10,7 @@ TinyDOC is a WYSIWYG Editor. The idea of this project is to provide a lightweigh
 const [forceFocusCounter, setForceFocusCounter] = React.useState(0)
 
 return (<TinyDOC
-   content="lorem ipsum"
+   content="Hello world"
    height={480}
    enabled
    saveCallback={() => {console.log("saveCallback")}
