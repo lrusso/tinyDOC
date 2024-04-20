@@ -42,39 +42,8 @@ class tinyDOC {
       .tinydoc_holder{float:left;padding-top:3px;padding-bottom:3px;padding-right:3px;margin:0}
       .tinydoc_separator{float:left;border-left:thin solid #D3D3D3;margin-left:1px;margin-right:3px;height:100px;width:1px}
       .tinydoc_separator2{float:left;border-left:thin solid #D3D3D3;margin-left:135px;height:100px;width:1px}
-      .tinydoc_button_save{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_save:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_print{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;}
-      .tinydoc_button_print:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_spellcheck{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_spellcheck:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_spellcheck_enabled{background-color:#E3E3E3 !important;border:thin solid #D3D3D3 !important}
-      .tinydoc_button_undo{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;}
-      .tinydoc_button_undo:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_redo{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_redo:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_bold{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_bold:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_italic{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_italic:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_underline{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_underline:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_strikethrough{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_strikethrough:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_dotted{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_dotted:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_numbered{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_numbered:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_highlight{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_highlight:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_link{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_link:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_template{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_template:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_calc{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_calc:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
-      .tinydoc_button_clear{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
-      .tinydoc_button_clear:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
+      .tinydoc_button{display:block;font-family:Arial;font-size:15px;line-height:28px;height:28px;width:32px;padding-top:4px;background-color:#F2F2F2;border:thin solid #F2F2F2;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+      .tinydoc_button:hover{background-color:#E3E3E3;border:thin solid #D3D3D3}
       .tinydoc_document{display:block;padding:8px;outline:none;color:black;background-color:white;font-family:Arial;font-size:16px;line-height:1.3;overflow:auto;-webkit-text-size-adjust:none;-webkit-user-select:text;user-select:text}
       .tinydoc_document a{text-decoration:underline;color:#3a76b1}
       .tinydoc_contentviewer{display:inline-block;font-family:Arial;font-size:13px;line-height:2.6;margin-left:11px;cursor:default;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1px;white-space:nowrap}
@@ -84,22 +53,8 @@ class tinyDOC {
       misspelled{text-decoration:underline;text-decoration-color:red;text-decoration-thickness:2px;text-decoration-style:dotted}
       @media (pointer: coarse)
         {
-        .tinydoc_button_save:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_print:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_spellcheck:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_undo:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_redo:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_bold:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_italic:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_underline:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_strikethrough:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_dotted:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_numbered:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_highlight:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_link:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_template:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_calc:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
-        .tinydoc_button_clear:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+        .tinydoc_button:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
+        .tinydoc_button:hover{background-color:#F2F2F2;border:thin solid #F2F2F2}
         }
       `
     document.getElementsByTagName("head")[0].appendChild(this.styleSheet)
@@ -119,7 +74,7 @@ class tinyDOC {
       this.holder1.className = "tinydoc_holder"
       this.menu.appendChild(this.holder1)
       this.buttonSave = document.createElement("div")
-      this.buttonSave.className = "tinydoc_button_save"
+      this.buttonSave.className = "tinydoc_button"
       this.buttonSave.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M896 960h-896v-1024h1024v896zM512 832h128v-256h-128v256zM896 64h-768v768h64v-320h576v320h75l53 -53v-715z' transform='translate(-10 930) scale(-1,1) rotate(180)'/></svg>"
       this.buttonSave.addEventListener("mousedown", (event) => {
@@ -137,7 +92,7 @@ class tinyDOC {
     this.holder2.className = "tinydoc_holder"
     this.menu.appendChild(this.holder2)
     this.buttonPrint = document.createElement("div")
-    this.buttonPrint.className = "tinydoc_button_print"
+    this.buttonPrint.className = "tinydoc_button"
     this.buttonPrint.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M256 896h512v-128h-512v128zM960 704h-896q-26 0 -45 -19t-19 -45v-320q0 -26 19 -45t45 -19h192v-256h512v256h192q26 0 45 19t19 45v320q0 26 -19 45t-45 19zM704 64h-384v320h384v-320zM974 608q0 -19 -13.5 -32.5t-32.5 -13.5t-32.5 13.5t-13.5 32.5t13.5 32.5 t32.5 13.5t32.5 -13.5t13.5 -32.5z' transform='translate(0 930) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonPrint.addEventListener("mousedown", (event) => {
@@ -155,7 +110,7 @@ class tinyDOC {
       this.holder3.className = "tinydoc_holder"
       this.menu.appendChild(this.holder3)
       this.buttonSpellcheck = document.createElement("div")
-      this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
+      this.buttonSpellcheck.className = "tinydoc_button"
       this.buttonSpellcheck.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M128 704h128v-192h64v384q0 26 -19 45t-45 19h-128q-26 0 -45 -19t-19 -45v-384h64v192zM128 896h128v-128h-128v128zM960 896v64h-192q-26 0 -45 -19t-19 -45v-320q0 -26 19 -45t45 -19h192v64h-192v320h192zM640 800v96q0 26 -19 45t-45 19h-192v-448h192q26 0 45 19 t19 45v96q0 26 -9 45t-35 19q26 0 35 19t9 45zM576 576h-128v128h128v-128zM576 768h-128v128h128v-128zM832 384l-416 -448l-224 288l82 70l142 -148l352 302z' transform='translate(0 950) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonSpellcheck.addEventListener("mousedown", (event) => {
@@ -173,7 +128,7 @@ class tinyDOC {
     this.holder4.className = "tinydoc_holder"
     this.menu.appendChild(this.holder4)
     this.buttonUndo = document.createElement("div")
-    this.buttonUndo.className = "tinydoc_button_undo"
+    this.buttonUndo.className = "tinydoc_button"
     this.buttonUndo.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M762 -64q43 77 62 168t-9 168t-113.5 127.5t-253.5 46.5v-254l-384 384l384 384v-248q201 5 314.5 -73t148.5 -196t-4.5 -255.5t-144.5 -251.5z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonUndo.addEventListener("mousedown", (event) => {
@@ -186,7 +141,7 @@ class tinyDOC {
     this.holder5.className = "tinydoc_holder"
     this.menu.appendChild(this.holder5)
     this.buttonRedo = document.createElement("div")
-    this.buttonRedo.className = "tinydoc_button_redo"
+    this.buttonRedo.className = "tinydoc_button"
     this.buttonRedo.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M576 712v248l384 -384l-384 -384v254q-168 4 -253.5 -46.5t-113.5 -127.5t-9 -168t62 -168q-105 114 -144.5 251.5t-4.5 255.5t148.5 196t314.5 73v0z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonRedo.addEventListener("mousedown", (event) => {
@@ -203,7 +158,7 @@ class tinyDOC {
     this.holder6.className = "tinydoc_holder"
     this.menu.appendChild(this.holder6)
     this.buttonBold = document.createElement("div")
-    this.buttonBold.className = "tinydoc_button_bold"
+    this.buttonBold.className = "tinydoc_button"
     this.buttonBold.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M708 475q28 34 44 76t16 89q0 53 -20 99.5t-55 81.5t-81.5 55t-99.5 20h-320v-896h384q53 0 99.5 20t81.5 55t55 81.5t20 99.5q0 70 -34 128t-90 91zM384 768h101q42 0 72 -37.5t30 -90.5t-30 -90.5t-71 -37.5h-102v256zM543 128h-159v256h159q44 0 75 -37.5t31 -90.5 t-31 -90.5t-75 -37.5z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonBold.addEventListener("mousedown", (event) => {
@@ -216,7 +171,7 @@ class tinyDOC {
     this.holder7.className = "tinydoc_holder"
     this.menu.appendChild(this.holder7)
     this.buttonItalic = document.createElement("div")
-    this.buttonItalic.className = "tinydoc_button_italic"
+    this.buttonItalic.className = "tinydoc_button"
     this.buttonItalic.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M896 896v-64h-128l-320 -768h128v-64h-448v64h128l320 768h-128v64h448z' transform='translate(0 955) scale(-1,1) rotate(180)'/></svg>"
     this.buttonItalic.addEventListener("mousedown", (event) => {
@@ -229,7 +184,7 @@ class tinyDOC {
     this.holder8.className = "tinydoc_holder"
     this.menu.appendChild(this.holder8)
     this.buttonUnderline = document.createElement("div")
-    this.buttonUnderline.className = "tinydoc_button_underline"
+    this.buttonUnderline.className = "tinydoc_button"
     this.buttonUnderline.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M704 896h128v-416q0 -60 -25 -112.5t-68.5 -91.5t-102 -61.5t-124.5 -22.5t-124.5 22.5t-102 61.5t-68.5 91.5t-25 112.5v416h128v-416q0 -30 13.5 -58t37.5 -51q28 -24 64.5 -37.5t76.5 -13.5t76.5 13.5t64.5 37.5q24 23 37.5 51t13.5 58v416zM192 128h640v-128h-640 v128z' transform='translate(0 975) scale(-1,1) rotate(180)'/></svg>"
     this.buttonUnderline.addEventListener("mousedown", (event) => {
@@ -242,7 +197,7 @@ class tinyDOC {
     this.holder9.className = "tinydoc_holder"
     this.menu.appendChild(this.holder9)
     this.buttonStrikethrough = document.createElement("div")
-    this.buttonStrikethrough.className = "tinydoc_button_strikethrough"
+    this.buttonStrikethrough.className = "tinydoc_button"
     this.buttonStrikethrough.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M731 443q48 -36 74.5 -85t26.5 -102t-26.5 -102t-74.5 -85q-44 -33 -100.5 -51t-118.5 -18t-118.5 18t-100.5 51q-48 36 -74.5 85t-26.5 102h128q0 -52 57 -90t135 -38t135 38t57 90t-57 90t-135 38q-62 0 -118.5 18t-100.5 51q-48 36 -74.5 85t-26.5 102t26.5 102 t74.5 85q44 33 100.5 51t118.5 18t118.5 -18t100.5 -51q48 -36 74.5 -85t26.5 -102h-128q0 52 -57 90t-135 38t-135 -38t-57 -90t57 -90t135 -38q62 0 118.5 -18t100.5 -51v0zM0 448h1024v-64h-1024v64z' transform='translate(0 960) scale(-1,1) rotate(180)'/></svg>"
     this.buttonStrikethrough.addEventListener("mousedown", (event) => {
@@ -259,7 +214,7 @@ class tinyDOC {
     this.holder10.className = "tinydoc_holder"
     this.menu.appendChild(this.holder10)
     this.buttonDotted = document.createElement("div")
-    this.buttonDotted.className = "tinydoc_button_dotted"
+    this.buttonDotted.className = "tinydoc_button"
     this.buttonDotted.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 896h640v-128h-640v128zM384 512h640v-128h-640v128zM384 128h640v-128h-640v128zM0 832q0 53 37.5 90.5t90.5 37.5t90.5 -37.5t37.5 -90.5t-37.5 -90.5t-90.5 -37.5t-90.5 37.5t-37.5 90.5zM0 448q0 53 37.5 90.5t90.5 37.5t90.5 -37.5t37.5 -90.5t-37.5 -90.5 t-90.5 -37.5t-90.5 37.5t-37.5 90.5zM0 64q0 53 37.5 90.5t90.5 37.5t90.5 -37.5t37.5 -90.5t-37.5 -90.5t-90.5 -37.5t-90.5 37.5t-37.5 90.5z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonDotted.addEventListener("mousedown", (event) => {
@@ -272,7 +227,7 @@ class tinyDOC {
     this.holder11.className = "tinydoc_holder"
     this.menu.appendChild(this.holder11)
     this.buttonNumbered = document.createElement("div")
-    this.buttonNumbered.className = "tinydoc_button_numbered"
+    this.buttonNumbered.className = "tinydoc_button"
     this.buttonNumbered.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 128h640v-128h-640v128zM384 512h640v-128h-640v128zM384 896h640v-128h-640v128zM192 960v-256h-64v192h-64v64h128zM128 434v-50h128v-64h-192v146l128 60v50h-128v64h192v-146zM256 256v-320h-192v64h128v64h-128v64h128v64h-128v64h192z' transform='translate(-50 940) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonNumbered.addEventListener("mousedown", (event) => {
@@ -285,7 +240,7 @@ class tinyDOC {
     this.holder12.className = "tinydoc_holder"
     this.menu.appendChild(this.holder12)
     this.buttonHighlight = document.createElement("div")
-    this.buttonHighlight.className = "tinydoc_button_highlight"
+    this.buttonHighlight.className = "tinydoc_button"
     this.buttonHighlight.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M739 627l-502 -502h-186v185l503 503l185 -186v0zM803 688l-185 186l67 67q17 17 38.5 17t38.5 -17l108 -109q17 -17 17 -38.5t-17 -38.5l-67 -67v0zM42 0' transform='translate(0 950) scale(-0.97,0.97) rotate(180)'/><path fill='#FFFF00' d='M-739 627l-502 -17 17 -38.5t-17 -38.5l-67 -67v0zM42 48h940v-112h-940v112v0z' transform='translate(0 950) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonHighlight.addEventListener("mousedown", (event) => {
@@ -298,7 +253,7 @@ class tinyDOC {
     this.holder13.className = "tinydoc_holder"
     this.menu.appendChild(this.holder13)
     this.buttonLink = document.createElement("div")
-    this.buttonLink.className = "tinydoc_button_link"
+    this.buttonLink.className = "tinydoc_button"
     this.buttonLink.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M320 256q13 -13 32.5 -12.5t33.5 14.5l316 316q14 14 14.5 33.5t-12.5 32.5t-32.5 12.5t-33.5 -14.5l-316 -316q-14 -14 -14.5 -33.5t12.5 -32.5zM477 285q3 -7 5 -14.5t2 -15.5q0 -13 -5 -25t-14 -21l-163 -163q-10 -10 -22 -14.5t-25 -4.5t-25 4.5t-21 14.5l-99 99 q-10 9 -14.5 21t-4.5 25t4.5 25t14.5 21l163 164q9 9 21 14t25 5q8 0 15.5 -2t14.5 -5l65 65q-21 16 -45.5 24t-49.5 8q-30 0 -58.5 -11t-51.5 -34l-163 -163q-46 -46 -46 -111t46 -110l99 -99q23 -23 51.5 -34.5t58.5 -11.5t59 11.5t52 34.5l163 163q42 42 45 100.5 t-32 104.5l-65 -65v0zM978 815l-99 99q-23 23 -51.5 34.5t-58.5 11.5t-59 -11.5t-51 -34.5l-164 -163q-42 -42 -45 -100.5t32 -104.5l65 65q-3 7 -5 14.5t-2 15.5q0 13 5 25t14 21l163 163q10 10 22 14.5t25 4.5t25 -4.5t21 -14.5l99 -99q10 -9 14.5 -21t4.5 -25t-4.5 -25 t-14.5 -21l-163 -164q-9 -9 -21 -14t-25 -5q-8 0 -15.5 2t-14.5 5l-65 -65q21 -16 45.5 -24t49.5 -8q30 0 58.5 11t51.5 34l163 164q46 45 46 110t-46 110z' transform='translate(0 930) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonLink.addEventListener("mousedown", (event) => {
@@ -316,7 +271,7 @@ class tinyDOC {
       this.holder14.className = "tinydoc_holder"
       this.menu.appendChild(this.holder14)
       this.buttonTemplate1 = document.createElement("div")
-      this.buttonTemplate1.className = "tinydoc_button_template"
+      this.buttonTemplate1.className = "tinydoc_button"
       this.buttonTemplate1.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate1.addEventListener("mousedown", (event) => {
@@ -331,7 +286,7 @@ class tinyDOC {
       this.holder15.className = "tinydoc_holder"
       this.menu.appendChild(this.holder15)
       this.buttonTemplate2 = document.createElement("div")
-      this.buttonTemplate2.className = "tinydoc_button_template"
+      this.buttonTemplate2.className = "tinydoc_button"
       this.buttonTemplate2.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate2.addEventListener("mousedown", (event) => {
@@ -346,7 +301,7 @@ class tinyDOC {
       this.holder16.className = "tinydoc_holder"
       this.menu.appendChild(this.holder16)
       this.buttonTemplate3 = document.createElement("div")
-      this.buttonTemplate3.className = "tinydoc_button_template"
+      this.buttonTemplate3.className = "tinydoc_button"
       this.buttonTemplate3.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate3.addEventListener("mousedown", (event) => {
@@ -366,7 +321,7 @@ class tinyDOC {
     this.holder17.className = "tinydoc_holder"
     this.menu.appendChild(this.holder17)
     this.buttonCalc = document.createElement("div")
-    this.buttonCalc.className = "tinydoc_button_calc"
+    this.buttonCalc.className = "tinydoc_button"
     this.buttonCalc.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 512.001 512.001'><path d='M403.432,0H108.57C86.583,0,68.695,17.887,68.695,39.874v432.253c0,21.987,17.887,39.874,39.874,39.874h294.862 c21.987,0,39.874-17.887,39.874-39.874V39.874C443.305,17.887,425.417,0,403.432,0z M424.297,472.127h-0.001 c0,11.505-9.36,20.865-20.865,20.865H108.57c-11.505,0-20.865-9.36-20.865-20.865V39.874c0-11.505,9.36-20.865,20.865-20.865 h294.862c11.505,0,20.865,9.36,20.865,20.865V472.127z'/><path d='M382.1,51.081H129.901c-5.25,0-9.504,4.255-9.504,9.504v82.322c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504V60.585C391.604,55.336,387.349,51.081,382.1,51.081z M372.596,133.403h-233.19V70.089h233.19 V133.403z'/><path d='M185.115,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,185.809,190.366,181.553,185.115,181.553z M175.611,240.889h-36.205v-40.327 h36.205V240.889z'/><path d='M185.115,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,287.952,190.366,283.696,185.115,283.696z M175.611,343.032h-36.205v-40.327 h36.205V343.032z'/><path d='M185.115,385.84h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C194.62,390.095,190.366,385.84,185.115,385.84z M175.611,445.175h-36.205v-40.327h36.205 V445.175z'/><path d='M283.608,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,185.809,288.857,181.553,283.608,181.553z M274.103,240.889h-36.205v-40.327 h36.205V240.889z'/><path d='M283.608,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,287.952,288.857,283.696,283.608,283.696z M274.103,343.032h-36.205v-40.327 h36.205V343.032z'/><path d='M283.608,385.84h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504h55.214 c5.25,0,9.504-4.255,9.504-9.504v-59.335C293.112,390.095,288.857,385.84,283.608,385.84z M274.103,445.175h-36.205v-40.327 h36.205V445.175z'/><path d='M382.1,181.553h-55.214c-5.25,0-9.504,4.255-9.504,9.504v59.335c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504v-59.335C391.604,185.809,387.349,181.553,382.1,181.553z M372.596,240.889H336.39v-40.327h36.205 V240.889z'/><path d='M382.1,283.696h-55.214c-5.25,0-9.504,4.255-9.504,9.504V454.68c0,5.249,4.254,9.504,9.504,9.504H382.1 c5.25,0,9.504-4.255,9.504-9.504V293.201C391.604,287.952,387.349,283.696,382.1,283.696z M372.596,445.175H336.39v-142.47h36.205 V445.175z'/></svg>"
     this.buttonCalc.addEventListener("mousedown", (event) => {
@@ -383,7 +338,7 @@ class tinyDOC {
     this.holder18.className = "tinydoc_holder"
     this.menu.appendChild(this.holder18)
     this.buttonRemoveFormat = document.createElement("div")
-    this.buttonRemoveFormat.className = "tinydoc_button_clear"
+    this.buttonRemoveFormat.className = "tinydoc_button"
     this.buttonRemoveFormat.innerHTML =
       "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M0 64h576v-128h-576v128zM192 960h704v-128h-704v128zM277 128l205 784l124 -32l-196 -752h-133zM930 -64l-130 130l-130 -130l-62 62l130 130l-130 130l62 62l130 -130l130 130l62 -62l-130 -130l130 -130z' transform='translate(0 915) scale(-0.97,0.97) rotate(180)'/></svg>"
     this.buttonRemoveFormat.addEventListener("mousedown", (event) => {
@@ -847,7 +802,7 @@ class tinyDOC {
 
       this.showPleaseWait(false)
 
-      this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
+      this.buttonSpellcheck.className = "tinydoc_button"
 
       setTimeout(() => {
         this.setCaretPosition(this.document, 0)
@@ -1346,7 +1301,7 @@ class tinyDOC {
 
             this.showPleaseWait(false)
 
-            this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
+            this.buttonSpellcheck.className = "tinydoc_button"
 
             this.setCaretPosition(this.document, originalCaretPosition)
           }, 25)
@@ -1355,8 +1310,7 @@ class tinyDOC {
 
           this.showPleaseWait(true)
 
-          this.buttonSpellcheck.className =
-            "tinydoc_button_spellcheck tinydoc_button_spellcheck_enabled"
+          this.buttonSpellcheck.className = "tinydoc_button"
 
           this.spellcheckerWorking = true
 
@@ -1430,7 +1384,7 @@ class tinyDOC {
 
               this.spellcheckerExecuted = false
 
-              this.buttonSpellcheck.className = "tinydoc_button_spellcheck"
+              this.buttonSpellcheck.className = "tinydoc_button"
 
               this.enable()
 
