@@ -15,13 +15,14 @@ https://lrusso.github.io/tinyDOC/vanilla/tinyDOC.htm
 | 1 | container | The document container. | 
 | 2 | documentText | The default text. |
 | 3 | saveFunction | The save function. |
-| 4 | spellcheckerEnabled | Boolean. |
-| 5 | spellcheckerLanguage | Spellchecker Language. |
-| 6 | spellcheckerURL | Spellchecker URL. |
-| 7 | spellcheckerNoSuggestionsLabel | No suggestions String. |
-| 8 | template1 | HTML template. |
-| 9 | template2 | HTML template. |
-| 10 | template3 | HTML template. |
+| 4 | CalcEnabled | Boolean. |
+| 5 | spellcheckerEnabled | Boolean. |
+| 6 | spellcheckerLanguage | Spellchecker Language. |
+| 7 | spellcheckerURL | Spellchecker URL. |
+| 8 | spellcheckerNoSuggestionsLabel | No suggestions String. |
+| 9 | template1 | HTML template. |
+| 10 | template2 | HTML template. |
+| 11 | template3 | HTML template. |
 
 **Example without the spellchecker:**
 
