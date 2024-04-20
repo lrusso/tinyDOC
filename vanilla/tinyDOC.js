@@ -1803,7 +1803,7 @@ class tinyDOC {
   }
 
   checkForMisspelledOrURLs = () => {
-    if (!this.checkForURL()){
+    if (!this.checkForURL()) {
       this.checkForMisspelled()
     }
   }
