@@ -1,38 +1,5 @@
 class tinyDOC {
   constructor(editorConfig) {
-    this.myContainer = editorConfig.container
-
-    if (typeof editorConfig.spellcheckerEnabled === "undefined") {
-      this.spellcheckerEnabled = false
-    } else {
-      this.spellcheckerEnabled = editorConfig.spellcheckerEnabled
-    }
-
-    if (editorConfig.saveFunction) {
-      this.saveFunction = editorConfig.saveFunction
-    }
-
-    if (editorConfig.spellcheckerLanguage) {
-      this.spellcheckerLanguage = editorConfig.spellcheckerLanguage
-    }
-
-    if (editorConfig.spellcheckerURL) {
-      this.spellcheckerURL = editorConfig.spellcheckerURL
-    }
-
-    if (editorConfig.spellcheckerNoSuggestionsLabel) {
-      this.spellcheckerNoSuggestionsLabel =
-        editorConfig.spellcheckerNoSuggestionsLabel
-    } else {
-      this.spellcheckerNoSuggestionsLabel = "(no suggestions)"
-    }
-
-    this.template1 = editorConfig.template1
-    this.template2 = editorConfig.template2
-    this.template3 = editorConfig.template3
-
-    this.documentEnabled = true
-
     this.styleSheet = document.createElement("style")
     this.styleSheet.innerText = `
       .tinydoc_menu_container{height:40px;background-color:#F2F2F2;border-bottom:thin solid #D3D3D3;overflow-y:hidden}
@@ -59,6 +26,14 @@ class tinyDOC {
       `
     document.getElementsByTagName("head")[0].appendChild(this.styleSheet)
 
+    this.myContainer = editorConfig.container
+
+    this.editorConfig = editorConfig
+
+    if (!this.editorConfig.spellcheckerNoSuggestionsLabel) {
+      this.editorConfig.spellcheckerNoSuggestionsLabel = "(No suggestions)"
+    }
+
     this.menuContainer = document.createElement("div")
     this.menuContainer.className = "tinydoc_menu_container"
     this.menuWrapper = document.createElement("div")
@@ -69,7 +44,7 @@ class tinyDOC {
     this.menuWrapper.appendChild(this.menu)
     this.myContainer.appendChild(this.menuContainer)
 
-    if (this.saveFunction) {
+    if (this.editorConfig.saveFunction) {
       this.holder1 = document.createElement("div")
       this.holder1.className = "tinydoc_holder"
       this.menu.appendChild(this.holder1)
@@ -105,7 +80,7 @@ class tinyDOC {
     this.separator2.className = "tinydoc_separator"
     this.menu.appendChild(this.separator2)
 
-    if (this.spellcheckerEnabled) {
+    if (this.editorConfig.spellcheckerEnabled) {
       this.holder3 = document.createElement("div")
       this.holder3.className = "tinydoc_holder"
       this.menu.appendChild(this.holder3)
@@ -266,7 +241,7 @@ class tinyDOC {
     this.separator6.className = "tinydoc_separator"
     this.menu.appendChild(this.separator6)
 
-    if (editorConfig.template1) {
+    if (this.editorConfig.template1) {
       this.holder14 = document.createElement("div")
       this.holder14.className = "tinydoc_holder"
       this.menu.appendChild(this.holder14)
@@ -275,13 +250,13 @@ class tinyDOC {
       this.buttonTemplate1.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate1.addEventListener("mousedown", (event) => {
-        this.insertHtmlAtCaret(this.template1, false)
+        this.insertHtmlAtCaret(this.editorConfig.template1, false)
         event.preventDefault()
       })
       this.holder14.appendChild(this.buttonTemplate1)
     }
 
-    if (editorConfig.template2) {
+    if (this.editorConfig.template2) {
       this.holder15 = document.createElement("div")
       this.holder15.className = "tinydoc_holder"
       this.menu.appendChild(this.holder15)
@@ -290,13 +265,13 @@ class tinyDOC {
       this.buttonTemplate2.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate2.addEventListener("mousedown", (event) => {
-        this.insertHtmlAtCaret(this.template2, false)
+        this.insertHtmlAtCaret(this.editorConfig.template2, false)
         event.preventDefault()
       })
       this.holder15.appendChild(this.buttonTemplate2)
     }
 
-    if (editorConfig.template3) {
+    if (this.editorConfig.template3) {
       this.holder16 = document.createElement("div")
       this.holder16.className = "tinydoc_holder"
       this.menu.appendChild(this.holder16)
@@ -305,13 +280,13 @@ class tinyDOC {
       this.buttonTemplate3.innerHTML =
         "<svg width='16' height='16' viewBox='0 0 1000 1000'><path d='M384 768h128v-64h-128v64zM576 768h128v-64h-128v64zM896 768v-256h-192v64h128v128h-64v64h128zM320 576h128v-64h-128v64zM512 576h128v-64h-128v64zM192 704v-128h64v-64h-128v256h192v-64h-128zM384 384h128v-64h-128v64zM576 384h128v-64h-128v64zM896 384v-256 h-192v64h128v128h-64v64h128zM320 192h128v-64h-128v64zM512 192h128v-64h-128v64zM192 320v-128h64v-64h-128v256h192v-64h-128zM960 896h-896v-896h896v896zM1024 960v0v-1024h-1024v1024h1024z' transform='translate(0 940) scale(-0.97,0.97) rotate(180)'/></svg>"
       this.buttonTemplate3.addEventListener("mousedown", (event) => {
-        this.insertHtmlAtCaret(this.template3, false)
+        this.insertHtmlAtCaret(this.editorConfig.template3, false)
         event.preventDefault()
       })
       this.holder16.appendChild(this.buttonTemplate3)
     }
 
-    if (editorConfig.template1 || editorConfig.template2 || editorConfig.template3) {
+    if (this.editorConfig.template1 || this.editorConfig.template2 || this.editorConfig.template3) {
       this.separator7 = document.createElement("div")
       this.separator7.className = "tinydoc_separator"
       this.menu.appendChild(this.separator7)
@@ -395,7 +370,7 @@ class tinyDOC {
     this.document.className = "tinydoc_document"
     this.document.contentEditable = true
 
-    if (this.spellcheckerEnabled) {
+    if (this.editorConfig.spellcheckerEnabled) {
       this.document.spellcheck = false
     }
 
@@ -407,6 +382,7 @@ class tinyDOC {
       this.document.innerHTML = "<div></div>"
     }
 
+    this.documentEnabled = true
     this.spellcheckerResult = []
     this.spellcheckerWorking = false
     this.spellcheckerExecuted = false
@@ -465,7 +441,7 @@ class tinyDOC {
           } else if (KEY_ENTER) {
             this.handleBreakline(event)
           } else if (KEY_CTRL_S) {
-            if (this.saveFunction) {
+            if (this.editorConfig.saveFunction) {
               event.preventDefault()
               this.save()
             }
@@ -592,7 +568,7 @@ class tinyDOC {
   save() {
     try {
       if (!this.spellcheckerWorking) {
-        this.saveFunction()
+        this.editorConfig.saveFunction()
       }
     } catch (err) {
       //
@@ -1258,10 +1234,10 @@ class tinyDOC {
           )
 
           const dataRequest = {}
-          dataRequest["lang"] = this.spellcheckerLanguage
+          dataRequest["lang"] = this.editorConfig.spellcheckerLanguage
           dataRequest["words"] = results
 
-          this.myWorker = new Worker(this.spellcheckerURL)
+          this.myWorker = new Worker(this.editorConfig.spellcheckerURL)
           this.myWorker.onmessage = (e) => {
             try {
               if (this.spellcheckerWorking) {
@@ -1843,7 +1819,7 @@ class tinyDOC {
             if (this.spellcheckerResult[finalMisspelled].length === 0) {
               this.contentViewer.innerHTML =
                 '<span class="tinydoc_spellchecker_no_suggestions">' +
-                this.spellcheckerNoSuggestionsLabel +
+                this.editorConfig.spellcheckerNoSuggestionsLabel +
                 "</span>"
             }
           } else {
