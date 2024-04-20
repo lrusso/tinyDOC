@@ -43,6 +43,10 @@ class tinyDOC {
       this.editorConfig.useCtrlSForSaving = true
     }
 
+    if (this.editorConfig.useCtrlPForPrinting === undefined) {
+      this.editorConfig.useCtrlPForPrinting = true
+    }
+
     this.menuContainer = document.createElement("div")
     this.menuContainer.className = "tinydoc_menu_container"
     this.menuWrapper = document.createElement("div")
@@ -424,6 +428,7 @@ class tinyDOC {
           const KEY_TAB = event.key === "Tab"
           const KEY_ENTER = event.key === "Enter"
           const KEY_CTRL_S = (event.ctrlKey || event.metaKey) && event.key === "s"
+          const KEY_CTRL_P = (event.ctrlKey || event.metaKey) && event.key === "p"
           const KEY_UNDO_MAC = event.ctrlKey && event.shiftKey && event.key === "z"
           const KEY_UNDO_WINDOWS =
             (event.ctrlKey || event.metaKey) && !event.shiftKey && event.key === "z"
@@ -450,6 +455,11 @@ class tinyDOC {
             ) {
               event.preventDefault()
               this.save()
+            }
+          } else if (KEY_CTRL_P) {
+            if (this.editorConfig.useCtrlPForPrinting) {
+              event.preventDefault()
+              this.print()
             }
           } else if (KEY_UNDO_MAC || KEY_UNDO_WINDOWS) {
             event.preventDefault()
