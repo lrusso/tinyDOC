@@ -1292,7 +1292,7 @@ class tinyDOC {
           "<!DOCTYPE html><html><head><title>" +
             this.encodeText(window.location.href) +
             "</title><style>a{text-decoration:underline;color:" +
-            linkColor +
+            this.editorConfig.linkColor +
             "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap;word-break:break-word'>" +
             this.document.innerHTML +
             "</body></html>"
@@ -1315,7 +1315,7 @@ class tinyDOC {
           "<!DOCTYPE html><html><head><title>" +
             this.encodeText(window.location.href) +
             "</title><style>a{text-decoration:underline;color:" +
-            linkColor +
+            this.editorConfig.linkColor +
             "}</style></head><body style='font-family:Arial;font-size:16px;white-space:pre-wrap;word-break:break-word'>" +
             this.document.innerHTML +
             "</body></html>"
