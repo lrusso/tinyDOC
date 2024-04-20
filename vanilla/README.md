@@ -15,6 +15,7 @@ const myEditor = new TinyDOC({
               container: document.getElementById("myTestContainer"), 
               content: "Hello world",
               saveCallback: () => {console.log("saveCallback")},
+              dirtyCallback: () => {console.log("dirtyCallback")},
               template1: "My Template 1",
               template2: "My Template 2",
               template3: "My Template 3",
