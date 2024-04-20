@@ -22,9 +22,9 @@ return (<TinyDOC
    focusOnMount
    forceFocus={forceFocusCounter}
    dirtyCallback={() => {console.log("dirtyCallback")}
-   template1="my template 1"
-   template2="my template 2"
-   template3="my template 3"
+   template1="My Template 1"
+   template2="My Template 2"
+   template3="My Template 3"
    calcEnabled
    useCtrlSForSaving
    useCtrlPForPrinting
